@@ -1,0 +1,4 @@
+language: python
+script:
+	 - echo "build start!"
+	 - python ./main.py
