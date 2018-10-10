@@ -1,4 +1,4 @@
 language: python
 script:
-	 - echo "build start!"
-	 - python ./main.py
+  - echo "build start!"
+  - python ./main.py
