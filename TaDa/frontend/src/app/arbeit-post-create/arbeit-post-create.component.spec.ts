@@ -75,7 +75,7 @@ describe('ArbeitPostCreateComponent', () => {
     component.region = 'Nakdae';
     component.confirm();
     expect(window.alert).toHaveBeenCalledWith("아르바이트 종류를 입력해 주세요.");
-    component.arbeitType = 'Mentoring';
+    component.arbeit_type = 'Mentoring';
     component.confirm();
     expect(window.alert).toHaveBeenCalledWith("시급을 입력해 주세요.");
     component.pay = '5000';
@@ -87,13 +87,10 @@ describe('ArbeitPostCreateComponent', () => {
     component.content = '내용입니다';
     component.confirm();
     expect(window.alert).toHaveBeenCalledWith("담당자 이름을 입력해 주세요.");
-    component.managerName = 'Team4';
+    component.manager_name = 'Team4';
     component.confirm();
     expect(window.alert).toHaveBeenCalledWith("담당자 전화번호를 입력해 주세요.");
-    component.managerPhone = '010-0000-0000';
-    component.confirm();
-    expect(window.alert).toHaveBeenCalledWith("시간대를 입력해 주세요.");
-    component.timezones = '1111';
+    component.manager_phone = '010-0000-0000';
     component.confirm();
     expect(window.alert).toBeTruthy();
 
