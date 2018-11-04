@@ -9,11 +9,16 @@ export class LoginUserService {
   LogInUser: User;
   constructor() { }
 
+  getLogInUser(): User {
+    if (this.LogInUser != null) {
+      return this.LogInUser;
+    } else {
+      return null;
+    }
+  }
+
   isValidUser() {}
 
-  isLogedIn(): boolean {
-    return this.LogInUser != null;
-  }
 
   getUserType(): string {
     if (this.LogInUser) {

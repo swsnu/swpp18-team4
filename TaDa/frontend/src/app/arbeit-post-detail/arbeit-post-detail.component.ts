@@ -1,9 +1,10 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
-import { Location } from '@angular/common';
 import { User } from '../User';
 import { ArbeitPost } from '../ArbeitPost';
 import { ArbeitService } from '../arbeit.service';
+import { LoginUserService } from '../log-in-user.service';
+import { getPreviousOrParentNode } from '@angular/core/src/render3/instructions';
 
 @Component({
   selector: 'app-arbeit-post-detail',
@@ -12,29 +13,35 @@ import { ArbeitService } from '../arbeit.service';
 })
 export class ArbeitPostDetailComponent implements OnInit {
 
-  const user: User;
-  const post: ArbeitPost;
+  user: User;
+  post: ArbeitPost;
 
   constructor(
     private arbeitService: ArbeitService,
+    private userService: LoginUserService,
     private route: ActivatedRoute,
     private router: Router) { }
-  ) { }
 
   ngOnInit() {
-    this.user = this.userService.getLoginUser();
+    this.user = this.userService.getLogInUser();
     let id = +this.route.snapshot.paramMap.get('id');
-    this.arbeitPostService.getArbeitPostById(id).then(success => {
-    });
+    this.getPost(id);
+    }
+
+  getPost(id:number) {
+    this.arbeitService.getArbeitPostById(id)
+      .then(post => this.post = post);
   }
-  
-  arbeitPostEdit() {
+
+  back() {
+    this.router.navigateByUrl('/arbeit');
+  }
+  edit() {
     this.router.navigateByUrl(`/arbeit/${this.post.id}/edit`);
 
   }
-
-  arbeitPostDelete() {
-    this.articleService.deleteArticle(this.post);
+  delete() {
+    this.arbeitService.deleteArbeitPost(this.post);
     this.router.navigateByUrl('/arbeit');
   }
 }
