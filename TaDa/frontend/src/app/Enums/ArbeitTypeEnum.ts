@@ -1,4 +1,4 @@
-enum ArbeitTypeEnum {
+export enum ArbeitTypeEnum {
     Mentoring,
     Tutoring,
     Cafe,

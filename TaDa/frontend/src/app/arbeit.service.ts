@@ -11,7 +11,7 @@ const httpOptions = {
   providedIn: 'root'
 })
 export class ArbeitService {
-  private arbeitUrl = 'api/articles/';
+  private arbeitUrl = 'api/arbeit/';
   
   constructor( 
     private http: HttpClient,
@@ -51,7 +51,7 @@ export class ArbeitService {
 
   private handleError<T> (operation = 'operation', result?: T) {
     return (error: any): Promise<T> => {
-      alert("Backend error. Try again!")
+      alert("Backend error. Try again!");
       return Promise.resolve(result as T);
   };
 }
