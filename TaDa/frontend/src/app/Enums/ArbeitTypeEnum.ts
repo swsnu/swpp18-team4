@@ -1,6 +1,7 @@
 enum ArbeitTypeEnum {
-    "Mentoring",
-    "Tutoring",
-    "Cafe/Restaurant",
-    "IT/Design",
+    Mentoring,
+    Tutoring,
+    Cafe,
+    IT,
+    Design,
 }

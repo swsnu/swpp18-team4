@@ -1,7 +1,7 @@
-enum ArbeitRegionEnum {
-    "School",
-    "SNUStation",
-    "Nokdu",
-    "Nakdae",
-    "Extra"
+export enum ArbeitRegionEnum {
+    School,
+    SNUStation,
+    Nokdu,
+    Nakdae,
+    Extra
 }

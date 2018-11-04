@@ -4,6 +4,7 @@ import { ArbeitPostCreateComponent } from './arbeit-post-create.component';
 
 import { RouterTestingModule } from "@angular/router/testing";
 import { FormsModule } from "@angular/forms";
+import { HttpClientModule } from "@angular/common/http";
 
 describe('ArbeitPostCreateComponent', () => {
   let component: ArbeitPostCreateComponent;
@@ -15,6 +16,7 @@ describe('ArbeitPostCreateComponent', () => {
       imports: [
         RouterTestingModule,
         FormsModule,
+        HttpClientModule,
       ]
     })
     .compileComponents();

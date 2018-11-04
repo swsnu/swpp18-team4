@@ -1,3 +1,5 @@
+import { ArbeitRegionEnum } from "./Enums/ArbeitRegionEnum";
+
 export class ArbeitPost {
     id: number;
     author_id: number;

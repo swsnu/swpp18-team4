@@ -73,7 +73,7 @@ export class ArbeitPostCreateComponent implements OnInit {
     } else if (!this.isValidInput(this.timezones)) {
       alert('시간대를 입력해 주세요.');
     } else {
-      this.arbeitService.createArbeitPost();
+      //this.arbeitService.createArbeitPost();
     }
   }
   
