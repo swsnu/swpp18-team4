@@ -1,0 +1,32 @@
+<div>
+  <div>
+    <button class="Clicked_tab" id="write-tab-button"(click)="view_write_tab()">Write</button>
+    <button class="unClicked_tab" id="preview-tab-button"(click)="view_preview_tab()">Preview</button>
+  </div>
+  <hr>
+  <div *ngIf="view_write">
+    <label>제목</label><br>
+    <input [(ngModel)]="region" type="text"><br>
+    <label>아르바이트 종류</label><br>
+    <input [(ngModel)]="arbeitType" type="text"><br>
+    <label>시급</label><br>
+    <input [(ngModel)]="pay" type="text"><br>
+    <label>제목</label><br>
+    <input [(ngModel)]="title" type="text"><br>
+    <label>내용</label><br>
+    <input [(ngModel)]="content" type="text"><br>
+    <label>담당자 이름</label><br>
+    <input [(ngModel)]="managerName" type="text"><br>
+    <label>담당자 폰번호</label><br>
+    <input [(ngModel)]="managerPhone" type="text"><br>
+    <label>시간대</label><br>
+    <input [(ngModel)]="timezones" type="text"><br>
+  </div>
+  <div *ngIf="!view_write">
+
+  </div>
+  <div>
+    <button (click)="back()">뒤로 가기</button>
+    <button (click)="confirm()">확인</button>
+  </div>
+</div>
