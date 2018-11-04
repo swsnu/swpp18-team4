@@ -24,11 +24,11 @@ export class ArbeitPostDetailComponent implements OnInit {
 
   ngOnInit() {
     this.user = this.userService.getLogInUser();
-    let id = +this.route.snapshot.paramMap.get('id');
+    const id = +this.route.snapshot.paramMap.get('id');
     this.getPost(id);
     }
 
-  getPost(id:number) {
+  getPost(id: number) {
     this.arbeitService.getArbeitPostById(id)
       .then(post => this.post = post);
   }
