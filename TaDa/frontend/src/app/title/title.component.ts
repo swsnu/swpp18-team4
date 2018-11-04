@@ -15,8 +15,8 @@ export class TitleComponent implements OnInit {
   ngOnInit() {
 
   }
-  isLogIned(): boolean {
-    return this.loginUserService.isLogIned();
+  isLogedIn(): boolean {
+    return this.loginUserService.isLogedIn();
   }
   onClickTitleImage(): void {
     this.router.navigateByUrl('');

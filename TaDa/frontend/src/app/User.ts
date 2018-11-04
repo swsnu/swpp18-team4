@@ -1,6 +1,8 @@
+import { UserTypeEnum } from './Enums/UserTypeEnum';
+
 export class User {
   id: number;
-  type: string; // TODO : change to enum
+  type: UserTypeEnum;
   email: string;
   password: string;
   name: string;

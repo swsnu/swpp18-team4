@@ -1,5 +1,6 @@
-import { Injectable } from '@angular/core';
-import { User } from './User';
+import {Injectable} from '@angular/core';
+import {User} from './User';
+import {UserTypeEnum} from './Enums/UserTypeEnum';
 
 @Injectable({
   providedIn: 'root'
@@ -10,13 +11,20 @@ export class LoginUserService {
 
   isValidUser() {}
 
-  isLogIned(): boolean {
+  isLogedIn(): boolean {
     return this.LogInUser != null;
   }
 
   getUserType(): string {
-    // TODO : implement with django backend
-    return this.LogInUser ? this.LogInUser.type : '';
+    if (this.LogInUser) {
+      if (this.LogInUser.type === UserTypeEnum.Employee) {
+        return 'Employee';
+      } else {
+        return 'Employer';
+      }
+    } else {
+      return '';
+    }
   }
 
   signOut(): void {
