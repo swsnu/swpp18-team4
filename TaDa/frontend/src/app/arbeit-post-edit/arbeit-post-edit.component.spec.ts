@@ -1,6 +1,8 @@
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 
 import { ArbeitPostEditComponent } from './arbeit-post-edit.component';
+import {HttpClientTestingModule} from "@angular/common/http/testing";
+import {RouterTestingModule} from "@angular/router/testing";
 
 describe('ArbeitPostEditComponent', () => {
   let component: ArbeitPostEditComponent;
@@ -8,7 +10,11 @@ describe('ArbeitPostEditComponent', () => {
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [ ArbeitPostEditComponent ]
+      declarations: [ ArbeitPostEditComponent ],
+      imports: [
+        HttpClientTestingModule,
+        RouterTestingModule,
+      ]
     })
     .compileComponents();
   }));
