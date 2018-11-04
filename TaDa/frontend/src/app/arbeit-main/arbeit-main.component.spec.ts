@@ -1,6 +1,10 @@
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 
 import { ArbeitMainComponent } from './arbeit-main.component';
+import { Component } from "@angular/core";
+
+@Component({selector: 'router-outlet', template: ''})
+class RouterOutletStubComponent { }
 
 describe('ArbeitMainComponent', () => {
   let component: ArbeitMainComponent;
@@ -8,7 +12,10 @@ describe('ArbeitMainComponent', () => {
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [ ArbeitMainComponent ]
+      declarations: [
+        ArbeitMainComponent,
+        RouterOutletStubComponent
+      ]
     })
     .compileComponents();
   }));

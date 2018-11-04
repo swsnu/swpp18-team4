@@ -1,3 +1,45 @@
-<p>
-  arbeit-post-detail works!
-</p>
+<header class="masthead">
+    <div class="grid__column">
+        <div class="control control--block">
+          <h2>{{post.title}}</h2>
+        </div>
+    </div>
+</header>
+
+<main class="mastcontent">
+  <div class="grid">
+    <div class="grid__column">
+        <div class="control control--block">
+            <label class="control__label">Region</label>
+              <p>{{post.region}}</p>
+            <label class="control__label">Arbeit Type</label>
+              <p>{{post.arbeit_type}}</p>
+            <label class="control__label">Pay</label>
+              <p>{{post.pay}}</p>
+            <label class="control__label">Time Zone</label>
+            <div *ngFor= "let time of post.time_zone">
+                <p>{{time}}</p>
+          </div>
+    </div>
+  </div>
+  <div class="grid">
+    <div class="grid__column">
+        <div class="control control--block">
+            <p>{{post.content}}</p>    
+        </div>
+    </div>
+  </div>
+  <div class="grid">
+    <div class="grid__column">
+        <div class="control control--block">
+          <p> {{post.title}} </p>
+        </div>
+    </div>
+  </div>
+</main>
+
+<footer class="mastfoot">
+    <a class="button button--filled" (click)="back()" > Back </a>
+    <a class="button button--outlined" (click)="edit()" > Edit </a>
+    <a class="button button--clear" (click)="delete()" > Delete </a>    
+</footer>

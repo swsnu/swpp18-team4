@@ -1,8 +1,9 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { Location } from '@angular/common';
-import { User } from '../user'
+import { User } from '../User';
 import { ArbeitPost } from '../ArbeitPost';
+import { ArbeitService } from '../arbeit.service';
 
 @Component({
   selector: 'app-arbeit-post-detail',
@@ -11,12 +12,11 @@ import { ArbeitPost } from '../ArbeitPost';
 })
 export class ArbeitPostDetailComponent implements OnInit {
 
-  const user: User
-  const post: ArbeitPost
+  const user: User;
+  const post: ArbeitPost;
 
   constructor(
-    private arbeitPostService: ArbeitPostService,
-    private loginserService: CommentService,
+    private arbeitService: ArbeitService,
     private route: ActivatedRoute,
     private router: Router) { }
   ) { }
@@ -27,11 +27,12 @@ export class ArbeitPostDetailComponent implements OnInit {
     this.arbeitPostService.getArbeitPostById(id).then(success => {
     });
   }
-
+  
   arbeitPostEdit() {
-    this.router.navigateByUrl(`/articles/${this.post.id}/edit`);
+    this.router.navigateByUrl(`/arbeit/${this.post.id}/edit`);
 
   }
+
   arbeitPostDelete() {
     this.articleService.deleteArticle(this.post);
     this.router.navigateByUrl('/arbeit');

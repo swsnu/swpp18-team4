@@ -14,6 +14,7 @@ import { SignUpEmployerComponent } from './sign-up-employer/sign-up-employer.com
 import { ArbeitBulletinComponent } from './arbeit-bulletin/arbeit-bulletin.component';
 import { ArbeitPostDetailComponent } from './arbeit-post-detail/arbeit-post-detail.component';
 import { ArbeitMainComponent } from './arbeit-main/arbeit-main.component';
+import { TitleComponent } from './title/title.component';
 
 @NgModule({
   declarations: [
@@ -27,7 +28,8 @@ import { ArbeitMainComponent } from './arbeit-main/arbeit-main.component';
     SignUpEmployerComponent,
     ArbeitBulletinComponent,
     ArbeitPostDetailComponent,
-    ArbeitMainComponent
+    ArbeitMainComponent,
+    TitleComponent
   ],
   imports: [
     BrowserModule,

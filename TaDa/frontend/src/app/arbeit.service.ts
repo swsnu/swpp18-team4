@@ -11,7 +11,7 @@ const httpOptions = {
   providedIn: 'root'
 })
 export class ArbeitService {
-  private arbeitUrl = 'api/articles/';
+  private arbeitUrl = 'api/arbeit/';
   
   constructor( 
     private http: HttpClient,
@@ -39,19 +39,19 @@ export class ArbeitService {
     const url = `${this.arbeitUrl}${post.id}`;
     return this.http.put(url, post, httpOptions)
       .toPromise()
-      .then(() => post);    
+      .then(() => post);
   }
-  
+
   deleteArbeitPost(post: ArbeitPost | number) {
     const id = (typeof post === 'number') ? post : post.id;
     const url = `${this.arbeitUrl}${id}`;
     return this.http.delete<ArbeitPost>(url, httpOptions)
-      .toPromise();    
+      .toPromise();
   }
 
   private handleError<T> (operation = 'operation', result?: T) {
     return (error: any): Promise<T> => {
-      alert("Backend error. Try again!")
+      alert("Backend error. Try again!");
       return Promise.resolve(result as T);
   };
 }
