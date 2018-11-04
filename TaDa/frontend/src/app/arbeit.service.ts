@@ -55,3 +55,4 @@ export class ArbeitService {
       return Promise.resolve(result as T);
   };
 }
+}
