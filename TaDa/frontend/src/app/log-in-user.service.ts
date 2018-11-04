@@ -1,19 +1,30 @@
 import {Injectable} from '@angular/core';
 import {User} from './User';
 import {UserTypeEnum} from './Enums/UserTypeEnum';
+import { HttpClientModule } from "@angular/common/http";
+import { RouterTestingModule } from "@angular/router/testing";
 
 @Injectable({
   providedIn: 'root'
 })
 export class LoginUserService {
   LogInUser: User;
+
   constructor() { }
+
+  isLoggedIn() {
+    return this.LogInUser != null;
+  }
+  getLogInUser(): User {
+    if (this.LogInUser != null) {
+      return this.LogInUser;
+    } else {
+      return null;
+    }
+  }
 
   isValidUser() {}
 
-  isLogedIn(): boolean {
-    return this.LogInUser != null;
-  }
 
   getUserType(): string {
     if (this.LogInUser) {

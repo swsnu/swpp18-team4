@@ -39,14 +39,14 @@ export class ArbeitService {
     const url = `${this.arbeitUrl}${post.id}`;
     return this.http.put(url, post, httpOptions)
       .toPromise()
-      .then(() => post);    
+      .then(() => post);
   }
-  
+
   deleteArbeitPost(post: ArbeitPost | number) {
     const id = (typeof post === 'number') ? post : post.id;
     const url = `${this.arbeitUrl}${id}`;
     return this.http.delete<ArbeitPost>(url, httpOptions)
-      .toPromise();    
+      .toPromise();
   }
 
   private handleError<T> (operation = 'operation', result?: T) {

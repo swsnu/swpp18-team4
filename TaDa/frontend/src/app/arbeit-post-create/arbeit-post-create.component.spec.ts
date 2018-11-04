@@ -33,7 +33,7 @@ describe('ArbeitPostCreateComponent', () => {
     expect(component).toBeTruthy();
   });
 
-  it('test isValiddInput func', () => {
+  it('test isValidInput func', () => {
     let region = component.region;
     expect(component.isValidInput(region)).toBeFalsy();
     region = '';
