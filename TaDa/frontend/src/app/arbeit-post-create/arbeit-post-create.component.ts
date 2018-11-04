@@ -78,7 +78,7 @@ export class ArbeitPostCreateComponent implements OnInit {
   back(): void {
     const sure_of_back = confirm('정말 나가시겠습니까? 변경사항이 저장되지 않을 수 있습니다.');
     if (sure_of_back) {
-      this.router.navigateByUrl(`/`);
+      this.router.navigateByUrl(`/arbeit`);
     } else {
       return;
     }
