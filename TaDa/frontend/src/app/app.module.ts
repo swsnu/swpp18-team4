@@ -15,6 +15,7 @@ import { ArbeitBulletinComponent } from './arbeit-bulletin/arbeit-bulletin.compo
 import { ArbeitPostDetailComponent } from './arbeit-post-detail/arbeit-post-detail.component';
 import { ArbeitMainComponent } from './arbeit-main/arbeit-main.component';
 import { TitleComponent } from './title/title.component';
+import {HttpClientModule} from "@angular/common/http";
 
 @NgModule({
   declarations: [
@@ -35,6 +36,7 @@ import { TitleComponent } from './title/title.component';
     BrowserModule,
     AppRoutingModule,
     FormsModule,
+    HttpClientModule,
   ],
   providers: [],
   bootstrap: [AppComponent]

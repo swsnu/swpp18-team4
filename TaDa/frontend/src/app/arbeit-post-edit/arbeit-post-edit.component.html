@@ -1,3 +1,50 @@
-<p>
-  arbeit-post-edit works!
-</p>
+<div>
+  <div>
+    <button class="Clicked_tab" id="write-tab-button"(click)="view_write_tab()">Write</button>
+    <button class="unClicked_tab" id="preview-tab-button"(click)="view_preview_tab()">Preview</button>
+  </div>
+  <hr>
+  <div *ngIf="view_write">
+    <label>제목</label><br>
+    <input [(ngModel)]="arbeitpost.title" type="text"><br>
+    <label>아르바이트 종류</label><br>
+    <!--<input [(ngModel)]="arbeitpost.arbeit_type" type="text"><br>-->
+    <label>시급</label><br>
+    <input [(ngModel)]="arbeitpost.pay" type="text"><br>
+    <label>지역</label><br>
+    <!--<input [(ngModel)]="arbeitpost.region" type="text"><br>-->
+    <label>내용</label><br>
+    <input [(ngModel)]="arbeitpost.content" type="text"><br>
+    <label>담당자 이름</label><br>
+    <input [(ngModel)]="arbeitpost.manager_name" type="text"><br>
+    <label>담당자 폰번호</label><br>
+    <input [(ngModel)]="arbeitpost.manager_phone" type="text"><br>
+    <label>시간대</label><br>
+    <!--<input [(ngModel)]="arbeitpost.time_zone" type="text"><br>-->
+  </div>
+  <div *ngIf="!view_write">
+    <label>제목</label>
+    <h3>{{arbeitpost.title}}</h3>
+    <label>글쓴이</label>
+    <!--<p id="article-author"> {{loginUserService.name}}</p> -->
+    <label>아르바이트 종류</label>
+    <p>{{arbeitpost.arbeit_type}}</p>
+    <label>시급</label>
+    <p>{{arbeitpost.pay}}원</p>
+    <label>지역</label>
+    <p>{{arbeitpost.region}}</p>
+    <label>내용</label>
+    <p>{{arbeitpost.content}}</p>
+    <label>담당자 이름</label>
+    <p>{{arbeitpost.manager_name}}</p>
+    <label>담당자 전화번호</label>
+    <p>{{arbeitpost.manager_phone}}</p>
+    <label>시간대</label>
+    <p>{{arbeitpost.time_zone}}</p>
+
+  </div>
+  <div>
+    <button (click)="back()">뒤로 가기</button>
+    <button (click)="confirm()">확인</button>
+  </div>
+</div>
