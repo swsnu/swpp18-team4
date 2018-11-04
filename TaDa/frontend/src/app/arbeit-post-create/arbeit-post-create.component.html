@@ -6,13 +6,13 @@
   <hr>
   <div *ngIf="view_write">
     <label>제목</label><br>
-    <input [(ngModel)]="region" type="text"><br>
+    <input [(ngModel)]="title" type="text"><br>
     <label>아르바이트 종류</label><br>
     <input [(ngModel)]="arbeitType" type="text"><br>
     <label>시급</label><br>
     <input [(ngModel)]="pay" type="text"><br>
-    <label>제목</label><br>
-    <input [(ngModel)]="title" type="text"><br>
+    <label>지역</label><br>
+    <input [(ngModel)]="region" type="text"><br>
     <label>내용</label><br>
     <input [(ngModel)]="content" type="text"><br>
     <label>담당자 이름</label><br>
@@ -23,6 +23,24 @@
     <input [(ngModel)]="timezones" type="text"><br>
   </div>
   <div *ngIf="!view_write">
+    <label>제목</label>
+    <h3>{{title}}</h3>
+    <label>글쓴이</label>
+    <!--<p id="article-author"> {{loginUserService.name}}</p> -->
+    <label>아르바이트 종류</label>
+    <p>{{arbeitType}}</p>
+    <label>시급</label>
+    <p>{{pay}}원</p>
+    <label>지역</label>
+    <p>{{region}}</p>
+    <label>내용</label>
+    <p>{{content}}</p>
+    <label>담당자 이름</label>
+    <p>{{managerName}}</p>
+    <label>담당자 전화번호</label>
+    <p>{{managerPhone}}</p>
+    <label>시간대</label>
+    <p>{{timezones}}</p>
 
   </div>
   <div>
