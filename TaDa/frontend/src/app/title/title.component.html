@@ -1,1 +1,11 @@
-
+<div class="grid">
+  <h1 (click)="onClickTitleImage()" class="title title--xxxl">소소하고 확실한 알바</h1>
+  <div *ngIf="isLogIned()">
+    <button (click)="onClickMyPage()">마이페이지</button>
+    <button (click)="onClickSignOut()">로그아웃</button>
+  </div>
+  <div *ngIf="!isLogIned() == true">
+    <button (click)="onClickSignIn()">로그인</button>
+    <button (click)="onClickSignUp()">회원가입</button>
+  </div>
+</div>
