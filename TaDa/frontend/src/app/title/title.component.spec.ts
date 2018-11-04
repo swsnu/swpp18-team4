@@ -37,7 +37,7 @@ describe('TitleComponent', () => {
   });
 
   it('log in testing', () => {
-    expect(component.isLogedIn()).toBeFalsy();
+    expect(component.isLoggedIn()).toBeFalsy();
   });
 
   it('sign in testing', () => {

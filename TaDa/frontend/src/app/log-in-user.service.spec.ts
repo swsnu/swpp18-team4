@@ -13,9 +13,9 @@ describe('LogInUserService', () => {
 
   it('test isLogedIn func', () => {
     const service: LoginUserService = TestBed.get(LoginUserService);
-    expect(service.isLogedIn()).toBeFalsy();
+    expect(service.isLoggedIn()).toBeFalsy();
     service.LogInUser = new User;
-    expect(service.isLogedIn()).toBeTruthy();
+    expect(service.isLoggedIn()).toBeTruthy();
   });
 
   it('test  getUserType func', () => {
