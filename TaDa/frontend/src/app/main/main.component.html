@@ -1,20 +1,35 @@
 <app-title></app-title>
-<div style="text-align:center">
-  <h1>
-    Welcome to {{ title }}!
-  </h1>
-  <ul>
-    <li>
-      <h2>Arbeit</h2>
-    </li>
-    <li>
-      <h2>Research</h2>
-    </li>
-    <li>
-      <h2>Survey</h2>
-    </li>
-    <li>
-      <h2>Lecture</h2>
-    </li>
-  </ul>
+<div style="text-align:center" class="container">
+  <div class="grid" (click)="onClickArbeitBulletin()">
+    <div class="grid__column">
+      <div class="card card--outlined card--primary color-primary">
+        <div class="card__content">
+          단기알바
+        </div>
+      </div>
+    </div>
+    <div class="grid__column">
+      <div class="card card--outlined card--secondary color-secondary">
+        <div class="card__content">
+          실험알바
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="grid">
+    <div class="grid__column">
+      <div class="card card--outlined card--secondary color-secondary">
+        <div class="card__content">
+          강연
+        </div>
+      </div>
+    </div>
+    <div class="grid__column">
+      <div class="card card--outlined card--primary color-primary">
+        <div class="card__content">
+          설문조사
+        </div>
+      </div>
+    </div>
+  </div>
 </div>

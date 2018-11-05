@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-main',
@@ -6,10 +7,12 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./main.component.css']
 })
 export class MainComponent implements OnInit {
-  title: string;
-  constructor() { }
+  constructor( private router: Router ) {}
 
   ngOnInit() {
-    this.title = 'TaDa';
+  }
+
+  onClickArbeitBulletin(): void {
+    this.router.navigateByUrl('/arbeit');
   }
 }

@@ -1,11 +1,11 @@
-<div class="grid">
+<div class="container">
   <h1 (click)="onClickTitleImage()" class="title title--xxxl">소소하고 확실한 알바</h1>
-  <div *ngIf="isLoggedIn()">
-    <button (click)="onClickMyPage()">마이페이지</button>
-    <button (click)="onClickSignOut()">로그아웃</button>
+  <div *ngIf="isLoggedIn()" class="float-right">
+    <button type="button" (click)="onClickMyPage()" class="btn btn-sm btn-outline-success">마이페이지</button>
+    <button type="button" (click)="onClickSignOut()" class="btn btn-sm btn-outline-primary">로그아웃</button>
   </div>
   <div *ngIf="!isLoggedIn() == true">
-    <button (click)="onClickSignIn()">로그인</button>
-    <button (click)="onClickSignUp()">회원가입</button>
+    <button type="button" (click)="onClickSignIn()" class="btn btn-sm btn-outline-success">로그인</button>
+    <button type="button" (click)="onClickSignUp()" class="btn btn-sm btn-outline-primary">회원가입</button>
   </div>
 </div>
