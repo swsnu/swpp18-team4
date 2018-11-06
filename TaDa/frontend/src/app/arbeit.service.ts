@@ -23,9 +23,7 @@ export class ArbeitService {
   
   getArbeitPostById(id: number): Promise<ArbeitPost> {
     const url = `${this.arbeitUrl}${id}`;
-    return this.http.get<ArbeitPost>(url).toPromise()
-      .catch(this.handleError<ArbeitPost>('get arbeitPost'));
-
+    return this.http.get<ArbeitPost>(url).toPromise();
   }
   
   //filterArbeitPost(): After calling getArbeitPosts(), filter the posts by arguments such as region, arbeit type and time zone.
