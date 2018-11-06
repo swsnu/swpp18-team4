@@ -1,3 +1,78 @@
-<p>
-  arbeit-bulletin works!
-</p>
+<div class="container">
+  <div class="card">
+    <ul class="list-group list-group-flush">
+      <li class="list-group-item">
+        <div class="form-group row">
+          <label class="col-sm-1 col-form-label font-weight-bold">지역</label>
+          <div class="col-sm-11">
+            <div class="form-check form-check-inline">
+              <input class="form-check-input" type="checkbox" id="inlineCheckbox1" value="option1">
+              <label class="form-check-label" for="inlineCheckbox1">서울대입구</label>
+            </div>
+            <div class="form-check form-check-inline">
+              <input class="form-check-input" type="checkbox" id="inlineCheckbox2" value="option2">
+              <label class="form-check-label" for="inlineCheckbox2">낙성대</label>
+            </div>
+            <div class="form-check form-check-inline">
+              <input class="form-check-input" type="checkbox" id="inlineCheckbox3" value="option3">
+              <label class="form-check-label" for="inlineCheckbox3">교내</label>
+            </div>
+            <div class="form-check form-check-inline">
+              <input class="form-check-input" type="checkbox" id="inlineCheckbox4" value="option4">
+              <label class="form-check-label" for="inlineCheckbox4">녹두</label>
+            </div>
+            <div class="form-check form-check-inline">
+              <input class="form-check-input" type="checkbox" id="inlineCheckbox5" value="option5">
+              <label class="form-check-label" for="inlineCheckbox5">기타</label>
+            </div>
+          </div>
+        </div>
+      </li>
+      <li class="list-group-item">
+        <div class="form-group row">
+          <label for="exampleInputText1" class="col-sm-2 col-form-label font-weight-bold">시간</label>
+          <div class="col-sm-4">
+            <input type="text" class="form-control-plaintext" id="exampleInputText1" value="시간을 입력하세요">
+          </div>
+          <label class="col-sm-2 col-form-label font-weight-bold">아르바이트 타입</label>
+          <div class="col-sm-4">
+            <div class="form-check form-check-inline">
+              <input class="form-check-input" type="checkbox" id="inlineCheckbox6" value="option6">
+              <label class="form-check-label" for="inlineCheckbox6">멘토링</label>
+            </div>
+            <div class="form-check form-check-inline">
+              <input class="form-check-input" type="checkbox" id="inlineCheckbox7" value="option7">
+              <label class="form-check-label" for="inlineCheckbox7">과외</label>
+            </div>
+          </div>
+        </div>
+      </li>
+    </ul>
+  </div>
+  <div class="btn-group btn-group-toggle float-right">
+    <button class="btn btn-sm btn-success mt-3 mb-3">Write</button>
+  </div>
+  <div>
+    <table class="table table-striped">
+      <thead>
+        <tr>
+          <th>글 ID</th>
+          <th>제목</th>
+          <th>글쓴이</th>
+          <th>시급</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let article of mockData">
+          <td>{{article.id}}</td>
+          <td [routerLink]="'./'+article.id">{{article.title}}</td>
+          <td>{{getAuthorNameByID(article.author_id)}}</td>
+          <td>{{article.pay}}</td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+  <div>
+    <button routerLink="./create" class="btn btn-lg btn-info float-right mt-3 mb-3" id="create-article-button">Write</button>
+  </div>
+</div>
