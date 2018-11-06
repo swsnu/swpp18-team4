@@ -1,7 +1,7 @@
 export enum ArbeitTypeEnum {
-    Mentoring = 'Mentoring',
-    Tutoring = 'Tutoring',
-    Cafe = 'Cafe',
+    Mentoring = '멘토링',
+    Tutoring = '과외',
+    Cafe = '카페 알바',
     IT = 'IT',
-    Design = 'Design',
+    Design = '디자인 알바',
 }
