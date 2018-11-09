@@ -1,50 +1,68 @@
 <div>
-  <div>
-    <button class="Clicked_tab" id="write-tab-button"(click)="view_write_tab()">Write</button>
-    <button class="unClicked_tab" id="preview-tab-button"(click)="view_preview_tab()">Preview</button>
-  </div>
-  <hr>
-  <div *ngIf="view_write">
-    <label>제목</label><br>
-    <input [(ngModel)]="title" type="text"><br>
-    <label>아르바이트 종류</label><br>
-    <input [(ngModel)]="arbeit_type" type="text"><br>
-    <label>시급</label><br>
-    <input [(ngModel)]="pay" type="text"><br>
-    <label>지역</label><br>
-    <input [(ngModel)]="region" type="text"><br>
-    <label>내용</label><br>
-    <input [(ngModel)]="content" type="text"><br>
-    <label>담당자 이름</label><br>
-    <input [(ngModel)]="manager_name" type="text"><br>
-    <label>담당자 폰번호</label><br>
-    <input [(ngModel)]="manager_phone" type="text"><br>
-    <label>시간대</label><br>
-    <!--<input [(ngModel)]="time_zone" type="text"><br>-->
-  </div>
-  <div *ngIf="!view_write">
-    <label>제목</label>
-    <h3>{{title}}</h3>
-    <label>글쓴이</label>
-    <!--<p id="article-author"> {{loginUserService.name}}</p> -->
-    <label>아르바이트 종류</label>
-    <p>{{arbeit_type}}</p>
-    <label>시급</label>
-    <p>{{pay}}원</p>
-    <label>지역</label>
-    <p>{{region}}</p>
-    <label>내용</label>
-    <p>{{content}}</p>
-    <label>담당자 이름</label>
-    <p>{{manager_name}}</p>
-    <label>담당자 전화번호</label>
-    <p>{{manager_phone}}</p>
-    <label>시간대</label>
-    <p>{{time_zone}}</p>
+  <h5 class="card-header">알바구인 글쓰기</h5>
+  <input id="title" type="text" [(ngModel)]="title" placeholder="제목을 입력하세요">
 
-  </div>
-  <div>
-    <button (click)="back()">뒤로 가기</button>
-    <button (click)="confirm()">확인</button>
+
+    <div class="card-deck">
+
+      <div class="col-sm-6">
+        <div class="card w-40">
+          <div>
+            <label id="arbeit_type" class="font-weight-bold">알바 유형</label>
+            <select [(ngModel)]="arbeit_type">
+                <option value="멘토링">멘토링</option>
+                <option value="과외">과외</option>
+                <option value="카페 알바">카페 알바</option>
+              </select>
+          </div>
+          <div>
+            <label id="region" class="font-weight-bold">지역</label>
+            <select [(ngModel)]="arbeit_type">
+              <option value="교내">교내</option>
+              <option value="설입">설입</option>
+              <option value="낙대">낙대</option>
+            </select>
+          </div>
+          <div>
+            <label id="pay" class="font-weight-bold">시급</label>
+            <input [(ngModel)]="pay" type="text">
+          </div>
+          <div>
+            <label id="timezone" class="font-weight-bold">시간대</label>
+            <input [(ngModel)]="time_zone" type="text">
+          </div>
+        </div>
+      </div>
+
+
+    <div class="col-sm-6">
+      <div class="card w-40">
+        <label id="content">내용</label>
+        <textarea [(ngModel)]="content"></textarea>
+      </div>
+    </div>
+
+      <div class="col-sm-6">
+        <div class="card w-40">
+          <div>
+            <label id="manager_name" class="font-weight-bold">담당자 이름</label>
+            <input [(ngModel)]="manager_name" type="text">
+          </div>
+          <div>
+            <label id="manager_phone" class="font-weight-bold">담당자 폰번호</label>
+            <input [(ngModel)]="manager_phone" type="text">
+          </div>
+        </div>
+      </div>
+
+    </div>
+
+
+    <!--<input [(ngModel)]="time_zone" type="text"><br>-->
+
+  <hr id="bottom-hr">
+  <div id="bottom-buttons">
+    <button id="preview" (click)="back()">미리 보기</button>
+    <button id="confirm" (click)="confirm()">확인</button>
   </div>
 </div>

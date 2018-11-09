@@ -1,0 +1,64 @@
+#title {
+  width: 47%;
+  padding: 12px 20px;
+  margin-top: 10px;
+  margin-bottom: 10px;
+  margin-left: 15px;
+  box-sizing: border-box;
+  border: 2px solid cornflowerblue;
+  border-radius: 3px;
+  -webkit-transition: width 0.4s ease-in-out;
+  transition: width 0.4s ease-in-out;
+}
+
+#title:focus {
+  width: 98%;
+}
+
+.card-header {
+  background: cornflowerblue;
+  color: white;
+}
+
+label {
+  padding-top: 15px;
+  padding-left: 20px;
+  margin-right: 20px;
+}
+div label, div select, div input {
+  display: inline-block;
+}
+
+textarea {
+  height: 270px;
+  resize: none;
+}
+
+.card {
+  border: 2px solid cornflowerblue;
+  border-radius: 7px;
+  box-sizing: border-box;
+}
+
+#preview, #confirm {
+  background-color: #0074D9;
+  color: white;
+  padding: 7px 0px;
+  margin: 8px 2px;
+  border: none;
+  cursor: pointer;
+  width: 90px;
+  text-align: center;
+}
+
+button:hover {
+  opacity: 0.8;
+}
+
+#bottom-hr {
+  margin-bottom: 8px;
+}
+
+#bottom-buttons {
+  text-align: center;
+}

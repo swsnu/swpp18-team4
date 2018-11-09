@@ -9,16 +9,14 @@ import { Router } from '@angular/router';
   styleUrls: ['./arbeit-post-create.component.css']
 })
 export class ArbeitPostCreateComponent implements OnInit {
+  title: string;
   region: string;
   arbeit_type: string;
   pay: string; // change into number when createArbeitPost()
-  title: string;
   content: string;
   manager_name: string;
   manager_phone: string;
-  time_zone: string[];
-
-  view_write: boolean;
+  time_zone: string;
 
   constructor(
     private loginUserService: LoginUserService,
@@ -43,17 +41,6 @@ export class ArbeitPostCreateComponent implements OnInit {
     }
   }
 
-  view_write_tab(): void {
-    this.view_write = true;
-    document.getElementById('write-tab-button').setAttribute('class', 'Clicked_tab');
-    document.getElementById('preview-tab-button').setAttribute('class', 'unClicked_tab');
-  }
-  view_preview_tab(): void {
-    this.view_write = false;
-    document.getElementById('write-tab-button').setAttribute('class', 'unClicked_tab');
-    document.getElementById('preview-tab-button').setAttribute('class', 'Clicked_tab');
-  }
-
   confirm(): void {
     // region
     if (!this.isValidInput(this.region)) {
@@ -74,7 +61,8 @@ export class ArbeitPostCreateComponent implements OnInit {
       //this.arbeitService.createArbeitPost();
     }
   }
-  
+
+  //this function can be deleted
   back(): void {
     const sure_of_back = confirm('정말 나가시겠습니까? 변경사항이 저장되지 않을 수 있습니다.');
     if (sure_of_back) {

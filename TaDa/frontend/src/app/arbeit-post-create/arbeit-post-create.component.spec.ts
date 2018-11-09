@@ -42,20 +42,6 @@ describe('ArbeitPostCreateComponent', () => {
     expect(component.isValidInput(region)).toBeTruthy();
   });
 
-  it('test view_write_tab func', () => {
-    component.view_write_tab();
-    expect(component.view_write).toEqual(true);
-    expect(document.getElementById('write-tab-button').getAttribute('class')).toContain('Clicked');
-    expect(document.getElementById('preview-tab-button').getAttribute('class')).toContain('unClicked');
-  });
-
-  it('test view_preview_tab func', () => {
-    component.view_preview_tab();
-    expect(component.view_write).toEqual(false);
-    expect(document.getElementById('write-tab-button').getAttribute('class')).toContain('unClicked');
-    expect(document.getElementById('preview-tab-button').getAttribute('class')).toContain('Clicked');
-  });
-
   it('test back func when yes', () => {
     spyOn(window, 'confirm').and.returnValue(true);
     component.back();
