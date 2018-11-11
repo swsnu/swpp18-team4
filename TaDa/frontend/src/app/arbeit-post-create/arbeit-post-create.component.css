@@ -40,7 +40,7 @@ textarea {
   box-sizing: border-box;
 }
 
-#preview, #confirm {
+button {
   background-color: #0074D9;
   color: white;
   padding: 7px 0px;
@@ -61,4 +61,41 @@ button:hover {
 
 #bottom-buttons {
   text-align: center;
+}
+
+#arbeit_type {
+  margin-top: 10px;
+}
+
+#pay-input {
+  /* background */
+}
+
+#picture_upload {
+  margin-top: 10px;
+}
+
+#selected_file {
+  margin-left: 20px;
+  margin-bottom: 10px;
+}
+
+select {
+  color: #006fff;
+  width: 135px;
+  background: url(http://i62.tinypic.com/15xvbd5.png) no-repeat 90% 0;
+}
+select::-ms-expand {
+  display: none;
+}
+select option:checked,
+select option:hover {
+  background: deepskyblue;
+  color: deepskyblue;
+}
+/* check, hover 스타일 설정 FireFox */
+select option:checked,
+select option:hover {
+  box-shadow: 0 0 10px 100px #ff00ff inset;
+  color: #fff;
 }

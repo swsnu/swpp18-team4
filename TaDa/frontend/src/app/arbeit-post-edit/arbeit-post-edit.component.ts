@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import {LoginUserService} from "../log-in-user.service";
 import {ArbeitService} from "../arbeit.service";
 import {Router} from "@angular/router";
+import {ArbeitPost} from "../ArbeitPost";
 
 @Component({
   selector: 'app-arbeit-post-edit',
@@ -9,7 +10,8 @@ import {Router} from "@angular/router";
   styleUrls: ['./arbeit-post-edit.component.css']
 })
 export class ArbeitPostEditComponent implements OnInit {
-  view_write: boolean;
+
+  target_post: ArbeitPost;
 
   constructor(
     private loginUserService: LoginUserService,
@@ -18,6 +20,8 @@ export class ArbeitPostEditComponent implements OnInit {
   ) { }
 
   ngOnInit() {
+    this.arbeitService.getArbeitPostById(1)
+      .then(post => this.target_post);
   }
 
 }

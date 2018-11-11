@@ -4,4 +4,5 @@ export enum ArbeitTypeEnum {
     Cafe = '카페 알바',
     IT = 'IT',
     Design = '디자인 알바',
+    Extra = '기타'
 }

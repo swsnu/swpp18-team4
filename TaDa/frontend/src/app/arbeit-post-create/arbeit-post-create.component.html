@@ -17,15 +17,17 @@
           </div>
           <div>
             <label id="region" class="font-weight-bold">지역</label>
-            <select [(ngModel)]="arbeit_type">
+            <select required [(ngModel)]="region">
               <option value="교내">교내</option>
               <option value="설입">설입</option>
               <option value="낙대">낙대</option>
             </select>
+            <label>지도로 위치 표시</label>
           </div>
-          <div>
+          <div class="number-wrapper">
             <label id="pay" class="font-weight-bold">시급</label>
-            <input [(ngModel)]="pay" type="text">
+            <input id="pay-input" type="number" step="1" [(ngModel)]="pay">
+            <label>원</label>
           </div>
           <div>
             <label id="timezone" class="font-weight-bold">시간대</label>
@@ -38,7 +40,7 @@
     <div class="col-sm-6">
       <div class="card w-40">
         <label id="content">내용</label>
-        <textarea [(ngModel)]="content"></textarea>
+        <textarea [(ngModel)]="content" placeholder="업무 내용, 상세주소 등등"></textarea>
       </div>
     </div>
 
@@ -55,6 +57,26 @@
         </div>
       </div>
 
+      <div id="picture_upload" class="col-sm-6">
+        <div class="card w-40">
+          <div>
+            <label class="font-weight-bold">사진 첨부</label>
+            <input style="display: none"
+              type="file" (change)="onFileChanged($event)"
+              #fileInput>
+            <button (click)="fileInput.click()">Select File</button>
+            <div id="selected_file">
+              <div *ngIf="selectedFile">
+                {{selectedFile.name}}
+              </div>
+              <div *ngIf="!selectedFile">
+                선택된 파일 없음
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
     </div>
 
 
@@ -62,7 +84,7 @@
 
   <hr id="bottom-hr">
   <div id="bottom-buttons">
-    <button id="preview" (click)="back()">미리 보기</button>
+    <button id="preview" (click)="preview()">미리 보기</button>
     <button id="confirm" (click)="confirm()">확인</button>
   </div>
 </div>

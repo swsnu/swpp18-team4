@@ -16,6 +16,7 @@ import { ArbeitPostDetailComponent } from './arbeit-post-detail/arbeit-post-deta
 import { ArbeitMainComponent } from './arbeit-main/arbeit-main.component';
 import { TitleComponent } from './title/title.component';
 import {HttpClientModule} from '@angular/common/http';
+import { ArbeitPostPreviewComponent } from './arbeit-post-preview/arbeit-post-preview.component';
 
 @NgModule({
   declarations: [
@@ -30,7 +31,8 @@ import {HttpClientModule} from '@angular/common/http';
     ArbeitBulletinComponent,
     ArbeitPostDetailComponent,
     ArbeitMainComponent,
-    TitleComponent
+    TitleComponent,
+    ArbeitPostPreviewComponent,
   ],
   imports: [
     BrowserModule,
