@@ -12,8 +12,8 @@ export class User {
 
 export class Employee {
   id: number;
-  arbeit_region: ArbeitRegionEnum;
-  arbeit_type: ArbeitTypeEnum;
+  arbeit_region: ArbeitRegionEnum[];
+  arbeit_type: ArbeitTypeEnum[];
   timezone: string[];
 }
 

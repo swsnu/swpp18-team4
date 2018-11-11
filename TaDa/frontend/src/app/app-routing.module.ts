@@ -20,7 +20,7 @@ const routes: Routes = [
   { path: 'sign_up/employee', component: SignUpEmployeeComponent },
   { path: 'sign_up/employer', component: SignUpEmployerComponent },
   { path: 'employee_page', component: EmployeePageComponent },
-  { path: 'employer_page', component: EmployerPageComponent },
+  { path: 'employer/:id', component: EmployerPageComponent },
 
   {
     path: 'arbeit', component: ArbeitMainComponent,

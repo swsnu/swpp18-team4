@@ -1,3 +1,31 @@
-<p>
-  employee-page works!
-</p>
+<h5 class="card-header">MyPage</h5>
+<div class="card">
+  <div class="card-body">
+    <label class = "font-weight-bold">Name:</label>{{user.name}}<br>
+    <label class = "font-weight-bold">Email:</label>{{user.email}}<br>
+    <label class = "font-weight-bold"> Password:</label>
+        <input type="password" [(ngModel)]="pw">
+    <br>
+    <label class = "font-weight-bold">Password Confirmation:
+        <input type="password" class="control__input" [(ngModel)]="pw_confirm">
+    </label>
+    <button type="button" (click)="editPassword()" class="btn btn-secondary">Confirm Password</button><br>
+    <!--Time zone with table-->
+    <label class = "font-weight-bold">Select TimeZone:
+      <input type="text" placeholder="시간을 입력하세요">
+    </label>
+  </div>
+
+  <div class="row">
+    <div class="col-sm-6">
+    <div class = "card">
+        <label class = "font-weight-bold">Email:</label>{{user.email}}<br>
+    </div>
+    
+    </div>
+  </div>
+</div>
+<button type="button" (click)="goBack()" float="left"class="btn btn-secondary">Back</button>
+<button type="button" (click)="editUserInfo()" float="right" class="btn btn-secondary">Confirm</button>
+
+

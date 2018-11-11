@@ -48,4 +48,12 @@ export class UserService {
       .then(() => employer);
   }
 
+  updateUser(user: User) {
+    const url = `${this.user_url}${user.id}`;
+    return this.http.put(url, user, httpOptions)
+    .toPromise()
+    .then(() => user);
+
+  }
+
 }
