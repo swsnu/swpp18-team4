@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { Employee, Employer, User} from "./User";
+import { Employee, Employer, User} from './User';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 
 const httpOptions = {
@@ -33,4 +33,19 @@ export class UserService {
     const url = `${'api/employer/'}${id}`;
     return this.http.get<Employee>(url).toPromise();
   }
+
+  updateEmployee(employee: Employee) {
+    const url = `${'api/employee/'}${employee.id}`;
+    return this.http.put(url, employee, httpOptions)
+      .toPromise()
+      .then(() => employee);
+  }
+
+  updateEmployer(employer: Employer) {
+    const url = `${'api/employer/'}${employer.id}`;
+    return this.http.put(url, employer, httpOptions)
+      .toPromise()
+      .then(() => employer);
+  }
+
 }

@@ -1,6 +1,6 @@
 import { UserTypeEnum } from './Enums/UserTypeEnum';
-import { ArbeitTypeEnum } from "./Enums/ArbeitTypeEnum";
-import { ArbeitRegionEnum } from "./Enums/ArbeitRegionEnum";
+import { ArbeitTypeEnum } from './Enums/ArbeitTypeEnum';
+import { ArbeitRegionEnum } from './Enums/ArbeitRegionEnum';
 
 export class User {
   id: number;
@@ -11,16 +11,16 @@ export class User {
 }
 
 export class Employee {
-  employee_id: number;
-  region: ArbeitRegionEnum;
-  //timezone:
+  id: number;
+  arbeit_region: ArbeitRegionEnum;
   arbeit_type: ArbeitTypeEnum;
+  timezone: string[];
 }
 
 export class Employer {
-  employer_id: number;
+  id: number;
   company_name: string;
-  company_address: string
+  company_address: string;
   business_content: string;
   representative_name: string;
   representative_phonenumber: string;
