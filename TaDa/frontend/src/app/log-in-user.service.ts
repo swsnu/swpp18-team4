@@ -1,20 +1,24 @@
-import {Injectable} from '@angular/core';
-import {User} from './User';
-import {UserTypeEnum} from './Enums/UserTypeEnum';
-import { HttpClientModule } from "@angular/common/http";
-import { RouterTestingModule } from "@angular/router/testing";
+import { Injectable } from '@angular/core';
+import { User, Employer, Employee } from './User';
+import { UserTypeEnum } from './Enums/UserTypeEnum';
+import { HttpClientModule } from '@angular/common/http';
+import { RouterTestingModule } from '@angular/router/testing';
 
 @Injectable({
   providedIn: 'root'
 })
 export class LoginUserService {
   LogInUser: User;
+  UserEmployer: Employer;
+  UserEmployee: Employee;
+  UserType: UserTypeEnum;
 
   constructor() { }
 
   isLoggedIn() {
     return this.LogInUser != null;
   }
+
   getLogInUser(): User {
     if (this.LogInUser != null) {
       return this.LogInUser;
@@ -23,18 +27,20 @@ export class LoginUserService {
     }
   }
 
+  getEmployee() {
+    return this.UserEmployee;
+  }
+  getEmployer() {
+    return this.UserEmployer;
+  }
+
   isValidUser() {}
 
-
-  getUserType(): string {
+  getUserType(): UserTypeEnum {
     if (this.LogInUser) {
-      if (this.LogInUser.type === UserTypeEnum.Employee) {
-        return 'Employee';
-      } else {
-        return 'Employer';
-      }
+      return this.UserType;
     } else {
-      return '';
+      return null;
     }
   }
 
@@ -42,5 +48,4 @@ export class LoginUserService {
     // TODO : connect with django backend
     this.LogInUser = null;
   }
-
 }

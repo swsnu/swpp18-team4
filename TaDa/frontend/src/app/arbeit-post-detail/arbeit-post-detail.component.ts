@@ -18,7 +18,7 @@ export class ArbeitPostDetailComponent implements OnInit {
 
   user: User;
   post: ArbeitPost;
-  
+
   ex_post: ArbeitPost = {
     id: 1,
     author_id: 1,

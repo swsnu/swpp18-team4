@@ -12,8 +12,8 @@ const httpOptions = {
 })
 export class ArbeitService {
   private arbeitUrl = 'api/arbeit/';
-  
-  constructor( 
+
+  constructor(
     private http: HttpClient,
     private router: Router) {}
 
@@ -22,14 +22,14 @@ export class ArbeitService {
   }
 
 
-  
+
   getArbeitPostById(id: number): Promise<ArbeitPost> {
     const url = `${this.arbeitUrl}${id}`;
     return this.http.get<ArbeitPost>(url).toPromise();
   }
-  
+
   //filterArbeitPost(): After calling getArbeitPosts(), filter the posts by arguments such as region, arbeit type and time zone.
-  
+
   createArbeitPost(post: Partial<ArbeitPost>): Promise<ArbeitPost> {
     return this.http.post<ArbeitPost>(this.arbeitUrl, post, httpOptions)
       .toPromise();

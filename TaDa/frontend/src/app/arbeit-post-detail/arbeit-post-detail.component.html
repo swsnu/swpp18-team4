@@ -1,45 +1,55 @@
+<h5 class="card-header">Arbeit Post #{{post.id}}</h5>
+<!--arbeit post itself-->
 <div *ngIf="post">
-    <div class="card w-80">
-        <h5 class="card-header">Arbeit Post # {{post.id}}</h5>
-        <div class="card-body">
-            <h2 class="card-title">{{post.title}}</h2>
-            <div class="row">
-            <!-- Some properties of post-->
-                <div class="col-sm-6">
-                    <div class="card w-40">
-                        <div class="card-body">
-                            <label class = "font-weight-bold">Region</label>: {{post.region}}
-                            <label class = "font-weight-bold">Type</label>: {{post.arbeit_type}}
-                            <label class = "font-weight-bold">Pay</label>: {{post.pay}}
-                            <p class="card-text">Time Zone</p>
-                            <div *ngFor= "let time of post.time_zone">
-                                <p>{{time}}</p>
+    <div class="row">
+        <div class="leftcolumn"> 
+            <div class="card">
+                <h2 class="card-title">{{post.title}}</h2>
+                        <!-- Some properties of post-->
+                    <div class="card">
+                        <div class="row">
+                            <div class="col-sm-6">
+                                <label class = "font-weight-bold">Region</label>: {{post.region}}<br>                                            <label class = "font-weight-bold">Detail Address</label>addresss<br>
+                                <label class = "font-weight-bold">Detail Address</label>: addresss<br>
+                                <label class = "font-weight-bold">Type</label>: {{post.arbeit_type}}<br>
+                                <label class = "font-weight-bold">Pay</label>: {{post.pay}}<br>
+                                <label class = "font-weight-bold">Time Zone</label>
+                                <div *ngFor= "let time of post.time_zone">
+                                    <p>{{time}}</p>
+                                </div>
                             </div>
+                            <div class="col-sm-6">
+                                <div class="fakeimg" padding="100px">Map</div>
+                            </div>                                          
                         </div>
                     </div>
-                </div>
-                <!-- Employer information -->
-                <div class="col-sm-6">
-                    <div class="card w-40">
-                        <div class="card-body">
-                            <h5 class="card-title">Employer Information</h5>
-                            <p class="card-text"> Company name</p>
-                            <p class="card-text"> Company address</p>
-                            <p class="card-text"> simple Explanation </p>
-                            <a href="#" class="btn btn-primary">Look more about this compan</a>
-                        </div>
-                    </div>
-                </div>
-            </div>            
-            <p class="card-text">{{post.content}}</p>
-            
-            <!--manager information-->
-            <div class="card w-90">
-                <div class="card-body">
-                    <p class="card-text"> Manager name: {{post.manager_name}}</p>
-                    <p class="card-text"> Manager phone number: {{post.manager_phone}}</p>    
+                <div class = "card-body">
+                <p class="card-text">{{post.content}}</p>          
+                <!--manager information-->
+                <label class = "font-weight-bold">Inquiry to Manager</label>
+                <label class = "font-weight-bold">Name:</label> {{post.manager_name}} <br>
+                <label class = "font-weight-bold">Phone:</label>{{post.manager_phone}}    
                 </div>
             </div>
-		</div>
-	</div>
+        </div>
+        <div class="rightcolumn">
+            <div class="card">
+                <h4>Employer Information</h4>
+                <label class = "font-weight-bold">Company name</label><br>
+                <label class = "font-weight-bold">Company address</label>
+                <p class="card-text"> simple Explanation </p>
+                <a href="#" class="btn btn-primary">Look more about this company</a>
+            </div>
+            <div class="card">
+                <h4>Banner comes here</h4>
+                <div class="fakeimg">Image</div><br>
+                <div class="fakeimg">Image</div><br>
+                <div class="fakeimg">Image</div>
+            </div>
+        </div>
+    </div>
 </div>
+
+<button type="button" float="left"class="btn btn-secondary">Back</button>
+<button type="button" float="right" class="btn btn-secondary">Edit</button>
+<button type="button" float="right" class="btn btn-secondary">Delete</button>

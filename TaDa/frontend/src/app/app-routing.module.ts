@@ -10,7 +10,12 @@ import { SignUpEmployerComponent } from './sign-up-employer/sign-up-employer.com
 import { ArbeitMainComponent } from './arbeit-main/arbeit-main.component';
 import { ArbeitBulletinComponent } from './arbeit-bulletin/arbeit-bulletin.component';
 import { ArbeitPostDetailComponent } from './arbeit-post-detail/arbeit-post-detail.component';
+
 import { ArbeitPostPreviewComponent } from "./arbeit-post-preview/arbeit-post-preview.component";
+
+import { EmployeePageComponent } from './employee-page/employee-page.component';
+import { EmployerPageComponent } from './employer-page/employer-page.component';
+
 
 const routes: Routes = [
   { path: '', component: MainComponent },
@@ -18,6 +23,9 @@ const routes: Routes = [
   { path: 'sign_up', component: SignUpMainComponent },
   { path: 'sign_up/employee', component: SignUpEmployeeComponent },
   { path: 'sign_up/employer', component: SignUpEmployerComponent },
+  { path: 'employee_page', component: EmployeePageComponent },
+  { path: 'employer/:id', component: EmployerPageComponent },
+
   {
     path: 'arbeit', component: ArbeitMainComponent,
     children: [
