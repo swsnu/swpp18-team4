@@ -4,7 +4,7 @@
       <li class="list-group-item">
         <div class="form-group row">
           <label class="col-sm-1 col-form-label font-weight-bold">지역</label>
-          <div class="col-sm-11">
+          <div class="col-sm-5">
             <div class="form-check form-check-inline">
               <input class="form-check-input" type="checkbox" id="inlineCheckbox1" value="option1">
               <label class="form-check-label" for="inlineCheckbox1">서울대입구</label>
@@ -26,31 +26,47 @@
               <label class="form-check-label" for="inlineCheckbox5">기타</label>
             </div>
           </div>
+
+          <label class="col-sm-2 col-form-label font-weight-bold">아르바이트 타입</label>
+          <div class="col-sm-4">
+            <div class="form-check form-check-inline">
+              <input class="form-check-input" type="checkbox" id="inlineCheckbox6">
+              <label class="form-check-label" for="inlineCheckbox6">멘토링</label>
+            </div>
+            <div class="form-check form-check-inline">
+              <input class="form-check-input" type="checkbox" id="inlineCheckbox7">
+              <label class="form-check-label" for="inlineCheckbox7">과외</label>
+            </div>
+          </div>
+        </div>
+        <div class="form-group row">
+          <label for="exampleInputText1" class="col-sm-1 col-form-label font-weight-bold">시간</label>
+          <div class="col-sm-4">
+            <input type="text" class="form-control-plaintext" id="exampleInputText1" placeholder="시간을 입력하세요">
+          </div>
         </div>
       </li>
       <li class="list-group-item">
         <div class="form-group row">
-          <label for="exampleInputText1" class="col-sm-2 col-form-label font-weight-bold">시간</label>
-          <div class="col-sm-4">
-            <input type="text" class="form-control-plaintext" id="exampleInputText1" value="시간을 입력하세요">
+          <label for="exampleInputText1" class="col-sm-1 col-form-label font-weight-bold">검색어</label>
+          <div class="col-sm-3">
+            <input type="text" class="form-control-plaintext" id="exampleInputText2" placeholder="검색어를 입력하세요">
           </div>
-          <label class="col-sm-2 col-form-label font-weight-bold">아르바이트 타입</label>
-          <div class="col-sm-4">
-            <div class="form-check form-check-inline">
-              <input class="form-check-input" type="checkbox" id="inlineCheckbox6" value="option6">
-              <label class="form-check-label" for="inlineCheckbox6">멘토링</label>
-            </div>
-            <div class="form-check form-check-inline">
-              <input class="form-check-input" type="checkbox" id="inlineCheckbox7" value="option7">
-              <label class="form-check-label" for="inlineCheckbox7">과외</label>
-            </div>
-          </div>
+          <select class="form-control col-sm-1">
+            <option>제목</option>
+            <option>내용</option>
+            <option>제목+내용</option>
+          </select>
+          <div class="col-sm-4"></div>
+          <button class="btn col-sm-2 btn-sm btn-outline-primary">검색</button>
         </div>
       </li>
     </ul>
   </div>
   <div class="btn-group btn-group-toggle float-right">
-    <button class="btn btn-sm btn-success mt-3 mb-3">Write</button>
+    <button class="btn btn-sm btn-dark">최신순</button>
+    <button class="btn btn-sm btn-dark">시급순</button>
+    <button class="btn btn-sm btn-dark">별점순</button>
   </div>
   <div>
     <table class="table table-striped">
