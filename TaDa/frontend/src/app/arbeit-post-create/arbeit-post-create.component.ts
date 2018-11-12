@@ -82,17 +82,17 @@ export class ArbeitPostCreateComponent implements OnInit {
     this.temp_post.title = this.title;
     this.temp_post.content = this.content;
     //region
-    if(this.region == '교내') {this.temp_post.region = ArbeitRegionEnum.School;}
-    else if(this.region == '설입') {this.temp_post.region = ArbeitRegionEnum.SNUStation;}
-    else if(this.region == '녹두') {this.temp_post.region = ArbeitRegionEnum.Nokdu;}
-    else if(this.region == '낙성대') {this.temp_post.region = ArbeitRegionEnum.Nakdae;}
+    if(this.region === '교내') {this.temp_post.region = ArbeitRegionEnum.School;}
+    else if(this.region === '설입') {this.temp_post.region = ArbeitRegionEnum.SNUStation;}
+    else if(this.region === '녹두') {this.temp_post.region = ArbeitRegionEnum.Nokdu;}
+    else if(this.region === '낙성대') {this.temp_post.region = ArbeitRegionEnum.Nakdae;}
     else {this.temp_post.region = ArbeitRegionEnum.Extra;}
     //arbeit_type
-    if(this.arbeit_type == '멘토링') {this.temp_post.arbeit_type = ArbeitTypeEnum.Mentoring;}
-    else if(this.arbeit_type == '과외') {this.temp_post.arbeit_type = ArbeitTypeEnum.Tutoring;}
-    else if(this.arbeit_type == '카페 알바') {this.temp_post.arbeit_type = ArbeitTypeEnum.Cafe;}
-    else if(this.arbeit_type == 'IT') {this.temp_post.arbeit_type = ArbeitTypeEnum.IT;}
-    else if(this.arbeit_type == '디자인 알바') {this.temp_post.arbeit_type = ArbeitTypeEnum.Design;}
+    if(this.arbeit_type === '멘토링') {this.temp_post.arbeit_type = ArbeitTypeEnum.Mentoring;}
+    else if(this.arbeit_type === '과외') {this.temp_post.arbeit_type = ArbeitTypeEnum.Tutoring;}
+    else if(this.arbeit_type === '카페 알바') {this.temp_post.arbeit_type = ArbeitTypeEnum.Cafe;}
+    else if(this.arbeit_type === 'IT') {this.temp_post.arbeit_type = ArbeitTypeEnum.IT;}
+    else if(this.arbeit_type === '디자인 알바') {this.temp_post.arbeit_type = ArbeitTypeEnum.Design;}
     else {this.temp_post.arbeit_type = ArbeitTypeEnum.Extra;}
     //
     this.temp_post.pay = this.pay;
@@ -109,6 +109,10 @@ export class ArbeitPostCreateComponent implements OnInit {
     const yyyy = today.getFullYear();
     const datestring = yyyy + '-' + mm + '-' + dd + 'T' + h + ':' + m + ':' + s;
     this.temp_post.register_date = new Date(datestring);
+  }
+
+  back(): void {
+    this.router.navigateByUrl('/arbeit');
   }
 
   confirm(): void {
