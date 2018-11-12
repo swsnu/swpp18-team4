@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { User, Employer, Employee } from './User';
+import { User, Employer, Employee } from './Classes/User';
 import { UserTypeEnum } from './Enums/UserTypeEnum';
 import { HttpClientModule } from '@angular/common/http';
 import { RouterTestingModule } from '@angular/router/testing';

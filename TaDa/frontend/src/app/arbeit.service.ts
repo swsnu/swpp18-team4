@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
-import { ArbeitPost } from './ArbeitPost';
+import { ArbeitPost } from './Classes/ArbeitPost';
 import { Router } from '@angular/router';
 
 const httpOptions = {

@@ -4,7 +4,7 @@ import { ArbeitService } from './arbeit.service';
 import { HttpClient, HttpErrorResponse } from "@angular/common/http";
 import { RouterTestingModule } from "@angular/router/testing";
 import { HttpClientTestingModule, HttpTestingController } from "@angular/common/http/testing";
-import {ArbeitPost} from "./ArbeitPost";
+import {ArbeitPost} from "./Classes/ArbeitPost";
 import {ArbeitRegionEnum} from "./Enums/ArbeitRegionEnum";
 import {ArbeitTypeEnum} from "./Enums/ArbeitTypeEnum";
 

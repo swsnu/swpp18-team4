@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import {ArbeitPost} from "./ArbeitPost";
+import {ArbeitPost} from "./Classes/ArbeitPost";
 
 @Injectable({
   providedIn: 'root'

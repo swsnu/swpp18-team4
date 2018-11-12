@@ -2,7 +2,7 @@ import {Component, OnInit} from '@angular/core';
 import {ArbeitService} from '../arbeit.service';
 import {LoginUserService} from '../log-in-user.service';
 import {Router} from '@angular/router';
-import {ArbeitPost} from "../ArbeitPost";
+import {ArbeitPost} from "../Classes/ArbeitPost";
 import {ArbeitRegionEnum} from "../Enums/ArbeitRegionEnum";
 import {ArbeitTypeEnum} from "../Enums/ArbeitTypeEnum";
 import { CurrentArbeitPostService } from "../current-arbeit-post.service";

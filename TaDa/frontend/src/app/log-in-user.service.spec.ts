@@ -1,5 +1,5 @@
 import {TestBed} from '@angular/core/testing';
-import {User} from "./User";
+import {User} from "./Classes/User";
 import {LoginUserService} from './log-in-user.service';
 import {UserTypeEnum} from "./Enums/UserTypeEnum";
 

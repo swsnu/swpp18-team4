@@ -1,6 +1,6 @@
 import { ArbeitRegionEnum } from './Enums/ArbeitRegionEnum';
 import { ArbeitTypeEnum } from './Enums/ArbeitTypeEnum';
-import { ArbeitPost } from './ArbeitPost';
+import { ArbeitPost } from './Classes/ArbeitPost';
 
 export const mockArbeitPost: ArbeitPost[] = [
   { id: 1,

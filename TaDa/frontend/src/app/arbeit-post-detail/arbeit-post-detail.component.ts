@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
-import { User } from '../User';
-import { ArbeitPost } from '../ArbeitPost';
+import { User } from '../Classes/User';
+import { ArbeitPost } from '../Classes/ArbeitPost';
 import { ArbeitService } from '../arbeit.service';
 import { LoginUserService } from '../log-in-user.service';
 

@@ -1,6 +1,6 @@
-import { UserTypeEnum } from './Enums/UserTypeEnum';
-import { ArbeitTypeEnum } from './Enums/ArbeitTypeEnum';
-import { ArbeitRegionEnum } from './Enums/ArbeitRegionEnum';
+import { UserTypeEnum } from '../Enums/UserTypeEnum';
+import { ArbeitTypeEnum } from '../Enums/ArbeitTypeEnum';
+import { ArbeitRegionEnum } from '../Enums/ArbeitRegionEnum';
 
 export class User {
   id: number;

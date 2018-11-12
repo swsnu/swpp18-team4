@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import {ArbeitPost} from "../ArbeitPost";
+import {ArbeitPost} from "../Classes/ArbeitPost";
 import {CurrentArbeitPostService} from "../current-arbeit-post.service";
 
 @Component({

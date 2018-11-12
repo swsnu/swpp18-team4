@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { Employee, Employer, User} from './User';
+import { Employee, Employer, User} from './Classes/User';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 
 const httpOptions = {

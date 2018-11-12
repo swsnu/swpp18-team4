@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import {LoginUserService} from "../log-in-user.service";
 import {ArbeitService} from "../arbeit.service";
 import {Router} from "@angular/router";
-import {ArbeitPost} from "../ArbeitPost";
+import {ArbeitPost} from "../Classes/ArbeitPost";
 
 @Component({
   selector: 'app-arbeit-post-edit',
