@@ -79,7 +79,7 @@
         </tr>
       </thead>
       <tbody>
-        <tr *ngFor="let article of mockData">
+        <tr *ngFor="let article of dataToShow">
           <td>{{article.id}}</td>
           <td [routerLink]="'./'+article.id">{{article.title}}</td>
           <td>{{getAuthorNameByID(article.author_id)}}</td>
