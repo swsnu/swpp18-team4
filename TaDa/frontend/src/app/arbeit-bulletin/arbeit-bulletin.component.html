@@ -50,15 +50,15 @@
         <div class="form-group row">
           <label for="exampleInputText1" class="col-sm-1 col-form-label font-weight-bold">검색어</label>
           <div class="col-sm-3">
-            <input type="text" class="form-control-plaintext" id="exampleInputText2" placeholder="검색어를 입력하세요">
+            <input type="text" class="form-control-plaintext" [(ngModel)]="search_keyword" id="search_keyword" placeholder="검색어를 입력하세요">
           </div>
-          <select class="form-control col-sm-1">
-            <option>제목</option>
-            <option>내용</option>
-            <option>제목+내용</option>
+          <select class="form-control col-sm-1" [(ngModel)]="search_criteria">
+            <option value="제목">제목</option>
+            <option value="내용">내용</option>
+            <option value="제목+내용">제목+내용</option>
           </select>
           <div class="col-sm-4"></div>
-          <button class="btn col-sm-2 btn-sm btn-outline-primary">검색</button>
+          <button class="btn col-sm-2 btn-sm btn-outline-primary" (click)="search()">검색</button>
         </div>
       </li>
     </ul>
