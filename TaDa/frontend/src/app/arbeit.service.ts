@@ -11,7 +11,7 @@ const httpOptions = {
   providedIn: 'root'
 })
 export class ArbeitService {
-  private arbeitUrl = 'api/arbeit/';
+  private arbeitUrl = 'arbeit/arbeit/';
 
   constructor(
     private http: HttpClient,
@@ -20,8 +20,6 @@ export class ArbeitService {
   getArbeitPosts(): Promise<ArbeitPost[]> {
     return this.http.get<ArbeitPost[]>(this.arbeitUrl).toPromise();
   }
-
-
 
   getArbeitPostById(id: number): Promise<ArbeitPost> {
     const url = `${this.arbeitUrl}${id}`;

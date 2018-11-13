@@ -1,5 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
+import {UserService} from "../user.service";
+import {Employer, User} from "../Classes/User";
 
 @Component({
   selector: 'app-main',
@@ -7,9 +9,15 @@ import { Router } from '@angular/router';
   styleUrls: ['./main.component.css']
 })
 export class MainComponent implements OnInit {
-  constructor( private router: Router ) {}
+  employer: Employer;
+  constructor(
+    private router: Router,
+    private userService: UserService,
+  ) {}
 
   ngOnInit() {
+    this.userService.getEmployer(2)
+      .then(employer => this.employer = employer);
   }
 
   onClickArbeitBulletin(): void {
