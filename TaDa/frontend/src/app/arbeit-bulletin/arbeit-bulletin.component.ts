@@ -27,7 +27,6 @@ export class ArbeitBulletinComponent implements OnInit {
   ) {}
 
   ngOnInit() {
-
     //this.getArbeitList();
     //this.getStarfromEmployer();
 
