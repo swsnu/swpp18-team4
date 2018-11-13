@@ -22,50 +22,11 @@ export class ArbeitBulletinComponent implements OnInit {
   dataToShow: ArbeitPost[]; // only array data in dataToShow is shown in bulletin board.
 
   /*variable for filtering */
-
-  time_1: Time = {
-    month: 10,
-    date:  22,
-    day: 3,
-    hour: 14,
-    minute: 5,
-  };
-
-  time_2: Time = {
-    month: 10,
-    date:  22,
-    day: 3,
-    hour: 16,
-    minute: 1,
-  }
-
-  time_3: Time = {
-    month: 11,
-    date:  23,
-    day: 3,
-    hour: 11,
-    minute: 4,
-  };
-
-  time_4: Time = {
-    month: 11,
-    date:  24,
-    day: 3,
-    hour: 16,
-    minute: 0,
-  };
-  zone1: TimeZone = {
-    start: this.time_1,
-    end: this.time_2,
-  };
-  zone2: TimeZone = {
-    start: this.time_3,
-    end: this.time_4,
-  };
-
+  filter_region = [false, false, false, false, false];
   filter_regionArray = [];
+  filter_type = [false, false];
   filter_typeArray = [];
-  filter_timeArray = [this.zone1, this.zone2];
+  filter_timeArray = [];
   filter_day: number;
   filter_start_hour: number;
   filter_start_min: number;
@@ -79,24 +40,28 @@ export class ArbeitBulletinComponent implements OnInit {
   constructor(
     private userService: UserService,
     private arbeitService: ArbeitService,
-    private timezoneService: TimezoneService
+    protected timezoneService: TimezoneService
   ) {}
 
   ngOnInit() {
-    //this.getArbeitList();
+    this.getArbeitList();
     //this.getStarfromEmployer();
 
-    this.mockData = mockArbeitPost;
-    this.dataToShow = this.mockData;
-
+    //this.mockData = mockArbeitPost;
+    //this.dataToShow = this.mockData;
   }
   getAuthorNameByID(id: number): string {
-    return '아기상어';
+    if(id == 4) {
+      return '아기상어';
+    } else {
+      return 'jyp930';
+    }
+
   }
 
   getArbeitList() {
     this.arbeitService.getArbeitPosts().then(
-      posts => this.full_arbeit_list = posts);
+      posts => this.full_arbeit_list = this.dataToShow = posts);
   }
 
   getStarfromEmployer() {
@@ -112,26 +77,47 @@ export class ArbeitBulletinComponent implements OnInit {
     }
   }
 
+
   filter() {
-    // let tmp_arr = [];
+    /* hardcoding- should be modified */
+    if (this.filter_region[0]) {
+      this.filter_regionArray.push(ArbeitRegionEnum.SNUStation);
+    }
+    if (this.filter_region[1]) {
+      this.filter_regionArray.push(ArbeitRegionEnum.Nakdae);
+    }
+    if (this.filter_region[2]) {
+      this.filter_regionArray.push(ArbeitRegionEnum.School);
+    }
+    if (this.filter_region[3]) {
+      this.filter_regionArray.push(ArbeitRegionEnum.Nokdu);
+    }
+    if (this.filter_region[4]) {
+      this.filter_regionArray.push(ArbeitRegionEnum.Extra);
+    }
+    if (this.filter_type[0]) {
+      this.filter_typeArray.push(ArbeitTypeEnum.Mentoring);
+    }
+    if (this.filter_type[1]) {
+      this.filter_typeArray.push(ArbeitTypeEnum.Tutoring);
+    }
+
     if (this.filter_regionArray.length !== 0) {
       this.dataToShow = this.dataToShow.filter(
-        function (element) {
-            return (element.region in this.filter_regionArray);
-        });
+        element => this.filter_regionArray.includes(element.region));
     }
     if (this.filter_typeArray.length !== 0) {
       this.dataToShow = this.dataToShow.filter(
-        function (element) {
-            return (element.arbeit_type in this.filter_typeArray);
-        });
+        element => this.filter_typeArray.includes(element.arbeit_type));
+
     }
     if (this.filter_timeArray.length !== 0) {
       this.dataToShow = this.dataToShow.filter(
-        function(element) {
-            return(this.timezoneService.filterTime(element, this.filter_timeArray));
-        });
+        element => this.timezoneService.filterTime(element.time_zone, this.filter_timeArray));
     }
+    this.filter_regionArray = [];
+    this.filter_typeArray = [];
+
   }
 
   sort(sorting_criteria: number) {
@@ -155,14 +141,13 @@ export class ArbeitBulletinComponent implements OnInit {
 
   add_timezone() {
     const startTime: Time = {
-      month: -1, date: -1, day: this.filter_day,
       hour: this.filter_start_hour, minute: this.filter_start_min,
     };
     const endTime: Time = {
-      month: -1, date: -1, day: this.filter_day,
       hour: this.filter_end_hour, minute: this.filter_end_min,
     };
     const timezone: TimeZone = {
+      month: -1, date: -1, day: this.filter_day,
       start: startTime, end: endTime
     };
 
@@ -181,8 +166,9 @@ export class ArbeitBulletinComponent implements OnInit {
   }
 
   search(): void {
-    this.dataToShow = this.mockData; // initialize dataToShow
+    this.dataToShow = this.full_arbeit_list; // initialize dataToShow
     /* do filtering */
+    this.filter();
 
     /* do keyword searching*/
     if (typeof this.search_criteria === 'undefined' ||
@@ -235,5 +221,4 @@ export class ArbeitBulletinComponent implements OnInit {
       return temp_array;
     }
   }
-
 }

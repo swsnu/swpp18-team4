@@ -6,6 +6,7 @@ import {ArbeitPost} from "../Classes/ArbeitPost";
 import {ArbeitRegionEnum} from "../Enums/ArbeitRegionEnum";
 import {ArbeitTypeEnum} from "../Enums/ArbeitTypeEnum";
 import { CurrentArbeitPostService } from "../current-arbeit-post.service";
+import {TimeZone} from "../Classes/TimeZone";
 
 @Component({
   selector: 'app-arbeit-post-create',
@@ -21,7 +22,8 @@ export class ArbeitPostCreateComponent implements OnInit {
   content: string;
   manager_name: string;
   manager_phone: string;
-  //time_zone: 시간클래스[];
+  time_zone: TimeZone[];
+
   test: string;
   public temp_post: ArbeitPost;
   selectedFile: File;
@@ -35,7 +37,6 @@ export class ArbeitPostCreateComponent implements OnInit {
 
   ngOnInit() {
     this.temp_post = new ArbeitPost();
-    //this.time_zone = new 시간클래스[5];
     //this.loginUserService.isLoggedIn();  // abort user when unauthorized
   }
 
@@ -80,6 +81,7 @@ export class ArbeitPostCreateComponent implements OnInit {
 
   make_temp_post() {
     //this.temp_post.author_id = this.loginUserService.LogInUser.id;
+    this.temp_post.author_id = 1;
     this.temp_post.title = this.title;
     this.temp_post.content = this.content;
     //region
@@ -97,7 +99,7 @@ export class ArbeitPostCreateComponent implements OnInit {
     else {this.temp_post.arbeit_type = ArbeitTypeEnum.Extra;}
     //
     this.temp_post.pay = this.pay;
-    //timezone
+    //this.temp_post.time_zone = this.time_zone;
     this.temp_post.manager_name = this.manager_name;
     this.temp_post.manager_phone = this.manager_phone;
     //get now date
@@ -120,7 +122,7 @@ export class ArbeitPostCreateComponent implements OnInit {
     const state = this.is_finished();
     if(state) {
       this.make_temp_post();
-     // this.arbeitService.createArbeitPost(this.temp_post);
+      this.arbeitService.createArbeitPost(this.temp_post);
       // 그림업로드
       this.router.navigateByUrl('/arbeit');
     } else {

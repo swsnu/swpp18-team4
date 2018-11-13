@@ -40,4 +40,4 @@ class Employer_introduction(models.Model):
     business_content = models.TextField(null = True)
     representative_name = models.CharField(max_length = 20, null = True)
     representative_phonenumber = models.CharField(max_length = 15, null = True)
-    #star = models.FloatField(default=0.0, null = True)
+    star = models.FloatField(default=0.0, null = True)

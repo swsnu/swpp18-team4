@@ -37,7 +37,7 @@ export class ArbeitPostDetailComponent implements OnInit {
 
   constructor(
     private arbeitService: ArbeitService,
-    private timezoneService: TimezoneService,
+    protected timezoneService: TimezoneService,
     //private userService: LoginUserService,
     private route: ActivatedRoute,
     private router: Router) { }
@@ -45,11 +45,12 @@ export class ArbeitPostDetailComponent implements OnInit {
   ngOnInit() {
     //this.user = this.userService.getLogInUser();
     //const id = +this.route.snapshot.paramMap.get('id');
-    //this.getPost(id);
-    this.post = this.ex_post;
+    this.getPost();
+    //this.post = this.ex_post;
     }
 
-  getPost(id: number) {
+  getPost():void {
+    const id = +this.route.snapshot.paramMap.get('id');
     this.arbeitService.getArbeitPostById(id)
       .then(post => this.post = post);
   }

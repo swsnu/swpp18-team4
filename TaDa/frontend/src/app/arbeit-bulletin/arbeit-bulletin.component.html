@@ -6,23 +6,23 @@
           <label class="col-sm-1 col-form-label font-weight-bold">지역</label>
           <div class="col-sm-5">
             <div class="form-check form-check-inline">
-              <input class="form-check-input" type="checkbox" id="inlineCheckbox1" value="option1">
+              <input class="form-check-input" [(ngModel)]="filter_region[0]" type="checkbox" id="inlineCheckbox1" value="option1">
               <label class="form-check-label" for="inlineCheckbox1">서울대입구</label>
             </div>
             <div class="form-check form-check-inline">
-              <input class="form-check-input" type="checkbox" id="inlineCheckbox2" value="option2">
-              <label class="form-check-label" for="inlineCheckbox2">낙성대</label>
+              <input class="form-check-input" [(ngModel)]="filter_region[1]" type="checkbox" id="inlineCheckbox2" value="option2">
+              <label class="form-check-label" for="inlineCheckbox3">낙성대</label>
             </div>
             <div class="form-check form-check-inline">
-              <input class="form-check-input" type="checkbox" id="inlineCheckbox3" value="option3">
+              <input class="form-check-input"  [(ngModel)]="filter_region[2]" type="checkbox" id="inlineCheckbox3" value="option3">
               <label class="form-check-label" for="inlineCheckbox3">교내</label>
             </div>
             <div class="form-check form-check-inline">
-              <input class="form-check-input" type="checkbox" id="inlineCheckbox4" value="option4">
+              <input class="form-check-input"  [(ngModel)]="filter_region[3]" type="checkbox" id="inlineCheckbox4" value="option4">
               <label class="form-check-label" for="inlineCheckbox4">녹두</label>
             </div>
             <div class="form-check form-check-inline">
-              <input class="form-check-input" type="checkbox" id="inlineCheckbox5" value="option5">
+              <input class="form-check-input"  [(ngModel)]="filter_region[4]" type="checkbox" id="inlineCheckbox5" value="option5">
               <label class="form-check-label" for="inlineCheckbox5">기타</label>
             </div>
           </div>
@@ -30,11 +30,11 @@
           <label class="col-sm-2 col-form-label font-weight-bold">아르바이트 타입</label>
           <div class="col-sm-4">
             <div class="form-check form-check-inline">
-              <input class="form-check-input" type="checkbox" id="inlineCheckbox6">
+              <input class="form-check-input" [(ngModel)]="filter_type[0]" type="checkbox" id="inlineCheckbox6">
               <label class="form-check-label" for="inlineCheckbox6">멘토링</label>
             </div>
             <div class="form-check form-check-inline">
-              <input class="form-check-input" type="checkbox" id="inlineCheckbox7">
+              <input class="form-check-input" [(ngModel)]="filter_type[1]" type="checkbox" id="inlineCheckbox7">
               <label class="form-check-label" for="inlineCheckbox7">과외</label>
             </div>
           </div>
@@ -43,7 +43,7 @@
             
             <!--already selected time zone-->
             <div *ngFor = "let time of filter_timeArray; let index = index;">          
-              <select class="day_select" [(ngModel)]="time.start.day">
+              <select class="day_select" [(ngModel)]="time.day">
                 <option value = "undefined">undefined </option>
                 <option *ngFor="let i of iter(7)" [ngValue]="i">
                   {{this.timezoneService.dayArray[i]}}</option>
@@ -67,6 +67,7 @@
               </select>
               <button (click)="remove_timezone(index)" class="btn btn-sm btn-dark"> - </button>
             </div>
+            
             <!-- new input of time select -->
             <select class="day_select" [(ngModel)]="filter_day">
               <option value = "undefined">undefined </option>
@@ -95,7 +96,7 @@
       </li>
       <li class="list-group-item">
         <div class="form-group row">
-          <label for="exampleInputText1" class="col-sm-1 col-form-label font-weight-bold">검색어</label>
+          <label class="col-sm-1 col-form-label font-weight-bold">검색어</label>
           <div class="col-sm-3">
             <input type="text" class="form-control-plaintext" [(ngModel)]="search_keyword" id="search_keyword" placeholder="검색어를 입력하세요">
           </div>
@@ -123,6 +124,8 @@
           <th>제목</th>
           <th>글쓴이</th>
           <th>시급</th>
+          <th>Region</th>
+          <th>Type</th>
           <th>star</th>
           <th>register_date</th>
         </tr>
@@ -133,6 +136,8 @@
           <td [routerLink]="'./'+post.id">{{post.title}}</td>
           <td>{{getAuthorNameByID(post.author_id)}}</td>
           <td>{{post.pay}}</td>
+          <td>{{post.region}}</td>
+          <td>{{post.arbeit_type}}</td>
           <td>{{post.star}}</td>
           <td>{{post.register_date}}</td>
         </tr>

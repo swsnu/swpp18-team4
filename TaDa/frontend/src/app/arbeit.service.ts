@@ -11,7 +11,7 @@ const httpOptions = {
   providedIn: 'root'
 })
 export class ArbeitService {
-  private arbeitUrl = 'arbeit/arbeit/';
+  private arbeitUrl = 'api/arbeit/arbeit/';
 
   constructor(
     private http: HttpClient,

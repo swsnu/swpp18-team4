@@ -1,5 +1,7 @@
 import { ArbeitRegionEnum } from '../Enums/ArbeitRegionEnum';
 import { ArbeitTypeEnum } from '../Enums/ArbeitTypeEnum';
+import { TimeZone } from './TimeZone';
+
 
 export class ArbeitPost {
     id: number;
@@ -9,7 +11,7 @@ export class ArbeitPost {
     region: ArbeitRegionEnum;
     arbeit_type: ArbeitTypeEnum;
     pay: number;
-    time_zone: string[];
+    time_zone: TimeZone[];
     manager_name: string;
     manager_phone: string;
     register_date: Date;
