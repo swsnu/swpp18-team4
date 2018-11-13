@@ -1,9 +1,11 @@
 from django.http import HttpResponse, HttpResponseNotAllowed, JsonResponse
 from django.views.decorators.csrf import ensure_csrf_cookie
+from django.views.decorators.csrf import csrf_exempt
 
 from django.shortcuts import render
 from django.shortcuts import get_object_or_404
 from .models import Arbeit
+import json
 
 
 @ensure_csrf_cookie
@@ -15,6 +17,7 @@ def token(request):
 
 
 # Create your views here.
+@csrf_exempt
 def arbeit_list(request):
     if request.method == 'GET' or request.method == 'POST':
         #if request.user.is_authenticated:
@@ -39,6 +42,9 @@ def arbeit_list(request):
             req_data = json.loads(request.body.decode())
             title = req_data['title']
             content = req_data['content']
+            content2 = req_data['content2']
+
+            
   
             new_arbeit = Arbeit(title=title, content=content, author=request.user)
             new_arbeit.save()
@@ -46,7 +52,7 @@ def arbeit_list(request):
     else:
         return HttpResponseNotAllowed(['GET', 'POST'])
 
-
+@csrf_exempt
 def arbeit_detail(request, arbeit_id):
     if request.method == 'GET' or request.method == 'PUT' or request.method == 'DELETE':
         #if request.user.is_authenticated:
