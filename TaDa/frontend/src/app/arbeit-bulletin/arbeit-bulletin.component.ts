@@ -3,7 +3,9 @@ import { ArbeitPost } from '../Classes/ArbeitPost';
 import { mockArbeitPost } from '../mock-ArbeitPost';
 import { UserService } from '../user.service';
 import { ArbeitService } from '../arbeit.service';
+import { TimezoneService } from '../timezone.service';
 import { User, Employer } from '../Classes/User';
+import { TimeZone } from '../Classes/TimeZone';
 
 
 @Component({
@@ -16,6 +18,14 @@ export class ArbeitBulletinComponent implements OnInit {
   full_arbeit_list: ArbeitPost[];
   mockData: ArbeitPost[]; // array to store all arbeit data.
   dataToShow: ArbeitPost[]; // only array data in dataToShow is shown in bulletin board.
+  timeArray: TimeZone[];
+
+  /*variable for filtering */
+  filter_day: number;
+  filter_start_hour: number;
+  filter_start_min: number;
+  filter_end_hour: number;
+  filter_end_min = 10;
 
   /*variable for keyword searching */
   search_keyword: string;
@@ -23,7 +33,8 @@ export class ArbeitBulletinComponent implements OnInit {
 
   constructor(
     private userService: UserService,
-    private arbeitService: ArbeitService
+    private arbeitService: ArbeitService,
+    private timezoneService: TimezoneService
   ) {}
 
   ngOnInit() {
@@ -120,4 +131,18 @@ export class ArbeitBulletinComponent implements OnInit {
       this.dataToShow = temp_data;
     }
   }
+
+  generateIter(num: number, step: number): number[] {
+    if (num < 1) {
+      return [];
+    } else {
+      let temp_array = [];
+      for(let i = 0; i < num; i += step) {
+        temp_array.push(i);
+      }
+      return temp_array;
+    }
+  }
+
+
 }

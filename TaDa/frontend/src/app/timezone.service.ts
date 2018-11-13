@@ -8,6 +8,10 @@ export class TimezoneService {
   constructor() { }
   dayArray = ['sun', 'mon', 'tue', 'wed', 'thur', 'Fri', 'sat'];
 
+  getDayArray() {
+    return this.dayArray;
+  }
+
   format(time: TimeZone): string {
     const startdate = this.formatDate(time.startDate);
     const enddate = this.formatDate(time.endDate);
