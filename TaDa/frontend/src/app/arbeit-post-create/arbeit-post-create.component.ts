@@ -21,8 +21,8 @@ export class ArbeitPostCreateComponent implements OnInit {
   content: string;
   manager_name: string;
   manager_phone: string;
-  time_zone: string;
-
+  //time_zone: 시간클래스[];
+  test: string;
   public temp_post: ArbeitPost;
   selectedFile: File;
 
@@ -35,6 +35,7 @@ export class ArbeitPostCreateComponent implements OnInit {
 
   ngOnInit() {
     this.temp_post = new ArbeitPost();
+    //this.time_zone = new 시간클래스[5];
     //this.loginUserService.isLoggedIn();  // abort user when unauthorized
   }
 
@@ -146,6 +147,18 @@ export class ArbeitPostCreateComponent implements OnInit {
 
   onFileChanged(event) {
     this.selectedFile = event.target.files[0]
+  }
+
+  generateIter(num: number): number[] {
+    if (num < 1) {
+      return [];
+    } else {
+      let temp_array = [];
+      for(let i=0; i<num; i++) {
+        temp_array.push(i);
+      }
+      return temp_array;
+    }
   }
 }
 

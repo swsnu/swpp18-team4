@@ -12,8 +12,13 @@
             <select [(ngModel)]="arbeit_type">
                 <option value="멘토링">멘토링</option>
                 <option value="과외">과외</option>
+                <option value="IT">IT</option>
                 <option value="카페 알바">카페 알바</option>
+                <option value="디자인 알바">디자인 알바</option>
               </select>
+            <select [(ngModel)]="arbeit_type">
+              <option *ngFor="let i of 'ArbeitTypeEnum'" [ngValue]="i">{{i}}</option>
+            </select>
           </div>
           <div>
             <label id="region" class="font-weight-bold">지역</label>
@@ -21,6 +26,7 @@
               <option value="교내">교내</option>
               <option value="설입">설입</option>
               <option value="낙대">낙대</option>
+              <option value="녹두">녹두</option>
             </select>
             <label>지도로 위치 표시</label>
           </div>
@@ -31,7 +37,21 @@
           </div>
           <div>
             <label id="timezone" class="font-weight-bold">시간대</label>
-            <input [(ngModel)]="time_zone" type="text">
+            <select class="time_select">
+              <option *ngFor="let i of generateIter(24)" [ngValue]="i">{{i}}</option>
+            </select>
+            :
+            <select class="time_select">
+              <option *ngFor="let i of generateIter(60)" [ngValue]="i">{{i}}</option>
+            </select>
+            ~
+            <select class="time_select">
+              <option *ngFor="let i of generateIter(24)" [ngValue]="i">{{i}}</option>
+            </select>
+            :
+            <select class="time_select">
+              <option *ngFor="let i of generateIter(60)" [ngValue]="i">{{i}}</option>
+            </select>
           </div>
         </div>
       </div>

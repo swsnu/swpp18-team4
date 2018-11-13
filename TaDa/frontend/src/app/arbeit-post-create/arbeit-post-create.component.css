@@ -80,6 +80,10 @@ button:hover {
   margin-bottom: 10px;
 }
 
+.time_select {
+  width: 80px;
+}
+
 select {
   color: #006fff;
   width: 135px;
