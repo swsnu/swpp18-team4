@@ -4,10 +4,10 @@ import { User } from '../Classes/User';
 import { ArbeitPost } from '../Classes/ArbeitPost';
 import { ArbeitService } from '../arbeit.service';
 import { LoginUserService } from '../log-in-user.service';
+import { TimezoneService } from '../timezone.service';
 
 import { ArbeitRegionEnum } from '../Enums/ArbeitRegionEnum';
 import { ArbeitTypeEnum } from '../Enums/ArbeitTypeEnum';
-
 
 @Component({
   selector: 'app-arbeit-post-detail',
@@ -27,7 +27,7 @@ export class ArbeitPostDetailComponent implements OnInit {
     region: ArbeitRegionEnum.SNUStation,
     arbeit_type: ArbeitTypeEnum.IT,
     pay: 8000,
-    time_zone: ['Mon 15:00-15:30', 'Tue 17:00-18:00'],
+    time_zone: null,
     manager_name: 'Chaehyun',
     manager_phone: '010-4818-4174',
     register_date: null,
@@ -37,7 +37,8 @@ export class ArbeitPostDetailComponent implements OnInit {
 
   constructor(
     private arbeitService: ArbeitService,
-    private userService: LoginUserService,
+    private timezoneService: TimezoneService,
+    //private userService: LoginUserService,
     private route: ActivatedRoute,
     private router: Router) { }
 

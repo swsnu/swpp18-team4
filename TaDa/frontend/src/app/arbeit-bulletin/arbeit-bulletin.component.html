@@ -39,12 +39,59 @@
             </div>
           </div>
         </div>
-        <div class="form-group row">
-          <label for="exampleInputText1" class="col-sm-1 col-form-label font-weight-bold">시간</label>
-          <div class="col-sm-4">
-            <input type="text" class="form-control-plaintext" id="exampleInputText1" placeholder="시간을 입력하세요">
-          </div>
-        </div>
+            <label id="timezone" class="font-weight-bold">시간대</label>
+            
+            <!--already selected time zone-->
+            <div *ngFor = "let time of filter_timeArray; let index = index;">          
+              <select class="day_select" [(ngModel)]="time.start.day">
+                <option value = "undefined">undefined </option>
+                <option *ngFor="let i of iter(7)" [ngValue]="i">
+                  {{this.timezoneService.dayArray[i]}}</option>
+              </select>
+              <select class="time_select" [(ngModel)]="time.start.hour">
+                <option *ngFor="let i of iter(24)" [ngValue]="i">{{i}}</option>
+              </select>
+              :
+              <select class="time_select" [(ngModel)]="time.start.minute">
+                <option *ngFor="let i of iter(6)" [ngValue]="i">
+                  {{this.timezoneService.minuteArray[i]}}</option>
+              </select>
+              -
+              <select class="time_select" [(ngModel)]="time.end.hour">
+                <option *ngFor="let i of iter(24)" [ngValue]="i">{{i}}</option>
+              </select>
+              :
+              <select class="time_select" [(ngModel)]="time.end.minute">
+                <option *ngFor="let i of iter(6)" [ngValue]="i">
+                  {{this.timezoneService.minuteArray[i]}}</option>
+              </select>
+              <button (click)="remove_timezone(index)" class="btn btn-sm btn-dark"> - </button>
+            </div>
+            <!-- new input of time select -->
+            <select class="day_select" [(ngModel)]="filter_day">
+              <option value = "undefined">undefined </option>
+              <option *ngFor="let i of iter(7)" [ngValue]="i">
+                {{this.timezoneService.dayArray[i]}}</option>
+            </select>
+            <select class="time_select" [(ngModel)]="filter_start_hour">
+              <option *ngFor="let i of iter(24)" [ngValue]="i">{{i}}</option>
+            </select>
+            :
+            <select class="time_select" [(ngModel)]="filter_start_min">
+              <option *ngFor="let i of iter(6)" [ngValue]="i">
+                {{this.timezoneService.minuteArray[i]}}</option>
+            </select>
+            -
+            <select class="time_select" [(ngModel)]="filter_end_hour">
+              <option *ngFor="let i of iter(24)" [ngValue]="i">{{i}}</option>
+            </select>
+            :
+            <select class="time_select" [(ngModel)]="filter_end_min">
+              <option *ngFor="let i of iter(6)" [ngValue]="i">
+                {{this.timezoneService.minuteArray[i]}}</option>
+            </select>
+            <button (click)="add_timezone()" class="btn btn-sm btn-dark"> + </button>
+  
       </li>
       <li class="list-group-item">
         <div class="form-group row">
