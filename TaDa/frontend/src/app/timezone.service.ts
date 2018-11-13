@@ -32,7 +32,7 @@ export class TimezoneService {
             return (element.day === timezone.day);
         });
 
-      for (let tmp in day_arr) {
+      for (const tmp of day_arr) {
         if (this.compareTime(timezone.start, tmp.start) <= 0
               && this.compareTime(timezone.end, tmp.end) >= 0) {
             return true;
