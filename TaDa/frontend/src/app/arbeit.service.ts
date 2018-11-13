@@ -21,8 +21,6 @@ export class ArbeitService {
     return this.http.get<ArbeitPost[]>(this.arbeitUrl).toPromise();
   }
 
-
-
   getArbeitPostById(id: number): Promise<ArbeitPost> {
     const url = `${this.arbeitUrl}${id}`;
     return this.http.get<ArbeitPost>(url).toPromise();

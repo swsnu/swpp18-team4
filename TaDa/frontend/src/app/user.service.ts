@@ -11,6 +11,8 @@ const httpOptions = {
 })
 export class UserService {
 
+  employer_list: Employer[];
+
   constructor(
     private http: HttpClient,
   ) { }
@@ -20,6 +22,12 @@ export class UserService {
     const id = (typeof user === 'number') ? user : user.id;
     const url = `${this.user_url}${id}`;
     return this.http.get<User>(url).toPromise();
+  }
+
+  getEmployerList(): void {
+    const url = `api/employer/`;
+    this.http.get<Employer[]>(url).subscribe(
+      list => this.employer_list = list);
   }
 
   getEmployer(user: User | number): Promise<Employer> {

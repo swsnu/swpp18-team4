@@ -1,7 +1,6 @@
 import { ArbeitRegionEnum } from '../Enums/ArbeitRegionEnum';
 import { ArbeitTypeEnum } from '../Enums/ArbeitTypeEnum';
 
-
 export class ArbeitPost {
     id: number;
     author_id: number;
@@ -15,4 +14,5 @@ export class ArbeitPost {
     manager_phone: string;
     register_date: Date;
     edit_date: Date;
+    star;
 }
