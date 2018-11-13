@@ -22,50 +22,9 @@ export class ArbeitBulletinComponent implements OnInit {
   dataToShow: ArbeitPost[]; // only array data in dataToShow is shown in bulletin board.
 
   /*variable for filtering */
-
-  time_1: Time = {
-    month: 10,
-    date:  22,
-    day: 3,
-    hour: 14,
-    minute: 5,
-  };
-
-  time_2: Time = {
-    month: 10,
-    date:  22,
-    day: 3,
-    hour: 16,
-    minute: 1,
-  }
-
-  time_3: Time = {
-    month: 11,
-    date:  23,
-    day: 3,
-    hour: 11,
-    minute: 4,
-  };
-
-  time_4: Time = {
-    month: 11,
-    date:  24,
-    day: 3,
-    hour: 16,
-    minute: 0,
-  };
-  zone1: TimeZone = {
-    start: this.time_1,
-    end: this.time_2,
-  };
-  zone2: TimeZone = {
-    start: this.time_3,
-    end: this.time_4,
-  };
-
   filter_regionArray = [];
   filter_typeArray = [];
-  filter_timeArray = [this.zone1, this.zone2];
+  filter_timeArray = [];
   filter_day: number;
   filter_start_hour: number;
   filter_start_min: number;
@@ -113,7 +72,6 @@ export class ArbeitBulletinComponent implements OnInit {
   }
 
   filter() {
-    // let tmp_arr = [];
     if (this.filter_regionArray.length !== 0) {
       this.dataToShow = this.dataToShow.filter(
         function (element) {
@@ -129,7 +87,7 @@ export class ArbeitBulletinComponent implements OnInit {
     if (this.filter_timeArray.length !== 0) {
       this.dataToShow = this.dataToShow.filter(
         function(element) {
-            return(this.timezoneService.filterTime(element, this.filter_timeArray));
+            return(this.timezoneService.filterTime(element.time_zone, this.filter_timeArray));
         });
     }
   }
@@ -155,14 +113,13 @@ export class ArbeitBulletinComponent implements OnInit {
 
   add_timezone() {
     const startTime: Time = {
-      month: -1, date: -1, day: this.filter_day,
       hour: this.filter_start_hour, minute: this.filter_start_min,
     };
     const endTime: Time = {
-      month: -1, date: -1, day: this.filter_day,
       hour: this.filter_end_hour, minute: this.filter_end_min,
     };
     const timezone: TimeZone = {
+      month: -1, date: -1, day: this.filter_day,
       start: startTime, end: endTime
     };
 
@@ -235,5 +192,4 @@ export class ArbeitBulletinComponent implements OnInit {
       return temp_array;
     }
   }
-
 }
