@@ -17,14 +17,17 @@ class TaDa_User(models.Model):
     def get_last_login(self):
         return self.last_login
 
+    def __str__(self):
+        return str(self.id)
+
 class Employee_preference(models.Model):
     employee_id = models.ForeignKey(User, on_delete = models.CASCADE)
     region_choices = (
-        ('교내', 'School')
-        ('서울대입구역', 'SNUStation')
-        ('녹두', 'Nokdu')
-        ('낙성대', 'Nakdae')
-        ('기타', 'Extra')
+        ('교내', 'School'),
+        ('서울대입구역', 'SNUStation'),
+        ('녹두', 'Nokdu'),
+        ('낙성대', 'Nakdae'),
+        ('기타', 'Extra'),
     )
     region = models.CharField(max_length = 50, null = True, choices = region_choices)
     #timezone
@@ -37,3 +40,4 @@ class Employer_introduction(models.Model):
     business_content = models.TextField(null = True)
     representative_name = models.CharField(max_length = 20, null = True)
     representative_phonenumber = models.CharField(max_length = 15, null = True)
+    #star = models.FloatField(default=0.0, null = True)

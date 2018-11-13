@@ -7,6 +7,8 @@ import json
 from .models import TaDa_User, Employee_preference, Employer_introduction
 from django.db import models
 
+from django.shortcuts import get_object_or_404
+
 # Create your views here.
 
 def signup(request):
@@ -101,6 +103,24 @@ def employee_info(request, employee_id): # employee_id is User's id, not TaDa_Us
         return HttpResponseNotAllowed(['GET', 'POST', 'PUT'])
         
 
+
+
+def employer_info(request, employer_id):
+    employer = get_object_or_404(Employer_introduction, id = employer_id)
+    if request.method == 'GET':
+        return JsonResponse({
+                'id': employer.id, 
+                'company_name': employer.company_name,
+                'company_address': employer.company_address,
+                'business_content': employer.business_content,
+                'representative_name': employer.representative_name,
+                'representative_phonenumber': employer.representative_phonenumber
+                }
+            , safe=False)
+    else:
+        return HttpResponseNotAllowed(['GET'])
+
+'''
 def employer_info(request, employer_id): # employer_id is User's id, not TaDa_User's id
     if request.method == 'GET':
         if request.user.is_authenticated:
@@ -141,7 +161,7 @@ def employer_info(request, employer_id): # employer_id is User's id, not TaDa_Us
         pass
     else:
         return HttpResponseNotAllowed(['GET', 'POST', 'PUT'])
-
+'''
 
 def token(request):
     if request.method == 'GET':

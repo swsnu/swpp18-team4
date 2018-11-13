@@ -33,7 +33,10 @@ export class SignInComponent implements OnInit {
       }
   
       if(alertMessage != 'Login Failed:\n') {alert(alertMessage)}
-      else this.router.navigateByUrl('');
+      else {
+        this.router.navigateByUrl('');
+
+      }
   }
 
 }
