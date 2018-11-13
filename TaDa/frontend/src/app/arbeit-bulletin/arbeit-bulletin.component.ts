@@ -79,16 +79,15 @@ export class ArbeitBulletinComponent implements OnInit {
   constructor(
     private userService: UserService,
     private arbeitService: ArbeitService,
-    private timezoneService: TimezoneService
+    protected timezoneService: TimezoneService
   ) {}
 
   ngOnInit() {
-    //this.getArbeitList();
+    this.getArbeitList();
     //this.getStarfromEmployer();
 
-    this.mockData = mockArbeitPost;
-    this.dataToShow = this.mockData;
-
+    //this.mockData = mockArbeitPost;
+    //this.dataToShow = this.mockData;
   }
   getAuthorNameByID(id: number): string {
     return '아기상어';
@@ -96,7 +95,7 @@ export class ArbeitBulletinComponent implements OnInit {
 
   getArbeitList() {
     this.arbeitService.getArbeitPosts().then(
-      posts => this.full_arbeit_list = posts);
+      posts => this.full_arbeit_list = this.dataToShow = posts);
   }
 
   getStarfromEmployer() {
@@ -181,7 +180,7 @@ export class ArbeitBulletinComponent implements OnInit {
   }
 
   search(): void {
-    this.dataToShow = this.mockData; // initialize dataToShow
+    this.dataToShow = this.full_arbeit_list; // initialize dataToShow
     /* do filtering */
 
     /* do keyword searching*/
