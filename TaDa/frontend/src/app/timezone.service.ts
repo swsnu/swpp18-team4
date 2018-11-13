@@ -16,22 +16,12 @@ export class TimezoneService {
 
 
   format(timezone: TimeZone): string {
-
-
-    if (startdate === enddate) {
-           return startdate + starttime + ' - ' + endtime;
-      } else {
-        return startdate + starttime + ' - ' + enddate + endtime;
-      }
+    return this.formatDate(timezone)+':'+this.formatTime(timezone.start)+'-'+
+          this.formatTime(timezone.end);
   }
 
-  formatDate(time: Time): string {
-    return (time.month + '.' + time.date +
-    '(' + this.dayArray[time.day] + ')');
-
-    return (timezone.month + 1) + '.' + timezone.date + '('
-              + this.dayArray[timezone.day] + ')'
-              + this.formatTime(timezone.start) + this.formatTime(timezone.end);
+  formatDate(time: TimeZone): string {
+    return (time.month + '.' + time.date +'(' + this.dayArray[time.day] + ')');
   }
 
   formatTime(time: Time): string {

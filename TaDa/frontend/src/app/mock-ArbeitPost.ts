@@ -13,8 +13,9 @@ export const mockArbeitPost: ArbeitPost[] = [
     pay: 9000,
     time_zone: [
       {
-        start: {month: 10, date:  22, day: 3, hour: 16, minute: 1},
-        end: {month: 10, date:  22, day: 3, hour: 20, minute: 1}
+        month: 11, date:  22, day: 3,
+        start: {hour: 16, minute: 1},
+        end: {hour: 20, minute: 1}
       }
     ],
     manager_name: '메니저이름',
@@ -34,8 +35,9 @@ export const mockArbeitPost: ArbeitPost[] = [
     pay: 50000,
     time_zone: [
       {
-        start: {month: 10, date:  23, day: 3, hour: 16, minute: 1},
-        end: {month: 10, date:  23, day: 3, hour: 20, minute: 1}
+        month: 11, date:  22, day: 3,
+        start: {hour: 16, minute: 1},
+        end: {hour: 20, minute: 1}
       }
     ],
     manager_name: '메니저이름',
@@ -53,8 +55,9 @@ export const mockArbeitPost: ArbeitPost[] = [
     pay: 7500,
     time_zone: [
       {
-        start: {month: 10, date:  25, day: 3, hour: 16, minute: 1},
-        end: {month: 10, date:  25, day: 3, hour: 20, minute: 1}
+        month: 11, date:  22, day: 3,
+        start: {hour: 16, minute: 1},
+        end: {hour: 20, minute: 1}
       }
     ],
     manager_name: '메니저이름',
@@ -73,8 +76,9 @@ export const mockArbeitPost: ArbeitPost[] = [
     pay: 40000,
     time_zone: [
       {
-        start: {month: 11, date:  22, day: 3, hour: 16, minute: 1},
-        end: {month: 11, date:  22, day: 3, hour: 20, minute: 1}
+        month: 11, date:  22, day: 3,
+        start: {hour: 16, minute: 1},
+        end: {hour: 20, minute: 1}
       }
     ],
     manager_name: '메니저이름',

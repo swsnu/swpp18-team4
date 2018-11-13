@@ -22,7 +22,7 @@ export class MainComponent implements OnInit {
   ngOnInit() {
     this.userService.getEmployer(2)
       .then(employer => this.employer = employer);
-    this.arbeitService.getArbeitPostById(3)
+    this.arbeitService.getArbeitPostById(30)
       .then(arbeit => this.arbeit = arbeit);
   }
 
