@@ -43,7 +43,7 @@
             
             <!--already selected time zone-->
             <div *ngFor = "let time of filter_timeArray; let index = index;">          
-              <select class="day_select" [(ngModel)]="time.start.day">
+              <select class="day_select" [(ngModel)]="time.day">
                 <option value = "undefined">undefined </option>
                 <option *ngFor="let i of iter(7)" [ngValue]="i">
                   {{this.timezoneService.dayArray[i]}}</option>
@@ -67,6 +67,7 @@
               </select>
               <button (click)="remove_timezone(index)" class="btn btn-sm btn-dark"> - </button>
             </div>
+            
             <!-- new input of time select -->
             <select class="day_select" [(ngModel)]="filter_day">
               <option value = "undefined">undefined </option>
