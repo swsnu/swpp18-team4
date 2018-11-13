@@ -1,22 +1,25 @@
 import { Injectable } from '@angular/core';
-import { TimeZone } from './Classes/TimeZone';
+import { TimeZone, Time } from './Classes/TimeZone';
 
 @Injectable({
   providedIn: 'root'
 })
 export class TimezoneService {
   constructor() { }
-  dayArray = ['sun', 'mon', 'tue', 'wed', 'thur', 'Fri', 'sat'];
+
+  //must edit it to Korean
+  minuteArray = ['00', '10', '20', '30', '40', '50'];
+  dayArray = ['Sun', 'Mon', 'Tue', 'Wed', 'Thur', 'Fri', 'Sat'];
 
   getDayArray() {
     return this.dayArray;
   }
 
-  format(time: TimeZone): string {
-    const startdate = this.formatDate(time.startDate);
-    const enddate = this.formatDate(time.endDate);
-    const starttime = this.formatTime(time.startDate);
-    const endtime = this.formatTime(time.endDate);
+  format(timezone: TimeZone): string {
+    const startdate = this.formatDate(timezone.start);
+    const enddate = this.formatDate(timezone.end);
+    const starttime = this.formatTime(timezone.start);
+    const endtime = this.formatTime(timezone.end);
 
     if (startdate === enddate) {
            return startdate + starttime + ' - ' + endtime;
@@ -25,12 +28,14 @@ export class TimezoneService {
       }
   }
 
-  formatDate(date: Date): string {
-    return (date.getMonth() + 1) + '.' + date.getDay() +
-    '(' + this.dayArray[date.getDay()] + ')';
+  formatDate(time: Time): string {
+    return (time.month + '.' + time.date +
+    '(' + this.dayArray[time.day] + ')';
   }
 
-  formatTime(date: Date): string {
-    return (date.getHours() + 1) + ':' + (date.getMinutes());
+  formatTime(time: Time): string {
+    return time.hour + ':' + time.minute;
   }
+
+
 }

@@ -27,7 +27,7 @@ export class ArbeitPostDetailComponent implements OnInit {
     region: ArbeitRegionEnum.SNUStation,
     arbeit_type: ArbeitTypeEnum.IT,
     pay: 8000,
-    time_zone: ['Mon 15:00-15:30', 'Tue 17:00-18:00'],
+    time_zone: null,
     manager_name: 'Chaehyun',
     manager_phone: '010-4818-4174',
     register_date: null,
