@@ -22,7 +22,9 @@ export class ArbeitBulletinComponent implements OnInit {
   dataToShow: ArbeitPost[]; // only array data in dataToShow is shown in bulletin board.
 
   /*variable for filtering */
+  filter_region = [false, false, false, false, false];
   filter_regionArray = [];
+  filter_type = [false, false];
   filter_typeArray = [];
   filter_timeArray = [];
   filter_day: number;
@@ -75,25 +77,47 @@ export class ArbeitBulletinComponent implements OnInit {
     }
   }
 
+
   filter() {
+    /* hardcoding- should be modified */
+    if (this.filter_region[0]) {
+      this.filter_regionArray.push(ArbeitRegionEnum.SNUStation);
+    }
+    if (this.filter_region[1]) {
+      this.filter_regionArray.push(ArbeitRegionEnum.Nakdae);
+    }
+    if (this.filter_region[2]) {
+      this.filter_regionArray.push(ArbeitRegionEnum.School);
+    }
+    if (this.filter_region[3]) {
+      this.filter_regionArray.push(ArbeitRegionEnum.Nokdu);
+    }
+    if (this.filter_region[4]) {
+      this.filter_regionArray.push(ArbeitRegionEnum.Extra);
+    }
+    if (this.filter_type[0]) {
+      this.filter_typeArray.push(ArbeitTypeEnum.Mentoring);
+    }
+    if (this.filter_type[1]) {
+      this.filter_typeArray.push(ArbeitTypeEnum.Tutoring);
+    }
+
     if (this.filter_regionArray.length !== 0) {
       this.dataToShow = this.dataToShow.filter(
-        function (element) {
-            return (element.region in this.filter_regionArray);
-        });
+        element => this.filter_regionArray.includes(element.region));
     }
     if (this.filter_typeArray.length !== 0) {
       this.dataToShow = this.dataToShow.filter(
-        function (element) {
-            return (element.arbeit_type in this.filter_typeArray);
-        });
+        element => this.filter_typeArray.includes(element.arbeit_type));
+
     }
     if (this.filter_timeArray.length !== 0) {
       this.dataToShow = this.dataToShow.filter(
-        function(element) {
-            return(this.timezoneService.filterTime(element.time_zone, this.filter_timeArray));
-        });
+        element => this.timezoneService.filterTime(element.time_zone, this.filter_timeArray));
     }
+    this.filter_regionArray = [];
+    this.filter_typeArray = [];
+
   }
 
   sort(sorting_criteria: number) {
@@ -144,6 +168,7 @@ export class ArbeitBulletinComponent implements OnInit {
   search(): void {
     this.dataToShow = this.full_arbeit_list; // initialize dataToShow
     /* do filtering */
+    this.filter();
 
     /* do keyword searching*/
     if (typeof this.search_criteria === 'undefined' ||

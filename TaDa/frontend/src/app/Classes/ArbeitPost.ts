@@ -1,6 +1,7 @@
 import { ArbeitRegionEnum } from '../Enums/ArbeitRegionEnum';
 import { ArbeitTypeEnum } from '../Enums/ArbeitTypeEnum';
-import { TimeZone } from "./TimeZone";
+import { TimeZone } from './TimeZone';
+
 
 export class ArbeitPost {
     id: number;
