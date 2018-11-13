@@ -3,9 +3,13 @@ from django.http import HttpResponse, JsonResponse, HttpResponseNotAllowed
 from django.contrib.auth.models import User
 from django.contrib.auth import authenticate, login, logout
 from django.views.decorators.csrf import ensure_csrf_cookie
+from django.views.decorators.csrf import csrf_exempt
+
 import json
 from .models import TaDa_User, Employee_preference, Employer_introduction
 from django.db import models
+
+from django.shortcuts import get_object_or_404
 
 # Create your views here.
 
@@ -101,6 +105,44 @@ def employee_info(request, employee_id): # employee_id is User's id, not TaDa_Us
         return HttpResponseNotAllowed(['GET', 'POST', 'PUT'])
         
 
+@csrf_exempt
+def employer_list(request):
+    if request.method == 'GET':
+        #if request.user.is_authenticated:
+        employer_list = []
+        for employer in Employer_introduction.objects.all():
+            employer_list.append({
+                'id': employer.id, 
+                'company_name': employer.company_name,
+                'company_address': employer.company_address,
+                'business_content': employer.business_content,
+                'representative_name': employer.representative_name,
+                'representative_phonenumber': employer.representative_phonenumber,
+                'star': employer.star
+                })
+        return JsonResponse(employer_list, safe=False)
+    else:
+        return HttpResponseNotAllowed(['GET'])
+
+@csrf_exempt
+def employer_info(request, employer_id):
+    employer = get_object_or_404(Employer_introduction, id = employer_id)
+    if request.method == 'GET':
+        return JsonResponse({
+                'id': employer.id, 
+                'employer_id': employer.employer_id.id,
+                'company_name': employer.company_name,
+                'company_address': employer.company_address,
+                'business_content': employer.business_content,
+                'representative_name': employer.representative_name,
+                'representative_phonenumber': employer.representative_phonenumber,
+                'star': employer.star
+                }
+            , safe=False)
+    else:
+        return HttpResponseNotAllowed(['GET'])
+
+'''
 def employer_info(request, employer_id): # employer_id is User's id, not TaDa_User's id
     if request.method == 'GET':
         if request.user.is_authenticated:
@@ -141,7 +183,7 @@ def employer_info(request, employer_id): # employer_id is User's id, not TaDa_Us
         pass
     else:
         return HttpResponseNotAllowed(['GET', 'POST', 'PUT'])
-
+'''
 
 def token(request):
     if request.method == 'GET':

@@ -1,4 +1,5 @@
 <app-title></app-title>
+
 <div style="text-align:center" class="container">
   <div class="grid" (click)="onClickArbeitBulletin()">
     <div class="grid__column">
@@ -33,3 +34,6 @@
     </div>
   </div>
 </div>
+
+<div *ngIf="employer">companyName: {{employer.company_address}}</div>
+<div *ngIf="arbeit">arbeitTitle: {{arbeit.region}}</div>

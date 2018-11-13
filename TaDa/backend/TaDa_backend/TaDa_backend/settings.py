@@ -25,11 +25,12 @@ SECRET_KEY = '68x)05&tz(nh=-dm%pe*o4f6pu9j6mqi%#zj)o3p_6(35^tq5y'
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = ['localhost']
 
 # Application definition
 
 INSTALLED_APPS = [
+    'Arbeit.apps.ArbeitConfig',
     'User.apps.UserConfig',
     'django.contrib.admin',
     'django.contrib.auth',
@@ -103,15 +104,9 @@ AUTH_PASSWORD_VALIDATORS = [
 # Internationalization
 # https://docs.djangoproject.com/en/2.1/topics/i18n/
 
-LANGUAGE_CODE = 'en-us'
 
-TIME_ZONE = 'UTC'
+TIME_ZONE = 'Asia/Seoul'
 
-USE_I18N = True
-
-USE_L10N = True
-
-USE_TZ = True
 
 
 # Static files (CSS, JavaScript, Images)

@@ -1,6 +1,7 @@
 import { ArbeitRegionEnum } from './Enums/ArbeitRegionEnum';
 import { ArbeitTypeEnum } from './Enums/ArbeitTypeEnum';
 import { ArbeitPost } from './Classes/ArbeitPost';
+import { Time } from "./Classes/TimeZone";
 
 export const mockArbeitPost: ArbeitPost[] = [
   { id: 1,
@@ -10,7 +11,12 @@ export const mockArbeitPost: ArbeitPost[] = [
     region: ArbeitRegionEnum.SNUStation,
     arbeit_type: ArbeitTypeEnum.Cafe,
     pay: 9000,
-    time_zone: ['10:00-15:00'],
+    time_zone: [
+      {
+        start: {month: 10, date:  22, day: 3, hour: 16, minute: 1},
+        end: {month: 10, date:  22, day: 3, hour: 20, minute: 1}
+      }
+    ],
     manager_name: '메니저이름',
     manager_phone: '010-1234-1234',
     register_date: new Date(2018, 10, 27),
@@ -26,7 +32,12 @@ export const mockArbeitPost: ArbeitPost[] = [
     region: ArbeitRegionEnum.Extra,
     arbeit_type: ArbeitTypeEnum.IT,
     pay: 50000,
-    time_zone: ['10:00-15:00'],
+    time_zone: [
+      {
+        start: {month: 10, date:  23, day: 3, hour: 16, minute: 1},
+        end: {month: 10, date:  23, day: 3, hour: 20, minute: 1}
+      }
+    ],
     manager_name: '메니저이름',
     manager_phone: '010-1234-1234',
     register_date: new Date(2018, 7, 9),
@@ -40,7 +51,12 @@ export const mockArbeitPost: ArbeitPost[] = [
     region: ArbeitRegionEnum.Nokdu,
     arbeit_type: ArbeitTypeEnum.Design,
     pay: 7500,
-    time_zone: ['10:00-15:00'],
+    time_zone: [
+      {
+        start: {month: 10, date:  25, day: 3, hour: 16, minute: 1},
+        end: {month: 10, date:  25, day: 3, hour: 20, minute: 1}
+      }
+    ],
     manager_name: '메니저이름',
     manager_phone: '010-1234-1234',
     register_date: new Date(2018, 11, 9),
@@ -55,7 +71,12 @@ export const mockArbeitPost: ArbeitPost[] = [
     region: ArbeitRegionEnum.Nakdae,
     arbeit_type: ArbeitTypeEnum.Tutoring,
     pay: 40000,
-    time_zone: ['10:00-15:00'],
+    time_zone: [
+      {
+        start: {month: 11, date:  22, day: 3, hour: 16, minute: 1},
+        end: {month: 11, date:  22, day: 3, hour: 20, minute: 1}
+      }
+    ],
     manager_name: '메니저이름',
     manager_phone: '010-1234-1234',
     register_date: new Date(2018, 10, 18),

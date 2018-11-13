@@ -1,4 +1,6 @@
 import { Component, OnInit } from '@angular/core';
+import { Router } from '@angular/router';
+import {UserService} from "../user.service";
 
 @Component({
   selector: 'app-sign-up-main',
@@ -7,9 +9,19 @@ import { Component, OnInit } from '@angular/core';
 })
 export class SignUpMainComponent implements OnInit {
 
-  constructor() { }
+  constructor(
+    private router: Router,
+    private userService: UserService) { }
 
   ngOnInit() {
   }
 
+
+  onClickSignUpEmployee(): void {
+    this.router.navigateByUrl('sign_up/employee');
+  }
+
+  onClickSignUpEmployer(): void {
+    this.router.navigateByUrl('sign_up/employee');
+  }
 }

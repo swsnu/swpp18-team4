@@ -9,11 +9,25 @@ export class TimezoneService {
 
   year = 2018;
 
+  //must edit it to Korean
   minuteArray = ['00', '10', '20', '30', '40', '50'];
-  dayArray = ['Sun', 'Mon', 'Tue', 'Wed', 'Thur', 'Fri', 'Sat'];
+  dayArray = ['일', '월', '화', '수', '목', '금', '토'];
   daysInMonth = [31, 28, 31, 30, 31, 30, 31, 31, 30, 31, 30, 31];
 
+
   format(timezone: TimeZone): string {
+
+
+    if (startdate === enddate) {
+           return startdate + starttime + ' - ' + endtime;
+      } else {
+        return startdate + starttime + ' - ' + enddate + endtime;
+      }
+  }
+
+  formatDate(time: Time): string {
+    return (time.month + '.' + time.date +
+    '(' + this.dayArray[time.day] + ')');
 
     return (timezone.month + 1) + '.' + timezone.date + '('
               + this.dayArray[timezone.day] + ')'
