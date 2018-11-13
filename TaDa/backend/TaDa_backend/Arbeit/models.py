@@ -7,11 +7,11 @@ class Arbeit(models.Model):
     title = models.CharField(max_length = 50, null = True);
     content = models.TextField(null = True);
     region_options = (
-        ('School', 'School'),
-        ('SNUStation', 'SNUStation'),
-        ('Nokdu', 'Nokdu'),
-        ('Nakdae', 'Nakdae'),
-        ('Extra', 'Extra')
+        ('교내', 'School'),
+        ('설입', 'SNUStation'),
+        ('녹두', 'Nokdu'),
+        ('낙성대', 'Nakdae'),
+        ('기타', 'Extra')
     )
     region = models.CharField(
     	max_length = 20,
@@ -19,12 +19,12 @@ class Arbeit(models.Model):
         default = 'Extra'
     )
     arbeit_type_options = (
-        ('Mentoring', 'Mentoring'),
-        ('Tutoring', 'Tutoring'),
-        ('Cafe', 'Cafe'),
+        ('멘토링', 'Mentoring'),
+        ('과외', 'Tutoring'),
+        ('카페', 'Cafe'),
         ('IT', 'IT'),
-        ('Design', 'Design'),
-        ('Extra', 'Extra')
+        ('디자인 알바', 'Design'),
+        ('기타', 'Extra')
     )
     arbeit_type = models.CharField(
     	max_length = 20,

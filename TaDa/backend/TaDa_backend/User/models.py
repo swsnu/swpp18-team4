@@ -24,7 +24,7 @@ class Employee_preference(models.Model):
     employee_id = models.ForeignKey(User, on_delete = models.CASCADE)
     region_choices = (
         ('교내', 'School'),
-        ('서울대입구역', 'SNUStation'),
+        ('설입', 'SNUStation'),
         ('녹두', 'Nokdu'),
         ('낙성대', 'Nakdae'),
         ('기타', 'Extra'),
