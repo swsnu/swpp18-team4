@@ -31,7 +31,8 @@ export class ArbeitPostDetailComponent implements OnInit {
     manager_name: 'Chaehyun',
     manager_phone: '010-4818-4174',
     register_date: null,
-    edit_date: null
+    edit_date: null,
+    star: 7.8
   };
 
   constructor(

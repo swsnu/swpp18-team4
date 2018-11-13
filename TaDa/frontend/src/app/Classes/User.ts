@@ -24,4 +24,5 @@ export class Employer {
   business_content: string;
   representative_name: string;
   representative_phonenumber: string;
+  star: number;
 }

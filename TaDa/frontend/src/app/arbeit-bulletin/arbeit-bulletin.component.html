@@ -64,9 +64,9 @@
     </ul>
   </div>
   <div class="btn-group btn-group-toggle float-right">
-    <button class="btn btn-sm btn-dark">최신순</button>
-    <button class="btn btn-sm btn-dark">시급순</button>
-    <button class="btn btn-sm btn-dark">별점순</button>
+    <button (click)= "sort(0)" class="btn btn-sm btn-dark">최신순</button>
+    <button (click)= "sort(1)" class="btn btn-sm btn-dark">시급순</button>
+    <button (click)= "sort(2)" class="btn btn-sm btn-dark">별점순</button>
   </div>
   <div>
     <table class="table table-striped">
@@ -76,14 +76,18 @@
           <th>제목</th>
           <th>글쓴이</th>
           <th>시급</th>
+          <th>star</th>
+          <th>register_date</th>
         </tr>
       </thead>
       <tbody>
-        <tr *ngFor="let article of dataToShow">
-          <td>{{article.id}}</td>
-          <td [routerLink]="'./'+article.id">{{article.title}}</td>
-          <td>{{getAuthorNameByID(article.author_id)}}</td>
-          <td>{{article.pay}}</td>
+        <tr *ngFor="let post of dataToShow">
+          <td>{{post.id}}</td>
+          <td [routerLink]="'./'+post.id">{{post.title}}</td>
+          <td>{{getAuthorNameByID(post.author_id)}}</td>
+          <td>{{post.pay}}</td>
+          <td>{{post.star}}</td>
+          <td>{{post.register_date}}</td>
         </tr>
       </tbody>
     </table>
