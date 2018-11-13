@@ -67,7 +67,6 @@
               </select>
               <button (click)="remove_timezone(index)" class="btn btn-sm btn-dark"> - </button>
             </div>
-
             <!-- new input of time select -->
             <select class="day_select" [(ngModel)]="filter_day">
               <option value = "undefined">undefined </option>
@@ -78,7 +77,7 @@
               <option *ngFor="let i of iter(24)" [ngValue]="i">{{i}}</option>
             </select>
             :
-            <select class="time_select" [(ngModel)]="filter_start_minute">
+            <select class="time_select" [(ngModel)]="filter_start_min">
               <option *ngFor="let i of iter(6)" [ngValue]="i">
                 {{this.timezoneService.minuteArray[i]}}</option>
             </select>
@@ -87,7 +86,7 @@
               <option *ngFor="let i of iter(24)" [ngValue]="i">{{i}}</option>
             </select>
             :
-            <select class="time_select" [(ngModel)]="filter_end_minute">
+            <select class="time_select" [(ngModel)]="filter_end_min">
               <option *ngFor="let i of iter(6)" [ngValue]="i">
                 {{this.timezoneService.minuteArray[i]}}</option>
             </select>

@@ -6,6 +6,8 @@ import { ArbeitService } from '../arbeit.service';
 import { TimezoneService } from '../timezone.service';
 import { User, Employer } from '../Classes/User';
 import { TimeZone, Time } from '../Classes/TimeZone';
+import { ArbeitRegionEnum } from '../Enums/ArbeitRegionEnum';
+import { ArbeitTypeEnum } from '../Enums/ArbeitTypeEnum';
 
 
 @Component({
@@ -61,6 +63,8 @@ export class ArbeitBulletinComponent implements OnInit {
     end: this.time_4,
   };
 
+  filter_regionArray = [];
+  filter_typeArray = [];
   filter_timeArray = [this.zone1, this.zone2];
   filter_day: number;
   filter_start_hour: number;
@@ -108,6 +112,28 @@ export class ArbeitBulletinComponent implements OnInit {
     }
   }
 
+  filter() {
+    // let tmp_arr = [];
+    if (this.filter_regionArray.length !== 0) {
+      this.dataToShow = this.dataToShow.filter(
+        function (element) {
+            return (element.region in this.filter_regionArray);
+        });
+    }
+    if (this.filter_typeArray.length !== 0) {
+      this.dataToShow = this.dataToShow.filter(
+        function (element) {
+            return (element.arbeit_type in this.filter_typeArray);
+        });
+    }
+    if (this.filter_timeArray.length !== 0) {
+      this.dataToShow = this.dataToShow.filter(
+        function(element) {
+            return(this.timezoneService.filterTime(element, this.filter_timeArray));
+        });
+    }
+  }
+
   sort(sorting_criteria: number) {
     if (sorting_criteria === 0) {// sort by register date
       this.dataToShow.sort(function(a, b) {
@@ -139,12 +165,12 @@ export class ArbeitBulletinComponent implements OnInit {
     const timezone: TimeZone = {
       start: startTime, end: endTime
     };
-    this.filter_timeArray.push(timezone);
 
-    this.clear_field();
+    this.filter_timeArray.push(timezone);
+    this.clear_timezone_field();
   }
 
-  clear_field(): void {
+  clear_timezone_field(): void {
     this.filter_day = undefined;
     this.filter_start_hour = undefined; this.filter_start_min = undefined;
     this.filter_end_hour = undefined; this.filter_end_min = undefined;

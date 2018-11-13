@@ -7,10 +7,10 @@ import { TimeZone, Time } from './Classes/TimeZone';
 export class TimezoneService {
   constructor() { }
 
+  const year = 2018;
   //must edit it to Korean
   minuteArray = ['00', '10', '20', '30', '40', '50'];
   dayArray = ['Sun', 'Mon', 'Tue', 'Wed', 'Thur', 'Fri', 'Sat'];
-
   getDayArray() {
     return this.dayArray;
   }
@@ -37,5 +37,15 @@ export class TimezoneService {
     return time.hour + ':' + time.minute;
   }
 
+  filterTime(timezone: TimeZone, filter_arr: TimeZone[]): boolean {
+    //let start = timezone.start.
+    return true;
+
+  }
+
+  getDay(month: number, day: number): number {
+    const date = new Date(this.year, month - 1, day);
+    return date.getDay();
+  }
 
 }
