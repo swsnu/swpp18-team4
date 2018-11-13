@@ -49,7 +49,12 @@ export class ArbeitBulletinComponent implements OnInit {
     //this.dataToShow = this.mockData;
   }
   getAuthorNameByID(id: number): string {
-    return '아기상어';
+    if(id == 4) {
+      return '아기상어';
+    } else {
+      return 'jyp930';
+    }
+
   }
 
   getArbeitList() {

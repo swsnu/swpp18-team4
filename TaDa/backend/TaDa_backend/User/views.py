@@ -105,6 +105,24 @@ def employee_info(request, employee_id): # employee_id is User's id, not TaDa_Us
         return HttpResponseNotAllowed(['GET', 'POST', 'PUT'])
         
 
+@csrf_exempt
+def employer_list(request):
+    if request.method == 'GET':
+        #if request.user.is_authenticated:
+        employer_list = []
+        for employer in Employer_introduction.objects.all():
+            employer_list.append({
+                'id': employer.id, 
+                'company_name': employer.company_name,
+                'company_address': employer.company_address,
+                'business_content': employer.business_content,
+                'representative_name': employer.representative_name,
+                'representative_phonenumber': employer.representative_phonenumber,
+                'star': employer.star
+                })
+        return JsonResponse(employer_list, safe=False)
+    else:
+        return HttpResponseNotAllowed(['GET'])
 
 @csrf_exempt
 def employer_info(request, employer_id):
@@ -112,11 +130,13 @@ def employer_info(request, employer_id):
     if request.method == 'GET':
         return JsonResponse({
                 'id': employer.id, 
+                'employer_id': employer.employer_id.id,
                 'company_name': employer.company_name,
                 'company_address': employer.company_address,
                 'business_content': employer.business_content,
                 'representative_name': employer.representative_name,
-                'representative_phonenumber': employer.representative_phonenumber
+                'representative_phonenumber': employer.representative_phonenumber,
+                'star': employer.star
                 }
             , safe=False)
     else:
