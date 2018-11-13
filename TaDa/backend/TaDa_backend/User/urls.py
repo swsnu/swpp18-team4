@@ -7,7 +7,8 @@ urlpatterns = [
     path('signin/', views.signin, name='signin'),
     path('signout/', views.signout, name='signout'),
     #path('user/<int:user_id>/', views.user, name='user'),
-    path('employee/<int:employee_id>/', views.employee_info, name='employee'),
-    path('employer/<int:employer_id>/', views.employer_info, name='employer'),
+    path('employee/<int:employee_id>/', views.employee_info, name='employee_info'),
+    path('employer/', views.employer_list, name='employer_list'),
+    path('employer/<int:employer_id>/', views.employer_info, name='employer_info'),
     path('token/', views.token, name='token')
 ]

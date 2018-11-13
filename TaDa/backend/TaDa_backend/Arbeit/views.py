@@ -28,6 +28,7 @@ def arbeit_list(request):
             for arbeit in Arbeit.objects.all():
                 arbeit_list.append({
                     'id': arbeit.id,
+                    'author_id': arbeit.author.id,
                     'title': arbeit.title, 
                     'content': arbeit.content,
                     'author': arbeit.author.id,
@@ -69,6 +70,7 @@ def arbeit_detail(request, arbeit_id):
         if request.method == 'GET':
             return JsonResponse({
                  'id': arbeit.id,
+                 'author_id': arbeit.author.id,
                  'title': arbeit.title, 
                  'content': arbeit.content,
                  'author': arbeit.author.id,
