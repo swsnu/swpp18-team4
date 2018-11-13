@@ -3,6 +3,8 @@ from django.http import HttpResponse, JsonResponse, HttpResponseNotAllowed
 from django.contrib.auth.models import User
 from django.contrib.auth import authenticate, login, logout
 from django.views.decorators.csrf import ensure_csrf_cookie
+from django.views.decorators.csrf import csrf_exempt
+
 import json
 from .models import TaDa_User, Employee_preference, Employer_introduction
 from django.db import models
@@ -104,7 +106,7 @@ def employee_info(request, employee_id): # employee_id is User's id, not TaDa_Us
         
 
 
-
+@csrf_exempt
 def employer_info(request, employer_id):
     employer = get_object_or_404(Employer_introduction, id = employer_id)
     if request.method == 'GET':
