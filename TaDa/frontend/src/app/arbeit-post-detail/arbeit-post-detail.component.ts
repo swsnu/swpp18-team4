@@ -4,10 +4,10 @@ import { User } from '../Classes/User';
 import { ArbeitPost } from '../Classes/ArbeitPost';
 import { ArbeitService } from '../arbeit.service';
 import { LoginUserService } from '../log-in-user.service';
+import { TimezoneService } from '../timezone.service';
 
 import { ArbeitRegionEnum } from '../Enums/ArbeitRegionEnum';
 import { ArbeitTypeEnum } from '../Enums/ArbeitTypeEnum';
-
 
 @Component({
   selector: 'app-arbeit-post-detail',
@@ -37,7 +37,8 @@ export class ArbeitPostDetailComponent implements OnInit {
 
   constructor(
     private arbeitService: ArbeitService,
-    private userService: LoginUserService,
+    private timezoneService: TimezoneService,
+    //private userService: LoginUserService,
     private route: ActivatedRoute,
     private router: Router) { }
 

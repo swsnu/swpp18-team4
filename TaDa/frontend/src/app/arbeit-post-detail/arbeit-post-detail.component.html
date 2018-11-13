@@ -15,7 +15,7 @@
                                 <label class = "font-weight-bold">Pay</label>: {{post.pay}}<br>
                                 <label class = "font-weight-bold">Time Zone</label>
                                 <div *ngFor= "let time of post.time_zone">
-                                    <p>{{time}}</p>
+                                    <p>{{this.timezoneService.format(time)}}</p>
                                 </div>
                             </div>
                             <div class="col-sm-6">
