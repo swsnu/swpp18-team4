@@ -16,9 +16,11 @@
                 <option value="카페 알바">카페 알바</option>
                 <option value="디자인 알바">디자인 알바</option>
               </select>
+            <!--
             <select [(ngModel)]="arbeit_type">
-              <option *ngFor="let i of 'ArbeitTypeEnum'" [ngValue]="i">{{i}}</option>
+              <option *ngFor="let i of 'getEnumList(ArbeitTypeEnum)'" [ngValue]="i">{{i}}</option>
             </select>
+            -->
           </div>
           <div>
             <label id="region" class="font-weight-bold">지역</label>
