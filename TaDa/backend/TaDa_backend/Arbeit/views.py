@@ -7,6 +7,8 @@ from django.shortcuts import get_object_or_404
 from .models import Arbeit
 import json
 
+from django.utils import timezone
+
 
 @ensure_csrf_cookie
 def token(request):
@@ -25,6 +27,7 @@ def arbeit_list(request):
             arbeit_list = []
             for arbeit in Arbeit.objects.all():
                 arbeit_list.append({
+                    'id': arbeit.id,
                     'title': arbeit.title, 
                     'content': arbeit.content,
                     'author': arbeit.author.id,
@@ -42,11 +45,17 @@ def arbeit_list(request):
             req_data = json.loads(request.body.decode())
             title = req_data['title']
             content = req_data['content']
-            content2 = req_data['content2']
+            region = req_data['region']
+            arbeit_type = req_data['arbeit_type']
+            pay = req_data['pay']
+            manager_name = req_data['manager_name']
+            manager_phone = req_data['manager_phone']
 
-            
   
-            new_arbeit = Arbeit(title=title, content=content, author=request.user)
+            new_arbeit = Arbeit(title=title, content=content, author=request.user,
+            					region=region, arbeit_type=arbeit_type, pay=pay,
+            					manager_name=manager_name, manager_phone=manager_phone,
+            					register_date=timezone.now())
             new_arbeit.save()
             return HttpResponse(status=201)
     else:
@@ -59,7 +68,8 @@ def arbeit_detail(request, arbeit_id):
         arbeit = get_object_or_404(Arbeit, id = arbeit_id)
         if request.method == 'GET':
             return JsonResponse({
-            	 'title': arbeit.title, 
+                 'id': arbeit.id,
+                 'title': arbeit.title, 
                  'content': arbeit.content,
                  'author': arbeit.author.id,
                  'region': arbeit.region,
@@ -69,15 +79,23 @@ def arbeit_detail(request, arbeit_id):
                  'manager_phone': arbeit.manager_phone,
                  'register_date': arbeit.register_date,
                  'edit_date': arbeit.edit_date
-            	}, safe=False)
+                }, safe=False)
         else:
             if request.method == 'PUT':
                 req_data = json.loads(request.body.decode())
                 title = req_data['title']
                 content = req_data['content']
+                region = req_data['region']
+                arbeit_type = req_data['arbeit_type']
+                pay = req_data['pay']
+                manager_name = req_data['manager_name']
+                manager_phone = req_data['manager_phone']
+                register_date = req_data['register_date']
 
                 arbeit.title = title
                 arbeit.content = content
+
+
                 arbeit.save()
                 return HttpResponse(status=200)
             else:
