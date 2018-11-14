@@ -44,10 +44,10 @@ export class ArbeitBulletinComponent implements OnInit {
   ) {}
 
   ngOnInit() {
-    //this.getArbeitList();
+    this.getArbeitList();
     //this.getStarfromEmployer();
 
-    this.full_arbeit_list = this.dataToShow = mockArbeitPost;
+    //this.full_arbeit_list = this.dataToShow = mockArbeitPost;
     this.sort(0);
   }
   getAuthorNameByID(id: number): string {
