@@ -37,6 +37,24 @@
               <input class="form-check-input" [(ngModel)]="filter_type[1]" type="checkbox" id="inlineCheckbox7">
               <label class="form-check-label" for="inlineCheckbox7">과외</label>
             </div>
+            <div class="form-check form-check-inline">
+              <input class="form-check-input" [(ngModel)]="filter_type[2]" type="checkbox" id="inlineCheckbox7">
+              <label class="form-check-label" for="inlineCheckbox7">카페</label>
+            </div>
+            <div class="form-check form-check-inline">
+              <input class="form-check-input" [(ngModel)]="filter_type[3]" type="checkbox" id="inlineCheckbox7">
+              <label class="form-check-label" for="inlineCheckbox7">IT</label>
+            </div>
+            <div class="form-check form-check-inline">
+              <input class="form-check-input" [(ngModel)]="filter_type[4]" type="checkbox" id="inlineCheckbox7">
+              <label class="form-check-label" for="inlineCheckbox7">디자인 알바</label>
+            </div>
+            <div class="form-check form-check-inline">
+              <input class="form-check-input" [(ngModel)]="filter_type[5]" type="checkbox" id="inlineCheckbox7">
+              <label class="form-check-label" for="inlineCheckbox7">기타</label>
+            </div>                 
+
+
           </div>
         </div>
             <label id="timezone" class="font-weight-bold">시간대</label>
@@ -120,7 +138,6 @@
     <table class="table table-striped">
       <thead>
         <tr>
-          <th>글 ID</th>
           <th>제목</th>
           <th>글쓴이</th>
           <th>시급</th>
@@ -132,14 +149,13 @@
       </thead>
       <tbody>
         <tr *ngFor="let post of dataToShow">
-          <td>{{post.id}}</td>
           <td [routerLink]="'./'+post.id">{{post.title}}</td>
           <td>{{getAuthorNameByID(post.author_id)}}</td>
           <td>{{post.pay}}</td>
           <td>{{post.region}}</td>
           <td>{{post.arbeit_type}}</td>
           <td>{{post.star}}</td>
-          <td>{{post.register_date}}</td>
+          <td>{{post.register_date | date: 'yyyy.MM.d'}}</td>
         </tr>
       </tbody>
     </table>

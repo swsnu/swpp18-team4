@@ -13,9 +13,9 @@ export const mockArbeitPost: ArbeitPost[] = [
     pay: 9000,
     time_zone: [
       {
-        month: 11, date:  22, day: 3,
-        start: {hour: 16, minute: 1},
-        end: {hour: 20, minute: 1}
+        month: 11, date:  14, day: 3,
+        start: {hour: 5, minute: 1},
+        end: {hour: 10, minute: 1}
       }
     ],
     manager_name: '메니저이름',
