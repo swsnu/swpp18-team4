@@ -1,23 +1,31 @@
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
-
-import { MainComponent } from './main.component';
-import { TitleComponent } from '../title/title.component';
+import { Component } from "@angular/core";
+import { MainComponent } from "./main.component";
 import { RouterTestingModule } from '@angular/router/testing';
 import { Router } from '@angular/router';
+import { HttpClientTestingModule } from "@angular/common/http/testing";
+import { UserService } from "../user.service";
+import { LoginUserService } from "../log-in-user.service";
+import {FormsModule} from "@angular/forms";
+
+@Component({selector: 'app-title', template: ''})
+class TitleStubComponent {}
 
 describe('MainComponent', () => {
   let component: MainComponent;
   let fixture: ComponentFixture<MainComponent>;
+  const routerSpy = jasmine.createSpyObj('Router', ['navigateByUrl']);
   let router: Router;
 
   beforeEach(async(() => {
-    const routerSpy = jasmine.createSpyObj('Router', ['navigateByUrl']);
     TestBed.configureTestingModule({
-      declarations: [ MainComponent, TitleComponent ],
-      imports: [ RouterTestingModule ],
+      declarations: [ MainComponent,  TitleStubComponent ],
+      imports: [ RouterTestingModule, HttpClientTestingModule],
       providers: [
-        { provide: Router, useValue: routerSpy }
-        ]
+        { provide: Router, useValue: routerSpy },
+        UserService,
+        LoginUserService,
+      ]
     })
     .compileComponents();
   }));
@@ -40,3 +48,4 @@ describe('MainComponent', () => {
     expect(navArgs).toBe('/arbeit', 'redirect : arbeit');
   });
 });
+

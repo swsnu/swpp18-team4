@@ -5,6 +5,9 @@ import { Component } from "@angular/core";
 
 @Component({selector: 'router-outlet', template: ''})
 class RouterOutletStubComponent { }
+@Component({selector: 'app-title', template: ''})
+class TitleStubComponent {}
+
 
 describe('ArbeitMainComponent', () => {
   let component: ArbeitMainComponent;
@@ -14,7 +17,8 @@ describe('ArbeitMainComponent', () => {
     TestBed.configureTestingModule({
       declarations: [
         ArbeitMainComponent,
-        RouterOutletStubComponent
+        RouterOutletStubComponent,
+        TitleStubComponent,
       ]
     })
     .compileComponents();
