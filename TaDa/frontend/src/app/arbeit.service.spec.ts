@@ -21,7 +21,7 @@ describe('ArbeitService', () => {
       imports: [
         RouterTestingModule,
         HttpClientTestingModule,
-      ]
+      ],
     });
     httpClient = TestBed.get(HttpClient);
     httpTestingController = TestBed.get(HttpTestingController);
@@ -38,7 +38,7 @@ describe('ArbeitService', () => {
     service.getArbeitPosts()
       .then(data => expect(data).toEqual([mockArbeitPost]));
 
-    httpClient.get<ArbeitPost>('api/arbeit/arbeit').toPromise()
+    httpClient.get<ArbeitPost>('api/arbeit/arbeit/').toPromise()
       .then(data => expect(data).toEqual(testPost));
   }));
 
@@ -57,7 +57,7 @@ describe('ArbeitService', () => {
     service.createArbeitPost(mockArbeitPost)
       .then(data => expect(data).toEqual(testPost));
 
-    httpClient.post<ArbeitPost>('api/arbeit/arbeit', testPost).toPromise()
+    httpClient.post<ArbeitPost>('api/arbeit/arbeit/', testPost).toPromise()
       .then(data => expect(data).toEqual(testPost));
 
   }));
@@ -68,7 +68,7 @@ describe('ArbeitService', () => {
     service.updateArbeitPost(testPost)
       .then(data => expect(data).toEqual(testPost));
 
-    httpClient.put<ArbeitPost>('api/arbeit/arbeit/1', testPost).toPromise()
+    httpClient.put<ArbeitPost>('api/arbeit/arbeit/1/', testPost).toPromise()
       .then(data => expect(data).toEqual(testPost));
 
   }));
@@ -79,7 +79,7 @@ describe('ArbeitService', () => {
     service.deleteArbeitPost(testPost)
       .then(data => expect(data).toEqual(testPost));
 
-    httpClient.delete<ArbeitPost>('api/arbeit/arbeit/1').toPromise()
+    httpClient.delete<ArbeitPost>('api/arbeit/arbeit/1/').toPromise()
       .then(data => expect(data).toEqual(testPost));
   }));
 });

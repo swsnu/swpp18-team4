@@ -59,20 +59,20 @@ export class ArbeitPostCreateComponent implements OnInit {
   }
 
   is_finished(): boolean {
-    if (!this.isValidInput(this.region)) {
+    if (!this.isValidInput(this.title)) {
+      alert('제목을 입력해 주세요.');
+    } else if (!this.isValidInput(this.region)) {
       alert('지역을 입력해 주세요.');
     } else if (!this.isValidInput(this.arbeit_type)) {
       alert('아르바이트 종류를 입력해 주세요.');
     } else if (!this.isValidInput(this.pay)) {
       alert('시급을 입력해 주세요.');
-    } else if (!this.isValidInput(this.title)) {
-      alert('제목을 입력해 주세요.');
-    } else if (!this.isValidInput(this.content)) {
-      alert('내용을 입력해 주세요.');
     } else if (!this.isValidInput(this.manager_name)) {
       alert('담당자 이름을 입력해 주세요.');
     } else if (!this.isValidInput(this.manager_phone)) {
       alert('담당자 전화번호를 입력해 주세요.');
+    } else if (!this.isValidInput(this.content)) {
+      alert('내용을 입력해 주세요.');
     } else {
       return true;
     }

@@ -55,7 +55,7 @@ export const mockArbeitPost: ArbeitPost[] = [
     pay: 7500,
     time_zone: [
       {
-        month: 11, date:  22, day: 3,
+        month: 11, date:  29, day: 3,
         start: {hour: 16, minute: 1},
         end: {hour: 20, minute: 1}
       }
@@ -76,7 +76,7 @@ export const mockArbeitPost: ArbeitPost[] = [
     pay: 40000,
     time_zone: [
       {
-        month: 11, date:  22, day: 3,
+        month: 11, date:  20, day: 1,
         start: {hour: 16, minute: 1},
         end: {hour: 20, minute: 1}
       }
