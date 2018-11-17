@@ -22,7 +22,7 @@ export class ArbeitService {
   }
 
   getArbeitPostById(id: number): Promise<ArbeitPost> {
-    const url = `${this.arbeitUrl}${id}`;
+    const url = `${this.arbeitUrl}${id}/`;
     return this.http.get<ArbeitPost>(url).toPromise();
   }
 
@@ -34,7 +34,7 @@ export class ArbeitService {
   }
   
   updateArbeitPost(post: ArbeitPost): Promise<ArbeitPost> {
-    const url = `${this.arbeitUrl}${post.id}`;
+    const url = `${this.arbeitUrl}${post.id}/`;
     return this.http.put(url, post, httpOptions)
       .toPromise()
       .then(() => post);
@@ -42,7 +42,7 @@ export class ArbeitService {
 
   deleteArbeitPost(post: ArbeitPost | number) {
     const id = (typeof post === 'number') ? post : post.id;
-    const url = `${this.arbeitUrl}${id}`;
+    const url = `${this.arbeitUrl}${id}/`;
     return this.http.delete<ArbeitPost>(url, httpOptions)
       .toPromise();
   }

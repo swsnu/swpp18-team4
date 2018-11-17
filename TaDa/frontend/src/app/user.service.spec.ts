@@ -5,6 +5,7 @@ import { HttpClient } from "@angular/common/http";
 import { UserService } from './user.service';
 import {Employer, User} from "./Classes/User";
 import { UserTypeEnum } from "./Enums/UserTypeEnum";
+import {Router} from "@angular/router";
 
 const mockUserList: User[] = [
   { id: 1, type: UserTypeEnum.Employer, email: "a@gmail.com", password: "a_pass", name: "a_name"},
@@ -21,6 +22,8 @@ const mockEmployer: Employer = {id: 1, company_name: "c1", company_address: "c1"
                                   representative_phonenumber: "c1", star: 1};
 
 describe('UserService', () => {
+  const routerSpy = jasmine.createSpyObj('Router', ['navigateByUrl']);
+
   let httpClient: HttpClient;
   let httpTestingController: HttpTestingController;
   let userService: UserService;
@@ -31,6 +34,7 @@ describe('UserService', () => {
       ],
       providers: [
         UserService,
+        { provide: Router, useValue: routerSpy }
       ]
     });
     httpClient = TestBed.get(HttpClient);
