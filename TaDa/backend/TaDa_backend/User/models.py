@@ -17,9 +17,6 @@ class TaDa_User(models.Model):
     def get_last_login(self):
         return self.last_login
 
-    def __str__(self):
-        return str(self.id)
-
 class Employee_preference(models.Model):
     employee_id = models.ForeignKey(User, on_delete = models.CASCADE)
     region_choices = (

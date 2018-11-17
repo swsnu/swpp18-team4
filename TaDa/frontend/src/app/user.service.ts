@@ -35,7 +35,7 @@ export class UserService {
     const url = `${'api/user/employer/'}${id}/`;
     return this.http.get<Employer>(url).toPromise();
   }
-/*
+
   getEmployee(user: User | number): Promise<Employee> {
     const id = (typeof user === 'number') ? user : user.id;
     const url = `${'api/user/employer/'}${id}`;
@@ -63,5 +63,5 @@ export class UserService {
     .then(() => user);
 
   }
-*/
+
 }

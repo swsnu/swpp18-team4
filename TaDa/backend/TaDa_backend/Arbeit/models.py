@@ -3,9 +3,9 @@ from django.contrib.auth.models import User
 
 # Create your models here.
 class Arbeit(models.Model):
-    author = models.ForeignKey(User, on_delete = models.CASCADE)
-    title = models.CharField(max_length = 50, null = True);
-    content = models.TextField(null = True);
+    #author = models.ForeignKey(User, on_delete = models.CASCADE)
+    title = models.CharField(max_length = 50, null = True)
+    content = models.TextField(null = True)
     region_options = (
         ('교내', 'School'),
         ('설입', 'SNUStation'),
@@ -32,7 +32,7 @@ class Arbeit(models.Model):
         default = 'Extra'
     )
     pay = models.IntegerField(default = 0)
-    #time_zone: string[];
+    #time_zone: string[]
     manager_name = models.CharField(max_length = 50, null = True)
     manager_phone = models.CharField(max_length = 50, null = True)
     register_date = models.DateTimeField('date published', null = True)
