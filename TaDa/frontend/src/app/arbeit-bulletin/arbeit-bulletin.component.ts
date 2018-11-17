@@ -24,7 +24,7 @@ export class ArbeitBulletinComponent implements OnInit {
   /*variable for filtering */
   filter_region = [false, false, false, false, false];
   filter_regionArray = [];
-  filter_type = [false, false];
+  filter_type = [false, false, false, false, false, false];
   filter_typeArray = [];
   filter_timeArray = [];
   filter_day: number;
@@ -47,8 +47,8 @@ export class ArbeitBulletinComponent implements OnInit {
     this.getArbeitList();
     //this.getStarfromEmployer();
 
-    //this.mockData = mockArbeitPost;
-    //this.dataToShow = this.mockData;
+    //this.full_arbeit_list = this.dataToShow = mockArbeitPost;
+    this.sort(0);
   }
   getAuthorNameByID(id: number): string {
     if(id == 4) {
@@ -56,7 +56,6 @@ export class ArbeitBulletinComponent implements OnInit {
     } else {
       return 'jyp930';
     }
-
   }
 
   getArbeitList() {
@@ -101,7 +100,22 @@ export class ArbeitBulletinComponent implements OnInit {
     if (this.filter_type[1]) {
       this.filter_typeArray.push(ArbeitTypeEnum.Tutoring);
     }
+    if (this.filter_type[2]) {
+      this.filter_typeArray.push(ArbeitTypeEnum.Cafe);
+    }
+    if (this.filter_type[3]) {
+      this.filter_typeArray.push(ArbeitTypeEnum.IT);
+    }
+    if (this.filter_type[4]) {
+      this.filter_typeArray.push(ArbeitTypeEnum.Design);
+    }
+    if (this.filter_type[5]) {
+      this.filter_typeArray.push(ArbeitTypeEnum.Extra);
+    }    
 
+
+
+    /* actual filtering */
     if (this.filter_regionArray.length !== 0) {
       this.dataToShow = this.dataToShow.filter(
         element => this.filter_regionArray.includes(element.region));
@@ -140,19 +154,21 @@ export class ArbeitBulletinComponent implements OnInit {
   }
 
   add_timezone() {
-    const startTime: Time = {
-      hour: this.filter_start_hour, minute: this.filter_start_min,
-    };
-    const endTime: Time = {
-      hour: this.filter_end_hour, minute: this.filter_end_min,
-    };
-    const timezone: TimeZone = {
-      month: -1, date: -1, day: this.filter_day,
-      start: startTime, end: endTime
-    };
+    if (this.filter_day != undefined && this.filter_start_hour != undefined) {
+      const startTime: Time = {
+        hour: this.filter_start_hour, minute: this.filter_start_min,
+      };
+      const endTime: Time = {
+        hour: this.filter_end_hour, minute: this.filter_end_min,
+      };
+      const timezone: TimeZone = {
+        month: -1, date: -1, day: this.filter_day,
+        start: startTime, end: endTime
+      };
 
-    this.filter_timeArray.push(timezone);
-    this.clear_timezone_field();
+      this.filter_timeArray.push(timezone);
+      this.clear_timezone_field();
+  }
   }
 
   clear_timezone_field(): void {
@@ -168,6 +184,7 @@ export class ArbeitBulletinComponent implements OnInit {
   search(): void {
     this.dataToShow = this.full_arbeit_list; // initialize dataToShow
     /* do filtering */
+    this.add_timezone();
     this.filter();
 
     /* do keyword searching*/

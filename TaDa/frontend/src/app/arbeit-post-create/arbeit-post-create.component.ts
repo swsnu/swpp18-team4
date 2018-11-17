@@ -44,7 +44,7 @@ export class ArbeitPostCreateComponent implements OnInit {
     if (typeof input === 'undefined') {
       return false;
     } else if(typeof input === 'number') {
-      if(input < 0) return false;
+      if (input < 0) return false;
       else return true;
     } else if(typeof input === 'object') {
       return false;
