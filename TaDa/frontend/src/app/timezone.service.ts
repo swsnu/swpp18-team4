@@ -9,7 +9,6 @@ export class TimezoneService {
 
   year = 2018;
 
-  //must edit it to Korean
   minuteArray = ['00', '10', '20', '30', '40', '50'];
   dayArray = ['일', '월', '화', '수', '목', '금', '토'];
   daysInMonth = [31, 28, 31, 30, 31, 30, 31, 31, 30, 31, 30, 31];
