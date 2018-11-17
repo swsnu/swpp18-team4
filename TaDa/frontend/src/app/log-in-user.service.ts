@@ -11,13 +11,13 @@ export class LoginUserService {
   LogInUser: User;
   UserEmployer: Employer;
   UserEmployee: Employee;
-  UserType: UserTypeEnum;
 
   constructor() { }
 
   isLoggedIn() {
     return this.LogInUser != null;
   }
+
 
   getLogInUser(): User {
     if (this.LogInUser != null) {
@@ -26,19 +26,17 @@ export class LoginUserService {
       return null;
     }
   }
-
+/*
   getEmployee() {
     return this.UserEmployee;
   }
   getEmployer() {
     return this.UserEmployer;
   }
-
-  isValidUser() {}
-
+*/
   getUserType(): UserTypeEnum {
     if (this.LogInUser) {
-      return this.UserType;
+      return this.LogInUser.type;
     } else {
       return null;
     }

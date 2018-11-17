@@ -21,7 +21,8 @@ describe('ArbeitPostDetailComponent', () => {
     manager_name: 'Chaehyun',
     manager_phone: '010-4818-4174',
     register_date: null,
-    edit_date: null
+    edit_date: null,
+    star: 1
   }; 
   beforeEach(async(() => {
     TestBed.configureTestingModule({

@@ -6,6 +6,7 @@ import {UserTypeEnum} from "./Enums/UserTypeEnum";
 describe('LogInUserService', () => {
   beforeEach(() => TestBed.configureTestingModule({}));
 
+
   it('should be created', () => {
     const service: LoginUserService = TestBed.get(LoginUserService);
     expect(service).toBeTruthy();
@@ -20,8 +21,10 @@ describe('LogInUserService', () => {
 
   it('test  getUserType func', () => {
     const service: LoginUserService = TestBed.get(LoginUserService);
-    expect(service.getUserType()).toEqual('');
-    service.LogInUser = new User;
+    const mockuser = <User>{id: 1, type: UserTypeEnum.Employer, email: "a@gmail.com", password: "a", name: "a"};
+    expect(service.getUserType()).toEqual(null);
+    service.LogInUser = mockuser;
+    expect(service.isLoggedIn()).toBeTruthy();
     service.LogInUser.type = UserTypeEnum.Employee;
     expect(service.getUserType()).toEqual('Employee');
     service.LogInUser.type = UserTypeEnum.Employer;

@@ -63,9 +63,6 @@ describe('ArbeitPostCreateComponent', () => {
     expect(window.alert).toHaveBeenCalledWith("아르바이트 종류를 입력해 주세요.");
     component.arbeit_type = 'Mentoring';
     component.confirm();
-    expect(window.alert).toHaveBeenCalledWith("시급을 입력해 주세요.");
-    component.pay = '5000';
-    component.confirm();
     expect(window.alert).toHaveBeenCalledWith("제목을 입력해 주세요.");
     component.title = '제목입니다';
     component.confirm();

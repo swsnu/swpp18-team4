@@ -17,25 +17,25 @@ export class UserService {
     private http: HttpClient,
   ) { }
   private user_url = 'api/user/';
-
+/*
   getUser(user: User | number): Promise<User> {
     const id = (typeof user === 'number') ? user : user.id;
     const url = `${this.user_url}${id}/`;
     return this.http.get<User>(url).toPromise();
   }
-
+*/
   getEmployerList(): void {
     const url = `api/user/employer/`;
     this.http.get<Employer[]>(url).subscribe(
-      list => this.employer_list = list);
+      list => this.employer_list = list); //여기 고치자
   }
 
   getEmployer(user: User | number): Promise<Employer> {
     const id = (typeof user === 'number') ? user : user.id;
-    const url = `${'api/user/employer/'}${id}`;
+    const url = `${'api/user/employer/'}${id}/`;
     return this.http.get<Employer>(url).toPromise();
   }
-
+/*
   getEmployee(user: User | number): Promise<Employee> {
     const id = (typeof user === 'number') ? user : user.id;
     const url = `${'api/user/employer/'}${id}`;
@@ -63,5 +63,5 @@ export class UserService {
     .then(() => user);
 
   }
-
+*/
 }

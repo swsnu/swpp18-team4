@@ -130,7 +130,7 @@ export class ArbeitPostCreateComponent implements OnInit {
     }
 
   }
-
+/*
   //this function can be deleted
   preview(): void {
     const state = this.is_finished();
@@ -145,7 +145,7 @@ export class ArbeitPostCreateComponent implements OnInit {
       return;
     }
   }
-
+*/
 
   onFileChanged(event) {
     this.selectedFile = event.target.files[0]

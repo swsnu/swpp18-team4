@@ -11,7 +11,6 @@ import { ArbeitMainComponent } from './arbeit-main/arbeit-main.component';
 import { ArbeitBulletinComponent } from './arbeit-bulletin/arbeit-bulletin.component';
 import { ArbeitPostDetailComponent } from './arbeit-post-detail/arbeit-post-detail.component';
 
-import { ArbeitPostPreviewComponent } from "./arbeit-post-preview/arbeit-post-preview.component";
 
 import { EmployeePageComponent } from './employee-page/employee-page.component';
 import { EmployerPageComponent } from './employer-page/employer-page.component';
@@ -31,7 +30,6 @@ const routes: Routes = [
     children: [
       {path: '', component: ArbeitBulletinComponent},
       {path: 'create', component: ArbeitPostCreateComponent},
-      {path: 'create/preview', component: ArbeitPostPreviewComponent},
       {path: ':id', component: ArbeitPostDetailComponent},
       {path: ':id/edit', component: ArbeitPostEditComponent}
     ]
