@@ -23,7 +23,8 @@ describe('ArbeitPostDetailComponent', () => {
     register_date: null,
     edit_date: null,
     star: 1
-  }; 
+  };
+
   beforeEach(async(() => {
     TestBed.configureTestingModule({
       declarations: [ ArbeitPostDetailComponent ],

@@ -1,6 +1,6 @@
 export class TimeZone {
     // month, date should not be null
-    month: number; // 0 to 11
+    month: number; // 1 to 12
     date: number; // 1 to 31
     day: number; // 0 to 6 => use array
 
