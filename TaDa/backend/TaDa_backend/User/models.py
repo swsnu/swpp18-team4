@@ -9,7 +9,7 @@ class TaDa_User(models.Model):
             ('EE', 'Employee'),
     )
     employ_type = models.CharField(max_length = 2, choices = employ_choices)
-    last_login = models.DateTimeField(auto_now = True)
+    #last_login = models.DateTimeField(auto_now = True)
     
     def get_employ_type(self):
         return self.employ_type

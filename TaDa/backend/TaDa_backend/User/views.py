@@ -66,7 +66,7 @@ def signout(request):
             return HttpResponse(status=401)
     else:
         return HttpResponseNotAllowed(['GET'])
-
+"""
 
 def employee_info(request, employee_id): # employee_id is User's id, not TaDa_User's id
     if request.method == 'GET':
@@ -184,7 +184,7 @@ def employer_info(request, employer_id): # employer_id is User's id, not TaDa_Us
     else:
         return HttpResponseNotAllowed(['GET', 'POST', 'PUT'])
 '''
-
+"""
 def token(request):
     if request.method == 'GET':
         return HttpResponse(status=204)

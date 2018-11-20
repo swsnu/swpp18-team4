@@ -35,8 +35,6 @@ export class EmployeePageComponent implements OnInit {
     timezone: ['Mon 13:00', 'Wed 17:30']
   }
 
-
-
   constructor(
     private loginService: LoginUserService,
     private userService: UserService,
@@ -48,13 +46,13 @@ export class EmployeePageComponent implements OnInit {
     this.user = this.ex_user;
     this.employee = this.ex_employee;
   }
-/*
+
   editUserInfo(): void {
     if (confirm('Really want to save?') === false) {
       return;
     }
-    //this.userService.updateEmployee(this.employee)
-    //  .then(employee => this.router.navigateByUrl(`employee_page`));
+    this.userService.updateEmployee(this.employee)
+      .then(employee => this.router.navigateByUrl(`employee_page`));
   }
 
 
@@ -70,8 +68,8 @@ export class EmployeePageComponent implements OnInit {
       alert('Check password again');
     } else {
         this.user.password = this.pw;
-    //    this.userService.updateUser(this.user)
-    //      .then(employee => this.router.navigateByUrl(`employee_page`));
+        this.userService.updateUser(this.user)
+          .then(employee => this.router.navigateByUrl(`employee_page`));
     }
 }
 
@@ -82,5 +80,5 @@ export class EmployeePageComponent implements OnInit {
       }
       this.router.navigateByUrl(`employee_page`);
   }
-  */
 }
+1
