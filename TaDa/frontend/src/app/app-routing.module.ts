@@ -1,44 +1,27 @@
 import { NgModule } from '@angular/core';
-import { RouterModule, Routes } from '@angular/router';
-import { ArbeitPostCreateComponent } from './arbeit-post-create/arbeit-post-create.component';
-import { ArbeitPostEditComponent } from './arbeit-post-edit/arbeit-post-edit.component';
-import { MainComponent } from './main/main.component';
-import { SignInComponent } from './sign-in/sign-in.component';
-import { SignUpMainComponent } from './sign-up-main/sign-up-main.component';
-import { SignUpEmployeeComponent } from './sign-up-employee/sign-up-employee.component';
-import { SignUpEmployerComponent } from './sign-up-employer/sign-up-employer.component';
-import { ArbeitMainComponent } from './arbeit-main/arbeit-main.component';
-import { ArbeitBulletinComponent } from './arbeit-bulletin/arbeit-bulletin.component';
-import { ArbeitPostDetailComponent } from './arbeit-post-detail/arbeit-post-detail.component';
-
-
-import { EmployeePageComponent } from './employee-page/employee-page.component';
-import { EmployerPageComponent } from './employer-page/employer-page.component';
-
+import { CommonModule } from '@angular/common';
+import { Routes, RouterModule } from '@angular/router';
+import { HomeComponent } from './core/home/home.component';
+import { SigninComponent } from './auth/components/signin/signin.component';
+import { SignupComponent } from './auth/components/signup/signup.component';
 
 const routes: Routes = [
-  { path: '', component: MainComponent },
-  { path: 'sign_in', component: SignInComponent },
-  { path: 'sign_up', component: SignUpMainComponent },
-  { path: 'sign_up/employee', component: SignUpEmployeeComponent },
-  { path: 'sign_up/employer', component: SignUpEmployerComponent },
-  { path: 'employee_page', component: EmployeePageComponent },
-  { path: 'employer/:id', component: EmployerPageComponent },
-
-  {
-    path: 'arbeit', component: ArbeitMainComponent,
-    children: [
-      {path: '', component: ArbeitBulletinComponent},
-      {path: 'create', component: ArbeitPostCreateComponent},
-      {path: ':id', component: ArbeitPostDetailComponent},
-      {path: ':id/edit', component: ArbeitPostEditComponent}
-    ]
-  },
-  { path: '**', redirectTo: ''},
+  { path: '', component: HomeComponent},
+  { path: 'signin', component: SigninComponent},
+  { path: 'signup', component: SignupComponent},
+  { path: 'message', loadChildren: './message/message.module#MessageModule' },
+  { path: 'scheduler', loadChildren: './scheduler/scheduler.module#SchedulerModule' },
+  { path: 'user', loadChildren: './user/user.module#UserModule' },
+  { path: 'post', loadChildren: './post/post.module#PostModule' },
+  { path: '**', redirectTo: '', pathMatch: 'full'}
 ];
 
 @NgModule({
-  imports: [ RouterModule.forRoot(routes) ],
-  exports: [ RouterModule ]
+  imports: [
+    CommonModule,
+    RouterModule.forRoot(routes)
+  ],
+  exports: [RouterModule],
+  declarations: []
 })
 export class AppRoutingModule { }

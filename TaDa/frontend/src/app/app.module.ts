@@ -2,47 +2,29 @@ import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
 
 import { AppComponent } from './app.component';
+import { HomeComponent } from './core/home/home.component';
 import { AppRoutingModule } from './app-routing.module';
-import { ArbeitPostCreateComponent } from './arbeit-post-create/arbeit-post-create.component';
-import { ArbeitPostEditComponent } from './arbeit-post-edit/arbeit-post-edit.component';
-import { FormsModule } from '@angular/forms';
-import { MainComponent } from './main/main.component';
-import { SignInComponent } from './sign-in/sign-in.component';
-import { SignUpMainComponent } from './sign-up-main/sign-up-main.component';
-import { SignUpEmployeeComponent } from './sign-up-employee/sign-up-employee.component';
-import { SignUpEmployerComponent } from './sign-up-employer/sign-up-employer.component';
-import { ArbeitBulletinComponent } from './arbeit-bulletin/arbeit-bulletin.component';
-import { ArbeitPostDetailComponent } from './arbeit-post-detail/arbeit-post-detail.component';
-import { ArbeitMainComponent } from './arbeit-main/arbeit-main.component';
-import { TitleComponent } from './title/title.component';
-import {HttpClientModule} from '@angular/common/http';
-import { EmployeePageComponent } from './employee-page/employee-page.component';
-import { EmployerPageComponent } from './employer-page/employer-page.component';
+import { FooterComponent } from './shared/footer/footer.component';
+import { NavComponent } from './shared/nav/nav.component';
+import { TimeblockComponent } from './shared/timeblock/timeblock.component';
+import { SigninComponent } from './auth/components/signin/signin.component';
+import { SignupComponent } from './auth/components/signup/signup.component';
 
 @NgModule({
   declarations: [
     AppComponent,
-    ArbeitPostCreateComponent,
-    ArbeitPostEditComponent,
-    MainComponent,
-    SignInComponent,
-    SignUpMainComponent,
-    SignUpEmployeeComponent,
-    SignUpEmployerComponent,
-    ArbeitBulletinComponent,
-    ArbeitPostDetailComponent,
-    ArbeitMainComponent,
-    TitleComponent,
-    EmployeePageComponent,
-    EmployerPageComponent,
+    HomeComponent,
+    FooterComponent,
+    NavComponent,
+    TimeblockComponent,
+    SigninComponent,
+    SignupComponent
   ],
   imports: [
     BrowserModule,
-    AppRoutingModule,
-    FormsModule,
-    HttpClientModule,
+    AppRoutingModule
   ],
   providers: [],
-  bootstrap: [AppComponent],
+  bootstrap: [AppComponent]
 })
 export class AppModule { }
