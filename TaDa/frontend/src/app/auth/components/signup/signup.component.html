@@ -1,3 +1,27 @@
-<p>
-  signup works!
-</p>
+<h2>회원가입</h2>
+<button id="as_employee" (click)="as_employer = false;">Employee</button>
+<button id="as_employer" (click)="as_employer = true">Employer</button>
+<form name="form" method="post">
+  이메일: <input id="email-input" type="text" name="email">
+  <label id="email-label"></label>
+  <br>
+  (해당 이메일로 인증링크가 전송됩니다.)
+  <br>
+  비밀번호: <input id="password-input" type="password" name="password">
+  <label id="password-label"></label>
+  <br>
+  비밀번호 확인: <input id="password-confirmation-input" type="password" name="password_confirmation">
+  <label id="password-confirmation-label"></label>
+  <br>
+  닉네임: <input id="nickname-input" type="text" name="nickname">
+  <label id="nickname-label"></label>
+  <br>
+  <div *ngIf="as_employer">
+    사업자등록번호: <input id="license-input" type="text" name="nickname">
+    <label id="license-label"></label>
+  </div>
+</form>
+<div>
+  SignUp As <br>
+  <button (click)=onClickConfirm()>{{as_employer ? 'Employer' : 'Employee'}}</button>
+</div>
