@@ -1,4 +1,6 @@
 import { Component, OnInit } from '@angular/core';
+import { Router } from "@angular/router";
+import {UserService} from "../../../core/services/user.service";
 
 @Component({
   selector: 'app-signin',
@@ -6,10 +8,18 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./signin.component.css']
 })
 export class SigninComponent implements OnInit {
+  constructor(
+    private userService: UserService,
+    private router: Router,
+  ) { }
+  ngOnInit() {}
 
-  constructor() { }
-
-  ngOnInit() {
+  onClickSignIn() {
+    //this.userService....
+    this.router.navigateByUrl('/');
+  }
+  onClickSignUp() {
+    this.router.navigateByUrl('signup');
   }
 
 }
