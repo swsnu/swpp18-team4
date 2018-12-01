@@ -61,7 +61,11 @@ export class UserService {
     const url = `${this.userUrl}${user.id}`;
     return this.http.put(url, user, httpOptions)
       .toPromise().then(() => user);
-
+  }
+  /* set properties in*/
+  setLoginUser(user: User): void {
+    this.currentUser = user;
+    this.userType = user.user_type;
   }
 
   /* get User by Id */
