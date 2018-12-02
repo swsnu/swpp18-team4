@@ -22,13 +22,13 @@ export class PostService {
   }
 
   getPostByPostId(post_id: number): Promise<Post> {
-    const url = `${this.postsUrl}/post/${post_id}`;
+    const url = `${this.postsUrl}post/${post_id}/`;
     return this.http.get<Post>(url, httpOptions)
       .toPromise().catch(this.handleError);
   }
 
   getPostsByAuthorId(author_id: number): Promise<Post[]> {
-    const url = `${this.postsUrl}/author/${author_id}`;
+    const url = `${this.postsUrl}author/${author_id}/`;
     return this.http.get<Post[]>(url, httpOptions)
       .toPromise().catch(this.handleError);
   }
@@ -39,13 +39,13 @@ export class PostService {
   }
 
   updatePost(post: Post): Promise<Post> {
-    const url = `${this.postsUrl}/${post.post_id}`;
+    const url = `${this.postsUrl}${post.post_id}/`;
     return this.http.put<Post>(url, httpOptions)
       .toPromise().then(() => post).catch(this.handleError);
   }
 
   deletePost(post: Post): Promise<Post> {
-    const url = `${this.postsUrl}/${post.post_id}`;
+    const url = `${this.postsUrl}${post.post_id}/`;
     return this.http.delete<Post>(url, httpOptions)
       .toPromise().then(() => post).catch(this.handleError);
   }

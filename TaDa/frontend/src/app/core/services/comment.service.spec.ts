@@ -4,12 +4,13 @@ import { CommentService } from './comment.service';
 import { HttpClientModule } from '@angular/common/http';
 
 describe('CommentService', () => {
-  beforeEach(() => TestBed.configureTestingModule({
-    declarations: [
 
-    ],
+  beforeEach(() => TestBed.configureTestingModule({
+    declarations: [],
     imports: [
       HttpClientModule
+    ],
+    providers: [
     ]
   }));
 

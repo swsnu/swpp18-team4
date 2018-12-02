@@ -18,25 +18,25 @@ export class CommentService {
   ) { }
 
   getWriteCommentsByPostId(post_id: number): Promise<Comment[]> {
-    const url = `${this.commentsUrl}/post/${post_id}`;
+    const url = `${this.commentsUrl}post/${post_id}/`;
     return this.http.get<Comment>(url, httpOptions)
       .toPromise().catch(this.handleError);
   }
 
   getReceiveCommentsByUserId(user_id: number): Promise<Comment[]> {
-    const url = `${this.commentsUrl}/receive/${user_id}`;
+    const url = `${this.commentsUrl}receive/${user_id}/`;
     return this.http.get<Comment>(url, httpOptions)
       .toPromise().catch(this.handleError);
   }
 
   getWriteCommentsByUserId(user_id: number) : Promise<Comment[]> {
-    const url = `${this.commentsUrl}/author/${user_id}`;
+    const url = `${this.commentsUrl}author/${user_id}/`;
     return this.http.get<Comment>(url, httpOptions)
       .toPromise().catch(this.handleError);
   }
 
   getComment(comment_id: number) : Promise<Comment> {
-    const url = `${this.commentsUrl}/${comment_id}`;
+    const url = `${this.commentsUrl}${comment_id}/`;
     return this.http.get<Comment>(url, httpOptions)
       .toPromise().catch(this.handleError);
   }
@@ -47,13 +47,13 @@ export class CommentService {
   }
 
   updateComment(comment: Comment): Promise<Comment> {
-    const url = `${this.commentsUrl}/${comment.comment_id}`;
+    const url = `${this.commentsUrl}${comment.comment_id}/`;
     return this.http.put<Comment>(url, comment, httpOptions)
       .toPromise().then(() => comment).catch(this.handleError);
   }
 
   deleteComment(comment: Comment): Promise<Comment> {
-    const url = `${this.commentsUrl}/${comment.comment_id}`;
+    const url = `${this.commentsUrl}${comment.comment_id}/`;
     return this.http.delete<Comment>(url, httpOptions)
       .toPromise().then(() => comment).catch(this.handleError);
   }
