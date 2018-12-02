@@ -1,17 +1,23 @@
 <!-- go to main page -->
-<a routerLink="/"> 소소하고 확실한 알바 </a>
-<div *ngIf="is_logged_in; then loginBlock; else notLoginBlock"></div>
 
-<!-- if user is logged in -->
-<ng-template #loginBlock>
-  <button>종모양아이콘</button>
-  <button routerLink="/message">채팅</button>
-  <button (click)="logOut()">로그아웃</button>
-  <button (click)="toUserPage()">마이페이지</button>
-</ng-template>
+<ul class="navbar navbar-dark bg-dark fixed-top">
+  <div class="right-nav-items">
+      <a routerLink="/"> 소소하고 확실한 알바 </a>
+      <div *ngIf="is_logged_in; then loginBlock; else notLoginBlock"></div>
 
-<!-- if user is not logged in -->
-<ng-template #notLoginBlock>
-  <button routerLink="/signup">회원가입</button>
-  <button routerLink="/signin">로그인</button>
-</ng-template>
+      <!-- if user is logged in -->
+      <ng-template #loginBlock>
+        <button>종모양아이콘</button>
+        <button routerLink="/message">채팅</button>
+        <button (click)="logOut()">로그아웃</button>
+        <button (click)="toUserPage()">마이페이지</button>
+      </ng-template>
+
+      <!-- if user is not logged in -->
+      <ng-template #notLoginBlock>
+        <button routerLink="/signup">회원가입</button>
+        <button routerLink="/signin">로그인</button>
+      </ng-template>
+
+  </div>
+</ul>
