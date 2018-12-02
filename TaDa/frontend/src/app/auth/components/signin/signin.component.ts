@@ -14,7 +14,12 @@ export class SigninComponent implements OnInit {
     private userService: UserService,
     private router: Router,
   ) { }
-  ngOnInit() {}
+
+  ngOnInit() {
+    if (this.userService.isLoggedIn()) {
+      this.router.navigateByUrl('/');
+    }
+  }
 
   onClickSignIn() {
     const signinForm = document.forms['form'];
@@ -34,14 +39,11 @@ export class SigninComponent implements OnInit {
       },
 
       (error: HttpErrorResponse) => {
-        console.log(error.status);
-        alert('alert Message');
+        alert('Login failed!');
       });
     }
 
     onClickSignUp() {
       this.router.navigateByUrl('signup');
     }
-
-
 }
