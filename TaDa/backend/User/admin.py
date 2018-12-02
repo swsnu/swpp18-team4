@@ -7,7 +7,6 @@ from django.contrib.auth.admin import UserAdmin as BaseUserAdmin
 from django.contrib.auth.forms import ReadOnlyPasswordHashField
 
 # Register your models here.
-admin.site.register(User)
 """
 class UserCreationForm(forms.ModelForm):
     password1 = forms.CharField(label = 'Password', widget=forms.PasswordInput)
@@ -64,6 +63,6 @@ class UserAdmin(BaseUserAdmin):
     search_fields = ('email',)
     ordering = ('email',)
     filter_horizontal = ()
-
-admin.site.register(Account, UserAdmin)
 """
+admin.site.register(User)
+

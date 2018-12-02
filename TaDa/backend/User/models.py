@@ -35,11 +35,25 @@ class User(AbstractBaseUser):
     user_type = EnumField(choices=['EE', 'ER'])
     email = models.EmailField(verbose_name='email address', max_length=100, unique=True)
     nickname = models.CharField(max_length=50, unique=True)
-    employee_region = EnumField(choices=['seoulip', 'nakdae', 'nokdu', 'snu', 'home',], null=True)
-    employee_type = EnumField(choices=['work_scholarship_student', 'mentoring', 'experiment_arbeit', 'private_lesson', 
-    'academy', 'survey', 'lecture', 'service', 'typing', 'outsourcing', 'extra'], null=True)
-    employee_how_to_pay = EnumField(choices=['pay_hourly', 'pay_per_work', 'goods', 'random', 'uncertain'], null=True)
-    employee_pay_limit = models.IntegerField(null=True)
+    employee_region = ListCharField(
+        base_field = models.CharField(max_length=10),
+        size = 5,
+        max_length = (5 * 11),
+        null = True
+    ) #choices=['seoulip', 'nakdae', 'nokdu', 'snu', 'home',], null=True)
+    employee_type = ListCharField(
+        base_field = models.CharField(max_length=25),
+        size = 11,
+        max_length = (11 * 26),
+        null = True
+    ) # choices=['work_scholarship_student', 'mentoring', 'experiment_arbeit', 'private_lesson', 'academy', 'survey', 'lecture', 'service', 'typing', 'outsourcing', 'extra'], null=True)
+    employee_how_to_pay = ListCharField(
+        base_field = models.CharField(max_length=15),
+        size = 5,
+        max_length = (5 * 16),
+        null = True
+    ) #choices=['pay_hourly', 'pay_per_work', 'goods', 'random', 'uncertain'], null=True
+    employee_pay_limit = models.PositiveIntegerField(null=True)
     company_name = models.CharField(max_length=100, null=True)
     company_address = models.CharField(max_length=200, null=True)
     business_content = models.TextField(null=True)
@@ -66,6 +80,3 @@ class User(AbstractBaseUser):
     def is_staff(self):
         "Is the user a member of staff?"
         return self.is_admin
-
-
-    
