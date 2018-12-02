@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
-import { User } from "../../core/models/user";
-import { UserService } from "../../core/services/user.service";
-import { Router } from "@angular/router";
+import { User } from '../../core/models/user';
+import { UserService } from '../../core/services/user.service';
+import { Router } from '@angular/router';
 
 
 @Component({
@@ -19,22 +19,17 @@ export class NavComponent implements OnInit {
 
   ngOnInit() {
     /* get current user state */
-    //this.is_logged_in = this.userService.isLoggendIn();
-    //this.current_user = this.userService.getCurrentUser();
-
-    /*
-    * this statements to mock. *
-    this.is_logged_in = true;
-    this.current_user = <User>{ id:4 };
-    */
+    this.is_logged_in = this.userService.isLoggedIn();
+    this.current_user = this.userService.getCurrentUser();
   }
 
   logOut() {
-    //this.userService.logOut();
-    this.router.navigateByUrl('');
+    this.userService.signout();
   }
+
   toUserPage() {
     const current_id = this.current_user.id;
-    this.router.navigateByUrl('user/'+current_id);
+    this.router.navigateByUrl('user/' + current_id);
+
   }
 }

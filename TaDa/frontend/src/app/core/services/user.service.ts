@@ -16,7 +16,7 @@ export class UserService {
   private signupUrl = '/api/user/signup/';
   private loginUrl = '/api/user/signin/';
   private signoutUrl = '/api/user/signout/';
-  private userType: TypeEnum;
+
   private currentUser: User = null;
 
   constructor(
@@ -36,7 +36,7 @@ export class UserService {
     }
   }
   getUserType(): TypeEnum {
-    return this.userType;
+    return this.currentUser.user_type;
   }
 
   /* http for UserService */
@@ -53,7 +53,8 @@ export class UserService {
 
   signout(): void {
     this.currentUser = null;
-    this.userType = null;
+    localStorage.removeItem('userEmail');
+    localStorage.removeItem('userPassword');
     this.http.get<Response>(this.signoutUrl).toPromise().catch(this.handleError);
   }
 
@@ -62,10 +63,10 @@ export class UserService {
     return this.http.put(url, user, httpOptions)
       .toPromise().then(() => user);
   }
+
   /* set properties in*/
   setLoginUser(user: User): void {
     this.currentUser = user;
-    this.userType = user.user_type;
   }
 
   /* get User by Id */

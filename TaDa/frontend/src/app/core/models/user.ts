@@ -7,6 +7,7 @@ export interface User {
   id: number;
   user_type: TypeEnum;
   email: string;
+  password: string;
   nickname: string;
   employee_region: RegionEnum;
   employee_type: ArbeitTypeEnum;
