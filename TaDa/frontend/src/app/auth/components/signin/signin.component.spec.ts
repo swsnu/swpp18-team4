@@ -30,8 +30,7 @@ const mock_user = {
   profile_image: null, // modify
   is_admin: false,
   is_active: false
-
-}
+};
 
 
 describe('SigninComponent', () => {
