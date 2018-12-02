@@ -82,7 +82,7 @@ WSGI_APPLICATION = 'TaDa_backend.wsgi.application'
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.mysql',
-        'NAME': 'TaDa_DB',
+        'NAME': 'tada_db',
         'OPTIONS': {
             'charset': 'utf8mb4',
         },
@@ -90,8 +90,8 @@ DATABASES = {
             'CHARSET': 'utf8mb4',
             'COLLATION': 'utf8mb4_unicode_ci',
         },
-        'USER': 'TaDa',
-        'PASSWORD': '1234',
+        'USER': 'root',
+        'PASSWORD': 'jyp01930',
         'HOST': 'localhost',
         'PORT': '3306',
     }
