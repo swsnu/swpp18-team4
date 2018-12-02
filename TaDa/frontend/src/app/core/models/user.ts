@@ -4,14 +4,14 @@ import { ArbeitTypeEnum } from './enums/arbeit-type-enum.enum';
 import { HowToPayEnum } from './enums/how-to-pay-enum.enum';
 
 export interface User {
-  id: number;
+  id?: number;
   user_type: TypeEnum;
   email: string;
   password: string;
   nickname: string;
-  employee_region: RegionEnum;
-  employee_type: ArbeitTypeEnum;
-  employee_how_to_pay: HowToPayEnum;
+  employee_region: RegionEnum[];
+  employee_type: ArbeitTypeEnum[];
+  employee_how_to_pay: HowToPayEnum[];
   employee_pay_limit: number;
   company_name: string;
   company_address: string;

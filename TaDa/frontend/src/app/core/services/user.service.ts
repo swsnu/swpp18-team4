@@ -13,7 +13,7 @@ const httpOptions = {
 })
 export class UserService {
   private userUrl = '/api/user/';
-  private signupUrl = '/api/user/signup/';
+  private signupUrl = '/api/user/signup';
   private loginUrl = '/api/user/signin/';
   private signoutUrl = '/api/user/signout/';
 
@@ -40,7 +40,8 @@ export class UserService {
   }
 
   /* http for UserService */
-  signup(user: User): Promise<User> {
+  signup(user: Partial<User>): Promise<User> {
+    console.log(user);
     return this.http.post<User>(this.signupUrl, user, httpOptions)
       .toPromise().catch(this.handleError);
   }
