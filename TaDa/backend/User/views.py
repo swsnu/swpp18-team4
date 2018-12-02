@@ -102,7 +102,7 @@ def activate(request, target_id, activate_token):
 @csrf_exempt    
 def user(request, uid):
     if request.method == 'GET':
-        #if request.user.is_authenticated:
+        if request.user.is_authenticated:
             target_user = User.objects.filter(id=uid)
             if target_user.exists():
                 user_dict = target_user.values()[0]
@@ -110,8 +110,8 @@ def user(request, uid):
                 return JsonResponse(json.dumps(user_dict), safe=False)
             else:
                 return HttpResponse(status=404)
-        #else:
-         #   return HttpResponse(status=401)
+        else:
+            return HttpResponse(status=401)
     elif request.method == 'PUT':
         if request.user.is_authenticated:
             target_user = User.objects.filter(id=uid)
