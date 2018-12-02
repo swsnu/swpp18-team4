@@ -6,7 +6,7 @@ import datetime
 # Create your models here.
 class Comment(models.Model):
     post = models.ForeignKey(Post, on_delete = models.CASCADE)
-    refer_comment = models.ForeignKey('Comment', models.SET_NULL, null = True)
+    #refer_comment = models.ForeignKey('Comment', models.SET_NULL, null = True)
     author = models.ForeignKey(User, on_delete = models.CASCADE)
     star = models.FloatField(null = True)
     content = models.TextField(null = True)
@@ -14,5 +14,5 @@ class Comment(models.Model):
     last_modify_date = models.DateTimeField('last edited date', auto_now = True, blank = True)
 
     def __str__(self):
-        return 'id: '+str(self.id)+' title:'+self.star
+        return 'id: '+ str(self.id)
 
