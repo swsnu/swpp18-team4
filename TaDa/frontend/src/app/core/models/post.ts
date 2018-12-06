@@ -1,8 +1,8 @@
-import { RegionEnum } from "./enums/region-enum.enum";
-import { ArbeitTypeEnum } from "./enums/arbeit-type-enum.enum";
-import { HowToPayEnum } from "./enums/how-to-pay-enum.enum";
+import { RegionEnum } from './enums/region-enum.enum';
+import { ArbeitTypeEnum } from './enums/arbeit-type-enum.enum';
+import { HowToPayEnum } from './enums/how-to-pay-enum.enum';
 
-export interface Post {
+export class Post {
     post_id: number;
     author_id: number;
     title: string;

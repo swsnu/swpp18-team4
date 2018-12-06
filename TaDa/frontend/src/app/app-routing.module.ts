@@ -24,8 +24,7 @@ const routes: Routes = [
     CommonModule,
     RouterModule.forRoot(routes),
     BrowserAnimationsModule,
-    ToastrModule.forRoot()
-
+    ToastrModule.forRoot(),
   ],
   exports: [RouterModule],
   declarations: []

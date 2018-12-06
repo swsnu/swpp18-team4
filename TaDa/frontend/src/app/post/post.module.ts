@@ -7,11 +7,13 @@ import { PostViewComponent } from './components/post-view/post-view.component';
 import { PostCreateComponent } from './components/post-create/post-create.component';
 import { PostEditComponent } from './components/post-edit/post-edit.component';
 import { CommentViewComponent } from './components/comment-view/comment-view.component';
+import { FormsModule } from '@angular/forms';
 
 @NgModule({
   imports: [
     CommonModule,
-    PostRoutingModule
+    PostRoutingModule,
+    FormsModule,
   ],
   declarations: [PostListComponent, PostViewComponent, PostCreateComponent, PostEditComponent, CommentViewComponent]
 })

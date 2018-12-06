@@ -1,4 +1,4 @@
-export interface Comment {
+export class Comment {
     comment_id: number;
     post_id: number;
     refer_comment_id: number;

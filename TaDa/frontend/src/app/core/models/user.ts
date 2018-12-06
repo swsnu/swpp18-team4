@@ -3,7 +3,7 @@ import { RegionEnum } from './enums/region-enum.enum';
 import { ArbeitTypeEnum } from './enums/arbeit-type-enum.enum';
 import { HowToPayEnum } from './enums/how-to-pay-enum.enum';
 
-export interface User {
+export class User {
   id?: number;
   user_type: TypeEnum;
   email: string;
