@@ -16,6 +16,27 @@ from django.db import models
 from .models import User, UserManager
 
 # Create your views here.
+
+@csrf_exempt
+def email(request, email):
+    if request.method == 'GET':
+        if not User.objects.filter(email = email).exists():
+            return JsonResponse({'isUnique': True})
+        else:
+            return JsonResponse({'isUnique': False})
+    else:
+        return HttpResponseNotAllowed(['GET'])
+
+@csrf_exempt
+def nickname(request, nickname):
+    if request.method == 'GET':
+        if not User.objects.filter(nickname = nickname).exists():
+            return JsonResponse({'isUnique': True})
+        else:
+            return JsonResponse({'isUnique': False})
+    else:
+        return HttpResponseNotAllowed(['GET'])
+
 @csrf_exempt
 def signup(request):
     if request.method == 'POST':
@@ -25,7 +46,7 @@ def signup(request):
         nickname = req_data['nickname']
         password = req_data['password']
 
-        if not User.objects.filter(email = email).exists():
+        if user_type and password and not User.objects.filter(email = email).exists() and not User.objects.filter(nickname = nickname).exists():
             User.objects.create_user(user_type = user_type, email = email, nickname = nickname, password = password)
             return HttpResponse(status=201)
         else:
