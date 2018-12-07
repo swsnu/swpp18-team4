@@ -90,5 +90,14 @@ describe('UserService', () => {
       .then(res => expect(res).toBeTruthy());
   });
 
+  it('test checkDuplicateEmail func', () => {
+    userService.checkDuplicateEmail('chjeong9727@naver.com')
+      .then(res => expect(res).toBeTruthy());
+  });
 
+
+  it('test checkDuplicateNickname func', () => {
+    userService.checkDuplicateNickname('Constant')
+      .then(res => expect(res).toBeTruthy());
+  });
 });

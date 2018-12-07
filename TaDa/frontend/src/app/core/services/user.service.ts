@@ -17,6 +17,8 @@ export class UserService {
   private signupUrl = '/api/user/signup';
   private loginUrl = '/api/user/signin/';
   private signoutUrl = '/api/user/signout/';
+  private emailUrl = '/api/user/email/';
+  private nicknameUrl = '/api/user/nickname/';
 
   private currentUser: User = null;
 
@@ -94,6 +96,29 @@ export class UserService {
     const url = `${this.userUrl}${user.id}`;
     return this.http.put(url, user, httpOptions)
       .toPromise().then(() => user);
+  }
+
+  /* When signUp, check if fields are unique or not*/
+  checkDuplicateEmail(email: string) {
+    const url = `${this.emailUrl}${email}`;
+    return this.http.get<Response>(url).toPromise().catch(this.handleError);
+  }
+
+  checkDuplicateNickname(nickname: string) {
+    const url = `${this.nicknameUrl}${nickname}`;
+    return this.http.get<Response>(url).toPromise().catch(this.handleError);
+  }
+
+  /* Send email to authenticate when SignUp */
+  sendMail(user: User): Promise<Response> {
+    const url = `api/sendmail/${user.email}`;
+    return this.http.post<Response>(url, httpOptions).toPromise();
+  }
+
+  /* After email verification, alter 'is_active' column in User table */
+  verificate(uidb64: string, token: string): Promise<Response> {
+    const url = `api/user/activate/${uidb64}/${token}/`;
+    return this.http.get<Response>(url).toPromise().catch(this.handleError);
   }
 
   /* get User by Id */

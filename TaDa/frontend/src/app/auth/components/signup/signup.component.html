@@ -1,24 +1,25 @@
 <h2>회원가입</h2>
 <br>
 <div class="btn-group" role="group" aria-label="Basic example">
-  <button id="as_employee" (click)="as_employer = false;" type="button" class="btn btn-secondary">알바생으로 가입</button>
+  <button id="as_employee" (click)="as_employer = false;" type="button" class="btn btn-secondary" selected>알바생으로 가입</button>
   <button id="as_employer"(click)="as_employer = true;" type="button" class="btn btn-secondary">고용주로 가입</button>
 </div>
 <br>
 <form>
+
   <!-- Email field -->
   <div class="form-group">
-    <label for="InputEmail"> Email address(가능하면 SNU 메일을 입력해주십시오) </label>
+    <label for="InputEmail"> Email 주소 (가능하면 SNU 메일을 입력해주십시오) </label>
     <small id="emailHelp" class="form-text text-muted"> 해당 이메일로 인증 링크가 전송됩니다.</small>
     <input type="email" class="form-control" name="email" aria-describedby="emailHelp" 
-        [(ngModel)]="signup_user.email" #email="ngModel" required>
-    <button type="button" class="btn btn-secondary" (click) = onClickcheckDuplicate() [disabled]="check_email">
-      중복 체크 </button>
+        [(ngModel)]="signup_user.email" #email="ngModel" required [disabled]="check_email;">
+    <button type="button" class="btn btn-secondary" (click) = onClickcheckDuplicateEmail() [disabled]="check_email">
+      {{check_email? "확인 완료": "중복체크"}} 
+    </button>
     <small class="help-block" *ngIf="(email.touched || email.dirty) && !validateEmail()">
         이메일 형식을 다시 확인해주세요
     </small>
   </div>
-
 
   <!-- Password and Confirmation field -->
   <div class="row">
@@ -26,7 +27,7 @@
         <!-- PW field -->
         <div class="form-group">
             <label for="InputPassword">비밀번호</label>
-            <input type="password" class="form-control" name="password"
+            <input type="text" class="form-control" name="password"
                 [(ngModel)]="signup_user.password" #password="ngModel" required maxlength="20">
             <small class="help-block" *ngIf="(password.touched || password.dirty) && !validatePassword()">
                 비밀번호는 8자 이상으로, 영문 대소문자와 숫자가 섞여있어야 합니다. 
@@ -38,23 +39,24 @@
         <!-- PW confirmation field -->
         <div class="form-group">
             <label for="InputPassword">비밀번호 확인</label>
-            <input type="password" class="form-control" name="password_confirm"
-                #password_confirm required>
-            <small class="help-block" *ngIf="password != password_confirm">
+            <input type="text" class="form-control" name="password_confirm"
+                [(ngModel)]="password_confirm" #passwordConfirm="ngModel" required>
+            <small class="help-block" *ngIf="(passwordConfirm.touched || passwordConfirm.dirty) && signup_user.password !== password_confirm">
               비밀번호가 일치하지 않습니다. 
             </small>
         </div>
       </div>
   </div>
 
-
-
   <!-- Nickname field. Only for Employee -->
   <div *ngIf="!as_employer" class="form-group">
     <label for="InputNickname"> 닉네임 </label>
     <input type="text" class="form-control" name="nickname" aria-describedby="nicknameHelp" 
         [(ngModel)]="signup_user.nickname" #nickname="ngModel" required>
-    <small class="help-block" *ngIf="(nickname.touched || nickname.dirty) && !validNickname()">
+    <button type="button" class="btn btn-secondary" (click) = onClickcheckDuplicateEmail() [disabled]="check_nickname">
+        {{check_nickname? "확인 완료": "중복 체크"}} 
+    </button>
+    <small class="help-block" *ngIf="(nickname.touched || nickname.dirty) && !validateNickname()">
         세글자 이상 입력해주세요
     </small>
   </div>
@@ -67,8 +69,9 @@
       </small>
       <input type="text" class="form-control" name="business_license" aria-describedby="business_licencse_Help" 
           [(ngModel)]="sign_user.employer_license_number" #email="ngModel" required >
-      <button type="button" class="btn btn-secondary" (click)=onClickcheckBusinessLicense()>확인</button>
+      <button type="button" class="btn btn-secondary" (click)=onClickcheckBusinessLicense() [disabled]="check_license">확인</button>
   </div>
 
+  <button (click)=onClickClear() class="btn btn-primary">되돌리기</button>
   <button type="submit" (click)=onClickConfirm() class="btn btn-primary">회원 가입</button>
 </form>
