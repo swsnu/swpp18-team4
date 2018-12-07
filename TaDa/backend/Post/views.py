@@ -9,51 +9,7 @@ from User.models import User
 from .models import Post
 
 # Create your views here.
-"""
-@csrf_exempt
-def signup(request):
-    if request.method == 'POST':
-        req_data = json.loads(request.body.decode())
-        user_type = req_data['user_type']
-        email = req_data['email']
-        nickname = req_data['nickname']
-        password = req_data['password']
 
-        if not User.objects.filter(email = email).exists():
-            User.objects.create_user(user_type = user_type, email = email, nickname = nickname, password = password)
-            return HttpResponse(status=201)
-        else:
-            return HttpResponse(status=409)
-    else:
-        return HttpResponseNotAllowed(['POST'])
-
-@csrf_exempt
-def signin(request):
-    if request.method == 'POST':
-        req_data = json.loads(request.body.decode())
-        email = req_data['email']
-        password = req_data['password']
-        user = authenticate(email = email, password = password)
-        if user is not None:
-            login(request, user)
-            user_id = User.objects.filter(email = email)[0].id
-            return JsonResponse({'id': user_id}, safe=False)
-        else:
-            return HttpResponse(status=401)
-    else:
-        return HttpResponseNotAllowed(['POST'])
-
-@csrf_exempt
-def signout(request):
-    if request.method == 'GET':
-        if request.user.is_authenticated:
-            logout(request)
-            return HttpResponse(status=204)
-        else:
-            return HttpResponse(status=401)
-    else:
-        return HttpResponseNotAllowed(['GET'])
-"""
 @csrf_exempt
 def posts(request):
     if request.method == 'GET':
@@ -64,6 +20,7 @@ def posts(request):
             return HttpResponse(status=401)
     elif request.method == 'POST':
         if request.user.is_authenticated:
+            # modify
             return HttpResponse(status=200)
         else:
             return HttpResponse(status=401)
@@ -73,11 +30,54 @@ def posts(request):
 
 @csrf_exempt
 def post(request, post_id):
-    pass
+    if request.method == 'GET':
+        if request.user.is_authenticated:
+            target_post = Post.objects.filter(id = post_id)
+            if target_post.exists():
+                return JsonResponse(json.dumps(target_post.values(), content_type="application/json"), safe=False)
+            else:
+                return HttpResponse(status=404)
+        else:
+            return HttpResponse(status=401)
+    elif request.method == 'PUT':
+        if request.user.is_authenticated:
+            target_post = Post.objects.filter(id = post_id)
+            if target_post.exists():
+                if target_post.author_id == request.user.id:
+                    # modify
+                    return HttpResponse(stauts=200)
+                else:
+                    return HttpResponse(status=403)
+            else:
+                return HttpResponse(status=404)
+        else:
+            return HttpResponse(status=401)
+    elif request.method == 'DELETE':
+        if request.user.is_authenticated:
+            target_post = Post.objects.filter(id = post_id)
+            if target_post.exists():
+                if target_post.author_id == request.user.id:
+                    target_post.delete()
+                    return HttpResponse(status=200)
+                else:
+                    return HttpResponse(status=403)
+            else:
+                return HttpResponse(status=404)
+        else:
+            return HttpResponse(status=401)
+    else:
+        return HttpResponseNotAllowed(['GET', 'PUT', 'DELETE'])
 
 @csrf_exempt
 def author(request, author_id):
-    pass
+    if request.method == 'GET':
+        if request.user.is_authenticated:
+            post_list = [post for post in Post.objects.filter(author_id = author_id).values()]
+            return JsonResponse(post_list, safe=False)
+        else:
+            return HttpResponse(status=401)
+    else: 
+        return HttpResponseBadRequest(['GET'])
 
 @ensure_csrf_cookie
 def token(request):
