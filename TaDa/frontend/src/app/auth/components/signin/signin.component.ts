@@ -27,7 +27,6 @@ export class SigninComponent implements OnInit {
     const token = this.userService.checkCSRF();
     if (token == null) {
       this.userService.createToken();
-      console.log('create Token!')      
     }
   }
 

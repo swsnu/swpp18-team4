@@ -30,19 +30,24 @@ export class UserService {
 
   /* create token for user with no token */
   createToken() : Promise<Response> {
+    console.log('create Token!')      
+
     return this.http.get<Response>(this.tokenUrl).toPromise().catch(this.handleError);
   }  
 
   /* Check cookie if token contained. If there's no token, return null */
   checkCSRF() : string {
     const lines = document.cookie.split(';');
+    let result: string = null; 
+    console.log(lines);
     lines.forEach(line => {
       if (line.match(/csrftoken/)) {
-        console.log(line.trim().split('=')[1]);
-        return line.trim().split('=')[1];
-      }});
-    console.log('does not end yet');
-    return null;
+        result =  line.trim().split('=')[1];
+      }
+    });
+
+    console.log(result);
+    return result;
   }
 
   /* get information about Logged-in User */

@@ -1,31 +1,74 @@
 <h2>회원가입</h2>
-
-<button id="as_employee" (click)="as_employer = false;">Employee</button>
-<button id="as_employer" (click)="as_employer = true">Employer</button>
-
-<form name="form" method="post">
-  이메일: <input id="email-input" type="text" name="email" autofocus>  
-  <button (click)=onClickcheckDuplicate()>중복 체크</button>
-  <label id="email-label"></label>
-  <br>
-    (해당 이메일로 인증링크가 전송됩니다.)
-  <br>
-  비밀번호: <input id="password-input" type="password" name="password">
-  <label id="password-label"></label>
-  <br>
-  비밀번호 확인: <input id="password-confirmation-input" type="password" name="password_confirmation">
-  <label id="password-confirmation-label"></label>
-  <br>
-  닉네임: <input id="nickname-input" type="text" name="nickname">
-  <label id="nickname-label"></label>
-  <br>
-
-  <div *ngIf="as_employer">
-    사업자등록번호: <input id="license-input" type="text" name="nickname">
-    <label id="license-label"></label>
+<br>
+<div class="btn-group" role="group" aria-label="Basic example">
+  <button id="as_employee" (click)="as_employer = false;" type="button" class="btn btn-secondary">알바생으로 가입</button>
+  <button id="as_employer"(click)="as_employer = true;" type="button" class="btn btn-secondary">고용주로 가입</button>
+</div>
+<br>
+<form>
+  <!-- Email field -->
+  <div class="form-group">
+    <label for="InputEmail"> Email address(가능하면 SNU 메일을 입력해주십시오) </label>
+    <small id="emailHelp" class="form-text text-muted"> 해당 이메일로 인증 링크가 전송됩니다.</small>
+    <input type="email" class="form-control" name="email" aria-describedby="emailHelp" 
+        [(ngModel)]="signup_user.email" #email="ngModel" required>
+    <button type="button" class="btn btn-secondary" (click) = onClickcheckDuplicate() [disabled]="check_email">
+      중복 체크 </button>
+    <small class="help-block" *ngIf="(email.touched || email.dirty) && !validateEmail()">
+        이메일 형식을 다시 확인해주세요
+    </small>
   </div>
 
+
+  <!-- Password and Confirmation field -->
+  <div class="row">
+      <div class="col">
+        <!-- PW field -->
+        <div class="form-group">
+            <label for="InputPassword">비밀번호</label>
+            <input type="password" class="form-control" name="password"
+                [(ngModel)]="signup_user.password" #password="ngModel" required maxlength="20">
+            <small class="help-block" *ngIf="(password.touched || password.dirty) && !validatePassword()">
+                비밀번호는 8자 이상으로, 영문 대소문자와 숫자가 섞여있어야 합니다. 
+            </small>
+        </div>
+      </div>
+
+      <div class="col">
+        <!-- PW confirmation field -->
+        <div class="form-group">
+            <label for="InputPassword">비밀번호 확인</label>
+            <input type="password" class="form-control" name="password_confirm"
+                #password_confirm required>
+            <small class="help-block" *ngIf="password != password_confirm">
+              비밀번호가 일치하지 않습니다. 
+            </small>
+        </div>
+      </div>
+  </div>
+
+
+
+  <!-- Nickname field. Only for Employee -->
+  <div *ngIf="!as_employer" class="form-group">
+    <label for="InputNickname"> 닉네임 </label>
+    <input type="text" class="form-control" name="nickname" aria-describedby="nicknameHelp" 
+        [(ngModel)]="signup_user.nickname" #nickname="ngModel" required>
+    <small class="help-block" *ngIf="(nickname.touched || nickname.dirty) && !validNickname()">
+        세글자 이상 입력해주세요
+    </small>
+  </div>
+
+  <!-- Business authentication field. Only for Employer -->
+  <div *ngIf="as_employer" class="form-group">
+      <label for="business_license"> 사업자 등록 번호 </label>
+      <small id="business_license_Help" class="form-text text-muted"> 
+        법적으로 등록된 사업장 혹은 사업자인지 확인하기 위함입니다. 스누메일로 가입인증을 한 회원은 작성하지 않아도 됩니다. 
+      </small>
+      <input type="text" class="form-control" name="business_license" aria-describedby="business_licencse_Help" 
+          [(ngModel)]="sign_user.employer_license_number" #email="ngModel" required >
+      <button type="button" class="btn btn-secondary" (click)=onClickcheckBusinessLicense()>확인</button>
+  </div>
+
+  <button type="submit" (click)=onClickConfirm() class="btn btn-primary">회원 가입</button>
 </form>
-<div>
-  <button (click)=onClickConfirm()>{{as_employer ? 'Employer' : 'Employee'}}으로 회원가입</button>
-</div>
