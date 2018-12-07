@@ -13,6 +13,7 @@ const httpOptions = {
 })
 export class UserService {
   private userUrl = '/api/user/';
+  private tokenUrl = '/api/user/token';
   private signupUrl = '/api/user/signup';
   private loginUrl = '/api/user/signin/';
   private signoutUrl = '/api/user/signout/';
@@ -21,7 +22,28 @@ export class UserService {
 
   constructor(
     private http: HttpClient
-  ) { }
+  ) { 
+      if (JSON.parse(sessionStorage.getItem('storedUser'))) {
+        this.currentUser = JSON.parse(sessionStorage.getItem('storedUser')) as User;
+      }
+  }
+
+  /* create token for user with no token */
+  createToken() : Promise<Response> {
+    return this.http.get<Response>(this.tokenUrl).toPromise().catch(this.handleError);
+  }  
+
+  /* Check cookie if token contained. If there's no token, return null */
+  checkCSRF() : string {
+    const lines = document.cookie.split(';');
+    lines.forEach(line => {
+      if (line.match(/csrftoken/)) {
+        console.log(line.trim().split('=')[1]);
+        return line.trim().split('=')[1];
+      }});
+    console.log('does not end yet');
+    return null;
+  }
 
   /* get information about Logged-in User */
   getCurrentUser(): User {
@@ -37,6 +59,10 @@ export class UserService {
   }
   getUserType(): TypeEnum {
     return this.currentUser.user_type;
+  }
+  
+  setLoginUser(user: User): void {
+      this.currentUser = user;
   }
 
   /* http for UserService */
@@ -65,11 +91,6 @@ export class UserService {
       .toPromise().then(() => user);
   }
 
-  /* set properties in*/
-  setLoginUser(user: User): void {
-    this.currentUser = user;
-  }
-
   /* get User by Id */
   getUser(id: number): Promise<User> {
     const url = `${this.userUrl}${id}`;
@@ -80,6 +101,5 @@ export class UserService {
     console.log('An error occurred in UserService', error);
     return Promise.reject(error.message || 'Internal server error');
   }
-
 
 }

@@ -15,30 +15,37 @@ export class SigninComponent implements OnInit {
     private router: Router,
   ) { }
 
+  private emailInput: string = '';
+  private passwordInput: string = '';
+
   ngOnInit() {
+    /* If user is already logged in, redirect to main page */
     if (this.userService.isLoggedIn()) {
       this.router.navigateByUrl('/');
+    }
+    /* If user has no token, create one */ 
+    const token = this.userService.checkCSRF();
+    if (token == null) {
+      this.userService.createToken();
+      console.log('create Token!')      
     }
   }
 
   onClickSignIn() {
-    const signinForm = document.forms['form'];
-    const emailInput = signinForm['email'].value;
-    const passwordInput = signinForm['password'].value;
-
-    this.userService.signin(emailInput, passwordInput).then(
+    this.userService.signin(this.emailInput, this.passwordInput).then(
       (response: Response) => {
         this.userService.getUser(response['id']).then(
           user => {
           this.userService.setLoginUser(user);
-          //localStorage.setItem('localUser', JSON.stringify(user));
-          localStorage.setItem('userEmail', user.email);
-          localStorage.setItem('userPassword', user.password);
+          sessionStorage.setItem('storedUser', JSON.stringify(user));
         });
         this.router.navigateByUrl('/');
       },
 
+      /* If user information does not match, alert mesage and clear input */
       (error: HttpErrorResponse) => {
+        this.emailInput = '';
+        this.passwordInput = '';
         alert('Login failed!');
       });
     }

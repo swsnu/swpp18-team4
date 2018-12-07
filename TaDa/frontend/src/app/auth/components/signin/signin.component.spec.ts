@@ -8,6 +8,7 @@ import { UserService } from '../../../core/services/user.service';
 import { User } from '../../../core/models/user';
 import { HttpErrorResponse } from '@angular/common/http';
 import { of, Observable } from 'rxjs';
+import { FormsModule } from '@angular/forms';
 
 import { Response, ResponseOptions } from '@angular/http';
 import { TypeEnum } from 'src/app/core/models/enums/type-enum.enum';
@@ -41,12 +42,13 @@ describe('SigninComponent', () => {
 
   beforeEach(async(() => {
     routerSpy = jasmine.createSpyObj('Router', ['navigateByUrl']);
-    const userSpy = jasmine.createSpyObj('UserService', ['isLoggedIn', 'signin', 'getUser', 'setLoginUser']);
+    const userSpy = jasmine.createSpyObj('UserService', ['createToken','checkCSRF', 'isLoggedIn', 'signin', 'getUser', 'setLoginUser']);
     TestBed.configureTestingModule({
       declarations: [ SigninComponent ],
       imports: [
         RouterTestingModule,
-        HttpClientModule
+        HttpClientModule,
+        FormsModule
       ],
       providers: [
         {provide: Router, useValue: routerSpy},
@@ -62,6 +64,13 @@ describe('SigninComponent', () => {
     fixture = TestBed.createComponent(SigninComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
+    userServiceSpy.checkCSRF.and.returnValue('asdf');
+    userServiceSpy.createToken.and.returnValue(new Promise(function(resolve, reject) {
+      resolve(new Response(
+        new ResponseOptions({ body: {'result' : true}})
+        ));
+    }));    
+
   });
 
   it('should create', () => {
@@ -118,7 +127,6 @@ describe('SigninComponent', () => {
     fixture.whenStable().then(() => {
       expect(window.alert).toHaveBeenCalled();
     });
-    //expect(window.alert).toHaveBeenCalledWith('Login failed!');
   });
 
 });

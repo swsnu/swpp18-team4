@@ -1,7 +1,7 @@
 from django.db import models
+from django.conf import settings
 from django_mysql.models import EnumField, ListCharField
 from django.contrib.auth.models import AbstractBaseUser, BaseUserManager
-from django.conf import settings
 
 # Create your models here.
 class UserManager(BaseUserManager):

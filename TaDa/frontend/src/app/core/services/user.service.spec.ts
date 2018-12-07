@@ -30,9 +30,11 @@ const mock_user: User = {
 
 describe('UserService', () => {
   const userUrl = '/api/user/';
+  const tokenUrl = '/api/user/token';
   const signupUrl = '/api/user/signup/';
   const loginUrl = '/api/user/signin/';
   const signoutUrl = '/api/user/signout/';
+
   let userServiceSpy: jasmine.SpyObj<UserService>;
   let userService: UserService;
   beforeEach(() => {
@@ -56,6 +58,26 @@ describe('UserService', () => {
   it('should be created', () => {
     const service: UserService = TestBed.get(UserService);
     expect(service).toBeTruthy();
+  });
+
+  it('test createToken func', () => {
+    userService.createToken()
+      .then(res => expect(res).toBeTruthy());
+  });
+
+  it('test checkCSRF func fail', async() => {
+    let cookie: string = 'my-cookie=cookievalue;date=20181212;';    
+    let result: string = '';
+    spyOnProperty(document, 'cookie', 'get').and.returnValue(cookie);
+    expect(userService.checkCSRF()).toBe(null);
+  });
+
+
+  it('test checkCSRF func success', async() => {
+    let cookie: string = 'my-cookie=cookievalue;csrftoken=ABCD123;date=20181212;';
+    let result: string = '';
+    spyOnProperty(document, 'cookie', 'get').and.returnValue(cookie);
+    await expect(userService.checkCSRF()).toEqual('ABCD123');
   });
 
   it('test signup func', () => {
