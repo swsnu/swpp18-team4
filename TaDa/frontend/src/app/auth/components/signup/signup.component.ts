@@ -48,12 +48,9 @@ export class SignupComponent implements OnInit {
       return;
     }
     this.userService.checkDuplicateEmail(this.signup_user.email).then(
-      (res: Response) => {
-        console.log(res);
-        console.log(res.body);
-
-        if (res['isUnique'] == true) {
-          console.log('isUnizue &&&&&&&&&&&&&&&&&&');
+      response => {
+        if (response.isUnique == true) {
+          console.log('isUnique &&&&&&&&&&&&&&&&&&');
           this.check_email = true;
         } else {
           this.toastrService.warning('이메일 중복! 다시 입력해주세요');

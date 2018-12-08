@@ -52,7 +52,7 @@ describe('SignupMailComponent', () => {
     fixture.detectChanges();
     userServiceSpy.verificate.and.returnValue(
       Promise.resolve({'successed': true, 'message': 'Congratulation'})
-  )};
+  )});
 
   /*
   it('should create', () => {

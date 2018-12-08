@@ -45,10 +45,9 @@ export class SigninComponent implements OnInit {
       (error: HttpErrorResponse) => {
         this.emailInput = '';
         this.passwordInput = '';
-        alert('Login failed!');
+        alert('로그인 실패!');
       });
     }
-
     onClickSignUp() {
       this.router.navigateByUrl('signup');
     }

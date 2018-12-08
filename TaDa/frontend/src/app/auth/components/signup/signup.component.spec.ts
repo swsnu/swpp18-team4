@@ -4,12 +4,12 @@ import { SignupComponent } from './signup.component';
 import { RouterTestingModule } from '@angular/router/testing';
 import { HttpClientModule } from '@angular/common/http';
 import { UserService } from '../../../core/services/user.service';
-import { User } from '../../../core/models/user';
 import { HttpErrorResponse } from '@angular/common/http';
 import { of, Observable } from 'rxjs';
 import { FormsModule } from '@angular/forms';
 import { Response, ResponseOptions } from '@angular/http';
 import { ToastrService, ToastrModule } from 'ngx-toastr';
+import { mock_users } from '../../../shared/mock/mock-user';
 
 
 describe('SignupComponent', () => {
@@ -69,31 +69,82 @@ describe('SignupComponent', () => {
     expect(toastrServiceSpy.warning.calls.count()).toEqual(1);
   });
  
-  /*
+  
   it('test duplicate email checkDuplicateEmail', async() => {
     component.signup_user.email ='chjeong@snu.ac.kr';
-    userServiceSpy.checkDuplicateEmail.and.returnValue(new Promise(function(resolve, reject) {
-      resolve(new Response(
-        new ResponseOptions({ body: {'isUnique' : false}})
-        ));
-    })); 
+    userServiceSpy.checkDuplicateEmail.and.returnValue(
+      Promise.resolve({'isUnique': false}
+    )); 
     await component.onClickcheckDuplicateEmail();
     expect(toastrServiceSpy.warning.calls.count()).toEqual(1);
   });
 
-  it('test checkDuplicateEmail success', async() => {
+  /*it('test checkDuplicateEmail success', async() => {
     component.check_email = false;
     component.signup_user.email ='chjeong@snu.ac.kr';
-    userServiceSpy.checkDuplicateEmail.and.returnValue(new Promise(function(resolve, reject) {
-      resolve(new Response(
-        new ResponseOptions({ body: {'isUnique' : true}})
-        ));
-    })); 
+    userServiceSpy.checkDuplicateEmail.and.returnValue(
+      Promise.resolve({'isUnique': false}
+    )); 
     await component.onClickcheckDuplicateEmail();
     expect(component.check_email).toBe(true);
-  }); */
+  });*/
 
+  it('test invalid nickname checkDuplicateNickname', async() => {
+    component.signup_user.nickname ='  1';
+    await component.onClickcheckDuplicateNickname();
+    expect(toastrServiceSpy.warning.calls.count()).toEqual(1);
+  });
+ 
   
+  it('test duplicate nickname checkDuplicateNickname', async() => {
+    component.signup_user.nickname = 'Nick';
+    userServiceSpy.checkDuplicateNickname.and.returnValue(
+      Promise.resolve({'isUnique': false}
+    )); 
+    await component.onClickcheckDuplicateNickname();
+    expect(toastrServiceSpy.warning.calls.count()).toEqual(1);
+  });
+
+  /*it('test checkDuplicateNickname success', async() => {
+    component.check_nickname = false;
+    component.signup_user.nickname ='Nickname';
+    userServiceSpy.checkDuplicateNickname.and.returnValue(
+      Promise.resolve({'isUnique': false}
+    )); 
+    await component.onClickcheckDuplicateNickname();
+    expect(component.check_nickname).toBe(true);
+  });*/
+
+  it('test sign up fail with invalid input', async() => {
+    component.as_employer = false;
+    component.signup_user.password = '123ABCabc';
+    component.password_confirm = '123ABCabc';
+    component.check_email = false;
+    component.check_nickname = false;
+
+    await component.onClickConfirm();
+    expect(toastrServiceSpy.warning.calls.count()).toEqual(2);
+  });
+
+  it('test sign up success', async() => {
+    component.as_employer = false;
+    component.signup_user.password = '123ABCabc';
+    component.password_confirm = '123ABCabc';
+    component.check_email = true;
+    component.check_nickname = true;
+    userServiceSpy.signup.and.returnValue(of(mock_users[0]).toPromise());
+    userServiceSpy.sendEmail.and.returnValue(
+      Promise.resolve({'isUnique': false}
+    ));
+    await component.onClickConfirm();
+    spyOn(window, 'alert');
+    expect(userServiceSpy.signup.calls.count()).toEqual(1);
+    expect(userServiceSpy.sendEmail.calls.count()).toEqual(1);
+    fixture.detectChanges();
+    fixture.whenStable().then(() => {
+      expect(window.alert).toHaveBeenCalled();
+    });
+  });  
 
   it('test validateEmail', () => {
     component.signup_user.email ='chjeong@snu.ac.kr';
