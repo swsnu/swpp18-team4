@@ -12,13 +12,10 @@
     <label for="InputEmail"> Email 주소 (가능하면 SNU 메일을 입력해주십시오) </label>
     <small id="emailHelp" class="form-text text-muted"> 해당 이메일로 인증 링크가 전송됩니다.</small>
     <input type="email" class="form-control" name="email" aria-describedby="emailHelp" 
-        [(ngModel)]="signup_user.email" #email="ngModel" required [disabled]="check_email;">
-    <button type="button" class="btn btn-secondary" (click) = onClickcheckDuplicateEmail() [disabled]="check_email">
+        [(ngModel)]="signup_user.email" #email="ngModel" (ngModelChange)="check_email = false;">        
+    <button type="button" class="btn btn-secondary" name="check_email" (click)="onClickcheckDuplicateEmail()" [disabled]="check_email">
       {{check_email? "확인 완료": "중복체크"}} 
     </button>
-    <small class="help-block" *ngIf="(email.touched || email.dirty) && !validateEmail()">
-        이메일 형식을 다시 확인해주세요
-    </small>
   </div>
 
   <!-- Password and Confirmation field -->
@@ -52,13 +49,10 @@
   <div *ngIf="!as_employer" class="form-group">
     <label for="InputNickname"> 닉네임 </label>
     <input type="text" class="form-control" name="nickname" aria-describedby="nicknameHelp" 
-        [(ngModel)]="signup_user.nickname" #nickname="ngModel" required>
-    <button type="button" class="btn btn-secondary" (click) = onClickcheckDuplicateEmail() [disabled]="check_nickname">
+        [(ngModel)]="signup_user.nickname" #nickname="ngModel" (ngModelchanged)="check_nickname = false;">
+    <button type="button" class="btn btn-secondary" (click) = onClickcheckDuplicateNickname() [disabled]="check_nickname">
         {{check_nickname? "확인 완료": "중복 체크"}} 
     </button>
-    <small class="help-block" *ngIf="(nickname.touched || nickname.dirty) && !validateNickname()">
-        세글자 이상 입력해주세요
-    </small>
   </div>
 
   <!-- Business authentication field. Only for Employer -->
@@ -68,10 +62,9 @@
         법적으로 등록된 사업장 혹은 사업자인지 확인하기 위함입니다. 스누메일로 가입인증을 한 회원은 작성하지 않아도 됩니다. 
       </small>
       <input type="text" class="form-control" name="business_license" aria-describedby="business_licencse_Help" 
-          [(ngModel)]="sign_user.employer_license_number" #email="ngModel" required >
+          [(ngModel)]="signup_user.employer_license_number" #email="ngModel" required >
       <button type="button" class="btn btn-secondary" (click)=onClickcheckBusinessLicense() [disabled]="check_license">확인</button>
   </div>
-
-  <button (click)=onClickClear() class="btn btn-primary">되돌리기</button>
+  
   <button type="submit" (click)=onClickConfirm() class="btn btn-primary">회원 가입</button>
 </form>
