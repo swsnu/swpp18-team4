@@ -64,6 +64,15 @@ export class UserService {
       return false;
     }
   }
+
+
+  isActivate(): boolean {
+    if (this.currentUser != null && this.currentUser.is_active == true) {
+      return true;
+    } else {
+      return false;
+    }
+  }  
   getUserType(): TypeEnum {
     return this.currentUser.user_type;
   }

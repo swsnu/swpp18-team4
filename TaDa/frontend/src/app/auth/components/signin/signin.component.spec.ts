@@ -12,27 +12,7 @@ import { FormsModule } from '@angular/forms';
 
 import { Response, ResponseOptions } from '@angular/http';
 import { TypeEnum } from 'src/app/core/models/enums/type-enum.enum';
-
-const mock_user = {
-  id: 1,
-  user_type: TypeEnum.EE,
-  email: 'ch@snu.ac.kr',
-  password: 'abc',
-  nickname: 'blu',
-  employee_region: null,
-  employee_type: null,
-  employee_how_to_pay: null,
-  employee_pay_limit: 10000,
-  company_name: null,
-  company_address: null,
-  business_content: null,
-  representative_name: null,
-  employer_license_number: null,
-  profile_image: null, // modify
-  is_admin: false,
-  is_active: false
-};
-
+import { mock_users } from '../../../shared/mock/mock-user';
 
 describe('SigninComponent', () => {
   let component: SigninComponent;
@@ -51,8 +31,8 @@ describe('SigninComponent', () => {
         FormsModule
       ],
       providers: [
-        {provide: Router, useValue: routerSpy},
-        {provide: UserService, useValue: userSpy}
+        { provide: Router, useValue: routerSpy },
+        { provide: UserService, useValue: userSpy }
       ]
     })
     .compileComponents();
@@ -100,7 +80,7 @@ describe('SigninComponent', () => {
         ));
     }));
 
-    userServiceSpy.getUser.and.returnValue(of(mock_user).toPromise());
+    userServiceSpy.getUser.and.returnValue(of(mock_users[0]).toPromise());
 
     await component.onClickSignIn();
 
