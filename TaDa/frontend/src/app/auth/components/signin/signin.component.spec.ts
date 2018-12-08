@@ -1,17 +1,15 @@
-import { async, tick, ComponentFixture, TestBed } from '@angular/core/testing';
+import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 
 import { Router } from '@angular/router';
 import { SigninComponent } from './signin.component';
 import { RouterTestingModule } from '@angular/router/testing';
 import { HttpClientModule } from '@angular/common/http';
 import { UserService } from '../../../core/services/user.service';
-import { User } from '../../../core/models/user';
 import { HttpErrorResponse } from '@angular/common/http';
 import { of, Observable } from 'rxjs';
 import { FormsModule } from '@angular/forms';
 
 import { Response, ResponseOptions } from '@angular/http';
-import { TypeEnum } from 'src/app/core/models/enums/type-enum.enum';
 import { mock_users } from '../../../shared/mock/mock-user';
 
 describe('SigninComponent', () => {

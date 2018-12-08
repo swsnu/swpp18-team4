@@ -38,7 +38,6 @@ describe('AuthGuard', () => {
     }).compileComponents();
     userServiceSpy = TestBed.get(UserService); 
     toastrServiceSpy = TestBed.get(ToastrService);
-
     guard = TestBed.get(AuthGuard);
   });
 

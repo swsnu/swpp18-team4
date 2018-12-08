@@ -32,8 +32,6 @@ export class UserService {
 
   /* create token for user with no token */
   createToken() : Promise<Response> {
-    console.log('create Token!')      
-
     return this.http.get<Response>(this.tokenUrl).toPromise().catch(this.handleError);
   }  
 
@@ -41,14 +39,11 @@ export class UserService {
   checkCSRF() : string {
     const lines = document.cookie.split(';');
     let result: string = null; 
-    console.log(lines);
     lines.forEach(line => {
       if (line.match(/csrftoken/)) {
         result =  line.trim().split('=')[1];
       }
     });
-
-    console.log(result);
     return result;
   }
 
@@ -64,8 +59,6 @@ export class UserService {
       return false;
     }
   }
-
-
   isActivate(): boolean {
     if (this.currentUser != null && this.currentUser.is_active == true) {
       return true;
@@ -83,7 +76,6 @@ export class UserService {
 
   /* http for UserService */
   signup(user: Partial<User>): Promise<User> {
-    console.log(user);
     return this.http.post<User>(this.signupUrl, user, httpOptions)
       .toPromise().catch(this.handleError);
   }

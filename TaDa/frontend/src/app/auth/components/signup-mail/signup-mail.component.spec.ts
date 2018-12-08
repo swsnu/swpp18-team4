@@ -4,7 +4,14 @@ import { RouterTestingModule } from '@angular/router/testing';
 import { HttpClientModule } from '@angular/common/http';
 import { UserService } from '../../../core/services/user.service';
 import { Router, ActivatedRoute, convertToParamMap } from '@angular/router';
-import { Response, ResponseOptions } from '@angular/http';
+import { HttpErrorResponse } from '@angular/common/http';
+
+/*
+class MockUserService extends UserService {
+  verificate(id, token) : {
+    return Promise.resolve({'successed': true, 'message': 'Congratulation'});
+  }
+}*/
 
 
 describe('SignupMailComponent', () => {
@@ -44,8 +51,8 @@ describe('SignupMailComponent', () => {
     component = fixture.componentInstance;
     fixture.detectChanges();
     userServiceSpy.verificate.and.returnValue(
-      Promise.resolve({'successed': true, 'message': 'Congratulation'}));
-  });
+      Promise.resolve({'successed': true, 'message': 'Congratulation'})
+  )};
 
   /*
   it('should create', () => {

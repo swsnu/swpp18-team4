@@ -9,7 +9,7 @@ import { HttpErrorResponse } from '@angular/common/http';
 import { of, Observable } from 'rxjs';
 import { FormsModule } from '@angular/forms';
 import { Response, ResponseOptions } from '@angular/http';
-import { ToastrModule } from 'ngx-toastr';
+import { ToastrService, ToastrModule } from 'ngx-toastr';
 
 
 describe('SignupComponent', () => {
@@ -17,11 +17,14 @@ describe('SignupComponent', () => {
   let fixture: ComponentFixture<SignupComponent>;
   let routerSpy: jasmine.SpyObj<Router>;
   let userServiceSpy: jasmine.SpyObj<UserService>;
+  let toastrServiceSpy: jasmine.SpyObj<ToastrService>;
 
   beforeEach(async(() => {
     routerSpy = jasmine.createSpyObj('Router', ['navigateByUrl']);
-    const userSpy = jasmine.createSpyObj('UserService', ['createToken','checkCSRF', 'isLoggedIn', 'signup', 'checkDuplicateEmail', 
-      'checkDuplicateNickname','sendEmail']);
+    const userSpy = jasmine.createSpyObj('UserService', ['createToken','checkCSRF', 'isLoggedIn', 
+      'signup', 'checkDuplicateEmail', 'checkDuplicateNickname','sendEmail']);
+    const toastrSpy = jasmine.createSpyObj('ToastrService', ['warning']);
+
     TestBed.configureTestingModule({
       declarations: [ SignupComponent ],
       imports: [
@@ -31,12 +34,15 @@ describe('SignupComponent', () => {
         ToastrModule.forRoot()
       ],
       providers: [
-        {provide: Router, useValue: routerSpy},
-        {provide: UserService, useValue: userSpy}
+        { provide: Router, useValue: routerSpy },
+        { provide: UserService, useValue: userSpy },
+        { provide: ToastrService, useValue: toastrSpy },
+
       ]
     })
     .compileComponents();
     userServiceSpy = TestBed.get(UserService);
+    toastrServiceSpy = TestBed.get(ToastrService);
 
   }));
 
@@ -57,6 +63,37 @@ describe('SignupComponent', () => {
     expect(component).toBeTruthy();
   });
 
+  it('test invalid email checkDuplicateEmail', async() => {
+    component.signup_user.email ='chjeong';
+    await component.onClickcheckDuplicateEmail();
+    expect(toastrServiceSpy.warning.calls.count()).toEqual(1);
+  });
+ 
+  /*
+  it('test duplicate email checkDuplicateEmail', async() => {
+    component.signup_user.email ='chjeong@snu.ac.kr';
+    userServiceSpy.checkDuplicateEmail.and.returnValue(new Promise(function(resolve, reject) {
+      resolve(new Response(
+        new ResponseOptions({ body: {'isUnique' : false}})
+        ));
+    })); 
+    await component.onClickcheckDuplicateEmail();
+    expect(toastrServiceSpy.warning.calls.count()).toEqual(1);
+  });
+
+  it('test checkDuplicateEmail success', async() => {
+    component.check_email = false;
+    component.signup_user.email ='chjeong@snu.ac.kr';
+    userServiceSpy.checkDuplicateEmail.and.returnValue(new Promise(function(resolve, reject) {
+      resolve(new Response(
+        new ResponseOptions({ body: {'isUnique' : true}})
+        ));
+    })); 
+    await component.onClickcheckDuplicateEmail();
+    expect(component.check_email).toBe(true);
+  }); */
+
+  
 
   it('test validateEmail', () => {
     component.signup_user.email ='chjeong@snu.ac.kr';
@@ -67,6 +104,8 @@ describe('SignupComponent', () => {
 
   it('test validatePassword', () => {
     component.signup_user.password ='chjeong@snu.ac.kr';
+    expect(component.validatePassword()).toBe(false);
+    component.signup_user.password ='123  22';
     expect(component.validatePassword()).toBe(false);
     component.signup_user.password ='123chJeong';
     expect(component.validatePassword()).toBe(true);

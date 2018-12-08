@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { Router } from "@angular/router";
 import { UserService } from "../../../core/services/user.service";
 import { User } from "../../../core/models/user";
-import { ToastrService } from 'ngx-toastr';
+import { ToastrService, ToastrComponentlessModule } from 'ngx-toastr';
 
 @Component({
   selector: 'app-signup',
@@ -49,7 +49,11 @@ export class SignupComponent implements OnInit {
     }
     this.userService.checkDuplicateEmail(this.signup_user.email).then(
       (res: Response) => {
-        if (res['isUnique'] == 'true') {
+        console.log(res);
+        console.log(res.body);
+
+        if (res['isUnique'] == true) {
+          console.log('isUnizue &&&&&&&&&&&&&&&&&&');
           this.check_email = true;
         } else {
           this.toastrService.warning('이메일 중복! 다시 입력해주세요');
@@ -66,7 +70,7 @@ export class SignupComponent implements OnInit {
     this.signup_user.nickname = this.signup_user.nickname.trim();
     this.userService.checkDuplicateNickname(this.signup_user.nickname).then(
       (res: Response) => {
-        if (res['isUnique'] == 'true') {
+        if (res['isUnique'] == true) {
           this.check_nickname = true;
         } else {
           this.toastrService.warning('닉네임 중복! 다시 입력해주세요');
@@ -97,6 +101,7 @@ export class SignupComponent implements OnInit {
         res => {
           this.userService.sendEmail(this.signup_user).then(
             _ => {
+              alert('입력해주신 이메일 주소로 인증 메일을 보냈습니다! 인증 메일을 확인해주셔야 회원 가입이 완료됩니다');
               this.router.navigate(['signin']);
             }
         )})
@@ -146,7 +151,6 @@ export class SignupComponent implements OnInit {
     if(this.as_employer && !this.check_license) {
       msg.push('사업자 등록 번호를 확인해주세요')
     }
-    console.log(msg);
     return msg;
   }
 }
