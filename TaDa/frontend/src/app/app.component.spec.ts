@@ -24,9 +24,9 @@ describe('AppComponent', () => {
     const app = fixture.debugElement.componentInstance;
     expect(app).toBeTruthy();
   }));
-  it(`should have as title 'frontend'`, async(() => {
+  it(`should have as title same`, async(() => {
     const fixture = TestBed.createComponent(AppComponent);
     const app = fixture.debugElement.componentInstance;
-    expect(app.title).toEqual('frontend');
+    expect(app.title).toEqual('SNU TaDa');
   }));
 });

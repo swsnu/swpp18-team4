@@ -100,4 +100,16 @@ describe('UserService', () => {
     userService.checkDuplicateNickname('Constant')
       .then(res => expect(res).toBeTruthy());
   });
+
+  it('test sendEmail func', () => {
+    let user = new User();
+    user.email = 'chjeong9727@naver.com';
+    userService.sendEmail(user)
+      .then(res => expect(res).toBeTruthy());
+  });
+
+  it('test verificate func', () => {
+    userService.verificate('1234', 'PtZtnTdserLc03QqqLzkr9Ulf2xq96aQ')
+      .then(res => expect(res).toBeTruthy());
+  });
 });
