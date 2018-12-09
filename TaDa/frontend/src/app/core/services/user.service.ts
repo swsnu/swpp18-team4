@@ -75,7 +75,7 @@ export class UserService {
   }
 
   /* http for UserService */
-  signup(user: Partial<User>): Promise<User> {
+  signup(user: Partial<User>): Promise<Response> {
     return this.http.post<User>(this.signupUrl, user, httpOptions)
       .toPromise().catch(this.handleError);
   }
