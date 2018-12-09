@@ -13,8 +13,8 @@ const httpOptions = {
 })
 export class UserService {
   private userUrl = '/api/user/';
-  private tokenUrl = '/api/user/token';
-  private signupUrl = '/api/user/signup';
+  private tokenUrl = '/api/user/token/';
+  private signupUrl = '/api/user/signup/';
   private loginUrl = '/api/user/signin/';
   private signoutUrl = '/api/user/signout/';
   private emailUrl = '/api/user/email/';
@@ -112,7 +112,7 @@ export class UserService {
 
   /* Send email to authenticate when SignUp */
   sendEmail(user: User): Promise<Response> {
-    const url = `api/sendmail/${user.email}`;
+    const url = `${this.emailUrl}${user.email}`;
     return this.http.post<Response>(url, httpOptions).toPromise();
   }
 

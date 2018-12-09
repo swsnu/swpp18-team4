@@ -49,6 +49,7 @@ export class SignupComponent implements OnInit {
     }
     this.userService.checkDuplicateEmail(this.signup_user.email).then(
       response => {
+        console.log('response is ####'+response);
         if (response.isUnique == true) {
           console.log('isUnique &&&&&&&&&&&&&&&&&&');
           this.check_email = true;
