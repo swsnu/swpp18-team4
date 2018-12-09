@@ -3,6 +3,7 @@ import { Router } from "@angular/router";
 import { UserService } from "../../../core/services/user.service";
 import { User } from "../../../core/models/user";
 import { ToastrService } from 'ngx-toastr';
+import { TypeEnum } from '../../../core/models/enums/type-enum.enum';
 
 @Component({
   selector: 'app-signup',
@@ -10,14 +11,13 @@ import { ToastrService } from 'ngx-toastr';
   styleUrls: ['./signup.component.css']
 })
 export class SignupComponent implements OnInit {
-  as_employer: boolean;
   signup_user: User;
+  as_employee = true;
 
   password_confirm: string;
   check_email: boolean = false;
   check_password: boolean = false;
   check_nickname: boolean = false;
-  check_license: boolean = false;
   is_SNUmail: boolean = false;
 
   constructor(
@@ -73,11 +73,6 @@ export class SignupComponent implements OnInit {
     })
   }
 
-  onClickcheckBusinessLicense() {
-    //TODO: 웹크롤링....?
-    this.check_license = true;
-  }
-
   /* Actual Signup logic */
   onClickConfirm() { 
     /* Checks validity of all input */
@@ -90,13 +85,23 @@ export class SignupComponent implements OnInit {
         this.toastrService.warning(error);
       })
 
-    /* if there's no error, send verification mail to user */
+    /* if there's no error, refines the User class */
     } else {
+      if ( this.as_employee == true) {
+        this.signup_user.user_type = TypeEnum.EE;
+      } else {
+        this.signup_user.user_type = TypeEnum.ER;
+        this.signup_user.nickname = null;
+      }
       this.userService.signup(this.signup_user).then(
         res => {
-              alert('회원가입 성공! 다시 로그인 해주세요');
-              this.router.navigate(['signin']);
-            }
+          if ( this.as_employee == true) {
+            alert('회원가입 성공! 다시 로그인 해주세요');
+          } else {
+            alert('회원가입 성공! 마이페이지에서 정보 등록 후 계정이 활성화됩니다!');
+          }
+          this.router.navigate(['signin']);
+        }
     )}
   }
   
@@ -138,11 +143,8 @@ export class SignupComponent implements OnInit {
     if (!this.check_password) {
       msg.push('비밀번호가 제대로 입력되었는지 확인해주세요');
     }
-    if (!this.as_employer && !this.check_nickname) {
+    if (this.as_employee && !this.check_nickname) {
       msg.push('닉네임 중복 체크를 해주세요');
-    }
-    if(this.as_employer && !this.check_license) {
-      msg.push('사업자 등록 번호를 확인해주세요')
     }
     return msg;
   }

@@ -17,7 +17,6 @@ import { AuthGuard } from './core/guard/auth.guard';
 import { UserService } from './core/services/user.service';
 import { PostService } from './core/services/post.service';
 import { CommentService } from './core/services/comment.service';
-import { SignupMailComponent } from './auth/components/signup-mail/signup-mail.component';
 
 @NgModule({
   declarations: [
@@ -28,7 +27,6 @@ import { SignupMailComponent } from './auth/components/signup-mail/signup-mail.c
     TimeblockComponent,
     SigninComponent,
     SignupComponent,
-    SignupMailComponent,
   ],
   imports: [
     BrowserModule,

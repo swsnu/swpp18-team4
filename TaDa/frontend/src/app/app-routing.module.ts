@@ -12,7 +12,6 @@ const routes: Routes = [
   { path: '', component: HomeComponent},
   { path: 'signin', component: SigninComponent},
   { path: 'signup', component: SignupComponent},
-  { path: 'signup_success', component: SignupComponent},
   { path: 'message', canActivate: [AuthGuard], loadChildren: './message/message.module#MessageModule' },
   { path: 'scheduler', canActivate: [AuthGuard], loadChildren: './scheduler/scheduler.module#SchedulerModule' },
   { path: 'user', canActivate: [AuthGuard], loadChildren: './user/user.module#UserModule'},

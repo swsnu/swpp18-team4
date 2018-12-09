@@ -18,7 +18,7 @@ export class User {
   business_content: string;
   representative_name: string;
   employer_license_number: string;
-  profile_image: string; // modify
+  //profile_image: string; // modify
   is_admin: boolean;
   is_active: boolean;
 }

@@ -19,7 +19,7 @@ export const mock_users: User[] = [
         business_content: 'welcome to mock-1 company!',
         representative_name: 'mock-name-1',
         employer_license_number: '123-123-123-1',
-        profile_image: 'mock-image-path-1',
+        //profile_image: 'mock-image-path-1',
         is_admin: false,
         is_active: false
     }

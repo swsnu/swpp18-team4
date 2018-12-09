@@ -87,32 +87,31 @@ export class UserService {
   }
 
   signout(): void {
-    this.currentUser = null;
-    localStorage.removeItem('userEmail');
-    localStorage.removeItem('userPassword');
     this.http.get<Response>(this.signoutUrl).toPromise().catch(this.handleError);
+    this.currentUser = null;
+
   }
 
   updateUser(user: User): Promise<User> {
-    const url = `${this.userUrl}${user.id}`;
+    const url = `${this.userUrl}${user.id}/`;
     return this.http.put(url, user, httpOptions)
       .toPromise().then(() => user);
   }
 
   /* When signUp, check if fields are unique or not*/
   checkDuplicateEmail(email: string) {
-    const url = `${this.emailUrl}${email}`;
+    const url = `${this.emailUrl}${email}/`;
     return this.http.get<Response>(url).toPromise().catch(this.handleError);
   }
 
   checkDuplicateNickname(nickname: string) {
-    const url = `${this.nicknameUrl}${nickname}`;
+    const url = `${this.nicknameUrl}${nickname}/`;
     return this.http.get<Response>(url).toPromise().catch(this.handleError);
   }
 
   /* Send email to authenticate when SignUp */
   sendEmail(user: User): Promise<Response> {
-    const url = `api/user/sendemail/${user.email}`;
+    const url = `api/user/sendemail/${user.email}/`;
     return this.http.post<Response>(url, httpOptions).toPromise();
   }
 
@@ -124,7 +123,7 @@ export class UserService {
 
   /* get User by Id */
   getUser(id: number): Promise<User> {
-    const url = `${this.userUrl}${id}`;
+    const url = `${this.userUrl}${id}/`;
     return this.http.get<User>(url).toPromise().catch(this.handleError);
   }
 

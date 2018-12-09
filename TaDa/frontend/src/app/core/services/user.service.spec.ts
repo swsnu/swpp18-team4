@@ -82,7 +82,7 @@ describe('UserService', () => {
 
   it('test signup func', () => {
     userService.signup(mock_user)
-      .then(user => expect(user.id).toEqual(1));
+      .then(res => expect(res).toEqual(1));
   });
 
   it('test signin func', () => {

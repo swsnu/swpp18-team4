@@ -25,6 +25,10 @@ export class NavComponent implements OnInit {
 
   logOut() {
     this.userService.signout();
+    localStorage.removeItem('userEmail');
+    localStorage.removeItem('userPassword');
+    this.userService.setLoginUser(null);
+
   }
 
   toUserPage() {
