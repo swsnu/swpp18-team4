@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { Router } from "@angular/router";
 import { UserService } from "../../../core/services/user.service";
 import { User } from "../../../core/models/user";
-import { ToastrService, ToastrComponentlessModule } from 'ngx-toastr';
+import { ToastrService } from 'ngx-toastr';
 
 @Component({
   selector: 'app-signup',
@@ -49,9 +49,7 @@ export class SignupComponent implements OnInit {
     }
     this.userService.checkDuplicateEmail(this.signup_user.email).then(
       response => {
-        console.log('response is ####'+response);
         if (response.isUnique == true) {
-          console.log('isUnique &&&&&&&&&&&&&&&&&&');
           this.check_email = true;
         } else {
           this.toastrService.warning('이메일 중복! 다시 입력해주세요');
@@ -60,7 +58,6 @@ export class SignupComponent implements OnInit {
   }
 
   onClickcheckDuplicateNickname() {
-    this.signup_user.nickname = this.signup_user.nickname.trim();
     if (this.validateNickname() == false) {
       this.toastrService.warning('닉네임은 세글자 이상 입력해주세요');
       return;
@@ -82,7 +79,7 @@ export class SignupComponent implements OnInit {
   }
 
   /* Actual Signup logic */
-  onClickConfirm() {  
+  onClickConfirm() { 
     /* Checks validity of all input */
     this.check_password = this.validatePassword() && (this.password_confirm === this.signup_user.password);
     const errormsg = this.build_errmsg();
@@ -97,14 +94,12 @@ export class SignupComponent implements OnInit {
     } else {
       this.userService.signup(this.signup_user).then(
         res => {
-          this.userService.sendEmail(this.signup_user).then(
-            _ => {
-              alert('입력해주신 이메일 주소로 인증 메일을 보냈습니다! 인증 메일을 확인해주셔야 회원 가입이 완료됩니다');
+              alert('회원가입 성공! 다시 로그인 해주세요');
               this.router.navigate(['signin']);
             }
-        )})
-    }
+    )}
   }
+  
 
   /* check validity of each field. These are used in html form */
   validateEmail(): boolean {

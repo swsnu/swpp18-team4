@@ -10,7 +10,6 @@
   <!-- Email field -->
   <div class="form-group">
     <label for="InputEmail"> Email 주소 (가능하면 SNU 메일을 입력해주십시오) </label>
-    <small id="emailHelp" class="form-text text-muted"> 해당 이메일로 인증 링크가 전송됩니다.</small>
     <input type="email" class="form-control" name="email" aria-describedby="emailHelp" 
         [(ngModel)]="signup_user.email" #email="ngModel" (ngModelChange)="check_email = false;">        
     <button type="button" class="btn btn-secondary" name="check_email" (click)="onClickcheckDuplicateEmail()" [disabled]="check_email">

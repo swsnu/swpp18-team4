@@ -112,7 +112,7 @@ export class UserService {
 
   /* Send email to authenticate when SignUp */
   sendEmail(user: User): Promise<Response> {
-    const url = `${this.emailUrl}${user.email}`;
+    const url = `api/user/sendemail/${user.email}`;
     return this.http.post<Response>(url, httpOptions).toPromise();
   }
 
