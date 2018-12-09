@@ -1,7 +1,7 @@
 from django.db import models
+from django.conf import settings
 from django_mysql.models import EnumField, ListCharField
 from django.contrib.auth.models import AbstractBaseUser, BaseUserManager
-from django.conf import settings
 
 # Create your models here.
 class UserManager(BaseUserManager):
@@ -59,7 +59,7 @@ class User(AbstractBaseUser):
     business_content = models.TextField(null=True)
     representative_name = models.CharField(max_length=50, null=True)
     employer_license_number = models.CharField(max_length=20, null=True)
-    profile_image = models.ImageField(upload_to='uploads/') #modify
+    #profile_image = models.ImageField(upload_to='uploads/') #modify
     is_admin = models.BooleanField(default=False)
     is_active = models.BooleanField(default=True)
     

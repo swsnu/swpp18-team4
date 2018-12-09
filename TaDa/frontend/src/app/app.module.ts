@@ -1,5 +1,9 @@
 import { BrowserModule } from '@angular/platform-browser';
+import { HttpClientModule, HttpClient } from '@angular/common/http';
 import { NgModule } from '@angular/core';
+import { FormsModule } from '@angular/forms';
+import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
+import { AgmCoreModule, GoogleMapsAPIWrapper } from '@agm/core';
 
 import { AppComponent } from './app.component';
 import { HomeComponent } from './core/home/home.component';
@@ -9,6 +13,11 @@ import { NavComponent } from './shared/nav/nav.component';
 import { TimeblockComponent } from './shared/timeblock/timeblock.component';
 import { SigninComponent } from './auth/components/signin/signin.component';
 import { SignupComponent } from './auth/components/signup/signup.component';
+import { AuthGuard } from './core/guard/auth.guard';
+import { UserService } from './core/services/user.service';
+import { PostService } from './core/services/post.service';
+import { CommentService } from './core/services/comment.service';
+import { SignupMailComponent } from './auth/components/signup-mail/signup-mail.component';
 
 @NgModule({
   declarations: [
@@ -18,13 +27,25 @@ import { SignupComponent } from './auth/components/signup/signup.component';
     NavComponent,
     TimeblockComponent,
     SigninComponent,
-    SignupComponent
+    SignupComponent,
+    SignupMailComponent,
   ],
   imports: [
     BrowserModule,
-    AppRoutingModule
+    AppRoutingModule,
+    HttpClientModule,
+    FormsModule,
+    AgmCoreModule.forRoot({
+      apiKey: 'AIzaSyCGdFwTXy8_d6emqQWwS5ww3AaSL9wRw9Q'
+    }),
+    NgbModule.forRoot()
   ],
-  providers: [],
+  providers: [
+    AuthGuard,
+    UserService,
+    PostService,
+    CommentService
+  ],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

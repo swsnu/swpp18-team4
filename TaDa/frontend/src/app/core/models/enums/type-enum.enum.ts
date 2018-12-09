@@ -1,4 +1,4 @@
 export enum TypeEnum {
-  EE,
-  ER
+  EE = 'EE',
+  ER = 'ER'
 }
