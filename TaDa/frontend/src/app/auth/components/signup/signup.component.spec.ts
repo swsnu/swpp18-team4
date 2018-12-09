@@ -79,15 +79,15 @@ describe('SignupComponent', () => {
     expect(toastrServiceSpy.warning.calls.count()).toEqual(1);
   });
 
-  /*it('test checkDuplicateEmail success', async() => {
+  it('test checkDuplicateEmail success', async() => {
     component.check_email = false;
     component.signup_user.email ='chjeong@snu.ac.kr';
     userServiceSpy.checkDuplicateEmail.and.returnValue(
-      Promise.resolve({'isUnique': false}
+      Promise.resolve({'isUnique': true}
     )); 
     await component.onClickcheckDuplicateEmail();
     expect(component.check_email).toBe(true);
-  });*/
+  });
 
   it('test invalid nickname checkDuplicateNickname', async() => {
     component.signup_user.nickname ='  1';
@@ -105,15 +105,15 @@ describe('SignupComponent', () => {
     expect(toastrServiceSpy.warning.calls.count()).toEqual(1);
   });
 
-  /*it('test checkDuplicateNickname success', async() => {
+  it('test checkDuplicateNickname success', async() => {
     component.check_nickname = false;
     component.signup_user.nickname ='Nickname';
     userServiceSpy.checkDuplicateNickname.and.returnValue(
-      Promise.resolve({'isUnique': false}
+      Promise.resolve({'isUnique': true}
     )); 
     await component.onClickcheckDuplicateNickname();
     expect(component.check_nickname).toBe(true);
-  });*/
+  });
 
   it('test sign up fail with invalid input', async() => {
     component.as_employer = false;

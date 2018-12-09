@@ -50,12 +50,12 @@ describe('SignupMailComponent', () => {
     fixture = TestBed.createComponent(SignupMailComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
-    userServiceSpy.verificate.and.returnValue(
-      Promise.resolve({'successed': true, 'message': 'Congratulation'})
-  )});
-
-  /*
+    });
+  
   it('should create', () => {
+    userServiceSpy.verificate.and.returnValue(
+      Promise.resolve({'successed': true, 'message': 'aabbcc'}
+    )); 
     expect(component).toBeTruthy();
   });
 
@@ -72,5 +72,5 @@ describe('SignupMailComponent', () => {
     const spy = routerSpy.navigateByUrl;
     const navArgs = spy.calls.first().args[0];
     expect(navArgs).toBe('signin');
-  });*/
+  });
 });
