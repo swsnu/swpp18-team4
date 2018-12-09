@@ -21,11 +21,11 @@ class UserManager(BaseUserManager):
         user.save(using=self._db)
         return user
     
-    def create_superuser(self, email, password, user_type = 'ER', nickname = 'JaeHwan'):
+    def create_superuser(self, email, password, user_type = 'EE', nickname = 'ABC'):
         user = self.create_user(
-            user_type = 'ER',
+            user_type = 'EE',
             email = self.normalize_email(email),
-            nickname = 'JaeHwan',
+            nickname = 'ABC',
         )
         user.is_admin = True
         user.save(using=self._db)
@@ -33,8 +33,8 @@ class UserManager(BaseUserManager):
     
 class User(AbstractBaseUser):
     user_type = EnumField(choices=['EE', 'ER'])
-    email = models.EmailField(verbose_name='email address', max_length=100, unique=True)
-    nickname = models.CharField(max_length=50, unique=True)
+    email = models.EmailField(verbose_name='email address', max_length=100, unique=True, db_index=True)
+    nickname = models.CharField(max_length=50, unique=True, null=True)
     employee_region = ListCharField(
         base_field = models.CharField(max_length=10),
         size = 5,

@@ -1,10 +1,11 @@
 from django.db import models
 from User.models import User
+from django_mysql.models import EnumField, ListCharField
 import datetime
 
 # Create your models here.
 class Post(models.Model):
-    author = models.ForeignKey(User, on_delete = models.CASCADE)
+    author = models.ForeignKey(User, on_delete = models.CASCADE, db_index=True)
     title = models.CharField(max_length = 100, null = True)
     content = models.TextField(null = True)
     region = models.CharField(max_length = 20, null = True)
@@ -13,7 +14,12 @@ class Post(models.Model):
     how_to_pay = models.CharField(max_length = 20,null = True)
     pay_per_hour = models.IntegerField(default = 0, null = True)
     goods = models.CharField(max_length = 100, null = True)
-    #timezone = models.ArrayField()
+    timezone = ListCharField(
+        base_field = models.CharField(max_length=30),
+        size = 20,
+        max_length = (20 * 31),
+        null = True
+    )
     register_date = models.DateTimeField('first published date', auto_now_add = True)
     last_modify_date = models.DateTimeField('last edited date', auto_now = True, blank = True)
     deadline = models.DateTimeField('deadline', null = True)
