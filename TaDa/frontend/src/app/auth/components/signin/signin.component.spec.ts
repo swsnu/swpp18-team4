@@ -1,37 +1,16 @@
-import { async, tick, ComponentFixture, TestBed } from '@angular/core/testing';
+import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 
 import { Router } from '@angular/router';
 import { SigninComponent } from './signin.component';
 import { RouterTestingModule } from '@angular/router/testing';
 import { HttpClientModule } from '@angular/common/http';
 import { UserService } from '../../../core/services/user.service';
-import { User } from '../../../core/models/user';
 import { HttpErrorResponse } from '@angular/common/http';
 import { of, Observable } from 'rxjs';
+import { FormsModule } from '@angular/forms';
 
 import { Response, ResponseOptions } from '@angular/http';
-import { TypeEnum } from 'src/app/core/models/enums/type-enum.enum';
-
-const mock_user = {
-  id: 1,
-  user_type: TypeEnum.EE,
-  email: 'ch@snu.ac.kr',
-  password: 'abc',
-  nickname: 'blu',
-  employee_region: null,
-  employee_type: null,
-  employee_how_to_pay: null,
-  employee_pay_limit: 10000,
-  company_name: null,
-  company_address: null,
-  business_content: null,
-  representative_name: null,
-  employer_license_number: null,
-  profile_image: null, // modify
-  is_admin: false,
-  is_active: false
-};
-
+import { mock_users } from '../../../shared/mock/mock-user';
 
 describe('SigninComponent', () => {
   let component: SigninComponent;
@@ -41,16 +20,17 @@ describe('SigninComponent', () => {
 
   beforeEach(async(() => {
     routerSpy = jasmine.createSpyObj('Router', ['navigateByUrl']);
-    const userSpy = jasmine.createSpyObj('UserService', ['isLoggedIn', 'signin', 'getUser', 'setLoginUser']);
+    const userSpy = jasmine.createSpyObj('UserService', ['createToken','checkCSRF', 'isLoggedIn', 'signin', 'getUser', 'setLoginUser']);
     TestBed.configureTestingModule({
       declarations: [ SigninComponent ],
       imports: [
         RouterTestingModule,
-        HttpClientModule
+        HttpClientModule,
+        FormsModule
       ],
       providers: [
-        {provide: Router, useValue: routerSpy},
-        {provide: UserService, useValue: userSpy}
+        { provide: Router, useValue: routerSpy },
+        { provide: UserService, useValue: userSpy }
       ]
     })
     .compileComponents();
@@ -62,6 +42,13 @@ describe('SigninComponent', () => {
     fixture = TestBed.createComponent(SigninComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
+    userServiceSpy.checkCSRF.and.returnValue('asdf');
+    userServiceSpy.createToken.and.returnValue(new Promise(function(resolve, reject) {
+      resolve(new Response(
+        new ResponseOptions({ body: {'result' : true}})
+        ));
+    }));    
+
   });
 
   it('should create', () => {
@@ -91,7 +78,7 @@ describe('SigninComponent', () => {
         ));
     }));
 
-    userServiceSpy.getUser.and.returnValue(of(mock_user).toPromise());
+    userServiceSpy.getUser.and.returnValue(of(mock_users[0]).toPromise());
 
     await component.onClickSignIn();
 
@@ -118,7 +105,6 @@ describe('SigninComponent', () => {
     fixture.whenStable().then(() => {
       expect(window.alert).toHaveBeenCalled();
     });
-    //expect(window.alert).toHaveBeenCalledWith('Login failed!');
   });
 
 });

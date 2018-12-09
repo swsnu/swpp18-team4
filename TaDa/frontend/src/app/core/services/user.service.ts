@@ -13,15 +13,39 @@ const httpOptions = {
 })
 export class UserService {
   private userUrl = '/api/user/';
+  private tokenUrl = '/api/user/token';
   private signupUrl = '/api/user/signup';
   private loginUrl = '/api/user/signin/';
   private signoutUrl = '/api/user/signout/';
+  private emailUrl = '/api/user/email/';
+  private nicknameUrl = '/api/user/nickname/';
 
   private currentUser: User = null;
 
   constructor(
     private http: HttpClient
-  ) { }
+  ) { 
+      if (JSON.parse(sessionStorage.getItem('storedUser'))) {
+        this.currentUser = JSON.parse(sessionStorage.getItem('storedUser')) as User;
+      }
+  }
+
+  /* create token for user with no token */
+  createToken() : Promise<Response> {
+    return this.http.get<Response>(this.tokenUrl).toPromise().catch(this.handleError);
+  }  
+
+  /* Check cookie if token contained. If there's no token, return null */
+  checkCSRF() : string {
+    const lines = document.cookie.split(';');
+    let result: string = null; 
+    lines.forEach(line => {
+      if (line.match(/csrftoken/)) {
+        result =  line.trim().split('=')[1];
+      }
+    });
+    return result;
+  }
 
   /* get information about Logged-in User */
   getCurrentUser(): User {
@@ -35,13 +59,23 @@ export class UserService {
       return false;
     }
   }
+  isActivate(): boolean {
+    if (this.currentUser != null && this.currentUser.is_active == true) {
+      return true;
+    } else {
+      return false;
+    }
+  }  
   getUserType(): TypeEnum {
     return this.currentUser.user_type;
+  }
+  
+  setLoginUser(user: User): void {
+      this.currentUser = user;
   }
 
   /* http for UserService */
   signup(user: Partial<User>): Promise<User> {
-    console.log(user);
     return this.http.post<User>(this.signupUrl, user, httpOptions)
       .toPromise().catch(this.handleError);
   }
@@ -65,9 +99,27 @@ export class UserService {
       .toPromise().then(() => user);
   }
 
-  /* set properties in*/
-  setLoginUser(user: User): void {
-    this.currentUser = user;
+  /* When signUp, check if fields are unique or not*/
+  checkDuplicateEmail(email: string) {
+    const url = `${this.emailUrl}${email}`;
+    return this.http.get<Response>(url).toPromise().catch(this.handleError);
+  }
+
+  checkDuplicateNickname(nickname: string) {
+    const url = `${this.nicknameUrl}${nickname}`;
+    return this.http.get<Response>(url).toPromise().catch(this.handleError);
+  }
+
+  /* Send email to authenticate when SignUp */
+  sendEmail(user: User): Promise<Response> {
+    const url = `api/sendmail/${user.email}`;
+    return this.http.post<Response>(url, httpOptions).toPromise();
+  }
+
+  /* After email verification, alter 'is_active' column in User table */
+  verificate(uidb64: string, token: string): Promise<Response> {
+    const url = `api/user/activate/${uidb64}/${token}/`;
+    return this.http.get<Response>(url).toPromise().catch(this.handleError);
   }
 
   /* get User by Id */
@@ -80,6 +132,5 @@ export class UserService {
     console.log('An error occurred in UserService', error);
     return Promise.reject(error.message || 'Internal server error');
   }
-
 
 }

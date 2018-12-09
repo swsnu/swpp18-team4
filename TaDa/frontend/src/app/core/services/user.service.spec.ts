@@ -30,9 +30,11 @@ const mock_user: User = {
 
 describe('UserService', () => {
   const userUrl = '/api/user/';
+  const tokenUrl = '/api/user/token';
   const signupUrl = '/api/user/signup/';
   const loginUrl = '/api/user/signin/';
   const signoutUrl = '/api/user/signout/';
+
   let userServiceSpy: jasmine.SpyObj<UserService>;
   let userService: UserService;
   beforeEach(() => {
@@ -58,6 +60,26 @@ describe('UserService', () => {
     expect(service).toBeTruthy();
   });
 
+  it('test createToken func', () => {
+    userService.createToken()
+      .then(res => expect(res).toBeTruthy());
+  });
+
+  it('test checkCSRF func fail', async() => {
+    let cookie: string = 'my-cookie=cookievalue;date=20181212;';    
+    let result: string = '';
+    spyOnProperty(document, 'cookie', 'get').and.returnValue(cookie);
+    expect(userService.checkCSRF()).toBe(null);
+  });
+
+
+  it('test checkCSRF func success', async() => {
+    let cookie: string = 'my-cookie=cookievalue;csrftoken=ABCD123;date=20181212;';
+    let result: string = '';
+    spyOnProperty(document, 'cookie', 'get').and.returnValue(cookie);
+    await expect(userService.checkCSRF()).toEqual('ABCD123');
+  });
+
   it('test signup func', () => {
     userService.signup(mock_user)
       .then(user => expect(user.id).toEqual(1));
@@ -68,5 +90,26 @@ describe('UserService', () => {
       .then(res => expect(res).toBeTruthy());
   });
 
+  it('test checkDuplicateEmail func', () => {
+    userService.checkDuplicateEmail('chjeong9727@naver.com')
+      .then(res => expect(res).toBeTruthy());
+  });
 
+
+  it('test checkDuplicateNickname func', () => {
+    userService.checkDuplicateNickname('Constant')
+      .then(res => expect(res).toBeTruthy());
+  });
+
+  it('test sendEmail func', () => {
+    let user = new User();
+    user.email = 'chjeong9727@naver.com';
+    userService.sendEmail(user)
+      .then(res => expect(res).toBeTruthy());
+  });
+
+  it('test verificate func', () => {
+    userService.verificate('1234', 'PtZtnTdserLc03QqqLzkr9Ulf2xq96aQ')
+      .then(res => expect(res).toBeTruthy());
+  });
 });
