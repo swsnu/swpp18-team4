@@ -3,6 +3,7 @@ import { Router } from '@angular/router';
 import { UserService } from '../../../core/services/user.service';
 import { HttpErrorResponse } from '@angular/common/http';
 import { Response } from '@angular/http';
+import { User } from 'src/app/core/models/user';
 
 @Component({
   selector: 'app-signin',
@@ -31,12 +32,15 @@ export class SigninComponent implements OnInit {
   }
 
   onClickSignIn() {
-    this.userService.signin(this.emailInput, this.passwordInput).then(
+    this.userService.signin(this.emailInput, this.passwordInput)
+    .then(
       (response: Response) => {
+        console.log(response['id']);
         this.userService.getUser(response['id']).then(
           user => {
           this.userService.setLoginUser(user);
-          sessionStorage.setItem('storedUser', JSON.stringify(user));
+          //sessionStorage.setItem('storedUserEmail', user.email);
+          //sessionStorage.setItem('storedUserPassword', user.password);
         });
         this.router.navigateByUrl('/');
       },

@@ -4,7 +4,7 @@ import { ArbeitTypeEnum } from './enums/arbeit-type-enum.enum';
 import { HowToPayEnum } from './enums/how-to-pay-enum.enum';
 
 export class User {
-  id?: number;
+  id: number;
   user_type: TypeEnum;
   email: string;
   password: string;

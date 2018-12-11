@@ -10,7 +10,6 @@ import { Router } from '@angular/router';
   styleUrls: ['./nav.component.css']
 })
 export class NavComponent implements OnInit {
-  is_logged_in: boolean;
   current_user: User;
   constructor(
     private userService: UserService,
@@ -19,21 +18,21 @@ export class NavComponent implements OnInit {
 
   ngOnInit() {
     /* get current user state */
-    this.is_logged_in = this.userService.isLoggedIn();
-    this.current_user = this.userService.getCurrentUser();
+    //this.current_user = this.userService.getCurrentUser();
   }
 
   logOut() {
     this.userService.signout();
-    localStorage.removeItem('userEmail');
-    localStorage.removeItem('userPassword');
+    //localStorage.removeItem('userEmail');
+    //localStorage.removeItem('userPassword');
     this.userService.setLoginUser(null);
 
   }
 
   toUserPage() {
-    const current_id = this.current_user.id;
-    this.router.navigateByUrl('user/' + current_id);
+    //const current_id = this.current_user.id;
+    console.log(this.userService.getCurrentUser().id);
+    this.router.navigateByUrl('user/' + this.userService.getCurrentUser().id);
 
   }
 }

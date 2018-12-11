@@ -23,7 +23,7 @@ const mock_user: User = {
   business_content: null,
   representative_name: null,
   employer_license_number: null,
-  profile_image: null, // modify
+  // profile_image: null, // modify
   is_admin: false,
   is_active: false
 };

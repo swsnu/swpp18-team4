@@ -25,8 +25,12 @@ export class UserService {
   constructor(
     private http: HttpClient
   ) { 
-      if (JSON.parse(sessionStorage.getItem('storedUser'))) {
-        this.currentUser = JSON.parse(sessionStorage.getItem('storedUser')) as User;
+      if (JSON.parse(sessionStorage.getItem('storedUserEmail'))) {
+        //const email = sessionStorage.getItem('storedUserEmail');
+        //const email = sessionStorage.getItem('storedUserEmail');
+
+        console.log('In session there is' + this.currentUser.email);
+        this.signin(this.currentUser.email, this.currentUser.password);
       }
   }
 
@@ -71,7 +75,7 @@ export class UserService {
   }
   
   setLoginUser(user: User): void {
-      this.currentUser = user;
+    this.currentUser = user;
   }
 
   /* http for UserService */
@@ -124,7 +128,7 @@ export class UserService {
   /* get User by Id */
   getUser(id: number): Promise<User> {
     const url = `${this.userUrl}${id}/`;
-    return this.http.get<User>(url).toPromise().catch(this.handleError);
+    return this.http.get<User>(url).toPromise().then(x => {console.log(x.id); return x;}).catch(this.handleError);
   }
 
   private handleError(error: any): Promise<any> {
