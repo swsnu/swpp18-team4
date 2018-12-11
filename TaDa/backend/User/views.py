@@ -41,12 +41,14 @@ def nickname(request, nickname):
 def signup(request):
     if request.method == 'POST':
         req_data = json.loads(request.body.decode())
-        user_type = req_data['user_type']
+        print(req_data)
         email = req_data['email']
         nickname = req_data['nickname']
         password = req_data['password']
+        user_type = req_data['user_type']
 
-        if user_type and password and not User.objects.filter(email = email).exists() and not User.objects.filter(nickname = nickname).exists():
+
+        if user_type and password:
             User.objects.create_user(user_type = user_type, email = email, nickname = nickname, password = password)
             return HttpResponse(status=201)
         else:
@@ -73,7 +75,9 @@ def signin(request):
 @csrf_exempt
 def signout(request):
     if request.method == 'GET':
-        if request.user.is_authenticated:
+        if not request.user:
+            return HttpResponse(status=404)
+        elif request.user.is_authenticated:
             logout(request)
             return HttpResponse(status=204)
         else:
@@ -128,7 +132,7 @@ def user(request, uid):
             if target_user.exists():
                 user_dict = target_user.values()[0]
                 del user_dict['last_login']
-                return JsonResponse(json.dumps(user_dict), safe=False)
+                return JsonResponse(user_dict, safe=False)
             else:
                 return HttpResponse(status=404)
         else:

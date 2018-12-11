@@ -5,13 +5,11 @@ from django.contrib.auth.models import AbstractBaseUser, BaseUserManager
 
 # Create your models here.
 class UserManager(BaseUserManager):
-    def create_user(self, user_type, email, nickname, password = None):
+    def create_user(self, user_type, email, nickname = None, password = None):
         if not email:
             raise ValueError("User must have an email")
         if not user_type:
             raise ValueError("User must have an user_type")
-        if not nickname:
-            raise ValueError("User must have a nickname")
         user = self.model(
             user_type = user_type,
             email = self.normalize_email(email),
