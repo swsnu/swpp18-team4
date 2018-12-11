@@ -41,15 +41,16 @@ def nickname(request, nickname):
 def signup(request):
     if request.method == 'POST':
         req_data = json.loads(request.body.decode())
-        print(req_data)
         email = req_data['email']
         nickname = req_data['nickname']
         password = req_data['password']
         user_type = req_data['user_type']
-
+        company_name = req_data['company_name']
+        company_address = req_data['company_address']
 
         if user_type and password:
-            User.objects.create_user(user_type = user_type, email = email, nickname = nickname, password = password)
+            User.objects.create_user(user_type = user_type, email = email, nickname = nickname, 
+            password = password, company_name = company_name, company_address = company_address)
             return HttpResponse(status=201)
         else:
             return HttpResponse(status=409)

@@ -92,6 +92,7 @@ export class SignupComponent implements OnInit {
       } else {
         this.signup_user.user_type = TypeEnum.ER;
         this.signup_user.nickname = null;
+        console.log(this.signup_user.company_address);
       }
       this.userService.signup(this.signup_user).then(
         res => {
@@ -156,7 +157,6 @@ export class SignupComponent implements OnInit {
         msg.push('회사 주소를 입력해주세요');
       }
     }
-
     return msg;
   }
 }
