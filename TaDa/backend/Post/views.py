@@ -11,7 +11,7 @@ from .models import Post
 
 
 # Create your views here.
-
+@csrf_exempt
 def posts(request):
     if request.method == 'GET':
         if request.user.is_authenticated:
@@ -50,7 +50,7 @@ def posts(request):
             return HttpResponse(status=401)
     else:
         return HttpResponseNotAllowed(['GET', 'POST'])
-    
+@csrf_exempt
 def post(request, post_id):
     if request.method == 'GET':
         if request.user.is_authenticated:
@@ -111,6 +111,7 @@ def post(request, post_id):
     else:
         return HttpResponseNotAllowed(['GET', 'PUT', 'DELETE'])
 
+@csrf_exempt
 def author(request, author_id):
     if request.method == 'GET':
         if request.user.is_authenticated:
