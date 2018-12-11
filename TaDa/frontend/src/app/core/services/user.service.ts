@@ -128,7 +128,7 @@ export class UserService {
   /* get User by Id */
   getUser(id: number): Promise<User> {
     const url = `${this.userUrl}${id}/`;
-    return this.http.get<User>(url).toPromise().then(x => {console.log(x.id); return x;}).catch(this.handleError);
+    return this.http.get<User>(url).toPromise().catch(this.handleError);
   }
 
   private handleError(error: any): Promise<any> {

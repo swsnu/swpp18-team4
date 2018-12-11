@@ -4,6 +4,7 @@ import { UserService } from '../../../core/services/user.service';
 import { HttpErrorResponse } from '@angular/common/http';
 import { Response } from '@angular/http';
 import { User } from 'src/app/core/models/user';
+import { TalkService } from 'src/app/core/services/talk.service';
 
 @Component({
   selector: 'app-signin',
@@ -14,6 +15,7 @@ export class SigninComponent implements OnInit {
   constructor(
     private userService: UserService,
     private router: Router,
+    private talkService: TalkService
   ) { }
 
   private emailInput: string = '';
@@ -35,10 +37,12 @@ export class SigninComponent implements OnInit {
     this.userService.signin(this.emailInput, this.passwordInput)
     .then(
       (response: Response) => {
-        console.log(response['id']);
         this.userService.getUser(response['id']).then(
           user => {
           this.userService.setLoginUser(user);
+          
+          this.talkService.createCurrentSession();
+
           //sessionStorage.setItem('storedUserEmail', user.email);
           //sessionStorage.setItem('storedUserPassword', user.password);
         });

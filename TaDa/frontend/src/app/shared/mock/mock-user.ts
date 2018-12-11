@@ -6,6 +6,7 @@ import { HowToPayEnum } from 'src/app/core/models/enums/how-to-pay-enum.enum';
 
 export const mock_users: User[] = [
     {
+        id: 1,
         user_type: TypeEnum.ER,
         email: 'mock-2@snu.ac.kr',
         password: 'mock-pw-1',

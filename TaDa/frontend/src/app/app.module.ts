@@ -17,7 +17,6 @@ import { AuthGuard } from './core/guard/auth.guard';
 import { UserService } from './core/services/user.service';
 import { PostService } from './core/services/post.service';
 import { CommentService } from './core/services/comment.service';
-import { TalkService } from './core/services/talk.service';
 
 @NgModule({
   declarations: [
@@ -49,8 +48,5 @@ import { TalkService } from './core/services/talk.service';
 })
 export class AppModule {
   constructor(
-    private talkService: TalkService
-  ) {
-    this.talkService.createCurrentSession();
-  }
+  ) { }
 }

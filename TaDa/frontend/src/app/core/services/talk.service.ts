@@ -62,6 +62,12 @@ export class TalkService {
     return session.createChatbox(conversationBuilder);
   }
 
+  async createInbox() : Promise<Talk.Inbox> {
+    const session = await this.currentSessionDeferred.promise;
+
+    return session.createInbox();
+  }
+  
   destroyAllLoadedPopups() {
     if (this.loadedPopups.length > 0) {
       this.loadedPopups.forEach(p => p.destroy());

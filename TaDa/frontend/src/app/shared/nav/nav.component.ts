@@ -26,12 +26,10 @@ export class NavComponent implements OnInit {
     //localStorage.removeItem('userEmail');
     //localStorage.removeItem('userPassword');
     this.userService.setLoginUser(null);
-
   }
 
   toUserPage() {
     //const current_id = this.current_user.id;
-    console.log(this.userService.getCurrentUser().id);
     this.router.navigateByUrl('user/' + this.userService.getCurrentUser().id);
 
   }
