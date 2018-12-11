@@ -8,12 +8,15 @@ import { PostCreateComponent } from './components/post-create/post-create.compon
 import { PostEditComponent } from './components/post-edit/post-edit.component';
 import { CommentViewComponent } from './components/comment-view/comment-view.component';
 import { FormsModule } from '@angular/forms';
+import { NgbModule, NgbDatepicker } from '@ng-bootstrap/ng-bootstrap';
+
 
 @NgModule({
   imports: [
     CommonModule,
     PostRoutingModule,
     FormsModule,
+    NgbModule.forRoot()
   ],
   declarations: [PostListComponent, PostViewComponent, PostCreateComponent, PostEditComponent, CommentViewComponent]
 })
