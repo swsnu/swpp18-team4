@@ -35,7 +35,6 @@ export class TalkService {
 
   async createTalkUser(applicationUser: User) : Promise<Talk.User> {
     await Talk.ready;
-    console.log(applicationUser);
 
     return new Talk.User({
         id: 'snutada_i_love_talkjs_' + applicationUser.id,
