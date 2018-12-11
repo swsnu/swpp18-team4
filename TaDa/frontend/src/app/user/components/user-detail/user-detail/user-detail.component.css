@@ -1,0 +1,14 @@
+#talkjs-container {
+    height: 505px;
+    margin-top: 1%;
+    text-align: center;
+}
+
+.divider {
+    width: 95%;
+}
+
+.container-title {
+    text-align: center;
+    font-weight: 600;
+}
