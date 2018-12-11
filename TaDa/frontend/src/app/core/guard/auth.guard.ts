@@ -19,7 +19,7 @@ export class AuthGuard implements CanActivate {
     next: ActivatedRouteSnapshot,
     state: RouterStateSnapshot): Observable<boolean> | Promise<boolean> | boolean {
     if (this.userService.isLoggedIn()) {
-        return true;
+      return true;
     } else {
       this.toastrService.warning('Please log in first');
       this.router.navigate(['signin'], { queryParams: { redirectTo: state.url } });

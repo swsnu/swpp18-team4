@@ -89,10 +89,11 @@ export class SignupComponent implements OnInit {
     } else {
       if ( this.as_employee == true) {
         this.signup_user.user_type = TypeEnum.EE;
+        this.signup_user.company_name = null;
+        this.signup_user.company_address = null;
       } else {
         this.signup_user.user_type = TypeEnum.ER;
         this.signup_user.nickname = null;
-        console.log(this.signup_user.company_address);
       }
       this.userService.signup(this.signup_user).then(
         res => {
@@ -124,7 +125,7 @@ export class SignupComponent implements OnInit {
     let lowercase: boolean = (/[a-z]/).test(this.signup_user.password);
     let uppercase: boolean = (/[A-Z]/).test(this.signup_user.password);
     let decimalcase: boolean = (/[0-9]/).test(this.signup_user.password);       
-    return (this.signup_user.password.length >= 8) && lowercase && uppercase && decimalcase;
+    return (this.signup_user.password.length >= 8) && (lowercase || uppercase) && decimalcase;
   }
 
   validateNickname(): boolean {
