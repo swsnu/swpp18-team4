@@ -35,10 +35,11 @@ export class TalkService {
 
   async createTalkUser(applicationUser: User) : Promise<Talk.User> {
     await Talk.ready;
+    console.log(applicationUser);
 
     return new Talk.User({
         id: 'snutada_i_love_talkjs_' + applicationUser.id,
-        name: applicationUser.nickname,
+        name: (applicationUser.user_type === TypeEnum.EE ? applicationUser.nickname : applicationUser.company_name),
         email: applicationUser.email,
         // photoUrl: applicationUser.profile_image,
         configuration: (applicationUser.user_type === TypeEnum.EE ? "employee" : "employer"),
@@ -67,7 +68,7 @@ export class TalkService {
 
     return session.createInbox();
   }
-  
+
   destroyAllLoadedPopups() {
     if (this.loadedPopups.length > 0) {
       this.loadedPopups.forEach(p => p.destroy());
