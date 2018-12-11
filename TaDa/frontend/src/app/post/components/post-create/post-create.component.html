@@ -1,3 +1,87 @@
-<input type="text" [(ngModel)]="new_post.title" placeholder="제목을 입력하세요">
+<div>
+  제목:
+  <input type="text" [(ngModel)]="new_post.title" placeholder="제목을 입력하세요"> {{new_post.title}}
+  <br>
 
-{{new_post.title}}
+  장소:
+  <select [(ngModel)]="new_post.region">
+    <option *ngFor="let symbol of region_enum_list" [ngValue]="symbol">{{symbol}}</option>
+  </select> {{new_post.region}}
+  <br>
+  <div *ngIf = "new_post.region"> <!--여기 form으로 바꾸기 invalid-->
+    <div *ngIf="new_post.region === '재택'; then HomeBlock; else notHomeBlock"></div>
+    <ng-template #notHomeBlock>
+      상세 주소:
+    <input type="text" [(ngModel)]="new_post.region_specific" placeholder="상세주소를 입력하세요">{{new_post.region_specific}}
+    </ng-template>
+    <ng-template #HomeBlock>
+      예상 총 업무 시간:
+      <input type="number" min="0" [(ngModel)]="new_post.home_expected_time" placeholder="총 예상시간을 입력해주세요">{{new_post.home_expected_time}}
+    </ng-template>
+  </div>
+
+  알바 유형:
+  <select [(ngModel)]="new_post.arbeit_type">
+    <option *ngFor="let symbol of arbeit_type_enum_list" [ngValue]="symbol">{{symbol}}</option>
+  </select>
+  {{new_post.arbeit_type}}
+  <br>
+
+  시간대: <!--여기 시간표 넣기-->
+
+  <br>
+
+  임금방식:
+  <select [(ngModel)]="new_post.how_to_pay">
+    <option *ngFor="let symbol of how_to_pay_enum_list" [ngValue]="symbol">{{symbol}}</option>
+  </select>
+  {{new_post.how_to_pay}}
+  <br>
+
+  <label *ngIf="new_post.how_to_pay === '시급' || new_post.how_to_pay === '건급'">시급:
+    <input type="number" min="0" [(ngModel)]="new_post.pay_per_hour" placeholder="시급을 입력해주세요"><br>
+    (시급을 입력하셔야 추천알바에 노출될 확률이 높아집니다.)
+    {{new_post.pay_per_hour}}
+    <br>
+  </label>
+  <label *ngIf="new_post.how_to_pay === '상품' || new_post.how_to_pay === '랜덤'">상품:
+    <input type="text" [(ngModel)]="new_post.goods" placeholder="상품을 입력해주세요">
+    {{new_post.pay_per_hour}}
+    <br>
+  </label>
+  <br>
+
+
+  마감일:
+  <form class="form-inline">
+    <div class="form-group">
+      <div class="input-group">
+        <input class="form-control" placeholder="yyyy-mm-dd"
+               name="dp" [(ngModel)]="model" ngbDatepicker #d="ngbDatepicker">
+        <button class="input-group-addon" (click)="d.toggle()" type="button">
+          <img src="favicon.ico" style="width: 1.2rem; height: 1rem; cursor: pointer;"/>
+        </button>
+      </div>
+    </div>
+  </form>
+
+  <!-- 지워질 2줄 -->
+  <button (click)="new_post.deadline = converJsonToDate(model)">convert</button>
+  {{new_post.deadline}}
+  <br>
+
+  매 알바마다 같은 사람이 와야만 합니까?
+  <input type="checkbox" [(ngModel)]="new_post.is_same_person">
+  {{new_post.is_same_person}}
+  <br>
+
+  content:
+  <textarea type="text" [(ngModel)]="new_post.content" placeholder="추가 내용을 입력하세요"></textarea>
+  {{new_post.content}}
+  <br>
+
+  <div>
+    <button (click)="back()">취소</button>
+    <button (click)="create()">확인</button>
+  </div>
+</div>

@@ -36,7 +36,7 @@ import { CommentService } from './core/services/comment.service';
     AgmCoreModule.forRoot({
       apiKey: 'AIzaSyCGdFwTXy8_d6emqQWwS5ww3AaSL9wRw9Q'
     }),
-    NgbModule.forRoot()
+    NgbModule.forRoot(),
   ],
   providers: [
     AuthGuard,
