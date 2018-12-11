@@ -5,12 +5,12 @@
 <div *ngIf="user">
   <hr class="divider">
 
-  <div id="chat-container">
+  <div *ngIf="user && user.id != userService.getCurrentUser().id" id="chat-container">
     <div class="row">
       <div class="col-sm-4"></div>
       <div class="col-sm-4 container-title">채팅</div>
       <div class="col-sm-4"></div>
     </div>
-    <div id="talkjs-container">{{user?.nickname}}와 채팅하기...</div>
+    <div id="talkjs-container">{{getCurrentUserName()}}와 채팅하기...</div>
   </div>
 </div>

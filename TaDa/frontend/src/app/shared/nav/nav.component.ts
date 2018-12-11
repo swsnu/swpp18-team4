@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { User } from '../../core/models/user';
 import { UserService } from '../../core/services/user.service';
 import { Router } from '@angular/router';
-
+import { TalkService } from 'src/app/core/services/talk.service';
 
 @Component({
   selector: 'app-nav',
@@ -13,6 +13,7 @@ export class NavComponent implements OnInit {
   current_user: User;
   constructor(
     private userService: UserService,
+    private talkService: TalkService,
     private router: Router,
   ) { }
 
@@ -23,9 +24,9 @@ export class NavComponent implements OnInit {
 
   logOut() {
     this.userService.signout();
-    //localStorage.removeItem('userEmail');
-    //localStorage.removeItem('userPassword');
+    sessionStorage.removeItem('user');
     this.userService.setLoginUser(null);
+    this.router.navigateByUrl('/');
   }
 
   toUserPage() {

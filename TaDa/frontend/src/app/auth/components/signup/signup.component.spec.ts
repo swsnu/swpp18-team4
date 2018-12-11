@@ -116,7 +116,7 @@ describe('SignupComponent', () => {
   });
 
   it('test sign up fail with invalid input', async() => {
-    component.as_employer = false;
+    component.as_employee = false;
     component.signup_user.password = '123ABCabc';
     component.password_confirm = '123ABCabc';
     component.check_email = false;
@@ -127,7 +127,7 @@ describe('SignupComponent', () => {
   });
 
   it('test sign up success', async() => {
-    component.as_employer = false;
+    component.as_employee = false;
     component.signup_user.password = '123ABCabc';
     component.password_confirm = '123ABCabc';
     component.check_email = true;
@@ -170,11 +170,10 @@ describe('SignupComponent', () => {
   });
 
   it('test buildErrMsg', () => {
-    component.as_employer = false;
+    component.as_employee = false;
     component.check_email = false;
     component.check_nickname = false;
     component.check_password = true;
-    component.check_license = false;
     expect(component.build_errmsg().length).toBe(2);
     component.check_nickname = true;
     expect(component.build_errmsg().length).toBe(1);

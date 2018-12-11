@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { Router } from '@angular/router';
+import { Router, ActivatedRoute } from '@angular/router';
 import { UserService } from '../../../core/services/user.service';
 import { HttpErrorResponse } from '@angular/common/http';
 import { Response } from '@angular/http';
@@ -15,11 +15,13 @@ export class SigninComponent implements OnInit {
   constructor(
     private userService: UserService,
     private router: Router,
-    private talkService: TalkService
+    private talkService: TalkService,
+    private route: ActivatedRoute,
   ) { }
 
   private emailInput: string = '';
   private passwordInput: string = '';
+  private return: string;
 
   ngOnInit() {
     /* If user is already logged in, redirect to main page */
@@ -31,6 +33,10 @@ export class SigninComponent implements OnInit {
     if (token == null) {
       this.userService.createToken();
     }
+
+    this.route.queryParams.subscribe(
+      params => this.return = (params['redirectTo'] || '/')
+    );
   }
 
   onClickSignIn() {
@@ -43,10 +49,10 @@ export class SigninComponent implements OnInit {
           
           this.talkService.createCurrentSession();
 
-          //sessionStorage.setItem('storedUserEmail', user.email);
-          //sessionStorage.setItem('storedUserPassword', user.password);
+          sessionStorage.setItem('user', JSON.stringify(user));
+
+          this.router.navigateByUrl(this.return);
         });
-        this.router.navigateByUrl('/');
       },
 
       /* If user information does not match, alert mesage and clear input */

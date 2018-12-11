@@ -23,15 +23,15 @@ export class UserService {
   private currentUser: User = null;
 
   constructor(
-    private http: HttpClient
+    private http: HttpClient,
   ) { 
-      if (JSON.parse(sessionStorage.getItem('storedUserEmail'))) {
-        //const email = sessionStorage.getItem('storedUserEmail');
-        //const email = sessionStorage.getItem('storedUserEmail');
-
-        console.log('In session there is' + this.currentUser.email);
-        this.signin(this.currentUser.email, this.currentUser.password);
+    /*
+      let obj = JSON.parse(sessionStorage.getItem('user'));
+      
+      if (obj != null) {
+        this.setLoginUser(obj);
       }
+      */
   }
 
   /* create token for user with no token */
@@ -63,13 +63,15 @@ export class UserService {
       return false;
     }
   }
+
   isActivate(): boolean {
     if (this.currentUser != null && this.currentUser.is_active == true) {
       return true;
     } else {
       return false;
     }
-  }  
+  } 
+   
   getUserType(): TypeEnum {
     return this.currentUser.user_type;
   }

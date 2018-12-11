@@ -17,6 +17,13 @@ export class TalkService {
 
   constructor(private userService: UserService) { 
     this.loadedPopups = [];
+
+    let obj = JSON.parse(sessionStorage.getItem('user'));
+    
+    if (obj != null) {
+      this.userService.setLoginUser(obj);
+      this.createCurrentSession();
+    }
   }
 
   async createCurrentSession() {
