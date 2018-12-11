@@ -13,6 +13,7 @@ import { Router } from '@angular/router';
   styleUrls: ['./post-create.component.css']
   })
   export class PostCreateComponent implements OnInit {
+
   new_post: Post;
   region_enum_list: string[];
   arbeit_type_enum_list: string[];
@@ -89,6 +90,7 @@ import { Router } from '@angular/router';
 
     // 마지막 확인
     if ( error_state === 0 ) {
+      //토스트로 바꾸기
       alert('작성 완료!');
       this.router.navigateByUrl('/post/list');
     } else {
