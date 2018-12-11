@@ -3,5 +3,6 @@ export enum RegionEnum {
   nakdae = '낙성대',
   nokdu = '녹두',
   snu = '학내',
-  home = '재택'
+  home = '재택',
+  extra = '기타'
 }
