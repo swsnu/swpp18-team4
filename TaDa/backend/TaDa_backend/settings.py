@@ -55,6 +55,8 @@ MIDDLEWARE = [
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
 ]
 
+AUTHENTICATION_BACKEND = ( 'django.contrib.auth.backends.ModelBackend' ) #modify
+
 ROOT_URLCONF = 'TaDa_backend.urls'
 
 TEMPLATES = [
