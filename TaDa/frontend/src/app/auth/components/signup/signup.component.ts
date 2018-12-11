@@ -146,6 +146,17 @@ export class SignupComponent implements OnInit {
     if (this.as_employee && !this.check_nickname) {
       msg.push('닉네임 중복 체크를 해주세요');
     }
+    if (!this.as_employee) {
+      this.signup_user.company_name = this.signup_user.company_name.trim();
+      this.signup_user.company_address = this.signup_user.company_address.trim();
+      if (this.signup_user.company_name == null) {
+        msg.push('회사 이름을 입력해주세요');
+      }
+      if (this.signup_user.company_address == null) {
+        msg.push('회사 주소를 입력해주세요');
+      }
+    }
+
     return msg;
   }
 }
