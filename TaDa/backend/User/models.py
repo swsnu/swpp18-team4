@@ -2,10 +2,11 @@ from django.db import models
 from django.conf import settings
 from django_mysql.models import EnumField, ListCharField
 from django.contrib.auth.models import AbstractBaseUser, BaseUserManager
+from django.core.serializers.json import DjangoJSONEncoder
 
 # Create your models here.
 class UserManager(BaseUserManager):
-    def create_user(self, user_type, email, nickname = None, password = None, company_name = None):
+    def create_user(self, user_type, email, nickname = None, company_name = None, password = None):
         if not email:
             raise ValueError("User must have an email")
         if not user_type:
@@ -20,12 +21,15 @@ class UserManager(BaseUserManager):
         user.save(using=self._db)
         return user
     
-    def create_superuser(self, email, password, user_type = 'EE', nickname = 'ABCD'):
+    def create_superuser(self, email, password, user_type, company_name = None, nickname = None):
         user = self.create_user(
-            user_type = 'EE',
+            user_type = user_type,
+            password = password,
             email = self.normalize_email(email),
-            nickname = 'ABCD',
+            nickname = nickname,
+            company_name = company_name,
         )
+        user.is_active = True
         user.is_admin = True
         user.save(using=self._db)
         return user
@@ -65,7 +69,7 @@ class User(AbstractBaseUser):
     objects = UserManager()
     
     USERNAME_FIELD = 'email'
-    REQUIRED_FIELD = ['user_type', 'nickname' ,'company_name']
+    REQUIRED_FIELD = ['user_type']
 
     def has_perm(self, perm, obj=None):
         "Does the user have a specific permission?"
