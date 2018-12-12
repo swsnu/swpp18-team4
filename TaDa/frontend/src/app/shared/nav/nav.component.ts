@@ -12,7 +12,7 @@ import { TalkService } from 'src/app/core/services/talk.service';
 export class NavComponent implements OnInit {
   current_user: User;
   constructor(
-    private userService: UserService,
+    public userService: UserService,
     private talkService: TalkService,
     private router: Router,
   ) { }
