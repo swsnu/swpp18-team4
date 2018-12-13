@@ -3,6 +3,7 @@ from django.http import HttpResponse, JsonResponse, HttpResponseNotAllowed, Http
 from django.contrib.auth import authenticate, login, logout
 from django.views.decorators.csrf import ensure_csrf_cookie, csrf_exempt 
 from json.decoder import JSONDecodeError
+from django.core.serializers.json import DjangoJSONEncoder
 import json
 
 from django.contrib.auth.tokens import PasswordResetTokenGenerator
@@ -14,6 +15,7 @@ from django.template.loader import render_to_string
 from django.shortcuts import get_object_or_404
 from django.db import models
 from .models import User, UserManager
+
 
 # Create your views here.
 
@@ -40,14 +42,17 @@ def nickname(request, nickname):
 @csrf_exempt
 def signup(request):
     if request.method == 'POST':
-        req_data = json.loads(request.body.decode())
-        email = req_data['email']
-        nickname = req_data['nickname']
-        password = req_data['password']
-        user_type = req_data['user_type']
-        company_name = req_data['company_name']
+        try:
+            req_data = json.loads(request.body.decode())
+            email = req_data['email']
+            nickname = req_data['nickname']
+            password = req_data['password']
+            user_type = req_data['user_type']
+            company_name = req_data['company_name']
+        except (KeyError, JSONDecodeError) as e:
+            return HttpResponseBadRequest()
 
-        if user_type and password:
+        if user_type and email and password:
             User.objects.create_user(user_type = user_type, email = email, nickname = nickname, 
             password = password, company_name = company_name)
             return HttpResponse(status=201)
@@ -59,9 +64,12 @@ def signup(request):
 @csrf_exempt
 def signin(request):
     if request.method == 'POST':
-        req_data = json.loads(request.body.decode())
-        email = req_data['email']
-        password = req_data['password']
+        try:
+            req_data = json.loads(request.body.decode())
+            email = req_data['email']
+            password = req_data['password']
+        except (KeyError, JSONDecodeError) as e:
+            return HttpResponseBadRequest()
         user = authenticate(email = email, password = password)
         if user is not None:
             login(request, user)
@@ -75,9 +83,7 @@ def signin(request):
 @csrf_exempt
 def signout(request):
     if request.method == 'GET':
-        if not request.user:
-            return HttpResponse(status=404)
-        elif request.user.is_authenticated:
+        if request.user.is_authenticated:
             logout(request)
             return HttpResponse(status=204)
         else:
@@ -130,8 +136,7 @@ def user(request, uid):
         if request.user.is_authenticated:
             target_user = User.objects.filter(id=uid)
             if target_user.exists():
-                user_dict = target_user.values()[0]
-                del user_dict['last_login']
+                user_dict = json.dumps(target_user.values()[0], cls=DjangoJSONEncoder)
                 return JsonResponse(user_dict, safe=False)
             else:
                 return HttpResponse(status=404)
@@ -144,38 +149,39 @@ def user(request, uid):
                 target_user = target_user[0]
                 if target_user.id == request.user.id:
                     #columns = ["user_type", "email", "password", "nickname", "employee_region", "employee_type", "employee_how_to_pay", "employee_pay_limit", "company_name", "company_address", "business_content", "representative_name", "employer_license_number", "profile_image"]
-                    req_data = json.loads(request.body.decode())
-                    if target_user.user_type == 'EE':
-                        target_user.set_password(req_data["password"])
-                        target_user.employee_region = req_data["employee_region"]
-                        target_user.employee_type = req_data["employee_type"]
-                        target_user.employee_how_to_pay = req_data["employee_how_to_pay"]
-                        target_user.employee_pay_limit = req_data["employee_pay_limit"]
-                        target_user.company_name = None
-                        target_user.company_address = None
-                        target_user.business_content = None
-                        target_user.representative_name = None
-                        target_user.employer_license_number = None
-                        target_user.profile_image = req_data["profile_image"]
-                        target_user.save()
-                        return HttpResponse(status=200)
-                    elif target_user.user_type == 'ER':
-                        target_user.set_password(req_data["password"])
-                        target_user.employee_region = None
-                        target_user.employee_type = None
-                        target_user.employee_how_to_pay = None
-                        target_user.employee_pay_limit = None
-                        target_user.company_name = req_data["company_name"]
-                        target_user.company_address = req_data["company_address"]
-                        target_user.business_content = req_data["business_content"]
-                        target_user.representative_name = req_data["representative_name"]
-                        target_user.employer_license_number = req_data["employer_license_number"]
-                        target_user.profile_image = req_data["profile_image"]
-                        target_user.save()
-                        return HttpResponse(status=200)
-                    else:
-                        return HttpResponseBadRequest()
                     #keylist = list(req_data.keys())
+                    try:
+                        req_data = json.loads(request.body.decode())
+                        if target_user.user_type == 'EE':
+                            target_user.set_password(req_data["password"])
+                            target_user.employee_region = req_data["employee_region"]
+                            target_user.employee_type = req_data["employee_type"]
+                            target_user.employee_how_to_pay = req_data["employee_how_to_pay"]
+                            target_user.employee_pay_limit = req_data["employee_pay_limit"]
+                            target_user.company_name = None
+                            target_user.company_address = None
+                            target_user.business_content = None
+                            target_user.representative_name = None
+                            target_user.employer_license_number = None
+                            #target_user.profile_image = req_data["profile_image"]
+                            target_user.save()
+                            return HttpResponse(status=200)
+                        elif target_user.user_type == 'ER':
+                            target_user.set_password(req_data["password"])
+                            target_user.employee_region = None
+                            target_user.employee_type = None
+                            target_user.employee_how_to_pay = None
+                            target_user.employee_pay_limit = None
+                            target_user.company_name = req_data["company_name"]
+                            target_user.company_address = req_data["company_address"]
+                            target_user.business_content = req_data["business_content"]
+                            target_user.representative_name = req_data["representative_name"]
+                            target_user.employer_license_number = req_data["employer_license_number"]
+                            #target_user.profile_image = req_data["profile_image"]
+                            target_user.save()
+                            return HttpResponse(status=200)
+                    except (KeyError, JSONDecodeError) as e:
+                        return HttpResponseBadRequest()
                 else:
                     return HttpResponse(status=403)
             else:
