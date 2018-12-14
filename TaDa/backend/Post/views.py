@@ -24,7 +24,7 @@ def posts(request):
         if request.user.is_authenticated:
             try:
                 req_data = json.loads(request.body.decode())
-                author = request.user
+                author = User.objects.filter(id = request.user.id)[0]
                 title = req_data['title']
                 content = req_data['content']
                 region = req_data['region']
@@ -45,7 +45,7 @@ def posts(request):
                 return HttpResponseBadRequest()
 
             Post.objects.create(author = author, title = title, content = content, region = region, region_specific = region_specific, arbeit_type = arbeit_type,
-            how_to_pay = how_to_pay, goods = goods, timezone = timezone, deadline = deadline, home_expect_time = home_expect_time, is_same_person = is_same_person)
+            how_to_pay = how_to_pay, pay_per_hour = pay_per_hour, goods = goods, timezone = timezone, deadline = deadline, home_expect_time = home_expect_time, is_same_person = is_same_person)
             return HttpResponse(status=200)
         else:
             return HttpResponse(status=401)
@@ -58,7 +58,8 @@ def post(request, post_id):
         if request.user.is_authenticated:
             target_post = Post.objects.filter(id = post_id)
             if target_post.exists():
-                return JsonResponse(json.dumps(target_post.values(), content_type="application/json"), safe=False)
+                post_dict = json.dumps(target_post.values()[0], cls=DjangoJSONEncoder)
+                return JsonResponse(post_dict, safe=False)
             else:
                 return HttpResponse(status=404)
         else:
@@ -117,7 +118,7 @@ def post(request, post_id):
 def author(request, author_id):
     if request.method == 'GET':
         if request.user.is_authenticated:
-            post_list = [post for post in Post.objects.filter(author_id = author_id).values()]
+            post_list = [post for post in Post.objects.filter(author = author_id).values()]
             return JsonResponse(post_list, safe=False)
         else:
             return HttpResponse(status=401)
