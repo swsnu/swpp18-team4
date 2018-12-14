@@ -6,7 +6,7 @@ import datetime
 # Create your models here.
 class Comment(models.Model):
     post = models.ForeignKey(Post, on_delete = models.CASCADE, db_index=True)
-    refer_comment = models.IntegerField(null = True)
+    refer_comment_id = models.IntegerField(default = -1, null = True)
     author = models.ForeignKey(User, on_delete = models.CASCADE)
     star = models.FloatField(null = True)
     content = models.TextField(null = True)
