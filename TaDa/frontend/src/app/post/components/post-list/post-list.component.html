@@ -1,5 +1,104 @@
-<p>
-  post-list works!
-</p>
-<button type="button" routerLink="/post/create" class="btn btn-primary">Create</button>
+<form class="border" style="padding:20px; margin-bottom: 20px;">
 
+<!-- filtering with Tags -->
+<div class="input-group mb-3">
+  <div class="input-group-prepend">
+    <span class="input-group-text" id="basic-addon3">필터링 태그</span>
+  </div>
+  <div class="form-control" id="basic-url" aria-describedby="basic-addon3">
+    <ng-container class="col-md-4" *ngFor="let tag of filering_tags">
+          {{tag}}
+    </ng-container>
+  </div>
+</div>
+
+<!-- filtering with Tags -->
+
+<div class="row">  
+  <button type="button"  (click)= "filter_button = 1" class="btn tag-button tag-time">시간</button>
+  <button type="button" (click)= "filter_button = 2" class="btn tag-button tag-type">유형</button>  
+  <button type="button" (click)= "filter_button = 3" class="btn tag-button tag-region">장소</button>
+  <button type="button" (click)= "filter_button = 4" class="btn tag-button tag-pay">급여</button>
+</div>
+
+<div [ngSwitch]="filter_button">
+    <b *ngSwitchCase="1">NOT YET</b>
+    <ng-container *ngSwitchCase="2">
+      <b *ngFor="let enums of arbeit_type_enum_list">
+        {{enums}} 
+      </b>
+    </ng-container>
+    <ng-container *ngSwitchCase="3">
+      <b *ngFor="let enums of region_enum_list">
+        {{enums}} 
+      </b>
+    </ng-container>
+    <ng-container *ngSwitchCase="4">
+      <b *ngFor="let enums of how_to_pay_enum_list">
+        {{enums}} 
+      </b>
+    </ng-container>
+    <b *ngSwitchDefault>No Direction</b>
+</div>  
+
+    <!-- seach bar -->
+    <div class="row" style="margin-top: 20px;">    
+      <div class="col-sm-6 col-md-6 float-left">
+		    <div class="input-group">
+          <select #search_criteria name="search_criteria">
+            <option value="0" selected="selected">제목</option>
+            <option value="1">내용</option>
+            <option value="2">제목+내용</option>
+          </select>  
+          <input type="text" class="form-control" #search_keyword name="search_keyword" placeholder="검색어를 입력하세요">
+          <button class="btn btn-primary" type="button" (click)="search(search_keyword.value, search_criteria.value)">검색</button>        
+        </div>
+        </div>
+
+        <!--sorting buttons-->
+        <div class="col-sm-4 col-md-4" style="float: right; margin-left: auto;">
+        <div class="btn-group btn-group-toggle">
+            <button (click)= "sort(0)" class="btn btn-dark">최신순</button>
+            <button (click)= "sort(1)" class="btn btn-dark">시급순</button>
+            <button (click)= "sort(2)" class="btn btn-dark">마감일순</button>
+        </div>
+        </div>
+	  </div>
+
+
+</form>
+
+
+
+
+<!-- Table -->
+<div>
+  <table class="table table-striped">
+    <thead>
+      <tr>
+        <th>글 번호</th>
+        <th>제목</th>
+        <th>작성자</th>
+        <th>징소</th>
+        <th>유형</th>
+        <th>급여</th>
+        <th>기간</th>
+        <th>등록일자</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let post of posts_filtered; let idx = index;">
+        <td>{{idx+1}}</td>
+        <td [routerLink]="'./'+post.id">{{post.title}}</td>
+        <td>{{getAuthorNameByID(post.author_id)}}</td>
+        <td>{{post.region}}</td>
+        <td>{{post.arbeit_type}}</td>
+        <td>{{post.pay_per_hour}}</td>
+        <td>아직 개발중</td>
+        <td>{{post.register_date | date: 'yyyy.MM.d'}}</td>
+      </tr>
+    </tbody>
+  </table>
+</div>
+
+<button type="button" style="float: right; margin-left: auto;" routerLink="/post/create" class="btn btn-primary">작성하기</button>
