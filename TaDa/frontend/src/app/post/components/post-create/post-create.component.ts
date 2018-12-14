@@ -110,8 +110,8 @@ import { UserService } from '../../../core/services/user.service';
     if ( error_state === 0 ) {
       // 토스트로 바꾸기
       alert('작성 완료!');
-      this.post_service.createPost(this.new_post);
-      this.router.navigateByUrl('/post/list');
+      this.post_service.createPost(this.new_post)
+        .then( () => this.router.navigateByUrl('/post/list'));
     } else {
       alert('* 표시된 칸을 모두 작성해주세요');
     }
