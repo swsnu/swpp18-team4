@@ -32,8 +32,8 @@
   <div class="list-group">
     <div *ngFor="let time_zone_row of time_zone_list; let idx = index" >
       <div class="row" *ngIf="idx % 2 === 0">
-        {{time_zone_list[idx] | date: 'shortDate'}}~
-        {{time_zone_list[idx+1] | date: 'shortDate'}}
+        {{time_zone_list[idx] | date: 'yyyy-MM-dd HH:mm:ss Z' }}~
+        {{time_zone_list[idx+1] | date: 'yyyy-MM-dd HH:mm:ss Z' }}
         <button (click)="remove_row(idx)">-</button>
       </div>
     </div>
@@ -47,6 +47,12 @@
         <button class="input-group-addon" (click)="d1.toggle()" type="button">
           <img src="favicon.ico" style="width: 1.2rem; height: 1rem; cursor: pointer;"/>
         </button>
+        <select name="start_h" [(ngModel)]="time_zone_hm[0]">
+          <option *ngFor="let i of iter(24)" [ngValue]="i">{{i}}</option>
+        </select>
+        <select name="start_m" [(ngModel)]="time_zone_hm[1]">
+          <option *ngFor="let i of iter(60)" [ngValue]="i">{{i}}</option>
+        </select>
       </div>
       ~
       <div class="input-group">
@@ -55,6 +61,12 @@
         <button class="input-group-addon" (click)="d2.toggle()" type="button">
           <img src="favicon.ico" style="width: 1.2rem; height: 1rem; cursor: pointer;"/>
         </button>
+        <select name="end_h" [(ngModel)]="time_zone_hm[2]">
+          <option *ngFor="let i of iter(24)" [ngValue]="i">{{i}}</option>
+        </select>
+        <select name="end_m" [(ngModel)]="time_zone_hm[3]">
+          <option *ngFor="let i of iter(60)" [ngValue]="i">{{i}}</option>
+        </select>
       </div>
     </div>
     <button (click)="addToTimezone(time_zone_start, time_zone_end)">+</button>

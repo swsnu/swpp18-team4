@@ -51,7 +51,7 @@ def posts(request):
             return HttpResponse(status=401)
     else:
         return HttpResponseNotAllowed(['GET', 'POST'])
-    
+      
 @csrf_exempt
 def post(request, post_id):
     if request.method == 'GET':
