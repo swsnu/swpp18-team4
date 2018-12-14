@@ -3,6 +3,7 @@ from django.http import HttpResponse, JsonResponse, HttpResponseNotAllowed, Http
 from django.contrib.auth import authenticate, login, logout
 from django.views.decorators.csrf import ensure_csrf_cookie, csrf_exempt 
 from json.decoder import JSONDecodeError
+from django.core.serializers.json import DjangoJSONEncoder
 import json
 from django.db import models
 from User.models import User
@@ -14,7 +15,19 @@ from .models import Comment
 def comments(request):
     if request.method == 'POST':
         if request.user.is_authenticated:
-            # modify
+            try:
+                req_data = json.loads(request.body.decode())
+                post = Post.objects.filter(id = req_data['post_id'])
+                refer_comment_id = req_data['refer_comment_id']
+                author = request.user
+                star = req_data['star']
+                content = req_data['content']
+                #register_date = models.DateTimeField('first published date', auto_now_add = True)
+                #last_modify_date = models.DateTimeField('last edited date', auto_now = True, blank = True)
+            except (KeyError, JSONDecodeError) as e:
+                return HttpResponseBadRequest()
+
+            Comment.objects.create(author = author, refer_comment_id = refer_comment_id, post = post, star = star, content = content)
             return HttpResponse(status=200)
         else:
             return HttpResponse(status=401)
@@ -27,7 +40,7 @@ def comment(request, comment_id):
         if request.user.is_authenticated:
             target_comment = Comment.objects.filter(id = comment_id)
             if target_comment.exists():
-                return JsonResponse(json.dumps(target_comment.values(), content_type="application/json"), safe=False)
+                return JsonResponse(json.dumps(target_comment.values(), cls = DjangoJSONEncoder), safe=False)
             else:
                 return HttpResponse(status=404)
         else:
@@ -37,7 +50,19 @@ def comment(request, comment_id):
             target_comment = Comment.objects.filter(id = comment_id)
             if target_comment.exists():
                 if target_comment.author_id == request.user.id:
-                    # modify
+                    try:
+                        req_data = json.loads(request.body.decode())
+                        #post = Post.objects.filter(id = req_data['post_id'])
+                        #refer_comment_id = req_data['refer_comment_id']
+                        #author = request.user
+                        target_comment.star = req_data['star']
+                        target_comment.content = req_data['content']
+                        #register_date = models.DateTimeField('first published date', auto_now_add = True)
+                        #last_modify_date = models.DateTimeField('last edited date', auto_now = True, blank = True)
+                    except (KeyError, JSONDecodeError) as e:
+                        return HttpResponseBadRequest()
+                        
+                    target_comment.save()
                     return HttpResponse(status=200)
                 else:
                     return HttpResponse(status=403)

@@ -3,6 +3,7 @@ from django.conf import settings
 from django_mysql.models import EnumField, ListCharField
 from django.contrib.auth.models import AbstractBaseUser, BaseUserManager
 from django.core.serializers.json import DjangoJSONEncoder
+import datetime
 
 # Create your models here.
 class UserManager(BaseUserManager):

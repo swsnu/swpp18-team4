@@ -19,8 +19,8 @@ export class SigninComponent implements OnInit {
     private route: ActivatedRoute,
   ) { }
 
-  private emailInput: string = '';
-  private passwordInput: string = '';
+  emailInput: string = '';
+  passwordInput: string = '';
   private return: string;
 
   ngOnInit() {

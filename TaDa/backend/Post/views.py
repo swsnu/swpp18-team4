@@ -4,13 +4,14 @@ from django.contrib.auth import authenticate, login, logout
 from django.views.decorators.csrf import ensure_csrf_cookie, csrf_exempt 
 from django.core.serializers.json import DjangoJSONEncoder
 from json.decoder import JSONDecodeError
+import datetime
 import json
 from django.db import models
 from User.models import User
 from .models import Post
 
-
 # Create your views here.
+
 @csrf_exempt
 def posts(request):
     if request.method == 'GET':
@@ -23,7 +24,7 @@ def posts(request):
         if request.user.is_authenticated:
             try:
                 req_data = json.loads(request.body.decode())
-                author = request.user.id
+                author = request.user
                 title = req_data['title']
                 content = req_data['content']
                 region = req_data['region']
@@ -50,6 +51,7 @@ def posts(request):
             return HttpResponse(status=401)
     else:
         return HttpResponseNotAllowed(['GET', 'POST'])
+      
 @csrf_exempt
 def post(request, post_id):
     if request.method == 'GET':
