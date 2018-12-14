@@ -22,7 +22,7 @@ export const mock_posts: Post[] = [
     register_date: null,
     last_modify_date: null,
     deadline: null,
-    home_expected_time: null,
+    home_expect_time: null,
     is_magam_user: false,
     is_magam_timeout: false,
     is_same_person: false
@@ -42,7 +42,7 @@ export const mock_posts: Post[] = [
     register_date: null,
     last_modify_date: null,
     deadline: null,
-    home_expected_time: null,
+    home_expect_time: null,
     is_magam_user: false,
     is_magam_timeout: false,
     is_same_person: false

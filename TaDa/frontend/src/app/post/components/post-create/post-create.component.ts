@@ -35,6 +35,7 @@ import { UserService } from '../../../core/services/user.service';
 
   ngOnInit() {
     this.new_post = new Post();
+    this.new_post.is_same_person = false;
     this.time_zone_list = [];
     this.region_enum_list = Object.values(RegionEnum);
     this.arbeit_type_enum_list = Object.values(ArbeitTypeEnum);
@@ -110,8 +111,10 @@ import { UserService } from '../../../core/services/user.service';
     if ( error_state === 0 ) {
       // 토스트로 바꾸기
       alert('작성 완료!');
+      this.new_post.author_id = this.user_service.getCurrentUser().id;
+      this.new_post.timezone = this.time_zone_list;
       this.post_service.createPost(this.new_post)
-        .then( () => this.router.navigateByUrl('/post/list'));
+        .then( () => console.log(1));
     } else {
       alert('* 표시된 칸을 모두 작성해주세요');
     }
@@ -121,6 +124,7 @@ import { UserService } from '../../../core/services/user.service';
   }
   typechecker(input): void {
     console.log(typeof input);
+    this.post_service.getPosts().then(data => console.log(data));
   }
   iter(num: number): number[] {
     const number_list = [];

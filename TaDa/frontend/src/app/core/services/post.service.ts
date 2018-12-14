@@ -34,13 +34,13 @@ export class PostService {
   }
 
   createPost(post: Post): Promise<Post> {
-    return this.http.post<Post>(this.postsUrl, httpOptions)
+    return this.http.post<Post>(this.postsUrl, post, httpOptions)
       .toPromise().then(() => post).catch(this.handleError);
   }
 
   updatePost(post: Post): Promise<Post> {
     const url = `${this.postsUrl}${post.post_id}/`;
-    return this.http.put<Post>(url, httpOptions)
+    return this.http.put<Post>(url, post, httpOptions)
       .toPromise().then(() => post).catch(this.handleError);
   }
 

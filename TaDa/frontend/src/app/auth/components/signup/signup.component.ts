@@ -87,7 +87,7 @@ export class SignupComponent implements OnInit {
 
     /* if there's no error, refines the User class */
     } else {
-      if ( this.as_employee == true) {
+      if ( this.as_employee === true) {
         this.signup_user.user_type = TypeEnum.EE;
         this.signup_user.company_name = null;
         this.signup_user.company_address = null;
@@ -97,7 +97,7 @@ export class SignupComponent implements OnInit {
       }
       this.userService.signup(this.signup_user).then(
         res => {
-          if ( this.as_employee == true) {
+          if ( this.as_employee === true) {
             alert('회원가입 성공! 다시 로그인 해주세요');
           } else {
             alert('회원가입 성공! 마이페이지에서 정보 등록 후 계정이 활성화됩니다!');
