@@ -9,6 +9,7 @@ import { PostEditComponent } from './components/post-edit/post-edit.component';
 import { CommentViewComponent } from './components/comment-view/comment-view.component';
 import { FormsModule } from '@angular/forms';
 import { NgbModule, NgbDatepicker } from '@ng-bootstrap/ng-bootstrap';
+import { TagComponent } from '../shared/tag/tag/tag.component';
 
 
 @NgModule({
@@ -18,6 +19,6 @@ import { NgbModule, NgbDatepicker } from '@ng-bootstrap/ng-bootstrap';
     FormsModule,
     NgbModule.forRoot()
   ],
-  declarations: [PostListComponent, PostViewComponent, PostCreateComponent, PostEditComponent, CommentViewComponent]
+  declarations: [PostListComponent, PostViewComponent, PostCreateComponent, PostEditComponent, CommentViewComponent, TagComponent]
 })
 export class PostModule { }

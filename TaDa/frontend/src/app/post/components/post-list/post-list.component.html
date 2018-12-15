@@ -15,10 +15,10 @@
 <!-- filtering with Tags -->
 
 <div class="row">  
-  <button type="button"  (click)= "filter_button = 1" class="btn tag-button tag-time">시간</button>
-  <button type="button" (click)= "filter_button = 2" class="btn tag-button tag-type">유형</button>  
-  <button type="button" (click)= "filter_button = 3" class="btn tag-button tag-region">장소</button>
-  <button type="button" (click)= "filter_button = 4" class="btn tag-button tag-pay">급여</button>
+  <button type="button"  (click)= "filter_button=1" class="btn tag-button tag-time">시간</button>
+  <button type="button" (click)= "filter_button=2" class="btn tag-button tag-type">유형</button>  
+  <button type="button" (click)= "filter_button=3" class="btn tag-button tag-region">장소</button>
+  <button type="button" (click)= "filter_button=4" class="btn tag-button tag-pay">급여</button>
 </div>
 
 <div [ngSwitch]="filter_button">
@@ -39,7 +39,7 @@
       </b>
     </ng-container>
     <b *ngSwitchDefault>No Direction</b>
-</div>  
+</div> 
 
     <!-- seach bar -->
     <div class="row" style="margin-top: 20px;">    
@@ -64,12 +64,7 @@
         </div>
         </div>
 	  </div>
-
-
 </form>
-
-
-
 
 <!-- Table -->
 <div>
@@ -102,3 +97,6 @@
 </div>
 
 <button type="button" style="float: right; margin-left: auto;" routerLink="/post/create" class="btn btn-primary">작성하기</button>
+
+
+<app-tag></app-tag>

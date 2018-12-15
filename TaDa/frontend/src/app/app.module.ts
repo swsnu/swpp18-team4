@@ -18,6 +18,7 @@ import { UserService } from './core/services/user.service';
 import { PostService } from './core/services/post.service';
 import { CommentService } from './core/services/comment.service';
 import { TalkService } from './core/services/talk.service';
+import { TagComponent } from './shared/tag/tag/tag.component';
 
 @NgModule({
   declarations: [

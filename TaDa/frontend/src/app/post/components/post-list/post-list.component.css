@@ -21,7 +21,6 @@
 }
 .tag-time {
     background: #ff9900;
-
 }
 
 .tag-type {
@@ -35,8 +34,4 @@
 
 .tag-pay {
     background: #cc6699;
-}
-
-.float-right {
-    float: right !important;
 }

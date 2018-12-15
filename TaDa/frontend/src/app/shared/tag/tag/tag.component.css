@@ -1,0 +1,105 @@
+ .item {
+    color: #48453d; 
+    margin-top: 30px; 
+    overflow: hidden;
+}
+
+.block-title {
+    color : #48453d; 
+    margin-bottom:0px; 
+    font-size:18px; 
+    margin-top: 0px; 
+    font-weight:700; 
+    text-transform:uppercase;
+}
+
+.item-content-block {
+    padding:20px; 
+    border-top:2px solid #f6f6f2; 
+    background-color:#FFF; 
+    display:block;
+}
+
+.tags a {
+    background-color:#756f5d; 
+    padding:10px; color:#fff; 
+    display:inline-block; font-size:11px; 
+    text-transform:uppercase; 
+    line-height:11px; 
+    border-radius:2px; 
+    margin-bottom:5px; 
+    margin-right:2px; 
+    text-decoration:none;
+}
+
+.tags a:hover {
+    background-color:#a38018;
+}
+
+
+.close {
+    margin-left: .25rem;
+    color: inherit;
+    font-size: 100%;
+    text-shadow: 0 1px 0 rgba(#000, .5);
+}
+
+/*
+.tag {
+    font-size: 12px;
+    padding: 0.3em 0.4em 0.3em;
+    margin: 2px 1px !important;
+    display: inline-block;
+    max-width: 100%;
+  }
+  
+  .tag > span {
+    display: inline-block;
+    max-width: 94%;
+    white-space: nowrap;
+    overflow: hidden;
+    -ms-text-overflow: ellipsis;
+    -o-text-overflow: ellipsis;
+    text-overflow: ellipsis;
+  }
+  
+  .tag a {
+    display: inline-block;
+    color: #bbb;
+    cursor: pointer;
+    opacity: 0.6;
+    margin: 0 0 0 0.3em;
+  }
+  
+  .tag a:hover {
+    opacity: 1.0;
+  }
+  
+  .tag a .glyphicon-white {
+    color: #fff;
+    margin-bottom: 2px;
+  }
+  
+  .tag .remove {
+    vertical-align: bottom;
+    top: 0;
+  }
+*/  
+
+.panel-heading span
+{
+    margin-top: -26px;
+    font-size: 15px;
+    margin-right: -12px;
+}
+
+.clickable {
+    background: rgba(0, 0, 0, 0.15);
+    display: inline-block;
+    padding: 6px 12px;
+    border-radius: 4px;
+    cursor: pointer;
+}
+
+.btn-glyphicon { float:right; padding:8px; background:#ffffff; margin-left:4px; }
+.icon-btn { padding: 1px 2px 3px 6px; border-radius:50px; float:left; line-height:2em; margin-left:3px;}
