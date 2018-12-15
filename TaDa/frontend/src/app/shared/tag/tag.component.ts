@@ -1,5 +1,5 @@
 import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
-import { region_enum_list, arbeit_type_enum_list, how_to_pay_enum_list } from '../../../core/models/enums/enum-list';
+import { region_enum_list, arbeit_type_enum_list, how_to_pay_enum_list } from '../../core/models/enums/enum-list';
 
 @Component({
   selector: 'app-tag',

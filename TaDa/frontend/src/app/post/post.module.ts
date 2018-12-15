@@ -9,7 +9,7 @@ import { PostEditComponent } from './components/post-edit/post-edit.component';
 import { CommentViewComponent } from './components/comment-view/comment-view.component';
 import { FormsModule } from '@angular/forms';
 import { NgbModule, NgbDatepicker } from '@ng-bootstrap/ng-bootstrap';
-import { TagComponent } from '../shared/tag/tag/tag.component';
+import { TagComponent } from '../shared/tag/tag.component';
 
 
 @NgModule({
