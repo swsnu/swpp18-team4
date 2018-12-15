@@ -18,7 +18,7 @@ import { UserService } from './core/services/user.service';
 import { PostService } from './core/services/post.service';
 import { CommentService } from './core/services/comment.service';
 import { TalkService } from './core/services/talk.service';
-import { TagComponent } from './shared/tag/tag/tag.component';
+import { DragToSelectModule } from 'ngx-drag-to-select';
 
 @NgModule({
   declarations: [
@@ -39,6 +39,7 @@ import { TagComponent } from './shared/tag/tag/tag.component';
       apiKey: 'AIzaSyCGdFwTXy8_d6emqQWwS5ww3AaSL9wRw9Q'
     }),
     NgbModule.forRoot(),
+    DragToSelectModule.forRoot()
 
   ],
   providers: [

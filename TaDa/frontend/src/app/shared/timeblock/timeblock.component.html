@@ -1,0 +1,37 @@
+<dts-select-container [(selectedItems)]="selected">
+	<div class="row">
+		<div class="col-4" *ngFor="let document of documents">
+			<div class="card mt-3" [dtsSelectItem]="document">
+				<div class="card-body">
+					<h1 class="text-center text-primary">
+						<i class="fa fa-file-text-o"></i>
+					</h1>
+				</div>
+				<div class="card-body">
+					{{document.name}}
+				</div>
+			</div>
+		</div>
+	</div>
+</dts-select-container>
+
+<hr>
+
+<div class="row">
+	<div class="col-6">
+		<div class="card">
+			<div class="card-header">
+				Documents
+			</div>
+			<pre>{{documents | json}}</pre>
+		</div>
+	</div>
+	<div class="col-6">
+		<div class="card">
+			<div class="card-header">
+				Selected
+			</div>
+			<pre>{{selected | json}}</pre>
+		</div>
+	</div>
+</div>

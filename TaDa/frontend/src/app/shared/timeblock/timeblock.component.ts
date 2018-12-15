@@ -7,9 +7,18 @@ import { Component, OnInit } from '@angular/core';
 })
 export class TimeblockComponent implements OnInit {
 
+  public documents: any[] = [];
+  public selected: any[] = [];
   constructor() { }
 
   ngOnInit() {
+    for (let id = 0; id < 6; id++) {
+      this.documents.push({
+        id,
+        name: `Document ${id}`,
+      });
+    }
   }
+
 
 }
