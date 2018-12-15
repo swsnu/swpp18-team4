@@ -1,9 +1,5 @@
 import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
-import { ArbeitTypeEnum } from '../../../core/models/enums/arbeit-type-enum.enum';
-import { HowToPayEnum } from '../../../core/models/enums/how-to-pay-enum.enum';
-import { RegionEnum } from '../../../core/models/enums/region-enum.enum';
 import { region_enum_list, arbeit_type_enum_list, how_to_pay_enum_list } from '../../../core/models/enums/enum-list';
-//import { Tag } from '../../../core/models/tag';
 
 @Component({
   selector: 'app-tag',
@@ -44,15 +40,7 @@ export class TagComponent implements OnInit {
     }
   }
 
-
-  test() {
-    console.log('closed');
-  }
-
-
-  /* if isSelected = true -> parent should add tag
-     else isSelected = false -> parent should remove tag*/
-  onClickSelect(){
+  onClickSelect() {
     if (this.isSelectable) {
       this.addTag.emit(true);
     } else {
@@ -60,7 +48,7 @@ export class TagComponent implements OnInit {
     }
   }
 
-  onClickRemove(){
+  onClickRemove() {
     this.removeTag.emit(true);
   }
 

@@ -1,5 +1,7 @@
 <form class="border" style="padding:20px; margin-bottom: 20px;">
-
+  <small class="help-block">
+      &nbsp;*같은 종류의 태그에 대해선 OR, 다른 종류의 태그에 대해선 AND 검색이 실행됩니다.  
+  </small>
 <!-- filtering with Tags -->
 <div class="input-group mb-3">
   <div class="input-group-prepend">
@@ -14,6 +16,7 @@
   </div>
 </div>
 
+
 <!-- filtering with Tags -->
 
 <div class="row" style="border-width: 1.5px;">  
@@ -21,6 +24,9 @@
   <button type="button" (click)= "filter_button=2" class="btn tag-button tag-type">유형</button>  
   <button type="button" (click)= "filter_button=3" class="btn tag-button tag-region">장소</button>
   <button type="button" (click)= "filter_button=4" class="btn tag-button tag-pay">급여</button>
+  <button type="button"  style="float: right; margin-left: auto;" (click)= "getMyTagInfo()" class="btn btn-primary">
+    내 태그 불러오기
+  </button>
 </div>
 
 <div [ngSwitch]="filter_button">
@@ -59,7 +65,7 @@
             <option value="2">제목+내용</option>
           </select>  
           <input type="text" class="form-control" #search_keyword name="search_keyword" placeholder="검색어를 입력하세요">
-          <button class="btn btn-primary" type="button" (click)="search(search_keyword.value, search_criteria.value)">검색</button>        
+          <button class="btn btn-primary" type="button" (click)="onClickSearch(search_keyword.value, search_criteria.value)">검색</button>        
         </div>
         </div>
 
@@ -82,7 +88,7 @@
         <th>글 번호</th>
         <th>제목</th>
         <th>작성자</th>
-        <th>징소</th>
+        <th>장소</th>
         <th>유형</th>
         <th>급여</th>
         <th>기간</th>
@@ -90,9 +96,9 @@
       </tr>
     </thead>
     <tbody>
-      <tr *ngFor="let post of posts_filtered; let idx = index;">
+      <tr [routerLink]="'/post/view/'+post.post_id" *ngFor="let post of posts_filtered; let idx = index;">
         <td>{{idx+1}}</td>
-        <td [routerLink]="'./'+post.id">{{post.title}}</td>
+        <td>{{post.title}}</td>
         <td>{{getAuthorNameByID(post.author_id)}}</td>
         <td>{{post.region}}</td>
         <td>{{post.arbeit_type}}</td>
