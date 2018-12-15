@@ -89,18 +89,18 @@ import { UserService } from '../../../core/services/user.service';
     new_post.deadline = this.convertJsonToDate(this.dead_line);
     if ( isNaN(new_post.deadline.getTime()) ) {
       error_state = 1;
-      document.getElementById('deadline').setAttribute('style', 'border: 2px solid red;');
+      document.getElementById('deadline').setAttribute('style', 'border: 3px solid red; color: red;');
     } else {
-      document.getElementById('deadline').setAttribute('style', 'border: 1px solid blue;');
+      document.getElementById('deadline').setAttribute('style', 'border: ; color: ;');
     }
 
     // for 로 돌리기
     for (const {item, index} of should_filled.map((item, index) => ({ item, index }))) {
       if ( (item === undefined) || (item === null) || (item.trim() === '') ) {
         error_state = 1;
-        document.getElementById(id_names[index]).setAttribute('style', 'border: 2px solid red;');
+        document.getElementById(id_names[index]).setAttribute('style', 'border: 3px solid red; color: red;');
       } else {
-        document.getElementById(id_names[index]).setAttribute('style', 'border: 1px solid blue;');
+        document.getElementById(id_names[index]).setAttribute('style', 'border: ; color: ;');
       }
     }
     // 마지막 확인
@@ -109,9 +109,10 @@ import { UserService } from '../../../core/services/user.service';
       this.new_post.author_id = this.user_service.getCurrentUser().id;
       this.new_post.timezone = this.time_zone_list;
       this.post_service.createPost(this.new_post)
-        .then( () => this.router.navigateByUrl('/post/list'));
+        .then( () => this.router.navigateByUrl('/post/list'))
+        .catch( () => alert('글 작성 실패'));
     } else {
-      alert('* 표시된 칸을 모두 작성해주세요');
+      alert('기본 정보란을 모두 작성해주세요');
     }
   }
   back(): void {

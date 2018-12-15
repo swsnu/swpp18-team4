@@ -35,13 +35,15 @@ export class PostEditComponent implements OnInit {
     const id = +this.route.snapshot.paramMap.get('id');
     this.post_service.getPostByPostId(id)
       .then( post => this.current_post = post)
-      .then( () => this.first_setting() );
+      .then( () => this.first_setting() )
+      .catch( () => this.router.navigateByUrl('/post/list'));
   }
   first_setting(): void {
     this.current_post = <Post>JSON.parse(this.current_post);
 
-    this.time_zone_list = this.current_post.timezone;
+
     this.dead_line = this.current_post.deadline;
+    this.time_zone_list = this.current_post.timezone;
     this.region_enum_list = Object.values(RegionEnum);
     this.arbeit_type_enum_list = Object.values(ArbeitTypeEnum);
     this.how_to_pay_enum_list = Object.values(HowToPayEnum);
@@ -85,7 +87,7 @@ export class PostEditComponent implements OnInit {
 
 
 
-  create(): void {
+  edit(): void {
     let error_state = 0;
     const new_post = this.current_post;
     const should_filled = [new_post.title, new_post.region, new_post.arbeit_type, new_post.how_to_pay, new_post.content];
@@ -114,13 +116,15 @@ export class PostEditComponent implements OnInit {
       this.current_post.author_id = this.user_service.getCurrentUser().id;
       this.current_post.timezone = this.time_zone_list;
       this.post_service.updatePost(this.current_post)
-        .then( () => this.router.navigateByUrl('/post/list'));
+        .then( () => this.router.navigateByUrl('/post/list'))
+        .catch( () => alert('업데이트 실패'));
     } else {
       alert('* 표시된 칸을 모두 작성해주세요');
     }
   }
   back(): void {
-    this.router.navigateByUrl('/post/list');
+    const id = +this.route.snapshot.paramMap.get('id');
+    this.router.navigateByUrl(`/post/view/${id}`);
   }
 
   iter(num: number): number[] {

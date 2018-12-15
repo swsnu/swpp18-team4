@@ -1,6 +1,6 @@
 <div *ngIf="time_zone_hm">
   *제목:
-  <input id="title" type="text" [value] = "current_post.title" [(ngModel)]="current_post.title" placeholder="제목을 입력하세요">
+  <input id="title" type="text" [(ngModel)]="current_post.title" placeholder="제목을 입력하세요">
   <br>
 
   *장소:
@@ -78,8 +78,14 @@
   </select>
   <br>
 
-  <label *ngIf="current_post.how_to_pay === '시급' || current_post.how_to_pay === '건급'">시급:
+  <label *ngIf="current_post.how_to_pay === '시급'">시급:
     <input type="number" min="0" [(ngModel)]="current_post.pay_per_hour" placeholder="단위:원"><br>
+    (시급을 입력하셔야 추천알바에 노출될 확률이 높아집니다.)
+    <br>
+  </label>
+  <label *ngIf="current_post.how_to_pay === '건급'">(예상)시급:
+    <input type="number" min="0" [(ngModel)]="current_post.pay_per_hour" placeholder="단위:원"><br>
+    (예상되는 시간을 적어주세요.)
     (시급을 입력하셔야 추천알바에 노출될 확률이 높아집니다.)
     <br>
   </label>
@@ -90,7 +96,7 @@
   <br>
 
 
-  *마감일: {{dead_line | date}}
+  *마감일: {{current_post.deadline | date}}
   <form class="form-inline">
     <div class="form-group">
       <div class="input-group">
@@ -114,7 +120,7 @@
 
   <div>
     <button (click)="back()">취소</button>
-    <button (click)="create()">저장</button>
+    <button (click)="edit()">저장</button>
   </div>
 </div>
 
