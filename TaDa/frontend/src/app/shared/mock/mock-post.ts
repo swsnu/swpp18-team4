@@ -8,7 +8,7 @@ import { HowToPayEnum } from 'src/app/core/models/enums/how-to-pay-enum.enum';
 
 export const mock_posts: Post[] = [
   {
-    post_id: 1,
+    id: 1,
     author_id: 1,
     title: 'title1',
     content: 'content1',
@@ -28,7 +28,7 @@ export const mock_posts: Post[] = [
     is_same_person: false
   },
   {
-    post_id: 2,
+    id: 2,
     author_id: 1,
     title: 'title2',
     content: 'content2',

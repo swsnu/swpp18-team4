@@ -31,10 +31,10 @@ export class SignupComponent implements OnInit {
     if (this.userService.isLoggedIn()) {
       this.router.navigateByUrl('/');
     }
-    /* If user has no token, create one */ 
+    /* If user has no token, create one */
     const token = this.userService.checkCSRF();
     if (token == null) {
-      this.userService.createToken();      
+      this.userService.createToken();
     }
     this.signup_user = new User();
   }
@@ -43,29 +43,29 @@ export class SignupComponent implements OnInit {
   onClickcheckDuplicateEmail() {
 
     /* check the validity of input email */
-    if (this.validateEmail() == false) {
+    if (this.validateEmail() === false) {
       this.toastrService.warning('이메일 형식을 다시 확인해주세요');
       return;
     }
     this.userService.checkDuplicateEmail(this.signup_user.email).then(
       response => {
-        if (response.isUnique == true) {
+        if (response.isUnique === true) {
           this.check_email = true;
         } else {
           this.toastrService.warning('이메일 중복! 다시 입력해주세요');
         }
-    })
+    });
   }
 
   onClickcheckDuplicateNickname() {
-    if (this.validateNickname() == false) {
+    if (this.validateNickname() === false) {
       this.toastrService.warning('닉네임은 세글자 이상 입력해주세요');
       return;
     }
     this.signup_user.nickname = this.signup_user.nickname.trim();
     this.userService.checkDuplicateNickname(this.signup_user.nickname).then(
       (res: Response) => {
-        if (res['isUnique'] == true) {
+        if (res['isUnique'] === true) {
           this.check_nickname = true;
         } else {
           this.toastrService.warning('닉네임 중복! 다시 입력해주세요');
@@ -104,9 +104,9 @@ export class SignupComponent implements OnInit {
           }
           this.router.navigate(['signin']);
         }
-    )}
+    );
+    }
   }
-  
 
   /* check validity of each field. These are used in html form */
   validateEmail(): boolean {
@@ -114,7 +114,7 @@ export class SignupComponent implements OnInit {
       return false;
     }
     this.signup_user.email = this.signup_user.email.trim();
-    let reg_email = /^[^@\s]+@[^@.\s]+.[a-z]{2,3}/
+    const reg_email = /^[^@\s]+@[^@.\s]+.[a-z]{2,3}/
     return reg_email.test(this.signup_user.email);
   }
 
@@ -122,9 +122,9 @@ export class SignupComponent implements OnInit {
     if (this.signup_user.password == null) {
       return false;
     }
-    let lowercase: boolean = (/[a-z]/).test(this.signup_user.password);
-    let uppercase: boolean = (/[A-Z]/).test(this.signup_user.password);
-    let decimalcase: boolean = (/[0-9]/).test(this.signup_user.password);       
+    const lowercase: boolean = (/[a-z]/).test(this.signup_user.password);
+    const uppercase: boolean = (/[A-Z]/).test(this.signup_user.password);
+    const decimalcase: boolean = (/[0-9]/).test(this.signup_user.password);
     return (this.signup_user.password.length >= 8) && (lowercase || uppercase) && decimalcase;
   }
 
@@ -133,12 +133,12 @@ export class SignupComponent implements OnInit {
       return false;
     }
     this.signup_user.nickname = this.signup_user.nickname.trim();
-    return (this.signup_user.nickname.length >= 3);    
+    return (this.signup_user.nickname.length >= 3);
   }
 
   /* make error msg checking all conditions */
   build_errmsg() {
-    let msg: string[] = Array();
+    const msg: string[] = Array();
     if (!this.check_email) {
       msg.push('이메일 중복 체크를 해주세요');
     }

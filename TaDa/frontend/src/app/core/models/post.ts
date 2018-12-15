@@ -3,7 +3,7 @@ import { ArbeitTypeEnum } from './enums/arbeit-type-enum.enum';
 import { HowToPayEnum } from './enums/how-to-pay-enum.enum';
 
 export class Post {
-    post_id: number = null;
+    id: number = null;
     author_id: number = null;
     title: string = null;
     content: string = null;

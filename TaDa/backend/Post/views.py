@@ -58,7 +58,8 @@ def post(request, post_id):
         if request.user.is_authenticated:
             target_post = Post.objects.filter(id = post_id)
             if target_post.exists():
-                return JsonResponse(json.dumps(target_post.values(), content_type="application/json"), safe=False)
+                post_dict = json.dumps(target_post.values()[0], cls=DjangoJSONEncoder)
+                return JsonResponse(post_dict, safe=False)           
             else:
                 return HttpResponse(status=404)
         else:
@@ -67,6 +68,7 @@ def post(request, post_id):
         if request.user.is_authenticated:
             target_post = Post.objects.filter(id = post_id)
             if target_post.exists():
+                target_post = target_post[0]
                 if target_post.author_id == request.user.id:
                     try:
                         req_data = json.loads(request.body.decode())

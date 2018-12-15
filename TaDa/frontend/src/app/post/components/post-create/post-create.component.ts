@@ -40,7 +40,6 @@ import { UserService } from '../../../core/services/user.service';
     this.region_enum_list = Object.values(RegionEnum);
     this.arbeit_type_enum_list = Object.values(ArbeitTypeEnum);
     this.how_to_pay_enum_list = Object.values(HowToPayEnum);
-    this.new_post.author_id = this.user_service.getCurrentUser().id;
     this.time_zone_start = new Date();
     this.time_zone_end = new Date();
     this.time_zone_hm = [0, 0, 0, 0];
@@ -53,7 +52,6 @@ import { UserService } from '../../../core/services/user.service';
     const object_to_json = JSON.stringify(input_json);
     const json_to_date = JSON.parse(object_to_json);
     const converted_date = new Date(json_to_date.year, json_to_date.month - 1, json_to_date.day, 23, 59);
-    console.log(converted_date);
     return converted_date;
   }
   addToTimezone(time_zone_start, time_zone_end): void {
@@ -67,7 +65,6 @@ import { UserService } from '../../../core/services/user.service';
     } else if ( converted_time_zone_start > converted_time_zone_end ) {
       alert('종료 시간이 시작 시간보다 빠릅니다.');
     } else {
-      alert('yes');
       // store
       this.time_zone_list.push(converted_time_zone_start);
       this.time_zone_list.push(converted_time_zone_end);
@@ -106,15 +103,13 @@ import { UserService } from '../../../core/services/user.service';
         document.getElementById(id_names[index]).setAttribute('style', 'border: 1px solid blue;');
       }
     }
-
     // 마지막 확인
     if ( error_state === 0 ) {
       // 토스트로 바꾸기
-      alert('작성 완료!');
       this.new_post.author_id = this.user_service.getCurrentUser().id;
       this.new_post.timezone = this.time_zone_list;
       this.post_service.createPost(this.new_post)
-        .then( () => console.log(1));
+        .then( () => this.router.navigateByUrl('/post/list'));
     } else {
       alert('* 표시된 칸을 모두 작성해주세요');
     }
@@ -122,10 +117,7 @@ import { UserService } from '../../../core/services/user.service';
   back(): void {
     this.router.navigateByUrl('/post/list');
   }
-  typechecker(input): void {
-    console.log(typeof input);
-    this.post_service.getPosts().then(data => console.log(data));
-  }
+
   iter(num: number): number[] {
     const number_list = [];
     for (let i = 0; i < num; i++) {
