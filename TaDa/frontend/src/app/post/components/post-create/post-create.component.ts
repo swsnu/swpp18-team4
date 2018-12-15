@@ -7,6 +7,7 @@ import { HowToPayEnum } from '../../../core/models/enums/how-to-pay-enum.enum';
 import { Router } from '@angular/router';
 import { PostService } from '../../../core/services/post.service';
 import { UserService } from '../../../core/services/user.service';
+import {ToastrService} from 'ngx-toastr';
 
 
 @Component({
@@ -30,7 +31,8 @@ import { UserService } from '../../../core/services/user.service';
   constructor(
     private router: Router,
     private post_service: PostService,
-    private user_service: UserService
+    private user_service: UserService,
+    private toastrService: ToastrService
   ) { }
 
   ngOnInit() {
@@ -61,9 +63,9 @@ import { UserService } from '../../../core/services/user.service';
     converted_time_zone_end.setHours(this.time_zone_hm[2]); converted_time_zone_end.setMinutes(this.time_zone_hm[3]);
 
     if ( isNaN(converted_time_zone_start.getTime()) || isNaN(converted_time_zone_end.getTime()) ) {
-      alert('Invalid Timezone');
+      this.toastrService.warning('올바른 날짜 형식이 아닙니다.');
     } else if ( converted_time_zone_start > converted_time_zone_end ) {
-      alert('종료 시간이 시작 시간보다 빠릅니다.');
+      this.toastrService.warning('종료 시간이 시작 시간보다 빠릅니다.');
     } else {
       // store
       this.time_zone_list.push(converted_time_zone_start);
@@ -112,7 +114,7 @@ import { UserService } from '../../../core/services/user.service';
         .then( () => this.router.navigateByUrl('/post/list'))
         .catch( () => alert('글 작성 실패'));
     } else {
-      alert('기본 정보란을 모두 작성해주세요');
+      this.toastrService.warning('기본 정보란을 모두 작성해주세요');
     }
   }
   back(): void {
@@ -123,6 +125,15 @@ import { UserService } from '../../../core/services/user.service';
     const number_list = [];
     for (let i = 0; i < num; i++) {
       number_list.push(i);
+    }
+    return number_list;
+  }
+  iter_minute(num: number): number[] {
+    const number_list = [];
+    for (let i = 0; i < num; i++) {
+      if (i % 5 === 0) {
+        number_list.push(i);
+      }
     }
     return number_list;
   }

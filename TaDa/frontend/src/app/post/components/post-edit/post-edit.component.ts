@@ -3,10 +3,12 @@ import { PostService } from '../../../core/services/post.service';
 import { UserService } from '../../../core/services/user.service';
 import { Post } from '../../../core/models/post';
 
+import { ToastrService } from 'ngx-toastr';
 import { ActivatedRoute, Router } from '@angular/router';
 import { RegionEnum } from '../../../core/models/enums/region-enum.enum';
 import { ArbeitTypeEnum } from '../../../core/models/enums/arbeit-type-enum.enum';
 import { HowToPayEnum } from '../../../core/models/enums/how-to-pay-enum.enum';
+
 
 @Component({
   selector: 'app-post-edit',
@@ -28,19 +30,19 @@ export class PostEditComponent implements OnInit {
     private post_service: PostService,
     private user_service: UserService,
     private router: Router,
-    private route: ActivatedRoute
+    private route: ActivatedRoute,
+    private toastrService: ToastrService
   ) { }
 
   ngOnInit() {
     const id = +this.route.snapshot.paramMap.get('id');
     this.post_service.getPostByPostId(id)
       .then( post => this.current_post = post)
-      .then( () => this.first_setting() )
-      .catch( () => this.router.navigateByUrl('/post/list'));
+      .then( () => this.first_setting() );
+      //.catch( () => this.router.navigateByUrl('/post/list'));
   }
   first_setting(): void {
     this.current_post = <Post>JSON.parse(this.current_post);
-
 
     this.dead_line = this.current_post.deadline;
     this.time_zone_list = this.current_post.timezone;
@@ -68,9 +70,9 @@ export class PostEditComponent implements OnInit {
     converted_time_zone_end.setHours(this.time_zone_hm[2]); converted_time_zone_end.setMinutes(this.time_zone_hm[3]);
 
     if ( isNaN(converted_time_zone_start.getTime()) || isNaN(converted_time_zone_end.getTime()) ) {
-      alert('Invalid Timezone');
+      this.toastrService.warning('올바른 날짜 형식이 아닙니다.');
     } else if ( converted_time_zone_start > converted_time_zone_end ) {
-      alert('종료 시간이 시작 시간보다 빠릅니다.');
+      this.toastrService.warning('종료 시간이 시작 시간보다 빠릅니다.');
     } else {
       // store
       this.time_zone_list.push(converted_time_zone_start);
@@ -96,18 +98,18 @@ export class PostEditComponent implements OnInit {
     new_post.deadline = this.convertJsonToDate(this.dead_line);
     if ( isNaN(new_post.deadline.getTime()) ) {
       error_state = 1;
-      document.getElementById('deadline').setAttribute('style', 'border: 2px solid red;');
+      document.getElementById('deadline').setAttribute('style', 'border: 2px solid red; color: red;');
     } else {
-      document.getElementById('deadline').setAttribute('style', 'border: 1px solid blue;');
+      document.getElementById('deadline').setAttribute('style', 'border: ;');
     }
 
     // for 로 돌리기
     for (const {item, index} of should_filled.map((item, index) => ({ item, index }))) {
       if ( (item === undefined) || (item === null) || (item.trim() === '') ) {
         error_state = 1;
-        document.getElementById(id_names[index]).setAttribute('style', 'border: 2px solid red;');
+        document.getElementById(id_names[index]).setAttribute('style', 'border: 2px solid red; color: red;');
       } else {
-        document.getElementById(id_names[index]).setAttribute('style', 'border: 1px solid blue;');
+        document.getElementById(id_names[index]).setAttribute('style', 'border: ; color: ;');
       }
     }
     // 마지막 확인
@@ -119,7 +121,7 @@ export class PostEditComponent implements OnInit {
         .then( () => this.router.navigateByUrl('/post/list'))
         .catch( () => alert('업데이트 실패'));
     } else {
-      alert('* 표시된 칸을 모두 작성해주세요');
+      this.toastrService.warning('기본 정보란을 모두 작성해주세요');
     }
   }
   back(): void {
@@ -131,6 +133,15 @@ export class PostEditComponent implements OnInit {
     const number_list = [];
     for (let i = 0; i < num; i++) {
       number_list.push(i);
+    }
+    return number_list;
+  }
+  iter_minute(num: number): number[] {
+    const number_list = [];
+    for (let i = 0; i < num; i++) {
+      if (i % 5 === 0) {
+        number_list.push(i);
+      }
     }
     return number_list;
   }

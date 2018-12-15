@@ -71,7 +71,7 @@
         <input id="deadline" class="form-control" placeholder="yyyy-mm-dd"
                name="dp" [(ngModel)]="dead_line" ngbDatepicker #d="ngbDatepicker">
         <button class="btn btn-outline-secondary" (click)="d.toggle()" type="button">
-          <img src="favicon.ico" style="width: 1.2rem; height: 1rem; cursor: pointer;"/>
+          <img src="calendar.ico" style="width: 1.2rem; height: 1rem; cursor: pointer;"/>
         </button>
       </div>
 
@@ -117,13 +117,13 @@
               <input class="form-control" placeholder="시작 시간"
                      name="dp" [(ngModel)]="time_zone_start" ngbDatepicker #d1="ngbDatepicker">
               <button class="btn btn-outline-secondary" (click)="d1.toggle()" type="button">
-                <img src="favicon.ico" style="width: 1.2rem; height: 1rem; cursor: pointer;"/>
+                <img src="calendar.ico" style="width: 1.2rem; height: 1rem; cursor: pointer;"/>
               </button>
               <select name="start_h" [(ngModel)]="time_zone_hm[0]">
                 <option *ngFor="let i of iter(24)" [ngValue]="i">{{i}}</option>
               </select>
               <select name="start_m" [(ngModel)]="time_zone_hm[1]">
-                <option *ngFor="let i of iter(60)" [ngValue]="i">{{i}}</option>
+                <option *ngFor="let i of iter_minute(60)" [ngValue]="i">{{i}}</option>
               </select>
             </div>
             <p class="font-weight-bold" style="font-size: 30px;">~</p>
@@ -131,13 +131,13 @@
               <input class="form-control" placeholder="종료 시간"
                      name="dp" [(ngModel)]="time_zone_end" ngbDatepicker #d2="ngbDatepicker">
               <button class="btn btn-outline-secondary" (click)="d2.toggle()" type="button">
-                <img src="favicon.ico" style="width: 1.2rem; height: 1rem; cursor: pointer;"/>
+                <img src="calendar.ico" style="width: 1.2rem; height: 1rem; cursor: pointer;"/>
               </button>
               <select name="end_h" [(ngModel)]="time_zone_hm[2]">
                 <option *ngFor="let i of iter(24)" [ngValue]="i">{{i}}</option>
               </select>
               <select name="end_m" [(ngModel)]="time_zone_hm[3]">
-                <option *ngFor="let i of iter(60)" [ngValue]="i">{{i}}</option>
+                <option *ngFor="let i of iter_minute(60)" [ngValue]="i">{{i}}</option>
               </select>
             </div>
           </div>
