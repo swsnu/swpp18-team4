@@ -5,16 +5,18 @@
   <div class="input-group-prepend">
     <span class="input-group-text" id="basic-addon3">필터링 태그</span>
   </div>
-  <div class="form-control" id="basic-url" aria-describedby="basic-addon3">
-    <ng-container class="col-md-4" *ngFor="let tag of filering_tags">
-          {{tag}}
+  <div class="form-control" id="basic-url" style="padding: 3px" aria-describedby="basic-addon3">
+    <ng-container class="col-md-4"  *ngFor="let tag of filtering_tags">
+        <app-tag (removeTag)="removeTag(tag.type, tag.index)" 
+          [hasCloseButton]="true" [isSelectable]="true" [enumType]="tag.type" [enumBody]="tag.index" >
+        </app-tag>
     </ng-container>
   </div>
 </div>
 
 <!-- filtering with Tags -->
 
-<div class="row">  
+<div class="row" style="border-width: 1.5px;">  
   <button type="button"  (click)= "filter_button=1" class="btn tag-button tag-time">시간</button>
   <button type="button" (click)= "filter_button=2" class="btn tag-button tag-type">유형</button>  
   <button type="button" (click)= "filter_button=3" class="btn tag-button tag-region">장소</button>
@@ -24,21 +26,27 @@
 <div [ngSwitch]="filter_button">
     <b *ngSwitchCase="1">NOT YET</b>
     <ng-container *ngSwitchCase="2">
-      <b *ngFor="let enums of arbeit_type_enum_list">
-        {{enums}} 
+      <b *ngFor="let enums of arbeit_type_enum_list; let idx = index;">
+        <app-tag (addTag)="addTag(2, idx)" (removeTag)="removeTag(2, idx)" 
+          [hasCloseButton]="false" [isSelectable]="!existInArray(2, idx)" [enumType]="2" [enumBody]="idx" >
+        </app-tag> 
       </b>
     </ng-container>
     <ng-container *ngSwitchCase="3">
-      <b *ngFor="let enums of region_enum_list">
-        {{enums}} 
+      <b *ngFor="let enums of region_enum_list; let idx = index;">
+          <app-tag (addTag)="addTag(3, idx)" (removeTag)="removeTag(3, idx)" 
+          [hasCloseButton]="false" [isSelectable]="!existInArray(3, idx)" [enumType]="3" [enumBody]="idx" >
+          </app-tag> 
       </b>
     </ng-container>
     <ng-container *ngSwitchCase="4">
-      <b *ngFor="let enums of how_to_pay_enum_list">
-        {{enums}} 
+      <b *ngFor="let enums of how_to_pay_enum_list; let idx = index;">
+        <app-tag (addTag)="addTag(4, idx)" (removeTag)="removeTag(4, idx)" 
+          [hasCloseButton]="false" [isSelectable]="!existInArray(4, idx)" [enumType]="4" [enumBody]="idx" >
+        </app-tag> 
       </b>
     </ng-container>
-    <b *ngSwitchDefault>No Direction</b>
+    <b *ngSwitchDefault></b>
 </div> 
 
     <!-- seach bar -->
@@ -99,4 +107,3 @@
 <button type="button" style="float: right; margin-left: auto;" routerLink="/post/create" class="btn btn-primary">작성하기</button>
 
 
-<app-tag></app-tag>

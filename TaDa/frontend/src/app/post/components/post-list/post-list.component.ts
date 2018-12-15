@@ -9,6 +9,8 @@ import { HowToPayEnum } from '../../../core/models/enums/how-to-pay-enum.enum';
 import { RegionEnum } from '../../../core/models/enums/region-enum.enum';
 import { region_enum_list, arbeit_type_enum_list, how_to_pay_enum_list } from '../../../core/models/enums/enum-list';
 import { TagComponent } from '../../../shared/tag/tag/tag.component';
+import { ToastrService } from 'ngx-toastr';
+
 
 
 @Component({
@@ -20,7 +22,7 @@ import { TagComponent } from '../../../shared/tag/tag/tag.component';
 export class PostListComponent implements OnInit {
   posts_all: Post[];
   posts_filtered: Post[];
-  filering_tags: string[];
+  filtering_tags = [];
 
   region_enum_list: string[];
   arbeit_type_enum_list: string[];
@@ -32,6 +34,7 @@ export class PostListComponent implements OnInit {
   constructor(
     private userService: UserService,
     private postService: PostService,
+    private toastrService: ToastrService
 
   ) { }
 
@@ -39,7 +42,6 @@ export class PostListComponent implements OnInit {
     
     this.posts_all = mock_posts;
     this.posts_filtered = this.posts_all;
-    this.filering_tags = ['너', '그리고', '나'];
     this.region_enum_list = region_enum_list;
     this.arbeit_type_enum_list = arbeit_type_enum_list;
     this.how_to_pay_enum_list = how_to_pay_enum_list;
@@ -56,5 +58,38 @@ export class PostListComponent implements OnInit {
   
   sort(criteria: number) {
     console.log(criteria);
+  }
+
+
+  /* functions for handling tag from filter_list */ 
+  addTag(enumtype: number, enumindex: number): void {
+    if (this.filtering_tags.length >= 5) {
+      this.toastrService.warning('필터링 태그는 5개까지 입력 가능합니다!');
+      return;
+    }
+
+    let ele = {
+      type: enumtype,
+      index: enumindex
+    }
+    this.filtering_tags.push(ele);
+  }
+
+  removeTag(type: number, index: number): void {
+    for (let i = 0; i < this.filtering_tags.length; i++) {
+      if (this.filtering_tags[i].type == type && this.filtering_tags[i].index == index) {
+          this.filtering_tags.splice(i, 1);
+          break;
+      }
+    }
+  }
+
+  existInArray(type: number, index: number): boolean {
+    for (let i = 0; i < this.filtering_tags.length; i++) {
+      if (this.filtering_tags[i].type == type && this.filtering_tags[i].index == index) {
+          return true;
+      }
+    }
+    return false;
   }
 }
