@@ -39,6 +39,7 @@ import { TagComponent } from './shared/tag/tag/tag.component';
       apiKey: 'AIzaSyCGdFwTXy8_d6emqQWwS5ww3AaSL9wRw9Q'
     }),
     NgbModule.forRoot(),
+
   ],
   providers: [
     AuthGuard,

@@ -1,3 +1,39 @@
-<p>
-  timeblock works!
-</p>
+<!--a draggable element-->
+<div [dndDraggable]="draggable.data"
+     [dndEffectAllowed]="draggable.effectAllowed"
+     [dndDisableIf]="draggable.disable"
+     (dndStart)="onDragStart($event)"
+     (dndCopied)="onDraggableCopied($event)"
+     (dndLinked)="onDraggableLinked($event)"
+     (dndMoved)="onDraggableMoved($event)"
+     (dndCanceled)="onDragCanceled($event)"
+     (dndEnd)="onDragEnd($event)">
+      
+    <!--if [dndHandle] is used inside dndDraggable drag can only start from the handle-->
+    <div *ngIf="draggable.handle"
+         dndHandle>HANDLE
+    </div>
+    
+    draggable ({{draggable.effectAllowed}}) <span [hidden]="!draggable.disable">DISABLED</span>
+    
+    <!--optionally select a child element as drag image-->
+    <div dndDragImageRef>DRAG_IMAGE</div>
+    
+</div>
+ 
+<!--a dropzone-->
+<!--to allow dropping content that is not [dndDraggable] set dndAllowExternal to true-->
+<section dndDropzone
+         (dndDragover)="onDragover($event)"
+         (dndDrop)="onDrop($event)">
+      
+    dropzone 
+    
+    <!--optional placeholder element for dropzone-->
+    <!--will be removed from DOM on init-->
+    <div style="border: 1px orangered solid; border-radius: 5px; padding: 15px;"
+         dndPlaceholderRef>
+        placeholder
+    </div>
+ 
+</section>

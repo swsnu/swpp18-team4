@@ -1,59 +1,58 @@
 <form class="border" style="padding:20px; margin-bottom: 20px;">
+  <!-- filtering with Tags -->
   <small class="help-block">
       &nbsp;*같은 종류의 태그에 대해선 OR, 다른 종류의 태그에 대해선 AND 검색이 실행됩니다.  
   </small>
-<!-- filtering with Tags -->
-<div class="input-group mb-3">
-  <div class="input-group-prepend">
-    <span class="input-group-text" id="basic-addon3">필터링 태그</span>
+  <div class="input-group mb-3">
+    <div class="input-group-prepend">
+      <span class="input-group-text" id="basic-addon3">필터링 태그</span>
+    </div>
+    <div class="form-control" id="basic-url" style="padding: 3px" aria-describedby="basic-addon3">
+      <ng-container class="col-md-4"  *ngFor="let tag of filtering_tags">
+          <app-tag (removeTag)="removeTag(tag.type, tag.index)" 
+            [hasCloseButton]="true" [isSelectable]="true" [enumType]="tag.type" [enumBody]="tag.index" >
+          </app-tag>
+      </ng-container>
+    </div>
   </div>
-  <div class="form-control" id="basic-url" style="padding: 3px" aria-describedby="basic-addon3">
-    <ng-container class="col-md-4"  *ngFor="let tag of filtering_tags">
-        <app-tag (removeTag)="removeTag(tag.type, tag.index)" 
-          [hasCloseButton]="true" [isSelectable]="true" [enumType]="tag.type" [enumBody]="tag.index" >
-        </app-tag>
-    </ng-container>
+
+
+  <!-- Selecting Tags -->
+  <div class="row" style="border-width: 1.5px;">  
+    <button type="button"  (click)= "filter_button=1" class="btn tag-button tag-time">시간</button>
+    <button type="button" (click)= "filter_button=2" class="btn tag-button tag-type">유형</button>  
+    <button type="button" (click)= "filter_button=3" class="btn tag-button tag-region">장소</button>
+    <button type="button" (click)= "filter_button=4" class="btn tag-button tag-pay">급여</button>
+    <button type="button" style="float: right; margin-left: auto;" (click)= "getMyTagInfo()" class="btn btn-primary">
+      내 태그 불러오기
+    </button>
   </div>
-</div>
 
-
-<!-- filtering with Tags -->
-
-<div class="row" style="border-width: 1.5px;">  
-  <button type="button"  (click)= "filter_button=1" class="btn tag-button tag-time">시간</button>
-  <button type="button" (click)= "filter_button=2" class="btn tag-button tag-type">유형</button>  
-  <button type="button" (click)= "filter_button=3" class="btn tag-button tag-region">장소</button>
-  <button type="button" (click)= "filter_button=4" class="btn tag-button tag-pay">급여</button>
-  <button type="button" style="float: right; margin-left: auto;" (click)= "getMyTagInfo()" class="btn btn-primary">
-    내 태그 불러오기
-  </button>
-</div>
-
-<div [ngSwitch]="filter_button">
-    <b *ngSwitchCase="1">NOT YET</b>
-    <ng-container *ngSwitchCase="2">
-      <b *ngFor="let enums of arbeit_type_enum_list; let idx = index;">
-        <app-tag (addTag)="addTag(2, idx)" (removeTag)="removeTag(2, idx)" 
-          [hasCloseButton]="false" [isSelectable]="!existInArray(2, idx)" [enumType]="2" [enumBody]="idx" >
-        </app-tag> 
-      </b>
-    </ng-container>
-    <ng-container *ngSwitchCase="3">
-      <b *ngFor="let enums of region_enum_list; let idx = index;">
-          <app-tag (addTag)="addTag(3, idx)" (removeTag)="removeTag(3, idx)" 
-          [hasCloseButton]="false" [isSelectable]="!existInArray(3, idx)" [enumType]="3" [enumBody]="idx" >
+  <div [ngSwitch]="filter_button">
+      <b *ngSwitchCase="1">NOT YET</b>
+      <ng-container *ngSwitchCase="2">
+        <b *ngFor="let enums of arbeit_type_enum_list; let idx = index;">
+          <app-tag (addTag)="addTag(2, idx)" (removeTag)="removeTag(2, idx)" 
+            [hasCloseButton]="false" [isSelectable]="!existInArray(2, idx)" [enumType]="2" [enumBody]="idx" >
           </app-tag> 
-      </b>
-    </ng-container>
-    <ng-container *ngSwitchCase="4">
-      <b *ngFor="let enums of how_to_pay_enum_list; let idx = index;">
-        <app-tag (addTag)="addTag(4, idx)" (removeTag)="removeTag(4, idx)" 
-          [hasCloseButton]="false" [isSelectable]="!existInArray(4, idx)" [enumType]="4" [enumBody]="idx" >
-        </app-tag> 
-      </b>
-    </ng-container>
-    <b *ngSwitchDefault></b>
-</div> 
+        </b>
+      </ng-container>
+      <ng-container *ngSwitchCase="3">
+        <b *ngFor="let enums of region_enum_list; let idx = index;">
+            <app-tag (addTag)="addTag(3, idx)" (removeTag)="removeTag(3, idx)" 
+            [hasCloseButton]="false" [isSelectable]="!existInArray(3, idx)" [enumType]="3" [enumBody]="idx" >
+            </app-tag> 
+        </b>
+      </ng-container>
+      <ng-container *ngSwitchCase="4">
+        <b *ngFor="let enums of how_to_pay_enum_list; let idx = index;">
+          <app-tag (addTag)="addTag(4, idx)" (removeTag)="removeTag(4, idx)" 
+            [hasCloseButton]="false" [isSelectable]="!existInArray(4, idx)" [enumType]="4" [enumBody]="idx" >
+          </app-tag> 
+        </b>
+      </ng-container>
+      <b *ngSwitchDefault></b>
+  </div> 
 
     <!-- seach bar -->
     <div class="row" style="margin-top: 20px;">    
@@ -67,7 +66,7 @@
           <input type="text" class="form-control" #search_keyword name="search_keyword" placeholder="검색어를 입력하세요">
           <button class="btn btn-primary" type="button" (click)="onClickSearch(search_keyword.value, search_criteria.value)">검색</button>        
         </div>
-        </div>
+       </div>
 
         <!--sorting buttons-->
         <div class="col-sm-4 col-md-4" style="float: right; margin-left: auto;">
@@ -112,5 +111,3 @@
 </div>
 
 <button type="button" style="float: right; margin-left: auto;" routerLink="/post/create" class="btn btn-primary">작성하기</button>
-
-
