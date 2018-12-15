@@ -69,18 +69,13 @@ export class PostListComponent implements OnInit {
   getMyTagInfo(): void {
     //const user = this.userService.getCurrentUser();
 
-    console.log('**********');    
-
     const user = mock_users[0];
     user.employee_region.push(RegionEnum.seoulip);
     user.employee_region.push(RegionEnum.home);
     user.employee_how_to_pay.push(HowToPayEnum.pay_hourly);
-
     let arr = [], user_enums = [];
-    console.log(user);
 
     user_enums = Object.values(user.employee_type);
-    console.log(user_enums);
     arbeit_type_enum_list.forEach(ele=> {
       if(user_enums.includes(ele)) {
         arr.push({
@@ -88,11 +83,9 @@ export class PostListComponent implements OnInit {
           index: arbeit_type_enum_list.indexOf(ele)
         });
       }
-    });
+  });
 
     user_enums = Object.values(user.employee_region);
-    console.log(user_enums);
-    console.log(user.employee_region)
     region_enum_list.forEach(ele=> {
       if(user_enums.includes(ele)) {
         arr.push({
@@ -102,7 +95,6 @@ export class PostListComponent implements OnInit {
       }
     });
     user_enums = Object.values(user.employee_how_to_pay);
-    console.log(user_enums);
     how_to_pay_enum_list.forEach(ele=> {
 
       if(user_enums.includes(ele)) {
@@ -112,7 +104,6 @@ export class PostListComponent implements OnInit {
         });
       }
     });
-    console.log(arr);
     this.filtering_tags = arr;
   }
 
@@ -212,6 +203,8 @@ export class PostListComponent implements OnInit {
     /* sort by deadline date  */  
     } else { 
       this.posts_filtered.sort(function(a, b) {
+        if (a.is_magam_timeout || a.is_magam_user ) return 1;
+        else if (b.is_magam_timeout || b.is_magam_user) return -1;
         return a.deadline > b.deadline ? 1 :
                a.deadline < b.deadline ? -1 : 0;
       });

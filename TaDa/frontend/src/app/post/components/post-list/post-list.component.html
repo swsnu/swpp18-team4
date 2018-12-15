@@ -24,7 +24,7 @@
   <button type="button" (click)= "filter_button=2" class="btn tag-button tag-type">유형</button>  
   <button type="button" (click)= "filter_button=3" class="btn tag-button tag-region">장소</button>
   <button type="button" (click)= "filter_button=4" class="btn tag-button tag-pay">급여</button>
-  <button type="button"  style="float: right; margin-left: auto;" (click)= "getMyTagInfo()" class="btn btn-primary">
+  <button type="button" style="float: right; margin-left: auto;" (click)= "getMyTagInfo()" class="btn btn-primary">
     내 태그 불러오기
   </button>
 </div>
@@ -96,7 +96,8 @@
       </tr>
     </thead>
     <tbody>
-      <tr [routerLink]="'/post/view/'+post.post_id" *ngFor="let post of posts_filtered; let idx = index;">
+      <tr [routerLink]="'/post/view/'+post.post_id" *ngFor="let post of posts_filtered; let idx = index;"
+          [ngStyle]= "post.is_magam_timeout || post.is_magam_user ? {'opacity':0.5}: {}">
         <td>{{idx+1}}</td>
         <td>{{post.title}}</td>
         <td>{{getAuthorNameByID(post.author_id)}}</td>
