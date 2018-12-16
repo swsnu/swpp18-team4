@@ -85,8 +85,8 @@ class PostTestCase(TestCase):
             #last_modify_date = models.DateTimeField('last edited date', auto_now = True, blank = True)
             'deadline': datetime.datetime.strptime("2018-01-02 16:30", "%Y-%m-%d %H:%M"),
             'home_expect_time': 10,
-                #is_magam_user = models.BooleanField(default = False)
-                #is_magam_timeout = models.BooleanField(default = False)
+            #is_magam_user = models.BooleanField(default = False)
+            #is_magam_timeout = models.BooleanField(default = False)
             'is_same_person': True,
         }, cls=DjangoJSONEncoder), content_type="application/json") #DjangoJSONEncoder
             
@@ -118,47 +118,48 @@ class PostTestCase(TestCase):
         client = Client()
         response = client.put('/api/post/')
         self.assertEqual(response.status_code, 405)
-    """
-    def test_post_get_success(self, post_id):
-        pass
     
-    def test_post_get_not_authenticated(self, post_id):
-        pass
-
-    def test_post_get_not_exist(self, post_id):
-        pass
-
-    def test_post_put_success(self, post_id):
-        pass
-    
-    def test_post_put_not_authenticated(self, post_id):
-        pass
-    
-    def test_post_put_not_exist(self, post_id):
-        pass
-    
-    def test_post_put_not_authorized(self, post_id):
-        pass
-    
-    def test_post_put_JSONerror(self, post_id):
-        pass
-    
-    def test_post_delete_success(self, post_id):
-        pass
-    
-    def test_post_delete_not_authenticated(self, post_id):
-        pass
-    
-    def test_post_delete_not_exist(self, post_id):
-        pass
-    
-    def test_post_delete_not_authorized(self, post_id):
-        pass
-    
-    def test_post_else(self, post_id):
+    def test_post_get_success(self):
         client = Client()
-        url = '/api/post/' + str(post_id)
-        response = client.post(url)
+        response = client.get('/api/post/')
+        pass
+    
+    def test_post_get_not_authenticated(self):
+        pass
+
+    def test_post_get_not_exist(self):
+        pass
+
+    def test_post_put_success(self):
+        pass
+    
+    def test_post_put_not_authenticated(self):
+        pass
+    
+    def test_post_put_not_exist(self):
+        pass
+    
+    def test_post_put_not_authorized(self):
+        pass
+    
+    def test_post_put_JSONerror(self):
+        pass
+    
+    def test_post_delete_success(self):
+        pass
+    
+    def test_post_delete_not_authenticated(self):
+        pass
+    
+    def test_post_delete_not_exist(self):
+        pass
+    
+    def test_post_delete_not_authorized(self):
+        pass
+    
+    def test_post_else(self):
+        client = Client()
+        response = client.post('/api/post/1')
         self.assertEqual(response.status_code, 405)
     
     def test_author_get_success(self, author_id):
