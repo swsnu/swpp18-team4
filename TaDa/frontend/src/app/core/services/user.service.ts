@@ -37,12 +37,12 @@ export class UserService {
   /* create token for user with no token */
   createToken() : Promise<Response> {
     return this.http.get<Response>(this.tokenUrl).toPromise().catch(this.handleError);
-  }  
+  }
 
   /* Check cookie if token contained. If there's no token, return null */
-  checkCSRF() : string {
+  checkCSRF(): string {
     const lines = document.cookie.split(';');
-    let result: string = null; 
+    let result: string = null;
     lines.forEach(line => {
       if (line.match(/csrftoken/)) {
         result =  line.trim().split('=')[1];
@@ -70,11 +70,12 @@ export class UserService {
     } else {
       return false;
     }
-  } 
 
+  }
   getUserType(): TypeEnum {
     return this.currentUser.user_type;
   }
+
 
   setLoginUser(user: User): void {
     this.currentUser = user;

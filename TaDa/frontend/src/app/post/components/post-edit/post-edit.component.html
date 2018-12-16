@@ -1,3 +1,160 @@
-<p>
-  post-edit works!
-</p>
+<div *ngIf="time_zone_hm">
+  <div class="card-deck">
+    <div class="card mb-3" style="margin-left:2%;">
+      <div class="card-header">기본 정보</div>
+      <div class="card-body text-primary">
+        <div class="input-group mb-3">
+          <div class="input-group-prepend">
+            <span class="input-group-text">제목</span>
+          </div>
+          <input id="title" type="text" [(ngModel)]="current_post.title" placeholder="제목을 입력하세요">
+        </div>
+
+        <div class="input-group mb-3">
+          <div class="input-group-prepend">
+            <span class="input-group-text" style="display: inline-block; height: 38px;">장소</span>
+          </div>
+          <select  class="custom-select" id="region" [(ngModel)]="current_post.region">
+            <option *ngFor="let symbol of region_enum_list" [ngValue]="symbol">{{symbol}}</option>
+          </select>
+        </div>
+
+        <div *ngIf = "current_post.region" class="input-group mb-3 not-important">
+          <div *ngIf="current_post.region === '재택'; then HomeBlock; else notHomeBlock" class="input-group-prepend"></div>
+          <ng-template #notHomeBlock>
+            <span class="input-group-text">(상세주소)</span>
+            <input type="text" [(ngModel)]="current_post.region_specific" placeholder="상세주소를 입력하세요">
+          </ng-template>
+          <ng-template #HomeBlock>
+            <span class="input-group-text">(예상 총 업무 시간)</span>
+            <input type="number" min="0" [(ngModel)]="current_post.home_expect_time" placeholder="총 예상시간을 입력해주세요">
+          </ng-template>
+        </div>
+
+        <div class="input-group mb-3">
+          <div class="input-group-prepend">
+            <span class="input-group-text" style="display: inline-block; height: 38px;">알바유형</span>
+          </div>
+          <select  class="custom-select" id="arbeit_type" [(ngModel)]="current_post.arbeit_type">
+            <option *ngFor="let symbol of arbeit_type_enum_list" [ngValue]="symbol">{{symbol}}</option>
+          </select>
+        </div>
+
+        <div class="input-group mb-3">
+          <div class="input-group-prepend">
+            <span class="input-group-text" style="display: inline-block; height: 38px;">입금방식</span>
+          </div>
+          <select  class="custom-select" id="how_to_pay" [(ngModel)]="current_post.how_to_pay">
+            <option *ngFor="let symbol of how_to_pay_enum_list" [ngValue]="symbol">{{symbol}}</option>
+          </select>
+        </div>
+
+        <div *ngIf = "current_post.how_to_pay" class="input-group mb-3 not-important">
+          <div *ngIf="current_post.how_to_pay === '시급'" class="input-group-prepend">
+            <span class="input-group-text">(시급)</span>
+            <input type="number" min="0" [(ngModel)]="current_post.pay_per_hour" placeholder="단위: 원">
+          </div>
+          <div *ngIf="current_post.how_to_pay === '건급'" class="input-group-prepend">
+            <span class="input-group-text">(예상 시급)</span>
+            <input type="number" min="0" [(ngModel)]="current_post.pay_per_hour" placeholder="단위: 원">
+          </div>
+          <div *ngIf="current_post.how_to_pay === '상품' || current_post.how_to_pay === '랜덤'" class="input-group-prepend">
+            <span class="input-group-text">(상품)</span>
+            <input type="text" [(ngModel)]="current_post.goods" placeholder="상품을 입력해주세요">
+          </div>
+        </div>
+
+
+        <div class="input-group mb-3">
+          <div class="input-group-prepend">
+            <span class="input-group-text" style="display: inline-block; height: 38px;">마감일 (수정 전 {{current_post.deadline | date: 'yyyy/M/d'}})</span>
+          </div>
+          <input id="deadline" class="form-control" placeholder="yyyy-mm-dd"
+                 name="dp" [(ngModel)]="dead_line" ngbDatepicker #d="ngbDatepicker">
+          <button class="btn btn-outline-secondary" (click)="d.toggle()" type="button">
+            <img src="calendar.ico" style="width: 1.2rem; height: 1rem; cursor: pointer;"/>
+          </button>
+        </div>
+
+        <div class="input-group">
+          <div class="input-group-prepend">
+            <span class="input-group-text">내용</span>
+          </div>
+          <textarea id="content" type="text" [(ngModel)]="current_post.content" placeholder="추가 내용을 입력하세요"></textarea>
+        </div>
+
+      </div>
+    </div>
+
+
+
+    <!-- 추가정보 -->
+    <div class="card border-info mb-3" style="margin-right:2%;">
+
+      <div class="card-header not-important-header">추가 정보</div>
+
+      <div class="custom-control custom-checkbox">
+        <input type="checkbox" [(ngModel)]="current_post.is_same_person" class="custom-control-input" id="customCheck1">
+        <label class="custom-control-label" for="customCheck1">매 알바마다 같은 사람이 와야만 합니까?</label>
+      </div>
+
+      <div class="card-body">
+        <h5 class="card-title">시간대</h5>
+        <div class="list-group">
+          <div *ngFor="let time_zone_row of time_zone_list; let idx = index" >
+            <div class="row" *ngIf="idx % 2 === 0">
+              <button class="btn btn-outline-secondary minus" (click)="remove_row(idx)">-</button>
+              {{time_zone_list[idx] | date: 'yyyy-MM-dd HH:mm' }} ~
+              {{time_zone_list[idx+1] | date: 'yyyy-MM-dd HH:mm' }}
+            </div>
+          </div>
+        </div>
+
+        <div>
+          <form class="form-inline">
+            <button  class="btn btn-outline-secondary plus" (click)="addToTimezone(time_zone_start, time_zone_end)">+</button>
+            <div class="form-group">
+              <div class="input-group2">
+                <input class="form-control" placeholder="시작 시간"
+                       name="dp" [(ngModel)]="time_zone_start" ngbDatepicker #d1="ngbDatepicker">
+                <button class="btn btn-outline-secondary" (click)="d1.toggle()" type="button">
+                  <img src="calendar.ico" style="width: 1.2rem; height: 1rem; cursor: pointer;"/>
+                </button>
+                <select name="start_h" [(ngModel)]="time_zone_hm[0]">
+                  <option *ngFor="let i of iter(24)" [ngValue]="i">{{i}}</option>
+                </select>
+                <select name="start_m" [(ngModel)]="time_zone_hm[1]">
+                  <option *ngFor="let i of iter_minute(60)" [ngValue]="i">{{i}}</option>
+                </select>
+              </div>
+              <p class="font-weight-bold" style="font-size: 30px;">~</p>
+              <div class="input-group2">
+                <input class="form-control" placeholder="종료 시간"
+                       name="dp" [(ngModel)]="time_zone_end" ngbDatepicker #d2="ngbDatepicker">
+                <button class="btn btn-outline-secondary" (click)="d2.toggle()" type="button">
+                  <img src="calendar.ico" style="width: 1.2rem; height: 1rem; cursor: pointer;"/>
+                </button>
+                <select name="end_h" [(ngModel)]="time_zone_hm[2]">
+                  <option *ngFor="let i of iter(24)" [ngValue]="i">{{i}}</option>
+                </select>
+                <select name="end_m" [(ngModel)]="time_zone_hm[3]">
+                  <option *ngFor="let i of iter_minute(60)" [ngValue]="i">{{i}}</option>
+                </select>
+              </div>
+            </div>
+          </form>
+        </div>
+      </div>
+
+    </div>
+
+  </div>
+
+
+  <div>
+    <button (click)="edit()" class="btn btn-outline-primary btn-lg">수정</button>
+    <button (click)="back()" class="btn btn-outline-secondary btn-lg">취소</button>
+  </div>
+
+</div>
+

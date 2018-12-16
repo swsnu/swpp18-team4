@@ -20,6 +20,7 @@ from .models import User, UserManager
 
 class UserTestCase(TestCase):
 
+#email
     def test_email_get_true(self):
         client = Client()
         client.post('/api/user/signup/', data = json.dumps({
@@ -49,6 +50,7 @@ class UserTestCase(TestCase):
         response = client.delete('/api/user/email/a@abc.com/')
         self.assertEqual(response.status_code, 405)
 
+#nickname
     def test_nickname_get_true(self):
         client = Client()
         client.post('/api/user/signup/', data = json.dumps({
@@ -78,6 +80,7 @@ class UserTestCase(TestCase):
         response = client.delete('/api/user/nickname/a/')
         self.assertEqual(response.status_code, 405)
 
+#token
     def test_token_get(self):
         client = Client()
         response = client.get('/api/user/token/')
@@ -88,6 +91,7 @@ class UserTestCase(TestCase):
         response = client.post('/api/user/token/')
         self.assertEqual(response.status_code, 405)
 
+#signup
     def test_signup_post_success(self):
         client = Client()
         response = client.post('/api/user/signup/', data = json.dumps({
@@ -124,8 +128,9 @@ class UserTestCase(TestCase):
         client = Client()
         response = client.get('/api/user/signup/')
         self.assertEqual(response.status_code, 405)
-    
-    def test_signin_success(self):
+
+#signin    
+    def test_signin_post_success(self):
         client = Client()
         client.post('/api/user/signup/', data = json.dumps({
             'user_type': 'ER',
@@ -142,21 +147,6 @@ class UserTestCase(TestCase):
         self.assertEqual(response.status_code, 200)
         self.assertJSONEqual(response.content, {'id': user_id})
 
-    def test_signin_fail(self):
-        client = Client()
-        client.post('/api/user/signup/', data = json.dumps({
-            'user_type': 'ER',
-            'email': 'abc@snu.ac.kr',
-            'nickname': 'c',
-            'password': "d",
-            'company_name': "c",
-        }), content_type="application/json")
-        response = client.post('/api/user/signin/', data = json.dumps({
-            'email': 'abc@snu.ac.kr',
-            'password': "k",
-        }), content_type="application/json")
-        self.assertEqual(response.status_code, 401)
-
     def test_signin_post_JSONerror(self):
         client = Client()
         client.post('/api/user/signup/', data = json.dumps({
@@ -171,11 +161,27 @@ class UserTestCase(TestCase):
         }), content_type="application/json")
         self.assertEqual(response.status_code, 400)
 
+    def test_signin_post_not_authenticated(self):
+        client = Client()
+        client.post('/api/user/signup/', data = json.dumps({
+            'user_type': 'ER',
+            'email': 'abc@snu.ac.kr',
+            'nickname': 'c',
+            'password': "d",
+            'company_name': "c",
+        }), content_type="application/json")
+        response = client.post('/api/user/signin/', data = json.dumps({
+            'email': 'abc@snu.ac.kr',
+            'password': "k",
+        }), content_type="application/json")
+        self.assertEqual(response.status_code, 401)
+
     def test_signin_else(self):
         client = Client()
         response = client.get('/api/user/signin/')
         self.assertEqual(response.status_code, 405)
-    
+
+#signout    
     def test_signout_success(self):
         client = Client()
         client.post('/api/user/signup/', data = json.dumps({
@@ -192,7 +198,7 @@ class UserTestCase(TestCase):
         response = client.get('/api/user/signout/')
         self.assertEqual(response.status_code, 204)
 
-    def test_signout_fail(self):
+    def test_signout_not_authenticated(self):
         client = Client()
         response = client.get('/api/user/signout/')
         self.assertEqual(response.status_code, 401)
@@ -201,7 +207,8 @@ class UserTestCase(TestCase):
         client = Client()
         response = client.delete('/api/user/signout/')
         self.assertEqual(response.status_code, 405)
-    
+
+#user    
     def test_user_get_success(self):
         client = Client()
         client.post('/api/user/signup/', data = json.dumps({

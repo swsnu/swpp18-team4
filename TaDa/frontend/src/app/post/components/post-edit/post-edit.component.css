@@ -1,0 +1,118 @@
+@import url(//fonts.googleapis.com/earlyaccess/jejugothic.css);
+@import url(//fonts.googleapis.com/earlyaccess/kopubbatang.css);
+@import url(//fonts.googleapis.com/earlyaccess/hanna.css);
+
+* {
+  font-family: 'Hanna', sans-serif;
+}
+*:focus {
+  outline: none;
+}
+
+.card {
+  border: solid;
+  border-color: blueviolet;
+  border-width: 1.5px;
+}
+.card-header {
+  color: blueviolet;
+  border-bottom-color: blueviolet;
+}
+.card-title {
+  color: mediumvioletred;
+}
+.input-group span {
+  border: 2px solid mediumvioletred;
+  border-radius: 0;
+  color: mediumvioletred;
+}
+.input-group input {
+  border: solid;
+  border-color: mediumvioletred;
+  padding-left: 10px;
+  max-width: 50%;
+}
+.input-group input::placeholder {
+  color: palevioletred;
+}
+.input-group select {
+  border: solid;
+  border-color: mediumvioletred;
+  padding-left: 10px;
+  max-width: 40%;
+}
+.input-group textarea {
+  border: solid;
+  border-color: mediumvioletred;
+  padding-left: 10px;
+  width: 50%;
+  height: 3em;
+}
+.input-group textarea:focus {
+  height: 10em;
+}
+.not-important span {
+  border: 2px solid cornflowerblue;
+  color: cornflowerblue;
+}
+.not-important input {
+  border-color: cornflowerblue;
+  margin-right: 30px;
+}
+.not-important input::placeholder {
+  color: lightblue;
+}
+
+.not-important-header {
+  color: lightseagreen;
+  border-bottom-color: lightseagreen;
+}
+
+.custom-checkbox {
+  margin-top: 10px;
+  margin-left: 10px;
+}
+.list-group {
+  margin-left: 10px;
+  margin-bottom: 10px;
+}
+
+.minus {
+  margin-left: 5px;
+  margin-right: 5px;
+  height: 30px;
+}
+.plus {
+  margin-right: 5px;
+}
+.input-group2 input {
+  max-width: 150px;
+}
+.input-group2 select {
+  margin-left: 1px;
+  margin-right: 1px;
+  height: 37px;
+}
+
+.btn-lg {
+  margin-left: 5px;
+}
+
+.border-info span {
+  border: 2px solid cornflowerblue;
+  color: cornflowerblue;
+}
+.border-info select {
+  border: solid;
+  border-color: cornflowerblue;
+}
+.border-info input {
+  border: solid;
+  border-color: cornflowerblue;
+}
+.border-info input::placeholder {
+  color: lightblue;
+}
+.border-info h5 {
+  color: cornflowerblue;
+}
