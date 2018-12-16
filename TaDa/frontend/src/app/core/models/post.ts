@@ -5,6 +5,7 @@ import { HowToPayEnum } from './enums/how-to-pay-enum.enum';
 export class Post {
     id: number = null;
     author_id: number = null;
+    author_name: string = null;
     title: string = null;
     content: string = null;
     region: RegionEnum = null;

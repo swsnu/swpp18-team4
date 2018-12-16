@@ -22,8 +22,6 @@ def comments(request):
                 author = request.user
                 star = req_data['star']
                 content = req_data['content']
-                #register_date = models.DateTimeField('first published date', auto_now_add = True)
-                #last_modify_date = models.DateTimeField('last edited date', auto_now = True, blank = True)
             except (KeyError, JSONDecodeError) as e:
                 return HttpResponseBadRequest()
 
@@ -40,7 +38,7 @@ def comment(request, comment_id):
         if request.user.is_authenticated:
             target_comment = Comment.objects.filter(id = comment_id)
             if target_comment.exists():
-                return JsonResponse(json.dumps(target_comment.values()[0], cls = DjangoJSONEncoder), safe=False)
+                return JsonResponse(target_comment.values()[0], safe=False)
             else:
                 return HttpResponse(status=404)
         else:
@@ -49,6 +47,7 @@ def comment(request, comment_id):
         if request.user.is_authenticated:
             target_comment = Comment.objects.filter(id = comment_id)
             if target_comment.exists():
+                target_comment = target_comment[0]
                 if target_comment.author == request.user:
                     try:
                         req_data = json.loads(request.body.decode())

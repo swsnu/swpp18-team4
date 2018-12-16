@@ -25,10 +25,10 @@ def posts(request):
             try:
                 req_data = json.loads(request.body.decode())
                 author = User.objects.filter(id = request.user.id)[0]
-                if author.user_type == 'EE':
-                    author_name = User.objects.filter(id = request.user.id)[0].company_name
+                if author.user_type == 'ER':
+                    author_name = author.company_name
                 else:
-                    author_name = User.objects.filter(id = request.user.id)[0].nickname
+                    author_name = author.nickname
                 title = req_data['title']
                 content = req_data['content']
                 region = req_data['region']
@@ -48,7 +48,7 @@ def posts(request):
             except (KeyError, JSONDecodeError) as e:
                 return HttpResponseBadRequest()
 
-            Post.objects.create(author = author, title = title, content = content, region = region, region_specific = region_specific, arbeit_type = arbeit_type,
+            Post.objects.create(author = author, author_name = author_name, title = title, content = content, region = region, region_specific = region_specific, arbeit_type = arbeit_type,
             how_to_pay = how_to_pay, pay_per_hour = pay_per_hour, goods = goods, timezone = timezone, deadline = deadline, home_expect_time = home_expect_time, is_same_person = is_same_person)
             return HttpResponse(status=200)
         else:
