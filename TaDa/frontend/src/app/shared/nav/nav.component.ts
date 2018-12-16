@@ -44,6 +44,6 @@ export class NavComponent implements OnInit {
   alarm() {
     this.postService.getClosingTimePosts()
       .then( posts => this.closing_posts = posts);
-    this.modalService.open(aa, { centered: true });
+   // this.modalService.open(aa, { centered: true });
   }
 }

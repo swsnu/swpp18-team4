@@ -136,8 +136,7 @@ def user(request, uid):
         if request.user.is_authenticated:
             target_user = User.objects.filter(id=uid)
             if target_user.exists():
-                user_dict = json.dumps(target_user.values()[0], cls=DjangoJSONEncoder)
-                return JsonResponse(user_dict, safe=False)
+                return JsonResponse(target_user.values()[0], safe=False)
             else:
                 return HttpResponse(status=404)
         else:

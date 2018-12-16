@@ -43,13 +43,13 @@ export const mock_posts: Post[] = [
     register_date: null,
     last_modify_date: null,
     deadline: null,
-    home_expected_time: null,
+    home_expect_time: null,
     is_magam_user: true,
     is_magam_timeout: false,
     is_same_person: false
   },
   {
-    post_id: 3,
+    id: 3,
     author_id: 2,
     title: 'title3',
     content: 'content3',
@@ -63,13 +63,13 @@ export const mock_posts: Post[] = [
     register_date: null,
     last_modify_date: null,
     deadline: null,
-    home_expected_time: null,
+    home_expect_time: null,
     is_magam_user: false,
     is_magam_timeout: false,
     is_same_person: false
   },
   {
-    post_id: 4,
+    id: 4,
     author_id: 2,
     title: 'title4',
     content: 'content3',
@@ -83,7 +83,7 @@ export const mock_posts: Post[] = [
     register_date: null,
     last_modify_date: null,
     deadline: null,
-    home_expected_time: null,
+    home_expect_time: null,
     is_magam_user: false,
     is_magam_timeout: true,
     is_same_person: false

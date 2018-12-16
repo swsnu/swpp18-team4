@@ -7,7 +7,4 @@ export class TimeblockService {
 
   constructor() { }
 
-  createTimeBlock(): [][] {
-    
-  }
 }

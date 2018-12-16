@@ -36,7 +36,7 @@ export class UserService {
   }
 
   /* create token for user with no token */
-  createToken() : Promise<Response> {
+  createToken(): Promise<Response> {
     return this.http.get<Response>(this.tokenUrl).toPromise().catch(this.handleError);
   }
 

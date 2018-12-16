@@ -58,8 +58,7 @@ def post(request, post_id):
         if request.user.is_authenticated:
             target_post = Post.objects.filter(id = post_id)
             if target_post.exists():
-                post_dict = json.dumps(target_post.values()[0], cls=DjangoJSONEncoder)
-                return JsonResponse(post_dict, safe=False)
+                return JsonResponse(target_post.values()[0], safe=False)
             else:
                 return HttpResponse(status=404)
         else:
