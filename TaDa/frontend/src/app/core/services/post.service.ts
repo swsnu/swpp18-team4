@@ -52,6 +52,12 @@ export class PostService {
       .toPromise().then(() => post).catch(this.handleError);
   }
 
+  getClosingTimePosts(): Promise<Post[]> {
+  return this.http.get<Post[]>(`${this.postsUrl}closing_time/`, httpOptions)
+    .toPromise()
+    .catch(this.handleError);
+}
+
   private handleError(error: any): Promise<any> {
     console.log('An error occurred in PostService', error);
     return Promise.reject(error.message || 'Internal server error');

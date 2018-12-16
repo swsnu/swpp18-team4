@@ -38,13 +38,13 @@ export class PostEditComponent implements OnInit {
     const id = +this.route.snapshot.paramMap.get('id');
     this.post_service.getPostByPostId(id)
       .then( post => this.current_post = post)
-      .then( () => this.first_setting() );
-      //.catch( () => this.router.navigateByUrl('/post/list'));
+      .then( () => this.first_setting() )
+      .catch( () => this.router.navigateByUrl('/post/list'));
   }
   first_setting(): void {
     const temp_string = this.current_post.toString();
     this.current_post = <Post>JSON.parse(temp_string);
-    
+
     this.dead_line = this.current_post.deadline;
     this.time_zone_list = this.current_post.timezone;
     this.region_enum_list = Object.values(RegionEnum);
@@ -53,7 +53,7 @@ export class PostEditComponent implements OnInit {
     this.time_zone_start = new Date();
     this.time_zone_end = new Date();
     this.time_zone_hm = [0, 0, 0, 0];
-  }
+}
 
   convertJsonToDate(input_json): Date {
     if ( input_json === null || input_json === undefined ) {

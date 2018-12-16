@@ -67,7 +67,7 @@
 
         <div class="input-group mb-3">
           <div class="input-group-prepend">
-            <span class="input-group-text" style="display: inline-block; height: 38px;">마감일 (수정 전 {{dead_line | date: 'yyyy/M/d'}})</span>
+            <span class="input-group-text" style="display: inline-block; height: 38px;">마감일 (수정 전 {{current_post.deadline | date: 'yyyy/M/d'}})</span>
           </div>
           <input id="deadline" class="form-control" placeholder="yyyy-mm-dd"
                  name="dp" [(ngModel)]="dead_line" ngbDatepicker #d="ngbDatepicker">
