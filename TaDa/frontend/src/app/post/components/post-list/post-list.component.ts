@@ -44,9 +44,7 @@ export class PostListComponent implements OnInit {
   ) { }
 
   ngOnInit() {
-    //this.getAllPosts();
-    this.posts_all = mock_posts;
-    this.posts_filtered = this.posts_all; // async 조심
+    this.getAllPosts();
     this.region_enum_list = region_enum_list;
     this.arbeit_type_enum_list = arbeit_type_enum_list;
     this.how_to_pay_enum_list = how_to_pay_enum_list;
@@ -55,8 +53,10 @@ export class PostListComponent implements OnInit {
 
   getAllPosts() {
     this.postService.getPosts().then(
-      posts => this.posts_all = posts
-    );
+      posts => {
+        this.posts_all = posts;
+        this.posts_filtered = posts;
+      });
   }
 
   getAuthorNameByID(id: number): string {
@@ -71,7 +71,9 @@ export class PostListComponent implements OnInit {
 
   getMyTagInfo(): void {
     //const user = this.userService.getCurrentUser();
-
+    if (this.userService.isLoggedIn() == false) {
+      return;
+    }
     const user = mock_users[0];
     user.employee_region.push(RegionEnum.seoulip);
     user.employee_region.push(RegionEnum.home);
@@ -200,9 +202,10 @@ export class PostListComponent implements OnInit {
       if (post.is_same_person == true) {
         bool_one = false;
         for (let i = 0; i < post.timezone.length; i = i+2) { //loop2
-          day = post.timezone[i].getDay();
+          day = new Date(post.timezone[i]).getDay();
           for (const obj of converted_timeblocks[day]) { // loop1
-            if (post.timezone[i].getHours() >= obj.start && post.timezone[i+1].getHours() < obj.end) {
+            if (new Date(post.timezone[i]).getHours() >= obj.start 
+                && new Date(post.timezone[i+1]).getHours() < obj.end) {
               bool_one = true;
               break;
             }
@@ -219,9 +222,10 @@ export class PostListComponent implements OnInit {
       /* should not be same person */
       } else {
         for (let i = 0; i < post.timezone.length; i = i+2) {
-          day = post.timezone[i].getDay();
+          day = new Date(post.timezone[i]).getDay();
           for (const obj of converted_timeblocks[day]) {
-            if (post.timezone[i].getHours() >= obj.start && post.timezone[i+1].getHours() < obj.end) {
+            if (new Date(post.timezone[i]).getHours() >= obj.start 
+                && new Date(post.timezone[i+1]).getHours() < obj.end) {
               new_arr.push(post);
               should_break = true;
               break;
