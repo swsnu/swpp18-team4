@@ -21,6 +21,7 @@
             "assets": [
               "src/favicon.ico",
               "src/calendar.ico",
+              "src/red_clock.ico",
               "src/assets"
             ],
             "styles": [
