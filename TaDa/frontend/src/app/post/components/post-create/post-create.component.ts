@@ -16,6 +16,9 @@ import {ToastrService} from 'ngx-toastr';
   styleUrls: ['./post-create.component.css']
   })
   export class PostCreateComponent implements OnInit {
+  init_googlemap_zoom: number;
+  init_googlemap_latitude: number;
+  init_googlemap_longitude: number;
 
   new_post: Post;
   region_enum_list: string[];
@@ -36,6 +39,8 @@ import {ToastrService} from 'ngx-toastr';
   ) { }
 
   ngOnInit() {
+    this.init_googlemap_zoom = 15;
+
     this.new_post = new Post();
     this.new_post.is_same_person = false;
     this.time_zone_list = [];
@@ -45,6 +50,50 @@ import {ToastrService} from 'ngx-toastr';
     this.time_zone_start = new Date();
     this.time_zone_end = new Date();
     this.time_zone_hm = [0, 0, 0, 0];
+  }
+
+  regionChange(event) {
+    if (event === RegionEnum.home) {
+      return;
+    } else {
+      this.init_googlemap_latitude = this.getInitLatitude();
+      this.init_googlemap_longitude = this.getInitLongitude();
+      this.new_post.latitude = this.init_googlemap_latitude;
+      this.new_post.longitude = this.init_googlemap_longitude;
+    }
+  }
+
+  getInitLatitude() {
+    if (this.new_post.region === RegionEnum.snu || this.new_post.region === RegionEnum.extra) {
+      return 37.459325;
+    } else if (this.new_post.region === RegionEnum.nakdae) {
+      return 37.477002;
+    } else if (this.new_post.region === RegionEnum.seoulip) {
+      return 37.481227;
+    } else if (this.new_post.region === RegionEnum.nokdu) {
+      return 37.470526;
+    } else {
+      return 37.459325;
+    }
+  }
+
+  getInitLongitude() {
+    if (this.new_post.region === RegionEnum.snu || this.new_post.region === RegionEnum.extra) {
+      return 126.953480;
+    } else if (this.new_post.region === RegionEnum.nakdae) {
+      return 126.963758;
+    } else if (this.new_post.region === RegionEnum.seoulip) {
+      return 126.952755
+    } else if (this.new_post.region === RegionEnum.nokdu) {
+      return 126.937568;
+    } else {
+      return 126.953480;
+    }
+  }
+
+  onClickMapEvent(event) {
+    this.new_post.latitude = event.coords.lat;
+    this.new_post.longitude = event.coords.lng;
   }
 
   convertJsonToDate(input_json): Date {
