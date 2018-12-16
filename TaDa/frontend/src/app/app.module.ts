@@ -19,6 +19,7 @@ import { PostService } from './core/services/post.service';
 import { CommentService } from './core/services/comment.service';
 import { TalkService } from './core/services/talk.service';
 import { DragToSelectModule } from 'ngx-drag-to-select';
+import { TimeblockService } from './core/services/timeblock.service';
 
 @NgModule({
   declarations: [
@@ -26,7 +27,6 @@ import { DragToSelectModule } from 'ngx-drag-to-select';
     HomeComponent,
     FooterComponent,
     NavComponent,
-    TimeblockComponent,
     SigninComponent,
     SignupComponent,
   ],
@@ -39,15 +39,14 @@ import { DragToSelectModule } from 'ngx-drag-to-select';
       apiKey: 'AIzaSyCGdFwTXy8_d6emqQWwS5ww3AaSL9wRw9Q'
     }),
     NgbModule.forRoot(),
-    DragToSelectModule.forRoot()
-
   ],
   providers: [
     AuthGuard,
     UserService,
     PostService,
     CommentService,
-    TalkService
+    TalkService,
+    TimeblockService
   ],
   bootstrap: [AppComponent]
 })

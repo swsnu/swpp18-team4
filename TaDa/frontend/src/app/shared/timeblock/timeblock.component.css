@@ -3,4 +3,13 @@
     border-color: gray;
     border-style: double;
     text-align: center;
+    font-size: 10pt;
+}
+
+.table { 
+    table-layout : fixed;
+}
+
+.selected {
+    background-color: #ff9900;
 }

@@ -10,6 +10,7 @@ import { HowToPayEnum } from '../../../core/models/enums/how-to-pay-enum.enum';
 import { RegionEnum } from '../../../core/models/enums/region-enum.enum';
 import { region_enum_list, arbeit_type_enum_list, how_to_pay_enum_list } from '../../../core/models/enums/enum-list';
 import { ToastrService } from 'ngx-toastr';
+import { TimeblockService, DraggableCell } from 'src/app/core/services/timeblock.service';
 
 
 
@@ -23,7 +24,7 @@ export class PostListComponent implements OnInit {
   posts_all: Post[];
   posts_filtered: Post[];
   filtering_tags = [];
-
+  timeblocks = [];
 
   /* enum lists for html loop */
   region_enum_list: string[];
@@ -36,6 +37,7 @@ export class PostListComponent implements OnInit {
   constructor(
     private userService: UserService,
     private postService: PostService,
+    private timeblockService: TimeblockService,
     private toastrService: ToastrService
 
   ) { }
@@ -47,7 +49,7 @@ export class PostListComponent implements OnInit {
     this.region_enum_list = region_enum_list;
     this.arbeit_type_enum_list = arbeit_type_enum_list;
     this.how_to_pay_enum_list = how_to_pay_enum_list;
-
+    this.timeblocks = this.timeblockService.createCells();
   }
 
   getAllPosts() {
@@ -212,6 +214,7 @@ export class PostListComponent implements OnInit {
   }
 
   /* functions for handling tag from filter_list */ 
+
   addTag(enumtype: number, enumindex: number): void {
     if (this.filtering_tags.length >= 5) {
       this.toastrService.warning('필터링 태그는 5개까지 입력 가능합니다!');

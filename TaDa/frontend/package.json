@@ -24,6 +24,7 @@
     "@angular/platform-browser-dynamic": "^6.1.0",
     "@angular/router": "^6.1.0",
     "@ng-bootstrap/ng-bootstrap": "^4.0.0",
+    "@ng-bootstrap/schematics": "^2.0.0-alpha.1",
     "@types/googlemaps": "^3.30.16",
     "@types/jquery": "^3.3.27",
     "bootstrap": "^4.1.3",
