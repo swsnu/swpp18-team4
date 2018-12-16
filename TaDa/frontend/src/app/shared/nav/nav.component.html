@@ -1,5 +1,4 @@
 <!-- go to main page -->
-
 <ul class="navbar navbar-dark bg-dark fixed-top">
   <div class="right-nav-items">
       <a routerLink="/"> 소소하고 확실한 알바 </a>
@@ -7,11 +6,9 @@
 
       <!-- if user is logged in -->
       <ng-template #loginBlock>
-        <button (click)="alarm()">종</button>
-
+        <button (click)="alarm(content)">종</button>
         <button routerLink="/message">채팅</button>
         <button (click)="logOut()">로그아웃</button>
-
         <button (click)="toUserPage()">마이페이지</button>
       </ng-template>
 
@@ -24,5 +21,19 @@
 </ul>
 
 
-
+<ng-template #content let-modal>
+  <div class="modal-header modals">
+    <h4 class="modal-title">!!마감 임박!!</h4>
+  </div>
+  <div class="modal-body modals">
+  <ul>
+    <li *ngFor="let post of alarm_posts">
+      <a href="/post/view/{{post.id}}">{{post.title}}</a>
+    </li>
+  </ul>
+  </div>
+  <div class="modal-footer modals">
+    <button type="button" class="btn btn-outline-dark" (click)="close()">Close</button>
+  </div>
+</ng-template>
 

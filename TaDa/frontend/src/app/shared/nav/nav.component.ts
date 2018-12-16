@@ -5,7 +5,7 @@ import { Router } from '@angular/router';
 import { TalkService } from 'src/app/core/services/talk.service';
 import { PostService } from '../../core/services/post.service';
 import { Post } from '../../core/models/post';
-import {NgbModal} from '@ng-bootstrap/ng-bootstrap';
+import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 
 @Component({
   selector: 'app-nav',
@@ -14,14 +14,14 @@ import {NgbModal} from '@ng-bootstrap/ng-bootstrap';
 })
 export class NavComponent implements OnInit {
   current_user: User;
-  closing_posts: Post[];
+  alarm_posts: Post[];
   constructor(
     public userService: UserService,
     private talkService: TalkService,
     private router: Router,
 
     private postService: PostService,
-    private modalService: NgbModal
+    private modalService: NgbModal,
   ) { }
 
   ngOnInit() {
@@ -41,9 +41,16 @@ export class NavComponent implements OnInit {
     this.router.navigateByUrl('user/' + this.userService.getCurrentUser().id);
   }
 
-  alarm() {
-    this.postService.getClosingTimePosts()
-      .then( posts => this.closing_posts = posts);
-   // this.modalService.open(aa, { centered: true });
+  alarm(content) {
+    this.postService.getAlarmPosts()
+      .then( posts => this.alarm_posts = posts)
+      .then( () => this.view_alarm_posts(content));
   }
+  view_alarm_posts(content) {
+    this.modalService.open(content);
+  }
+  close() {
+    this.modalService.dismissAll();
+  }
+
 }

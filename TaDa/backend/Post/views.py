@@ -127,7 +127,7 @@ def author(request, author_id):
         return HttpResponseBadRequest(['GET'])
 
 @csrf_exempt
-def closing_time(request):
+def alarm(request):
     from django.utils import timezone
     if request.method == 'GET':
         if request.user.is_authenticated:
