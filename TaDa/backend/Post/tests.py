@@ -56,8 +56,8 @@ class PostTestCase(TestCase):
                 #is_magam_user = models.BooleanField(default = False)
                 #is_magam_timeout = models.BooleanField(default = False)
             'is_same_person': True,
-            'latitude': 36.5,
-            'longitude': 36.5,
+            'latitude': None,
+            'longitude': None,
         }, cls=DjangoJSONEncoder), content_type="application/json")
         self.assertEqual(response.status_code, 200)
     
