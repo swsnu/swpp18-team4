@@ -41,11 +41,13 @@ def posts(request):
                 #is_magam_user = models.BooleanField(default = False)
                 #is_magam_timeout = models.BooleanField(default = False)
                 is_same_person = req_data['is_same_person']
+                latitude = req_data['latitude']
+                longitude = req_data['longitude']
             except (KeyError, JSONDecodeError) as e:
                 return HttpResponseBadRequest()
 
             Post.objects.create(author = author, title = title, content = content, region = region, region_specific = region_specific, arbeit_type = arbeit_type,
-            how_to_pay = how_to_pay, pay_per_hour = pay_per_hour, goods = goods, timezone = timezone, deadline = deadline, home_expect_time = home_expect_time, is_same_person = is_same_person)
+            how_to_pay = how_to_pay, pay_per_hour = pay_per_hour, goods = goods, timezone = timezone, deadline = deadline, home_expect_time = home_expect_time, is_same_person = is_same_person, latitude = latitude, longitude = longitude)
             return HttpResponse(status=200)
         else:
             return HttpResponse(status=401)
@@ -87,6 +89,8 @@ def post(request, post_id):
                         #is_magam_user = models.BooleanField(default = False)
                         #is_magam_timeout = models.BooleanField(default = False)
                         target_post.is_same_person = req_data['is_same_person']
+                        target_post.latitude = req_data['latitude']
+                        target_post.longitude = req_data['longitude']
                     except (KeyError, JSONDecodeError) as e:
                         return HttpResponseBadRequest()
 
