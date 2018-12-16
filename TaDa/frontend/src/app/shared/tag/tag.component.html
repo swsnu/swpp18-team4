@@ -1,0 +1,20 @@
+<div *ngIf="hasCloseButton; then withCloseButton; else withoutCloseButton"></div>
+
+<ng-template #withCloseButton>
+    <button type="button" style="margin-right: 5px; " (click)="onClickRemove()"
+        [ngStyle]="{'background-color': tag_color}" class="btn btn-sm btn-cannotselect">
+        {{tag_string}}&nbsp;
+        <span>
+            <i class="fas fa-times-circle"></i>    
+        </span>
+    </button>
+</ng-template>
+
+
+<ng-template #withoutCloseButton>
+    <button type="button"  style="margin-right: 5px; margin-top:10px" (click)="onClickSelect()"
+        [ngStyle]="isSelectable ? {'border-color':tag_color} : {'background-color': tag_color }" 
+        [ngClass]="isSelectable ? 'btn btn-sm btn-canselect': 'btn btn-sm btn-cannotselect'">
+        {{tag_string}}&nbsp;
+    </button>
+</ng-template>

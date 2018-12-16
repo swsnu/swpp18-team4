@@ -3,6 +3,7 @@ import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { User } from '../models/user';
 import { Response } from '@angular/http';
 import { TypeEnum } from '../models/enums/type-enum.enum';
+import { region_enum_list, arbeit_type_enum_list, how_to_pay_enum_list } from '../models/enums/enum-list';
 
 const httpOptions = {
   headers: new HttpHeaders({ 'Content-Type': 'application/json'})
@@ -63,6 +64,19 @@ export class UserService {
       return false;
     }
   }
+/*
+  getUserTags(): [] {
+    let arr = [];
+    if (this.currentUser.employee_type != null) {
+      this.currentUser.employee_type.forEach(enum => {
+        arr.push({
+          type: 
+        })
+      })
+      region_enum_list
+    }
+    return [];
+  } */
 
   isActivate(): boolean {
     if (this.currentUser != null && this.currentUser.is_active == true) {

@@ -1,3 +1,29 @@
-<p>
-  timeblock works!
-</p>
+<!--<dts-select-container [(selectedItems)]="selectedItems" [selectWithShortcut]="false">
+<table class="table table-responsive table-bordered">
+    <thead>
+      <tr>
+        <th scope="col" class='th' width="16%"></th>
+        <ng-container *ngFor="let row_idx of row_index">
+            <th class='th' scope="col" width="12%">{{row_idx}}</th>
+        </ng-container>
+      </tr>
+    </thead>
+    <tbody>                  
+      <tr *ngFor="let col_idx of col_index; let y=index">
+        <th class='th' scope="row">{{col_idx}}</th>
+        <ng-container *ngFor="let row_idx of row_index; let x=index">
+            <td #item name="item" [dtsSelectItem]="rawItems[x][y]">{{x}}:{{y}}</td>
+        </ng-container>
+      </tr>
+    </tbody>
+</table>
+</dts-select-container>
+
+<div class="col-6">
+		<div class="card">
+			<div class="card-header">
+				Selected
+			</div>
+			<pre>{{selectedItems | json}}</pre>
+		</div>
+</div>-->
