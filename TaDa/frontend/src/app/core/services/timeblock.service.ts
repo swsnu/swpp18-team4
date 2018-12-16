@@ -16,9 +16,9 @@ export class TimeblockService {
   }
 
   createCells() {
-    let arr = [];
+    const arr = [];
     for (let i = 0; i < this.row_index.length; i++) {
-      let tmp =[];
+      const tmp = [];
       for (let j = 0; j < this.col_index.length; j++) {
         tmp.push(new DraggableCell(i, j, false));
       }

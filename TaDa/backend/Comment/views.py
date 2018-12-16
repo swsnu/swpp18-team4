@@ -35,14 +35,11 @@ def comments(request):
 @csrf_exempt
 def comment(request, comment_id):
     if request.method == 'GET':
-        if request.user.is_authenticated:
-            target_comment = Comment.objects.filter(id = comment_id)
-            if target_comment.exists():
-                return JsonResponse(target_comment.values()[0], safe=False)
-            else:
-                return HttpResponse(status=404)
+        target_comment = Comment.objects.filter(id = comment_id)
+        if target_comment.exists():
+            return JsonResponse(target_comment.values()[0], safe=False)
         else:
-            return HttpResponse(status=401)
+            return HttpResponse(status=404)
     elif request.method == 'PUT':
         if request.user.is_authenticated:
             target_comment = Comment.objects.filter(id = comment_id)
@@ -88,52 +85,43 @@ def comment(request, comment_id):
 @csrf_exempt
 def commentByPost(request, post_id):
     if request.method == 'GET':
-        if request.user.is_authenticated:
-            target_post = Post.objects.filter(id = post_id)
-            if target_post.exists():
-                comment_list = [comment for comment in Comment.objects.filter(post = target_post).values()]
-                return JsonResponse(comment_list, safe=False)
-            else:
-                return HttpResponse(status=404)
+        target_post = Post.objects.filter(id = post_id)
+        if target_post.exists():
+            comment_list = [comment for comment in Comment.objects.filter(post = target_post).values()]
+            return JsonResponse(comment_list, safe=False)
         else:
-            return HttpResponse(status=401)
+            return HttpResponse(status=404)
     else: 
         return HttpResponseBadRequest(['GET'])
 
 @csrf_exempt
 def commentByAuthor(request, author_id):
     if request.method == 'GET':
-        if request.user.is_authenticated:
-            target_author = User.objects.filter(id = author_id)
-            if target_author.exists():
-                comment_list = [comment for comment in Comment.objects.filter(author = target_author).values()]
-                return JsonResponse(comment_list, safe=False)
-            else:
-                return HttpResponse(status=404)
+        target_author = User.objects.filter(id = author_id)
+        if target_author.exists():
+            comment_list = [comment for comment in Comment.objects.filter(author = target_author).values()]
+            return JsonResponse(comment_list, safe=False)
         else:
-            return HttpResponse(status=401)
+            return HttpResponse(status=404)
     else: 
         return HttpResponseBadRequest(['GET'])
 
 @csrf_exempt
 def commentReceive(request, author_id):
     if request.method == 'GET':
-        if request.user.is_authenticated:
-            target_author = User.objects.filter(id = author_id)
-            if target_author.exists():
-                if author_id == request.user.id:
-                    post_id_list = [post.id for post in Post.objects.filter(author = target_author).values()]
-                    comment_list = []
-                    for pid in post_id_list:
-                        comment_list_pid = [comment for comment in Comment.objects.filter(post_id = pid).values()] 
-                        comment_list += comment_list_pid
-                    return JsonResponse(comment_list, safe=False)
-                else:
-                    return HttpResponse(status=403)
+        target_author = User.objects.filter(id = author_id)
+        if target_author.exists():
+            if author_id == request.user.id:
+                post_id_list = [post.id for post in Post.objects.filter(author = target_author).values()]
+                comment_list = []
+                for pid in post_id_list:
+                    comment_list_pid = [comment for comment in Comment.objects.filter(post_id = pid).values()] 
+                    comment_list += comment_list_pid
+                return JsonResponse(comment_list, safe=False)
             else:
-                return HttpResponse(status=404)
+                return HttpResponse(status=403)
         else:
-            return HttpResponse(status=401)
+            return HttpResponse(status=404)
     else:
         return HttpResponseBadRequest(['GET'])
 

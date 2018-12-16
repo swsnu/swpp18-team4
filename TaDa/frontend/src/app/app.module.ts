@@ -51,7 +51,7 @@ import { NgbdModalComponent, NgbdModalContentComponent } from './shared/modal/mo
     PostService,
     CommentService,
     TalkService,
-    TimeblockService
+    TimeblockService,
     NgbActiveModal,
   ],
   bootstrap: [AppComponent]

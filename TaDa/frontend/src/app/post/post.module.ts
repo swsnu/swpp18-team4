@@ -20,17 +20,17 @@ import { AgmCoreModule } from '@agm/core';
     PostRoutingModule,
     FormsModule,
     NgbModule.forRoot(),
-    DragToSelectModule.forRoot()
+    DragToSelectModule.forRoot(),
     AgmCoreModule.forRoot({
       apiKey: 'AIzaSyCYOybP6ZEj4V4tWM8367t_EKIXVHD4ado'
     }),
   ],
   declarations: [
-    PostListComponent, 
-    PostViewComponent, 
-    PostCreateComponent, 
-    PostEditComponent, 
-    CommentViewComponent, 
+    PostListComponent,
+    PostViewComponent,
+    PostCreateComponent,
+    PostEditComponent,
+    CommentViewComponent,
     TagComponent,
     TimeblockComponent
   ]

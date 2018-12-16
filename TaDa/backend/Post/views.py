@@ -16,11 +16,8 @@ from .models import Post
 @csrf_exempt
 def posts(request):
     if request.method == 'GET':
-        if request.user.is_authenticated:
-            post_all_list = [post for post in Post.objects.all().values()]
-            return JsonResponse(post_all_list, safe = False)
-        else:
-            return HttpResponse(status=401)
+        post_all_list = [post for post in Post.objects.all().values()]
+        return JsonResponse(post_all_list, safe = False)
     elif request.method == 'POST':
         if request.user.is_authenticated:
             try:
@@ -63,14 +60,11 @@ def posts(request):
 @csrf_exempt
 def post(request, post_id):
     if request.method == 'GET':
-        if request.user.is_authenticated:
-            target_post = Post.objects.filter(id = post_id)
-            if target_post.exists():
-                return JsonResponse(target_post.values()[0], safe=False)
-            else:
-                return HttpResponse(status=404)
+        target_post = Post.objects.filter(id = post_id)
+        if target_post.exists():
+            return JsonResponse(target_post.values()[0], safe=False)
         else:
-            return HttpResponse(status=401)
+            return HttpResponse(status=404)
     elif request.method == 'PUT':
         if request.user.is_authenticated:
             target_post = Post.objects.filter(id = post_id)
@@ -144,13 +138,10 @@ def author(request, author_id):
 def alarm(request):
     from django.utils import timezone
     if request.method == 'GET':
-        if request.user.is_authenticated:
             startdate = datetime.datetime.now(tz=timezone.utc)
             enddate = startdate + datetime.timedelta(days=2)
             post_list = [post for post in Post.objects.filter(deadline__range=[startdate, enddate]).values()]
             return JsonResponse(post_list, safe=False)
-        else:
-            return HttpResponse(status=401)
     else: 
         return HttpResponseNotAllowed(['GET'])
 

@@ -50,6 +50,8 @@ import {ToastrService} from 'ngx-toastr';
     this.time_zone_start = new Date();
     this.time_zone_end = new Date();
     this.time_zone_hm = [0, 0, 0, 0];
+    this.new_post.latitude = 0;
+    this.new_post.longitude = 0;
   }
 
   regionChange(event) {
@@ -155,6 +157,7 @@ import {ToastrService} from 'ngx-toastr';
       }
     }
     // 마지막 확인
+
     if ( error_state === 0 ) {
       // 토스트로 바꾸기
       this.new_post.author_id = this.user_service.getCurrentUser().id;

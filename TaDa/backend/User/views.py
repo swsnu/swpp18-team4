@@ -133,14 +133,11 @@ def activate(request, target_id, activate_token):
 @csrf_exempt    
 def user(request, uid):
     if request.method == 'GET':
-        if request.user.is_authenticated:
-            target_user = User.objects.filter(id=uid)
-            if target_user.exists():
-                return JsonResponse(target_user.values()[0], safe=False)
-            else:
-                return HttpResponse(status=404)
+        target_user = User.objects.filter(id=uid)
+        if target_user.exists():
+            return JsonResponse(target_user.values()[0], safe=False)
         else:
-            return HttpResponse(status=401)
+            return HttpResponse(status=404)
     elif request.method == 'PUT':
         if request.user.is_authenticated:
             target_user = User.objects.filter(id=uid)
