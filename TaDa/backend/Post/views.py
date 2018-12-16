@@ -3,6 +3,7 @@ from django.http import HttpResponse, JsonResponse, HttpResponseNotAllowed, Http
 from django.contrib.auth import authenticate, login, logout
 from django.views.decorators.csrf import ensure_csrf_cookie, csrf_exempt 
 from django.core.serializers.json import DjangoJSONEncoder
+from django.utils import timezone
 from json.decoder import JSONDecodeError
 import datetime
 import json
@@ -133,7 +134,6 @@ def author(request, author_id):
 
 @csrf_exempt
 def closing_time(request):
-    from django.utils import timezone
     if request.method == 'GET':
         if request.user.is_authenticated:
             startdate = datetime.datetime.now(tz=timezone.utc)
