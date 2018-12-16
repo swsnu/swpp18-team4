@@ -1,26 +1,67 @@
-<!-- go to main page -->
-<ul class="navbar navbar-dark bg-dark fixed-top">
-  <div class="right-nav-items">
-      <a routerLink="/"> 소소하고 확실한 알바 </a>
-      <div *ngIf="userService.isLoggedIn(); then loginBlock; else notLoginBlock"></div>
+<link href="//maxcdn.bootstrapcdn.com/bootstrap/4.1.1/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css">
+<script src="//maxcdn.bootstrapcdn.com/bootstrap/4.1.1/js/bootstrap.min.js"></script>
+<script src="//cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+<!------ Include the above in your HEAD tag ---------->
 
-      <!-- if user is logged in -->
-      <ng-template #loginBlock>
-        <button (click)="alarm(content)">
-          <i class="fas fa-bell"></i>
-        </button>
-        <button routerLink="/message">채팅</button>
-        <button (click)="logOut()">로그아웃</button>
-        <button (click)="toUserPage()">마이페이지</button>
-      </ng-template>
+<nav class="navbar navbar-icon-top navbar-expand-lg navbar-dark bg-dark">
+  <a class="navbar-brand" routerLink="/">소확알</a>
 
-      <!-- if user is not logged in -->
-      <ng-template #notLoginBlock>
-        <button routerLink="/signup">회원가입</button>
-        <button routerLink="/signin">로그인</button>
-      </ng-template>
+  <div class="collapse navbar-collapse" id="navbarSupportedContent">
+    <div *ngIf="userService.isLoggedIn(); then loginBlock; else notLoginBlock"></div>
+    <ng-template #loginBlock>
+    <ul class="navbar-nav mr-auto">
+      <li class="nav-item active">
+        <a class="nav-link" (click)="toUserPage()">
+          <i class="fa fa-user"></i>
+          내 정보
+        </a>
+      </li>
+      <li class="nav-item active">
+        <a class="nav-link" routerLink="/message">
+          <i class="fa fa-comments"></i>
+          채팅
+        </a>
+      </li>
+      <li class="nav-item active">
+        <a class="nav-link" (click)="alarm(content)">
+          <i class="fa fa-bell"></i>
+          알림
+        </a>
+      </li>
+      <li class="nav-item active">
+        <a class="nav-link" (click)="logOut()">
+          <i class="fa fa-sign-out"></i>
+          로그아웃
+        </a>
+      </li>
+    </ul>
+    </ng-template>
+    <ng-template #notLoginBlock>
+      <ul class="navbar-nav mr-auto">
+        <li class="nav-item active">
+          <a class="nav-link" routerLink="/signin">
+            <i class="fa fa-sign-in"></i>
+            로그인
+          </a>
+        </li>
+        <li class="nav-item active">
+          <a class="nav-link" routerLink="/signup">
+            <i class="fa fa-user-plus"></i>
+            회원가입
+          </a>
+        </li>
+      </ul>
+    </ng-template>
+
+
+    <form class="form-inline my-2 my-lg-0">
+      <input name="key_word" [(ngModel)]="key_word" class="form-control mr-sm-2" type="text" placeholder="Search" aria-label="Search">
+      <button (click)="search_click(search)" class="btn btn-outline-success my-2 my-sm-0" type="submit">Search</button>
+    </form>
+
   </div>
-</ul>
+</nav>
+
 
 
 <ng-template #content let-modal>
@@ -41,3 +82,18 @@
   </div>
 </ng-template>
 
+<ng-template #search let-modal>
+  <div class="modal-header modals" style="display: inline-block;">
+    <h4 class="modal-title" style="display: inline-block;">검색어: {{key_word}}</h4>
+  </div>
+  <div class="modal-body modals">
+    <ul>
+      <li *ngFor="let post of search_posts">
+        <a href="/post/view/{{post.id}}">{{post.title}}</a>
+      </li>
+    </ul>
+  </div>
+  <div class="modal-footer modals">
+    <button type="button" class="btn btn-outline-dark" (click)="close()">Close</button>
+  </div>
+</ng-template>

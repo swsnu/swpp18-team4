@@ -13,8 +13,10 @@ import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
   styleUrls: ['./nav.component.css']
 })
 export class NavComponent implements OnInit {
-  current_user: User;
   alarm_posts: Post[];
+  search_posts: Post[];
+  key_word: string;
+  all_posts: Post[];
   constructor(
     public userService: UserService,
     private talkService: TalkService,
@@ -25,8 +27,10 @@ export class NavComponent implements OnInit {
   ) { }
 
   ngOnInit() {
-    /* get current user state */
-    //this.current_user = this.userService.getCurrentUser();
+    this.postService.getAlarmPosts()
+      .then( posts => this.alarm_posts = posts);
+    this.postService.getPosts()
+      .then( posts => this.all_posts = posts);
   }
 
   logOut() {
@@ -37,17 +41,21 @@ export class NavComponent implements OnInit {
   }
 
   toUserPage() {
-    //const current_id = this.current_user.id;
     this.router.navigateByUrl('user/' + this.userService.getCurrentUser().id);
   }
 
-  alarm(content) {
-    this.postService.getAlarmPosts()
-      .then( posts => this.alarm_posts = posts)
-      .then( () => this.view_alarm_posts(content));
+  alarm(triger) {
+    this.modalService.open(triger);
   }
-  view_alarm_posts(content) {
-    this.modalService.open(content);
+  search_click(triger) {
+    const temp_posts = [];
+    for (const post of this.all_posts) {
+      if (post.title.includes(this.key_word)) {
+        temp_posts.push(post);
+      }
+    }
+    this.search_posts = temp_posts;
+    this.alarm(triger);
   }
   close() {
     this.modalService.dismissAll();
