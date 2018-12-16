@@ -8,8 +8,8 @@ import { HowToPayEnum } from 'src/app/core/models/enums/how-to-pay-enum.enum';
 
 export const mock_posts: Post[] = [
   {
-    post_id: 1,
-    author_id: 2,
+    id: 1,
+    author_id: 1,
     title: 'title1',
     content: 'content1',
     region: RegionEnum.home,
@@ -22,14 +22,14 @@ export const mock_posts: Post[] = [
     register_date: null,
     last_modify_date: null,
     deadline: null,
-    home_expected_time: null,
+    home_expect_time: null,
     is_magam_user: false,
     is_magam_timeout: false,
     is_same_person: false
   },
 
   {
-    post_id: 2,
+    id: 2,
     author_id: 1,
     title: 'title2',
     content: 'content2',

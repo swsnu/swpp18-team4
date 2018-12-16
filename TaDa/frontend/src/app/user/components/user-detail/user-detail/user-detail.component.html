@@ -1,11 +1,13 @@
-<p>
-  user-detail works!
-</p>
-
 <div *ngIf="user">
+  <div *ngIf="isMyPage()">
+    <button type="button" routerLink="/user/edit" class="btn btn-primary">내정보 수정</button>
+  </div>
+
+  
+
   <hr class="divider">
 
-  <div *ngIf="user && user.id != userService.getCurrentUser().id" id="chat-container">
+  <div *ngIf="user && !isMyPage()" id="chat-container">
     <div class="row">
       <div class="col-sm-4"></div>
       <div class="col-sm-4 container-title">채팅</div>

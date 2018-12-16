@@ -6,19 +6,19 @@ import { HowToPayEnum } from './enums/how-to-pay-enum.enum';
 export class User {
   id: number;
   user_type: TypeEnum;
-  email: string;
-  password: string;
-  nickname: string;
-  employee_region: RegionEnum[];
-  employee_type: ArbeitTypeEnum[];
-  employee_how_to_pay: HowToPayEnum[];
-  employee_pay_limit: number;
-  company_name: string;
-  company_address: string;
-  business_content: string;
-  representative_name: string;
-  employer_license_number: string;
+  email: string = null;
+  password: string = null;
+  nickname: string = null;
+  employee_region: RegionEnum[] = null;
+  employee_type: ArbeitTypeEnum[] = null;
+  employee_how_to_pay: HowToPayEnum[] = null;
+  employee_pay_limit: number = null;
+  company_name: string = null;
+  company_address: string = null;
+  business_content: string = null;
+  representative_name: string = null;
+  employer_license_number: string = null;
   //profile_image: string; // modify
-  is_admin: boolean;
-  is_active: boolean;
+  is_admin: boolean = null;
+  is_active: boolean = null;
 }
