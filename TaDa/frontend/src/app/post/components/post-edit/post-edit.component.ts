@@ -42,8 +42,6 @@ export class PostEditComponent implements OnInit {
       .catch( () => this.router.navigateByUrl('/post/list'));
   }
   first_setting(): void {
-    const temp_string = this.current_post.toString();
-    this.current_post = <Post>JSON.parse(temp_string);
 
     this.dead_line = this.current_post.deadline;
     this.time_zone_list = this.current_post.timezone;

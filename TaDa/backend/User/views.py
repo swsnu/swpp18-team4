@@ -136,8 +136,7 @@ def user(request, uid):
         if request.user.is_authenticated:
             target_user = User.objects.filter(id=uid)
             if target_user.exists():
-                user_dict = json.dumps(target_user.values()[0], cls=DjangoJSONEncoder)
-                return JsonResponse(user_dict, safe=False)
+                return JsonResponse(target_user.values()[0], safe=False)
             else:
                 return HttpResponse(status=404)
         else:
@@ -163,7 +162,6 @@ def user(request, uid):
                             target_user.business_content = None
                             target_user.representative_name = None
                             target_user.employer_license_number = None
-                            #target_user.profile_image = req_data["profile_image"]
                             target_user.save()
                             return HttpResponse(status=200)
                         elif target_user.user_type == 'ER':
@@ -177,7 +175,6 @@ def user(request, uid):
                             target_user.business_content = req_data["business_content"]
                             target_user.representative_name = req_data["representative_name"]
                             target_user.employer_license_number = req_data["employer_license_number"]
-                            #target_user.profile_image = req_data["profile_image"]
                             target_user.save()
                             return HttpResponse(status=200)
                     except (KeyError, JSONDecodeError) as e:

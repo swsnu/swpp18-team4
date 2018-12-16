@@ -5,6 +5,7 @@ import { HowToPayEnum } from './enums/how-to-pay-enum.enum';
 export class Post {
     id: number = null;
     author_id: number = null;
+    author_name: string = null;
     title: string = null;
     content: string = null;
     region: RegionEnum = null;
@@ -21,4 +22,6 @@ export class Post {
     is_magam_user: boolean = null;
     is_magam_timeout: boolean = null;
     is_same_person: boolean = null;
+    latitude: number = null;
+    longitude: number = null;
 }

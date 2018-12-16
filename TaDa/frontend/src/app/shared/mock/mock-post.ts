@@ -10,6 +10,7 @@ export const mock_posts: Post[] = [
   {
     id: 1,
     author_id: 1,
+    author_name: 'aaa',
     title: 'title1',
     content: 'content1',
     region: RegionEnum.home,
@@ -25,12 +26,15 @@ export const mock_posts: Post[] = [
     home_expect_time: null,
     is_magam_user: false,
     is_magam_timeout: false,
-    is_same_person: false
+    is_same_person: false,
+    latitude: null,
+    longitude: null
   },
 
   {
     id: 2,
     author_id: 1,
+    author_name: 'aaa',
     title: 'title2',
     content: 'content2',
     region: RegionEnum.extra,
@@ -43,14 +47,17 @@ export const mock_posts: Post[] = [
     register_date: null,
     last_modify_date: null,
     deadline: null,
-    home_expected_time: null,
+    home_expect_time: null,
     is_magam_user: true,
     is_magam_timeout: false,
-    is_same_person: false
+    is_same_person: false,
+    latitude: 35.524879,
+    longitude: 129.344075
   },
   {
-    post_id: 3,
+    id: 3,
     author_id: 2,
+    author_name: 'bbb',
     title: 'title3',
     content: 'content3',
     region: RegionEnum.home,
@@ -63,14 +70,17 @@ export const mock_posts: Post[] = [
     register_date: null,
     last_modify_date: null,
     deadline: null,
-    home_expected_time: null,
+    home_expect_time: null,
     is_magam_user: false,
     is_magam_timeout: false,
-    is_same_person: false
+    is_same_person: false,
+    latitude: null,
+    longitude: null
   },
   {
-    post_id: 4,
+    id: 4,
     author_id: 2,
+    author_name: 'bbb',
     title: 'title4',
     content: 'content3',
     region: RegionEnum.home,
@@ -83,9 +93,11 @@ export const mock_posts: Post[] = [
     register_date: null,
     last_modify_date: null,
     deadline: null,
-    home_expected_time: null,
+    home_expect_time: null,
     is_magam_user: false,
     is_magam_timeout: true,
-    is_same_person: false
+    is_same_person: false,
+    latitude: null,
+    longitude: null
   }
 ];
