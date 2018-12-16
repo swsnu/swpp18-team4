@@ -27,6 +27,8 @@ class Post(models.Model):
     is_magam_user = models.BooleanField(default = False)
     is_magam_timeout = models.BooleanField(default = False)
     is_same_person = models.BooleanField(default = False)
+    latitude = models.FloatField(default = False)
+    longitude = models.FloatField(default = False)
 
     def __str__(self):
         return 'id: '+ str(self.id)
