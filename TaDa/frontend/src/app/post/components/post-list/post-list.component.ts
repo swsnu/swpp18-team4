@@ -11,6 +11,7 @@ import { RegionEnum } from '../../../core/models/enums/region-enum.enum';
 import { region_enum_list, arbeit_type_enum_list, how_to_pay_enum_list } from '../../../core/models/enums/enum-list';
 import { ToastrService } from 'ngx-toastr';
 import { TimeblockService, DraggableCell } from 'src/app/core/services/timeblock.service';
+import { browser } from 'protractor';
 
 
 
@@ -142,6 +143,7 @@ export class PostListComponent implements OnInit {
   filter(arr: Post[]): Post[] {
     let tag_arr2 = [], tag_arr3 = [], tag_arr4 =[];
     let new_arr = [];
+    let shouldTimeSort: boolean = false;
 
     if (this.filtering_tags.length == 0) {
       return arr;
@@ -149,7 +151,9 @@ export class PostListComponent implements OnInit {
 
     /* classify filtering_tags by its enum type */
     this.filtering_tags.forEach(element => {
-      if (element.type == 2) {
+      if (element.type == 1) {
+        shouldTimeSort = true;
+      } else if (element.type == 2) {
         tag_arr2.push(this.arbeit_type_enum_list[element.index]);
       } else if (element.type == 3) {
         tag_arr3.push(this.region_enum_list[element.index]);
@@ -157,7 +161,7 @@ export class PostListComponent implements OnInit {
         tag_arr4.push(this.how_to_pay_enum_list[element.index]);
       }
     });
-
+    /* If there is no tag, includes all */
     if (tag_arr2.length == 0) {
       tag_arr2 = this.arbeit_type_enum_list;
     }
@@ -175,8 +179,60 @@ export class PostListComponent implements OnInit {
         new_arr.push(post);
       }
     }
+
+    if (shouldTimeSort) {
+      new_arr = this.filter_time(new_arr);
+    }
     return new_arr; 
   }  
+
+  filter_time(input_arr: Post[]) {
+    let new_arr = [];
+    let bool_one;
+    let day: number;
+    let should_break: boolean;
+    let converted_timeblocks = this.timeblockService.convertCellstoDate(this.timeblocks);
+
+    for (const post of input_arr) {
+      should_break = false;
+
+      /* should be same person */
+      if (post.is_same_person == true) {
+        bool_one = false;
+        for (let i = 0; i < post.timezone.length; i = i+2) { //loop2
+          day = post.timezone[i].getDay();
+          for (const obj of converted_timeblocks[day]) { // loop1
+            if (post.timezone[i].getHours() >= obj.start && post.timezone[i+1].getHours() < obj.end) {
+              bool_one = true;
+              break;
+            }
+          }//loop1
+          
+          if (bool_one == false) {
+            break;
+          }
+        } //loop2 
+
+        if (bool_one == true) {
+          new_arr.push(post);
+        }
+      /* should not be same person */
+      } else {
+        for (let i = 0; i < post.timezone.length; i = i+2) {
+          day = post.timezone[i].getDay();
+          for (const obj of converted_timeblocks[day]) {
+            if (post.timezone[i].getHours() >= obj.start && post.timezone[i+1].getHours() < obj.end) {
+              new_arr.push(post);
+              should_break = true;
+              break;
+            }
+          }
+          if (should_break) break;
+        }
+      } // end of else
+    } // end of biggest loop
+    return new_arr;  
+  }
   
   sort(criteria: number) {
     /* sort by register date */
@@ -220,7 +276,6 @@ export class PostListComponent implements OnInit {
       this.toastrService.warning('필터링 태그는 5개까지 입력 가능합니다!');
       return;
     }
-
     let ele = {
       type: enumtype,
       index: enumindex
