@@ -111,6 +111,9 @@
   border: solid;
   border-color: cornflowerblue;
 }
+.border-info .form-control {
+  width: 50%;
+}
 .border-info input::placeholder {
   color: lightblue;
 }

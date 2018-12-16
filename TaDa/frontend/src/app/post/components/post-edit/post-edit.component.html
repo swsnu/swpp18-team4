@@ -112,7 +112,7 @@
 
         <div>
           <form class="form-inline">
-            <button  class="btn btn-outline-secondary plus" (click)="addToTimezone(time_zone_start, time_zone_end)">+</button>
+            <button  class="btn btn-outline-secondary plus" (click)="addToTimezone(time_zone_start)">+</button>
             <div class="form-group">
               <div class="input-group2">
                 <input class="form-control" placeholder="시작 시간"
@@ -127,13 +127,8 @@
                   <option *ngFor="let i of iter_minute(60)" [ngValue]="i">{{i}}</option>
                 </select>
               </div>
-              <p class="font-weight-bold" style="font-size: 30px;">~</p>
+              <p class="font-weight-bold" style="font-size: 30px; padding-right: 2px;">~</p>
               <div class="input-group2">
-                <input class="form-control" placeholder="종료 시간"
-                       name="dp" [(ngModel)]="time_zone_end" ngbDatepicker #d2="ngbDatepicker">
-                <button class="btn btn-outline-secondary" (click)="d2.toggle()" type="button">
-                  <img src="calendar.ico" style="width: 1.2rem; height: 1rem; cursor: pointer;"/>
-                </button>
                 <select name="end_h" [(ngModel)]="time_zone_hm[2]">
                   <option *ngFor="let i of iter(24)" [ngValue]="i">{{i}}</option>
                 </select>
