@@ -21,4 +21,6 @@ export class Post {
     is_magam_user: boolean = null;
     is_magam_timeout: boolean = null;
     is_same_person: boolean = null;
+    latitude: number = null;
+    longitude: number = null;
 }
