@@ -1,6 +1,7 @@
 <div *ngIf="user">
   <div *ngIf="isMyPage()">
     <button type="button" routerLink="/user/edit" class="btn btn-primary">내정보 수정</button>
+    {{user.email}}
   </div>
 
   

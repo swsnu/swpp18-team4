@@ -6,6 +6,7 @@ import datetime
 # Create your models here.
 class Post(models.Model):
     author = models.ForeignKey(User, on_delete = models.CASCADE, db_index=True)
+    author_name = models.CharField(max_length = 100, null = True)
     title = models.CharField(max_length = 100, null = True)
     content = models.TextField(null = True)
     region = models.CharField(max_length = 20, null = True)

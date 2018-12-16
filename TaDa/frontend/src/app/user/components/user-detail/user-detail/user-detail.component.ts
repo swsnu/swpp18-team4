@@ -26,14 +26,14 @@ export class UserDetailComponent implements OnInit {
     this.userService.getUser(id).then(
       user => {
         this.user = user;
-        if(!this.isMyPage()) {
+        if (!this.isMyPage()) {
           this.loadChatbox(user);
         }
       },
       error => {
         this.router.navigateByUrl('');
       }
-    )
+    );
   }
 
   isMyPage(): boolean {
@@ -41,7 +41,9 @@ export class UserDetailComponent implements OnInit {
   }
 
   getCurrentUserName(): string {
-    if(!this.user) return '';
+    if (!this.user) {
+      return '';
+    }
     return this.user.user_type === TypeEnum.EE ? this.user.nickname : this.user.company_name;
   }
 

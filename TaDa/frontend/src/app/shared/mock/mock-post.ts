@@ -10,6 +10,7 @@ export const mock_posts: Post[] = [
   {
     id: 1,
     author_id: 1,
+    author_name: 'aaa',
     title: 'title1',
     content: 'content1',
     region: RegionEnum.home,
@@ -33,6 +34,7 @@ export const mock_posts: Post[] = [
   {
     id: 2,
     author_id: 1,
+    author_name: 'aaa',
     title: 'title2',
     content: 'content2',
     region: RegionEnum.extra,
@@ -55,6 +57,7 @@ export const mock_posts: Post[] = [
   {
     id: 3,
     author_id: 2,
+    author_name: 'bbb',
     title: 'title3',
     content: 'content3',
     region: RegionEnum.home,
@@ -77,6 +80,7 @@ export const mock_posts: Post[] = [
   {
     id: 4,
     author_id: 2,
+    author_name: 'bbb',
     title: 'title4',
     content: 'content3',
     region: RegionEnum.home,

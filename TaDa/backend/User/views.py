@@ -162,7 +162,6 @@ def user(request, uid):
                             target_user.business_content = None
                             target_user.representative_name = None
                             target_user.employer_license_number = None
-                            #target_user.profile_image = req_data["profile_image"]
                             target_user.save()
                             return HttpResponse(status=200)
                         elif target_user.user_type == 'ER':
@@ -176,7 +175,6 @@ def user(request, uid):
                             target_user.business_content = req_data["business_content"]
                             target_user.representative_name = req_data["representative_name"]
                             target_user.employer_license_number = req_data["employer_license_number"]
-                            #target_user.profile_image = req_data["profile_image"]
                             target_user.save()
                             return HttpResponse(status=200)
                     except (KeyError, JSONDecodeError) as e:
