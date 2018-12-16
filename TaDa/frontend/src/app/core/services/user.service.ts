@@ -70,10 +70,13 @@ export class UserService {
     } else {
       return false;
     }
+
   }
   getUserType(): TypeEnum {
     return this.currentUser.user_type;
   }
+
+
   setLoginUser(user: User): void {
     this.currentUser = user;
   }

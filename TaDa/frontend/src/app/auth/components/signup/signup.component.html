@@ -26,7 +26,7 @@
             <input type="password" class="form-control" name="password"
                 [(ngModel)]="signup_user.password" #password="ngModel" required maxlength="20">
             <small class="help-block" *ngIf="(password.touched || password.dirty) && !validatePassword()">
-                비밀번호는 8자 이상으로, 영문 대소문자와 숫자가 섞여있어야 합니다. 
+                비밀번호는 8자 이상으로, 영문과 숫자가 섞여있어야 합니다. 
             </small>
         </div>
       </div>
@@ -48,7 +48,7 @@
   <div *ngIf="as_employee" class="form-group">
     <label for="InputNickname"> 닉네임 </label>
     <input type="text" class="form-control" name="nickname" aria-describedby="nicknameHelp" 
-        [(ngModel)]="signup_user.nickname" #nickname="ngModel" (ngModelchanged)="check_nickname = false;">
+        [(ngModel)]="signup_user.nickname" #nickname="ngModel" (ngModelChange)="check_nickname = false;">
     <button type="button" class="btn btn-secondary" (click) = onClickcheckDuplicateNickname() [disabled]="check_nickname">
         {{check_nickname? "확인 완료": "중복 체크"}} 
     </button>
