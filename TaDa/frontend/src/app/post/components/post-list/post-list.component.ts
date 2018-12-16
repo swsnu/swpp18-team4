@@ -23,7 +23,7 @@ import { browser } from 'protractor';
 
 export class PostListComponent implements OnInit {
   posts_all: Post[];
-  posts_filtered: Post[];
+  posts_filtered: Post[] = [];
   filtering_tags = [];
   timeblocks = [];
 
@@ -225,7 +225,7 @@ export class PostListComponent implements OnInit {
           day = new Date(post.timezone[i]).getDay();
           for (const obj of converted_timeblocks[day]) {
             if (new Date(post.timezone[i]).getHours() >= obj.start 
-                && new Date(post.timezone[i+1]).getHours() < obj.end) {
+                && new Date(post.timezone[i+1]).getHours() <= obj.end) {
               new_arr.push(post);
               should_break = true;
               break;

@@ -109,6 +109,9 @@
         <td>아직 개발중</td>
         <td>{{post.register_date | date: 'yyyy.MM.d'}}</td>
       </tr>
+      <tr *ngIf="posts_filtered.length == 0">
+        <td colspan="9" style="text-align: center">검색결과가 없습니다!</td>
+      </tr>
     </tbody>
   </table>
 </div>
