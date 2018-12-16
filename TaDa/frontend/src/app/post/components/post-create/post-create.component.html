@@ -23,7 +23,7 @@
         <ng-template #notHomeBlock>
           <span class="input-group-text">(상세주소)</span>
           <input type="text" [(ngModel)]="new_post.region_specific" placeholder="상세주소를 입력하세요">
-          <span class="input-group-text" style="margin-top: 10px;">(지도 - 대략적인 위치를 찍어 주세요)</span>
+          <span class="input-group-text" style="margin-top: 10px;">(지도 - 대략적인 위치를 클릭해 주세요)</span>
           <div class="map-container">
             <agm-map class="custom-map" [latitude]="init_googlemap_latitude" [longitude]="init_googlemap_longitude"
             [zoom]="init_googlemap_zoom" (mapClick)="onClickMapEvent($event)">
