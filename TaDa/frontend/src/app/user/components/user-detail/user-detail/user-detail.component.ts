@@ -26,11 +26,18 @@ export class UserDetailComponent implements OnInit {
     this.userService.getUser(id).then(
       user => {
         this.user = user;
-        if(id != this.userService.getCurrentUser().id) {
+        if(!this.isMyPage()) {
           this.loadChatbox(user);
         }
+      },
+      error => {
+        this.router.navigateByUrl('');
       }
     )
+  }
+
+  isMyPage(): boolean {
+    return this.user.id === this.userService.getCurrentUser().id;
   }
 
   getCurrentUserName(): string {

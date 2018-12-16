@@ -1,0 +1,18 @@
+.btn .btn-outline-primary .btn-sm[disabled] {
+    background-color: #000000;
+}
+
+
+.btn.btn-primary:disabled{
+    background-color: #00ff00;
+}
+
+.btn-canselect {
+    background-color: white;
+    border-width: 2px;
+}
+
+
+.btn-cannotselect {
+    color: black;
+}

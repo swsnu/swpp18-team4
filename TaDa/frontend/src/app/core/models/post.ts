@@ -3,8 +3,8 @@ import { ArbeitTypeEnum } from './enums/arbeit-type-enum.enum';
 import { HowToPayEnum } from './enums/how-to-pay-enum.enum';
 
 export class Post {
-    post_id: number;
-    author_id: number;
+    id: number = null;
+    author_id: number = null;
     title: string = null;
     content: string = null;
     region: RegionEnum = null;
@@ -17,7 +17,7 @@ export class Post {
     register_date: Date = null;
     last_modify_date: Date = null;
     deadline: Date = null;
-    home_expected_time: number = null;
+    home_expect_time: number = null;
     is_magam_user: boolean = null;
     is_magam_timeout: boolean = null;
     is_same_person: boolean = null;

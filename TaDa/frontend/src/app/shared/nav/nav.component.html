@@ -7,10 +7,10 @@
 
       <!-- if user is logged in -->
       <ng-template #loginBlock>
-        <button>종모양아이콘</button>
+        <button (click)="alarm()">종</button>
+
         <button routerLink="/message">채팅</button>
         <button (click)="logOut()">로그아웃</button>
-        {{currentUser}}
 
         <button (click)="toUserPage()">마이페이지</button>
       </ng-template>
@@ -20,6 +20,9 @@
         <button routerLink="/signup">회원가입</button>
         <button routerLink="/signin">로그인</button>
       </ng-template>
-
   </div>
 </ul>
+
+
+
+

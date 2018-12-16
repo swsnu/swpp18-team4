@@ -68,6 +68,7 @@ def post(request, post_id):
         if request.user.is_authenticated:
             target_post = Post.objects.filter(id = post_id)
             if target_post.exists():
+                target_post = target_post[0]
                 if target_post.author_id == request.user.id:
                     try:
                         req_data = json.loads(request.body.decode())
@@ -102,6 +103,7 @@ def post(request, post_id):
         if request.user.is_authenticated:
             target_post = Post.objects.filter(id = post_id)
             if target_post.exists():
+                target_post = target_post[0]
                 if target_post.author_id == request.user.id:
                     target_post.delete()
                     return HttpResponse(status=200)
@@ -119,6 +121,20 @@ def author(request, author_id):
     if request.method == 'GET':
         if request.user.is_authenticated:
             post_list = [post for post in Post.objects.filter(author = author_id).values()]
+            return JsonResponse(post_list, safe=False)
+        else:
+            return HttpResponse(status=401)
+    else: 
+        return HttpResponseBadRequest(['GET'])
+
+@csrf_exempt
+def closing_time(request):
+    from django.utils import timezone
+    if request.method == 'GET':
+        if request.user.is_authenticated:
+            startdate = datetime.datetime.now(tz=timezone.utc)
+            enddate = startdate + datetime.timedelta(days=2)
+            post_list = [post for post in Post.objects.filter(deadline__range=[startdate, enddate]).values()]
             return JsonResponse(post_list, safe=False)
         else:
             return HttpResponse(status=401)

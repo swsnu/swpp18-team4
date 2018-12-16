@@ -3,6 +3,7 @@ import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { User } from '../models/user';
 import { Response } from '@angular/http';
 import { TypeEnum } from '../models/enums/type-enum.enum';
+import { region_enum_list, arbeit_type_enum_list, how_to_pay_enum_list } from '../models/enums/enum-list';
 
 const httpOptions = {
   headers: new HttpHeaders({ 'Content-Type': 'application/json'})
@@ -37,12 +38,12 @@ export class UserService {
   /* create token for user with no token */
   createToken() : Promise<Response> {
     return this.http.get<Response>(this.tokenUrl).toPromise().catch(this.handleError);
-  }  
+  }
 
   /* Check cookie if token contained. If there's no token, return null */
-  checkCSRF() : string {
+  checkCSRF(): string {
     const lines = document.cookie.split(';');
-    let result: string = null; 
+    let result: string = null;
     lines.forEach(line => {
       if (line.match(/csrftoken/)) {
         result =  line.trim().split('=')[1];
@@ -63,6 +64,19 @@ export class UserService {
       return false;
     }
   }
+/*
+  getUserTags(): [] {
+    let arr = [];
+    if (this.currentUser.employee_type != null) {
+      this.currentUser.employee_type.forEach(enum => {
+        arr.push({
+          type: 
+        })
+      })
+      region_enum_list
+    }
+    return [];
+  } */
 
   isActivate(): boolean {
     if (this.currentUser != null && this.currentUser.is_active == true) {
@@ -70,12 +84,13 @@ export class UserService {
     } else {
       return false;
     }
-  } 
-   
+
+  }
   getUserType(): TypeEnum {
     return this.currentUser.user_type;
   }
-  
+
+
   setLoginUser(user: User): void {
     this.currentUser = user;
   }

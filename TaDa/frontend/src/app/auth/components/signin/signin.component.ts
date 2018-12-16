@@ -28,7 +28,7 @@ export class SigninComponent implements OnInit {
     if (this.userService.isLoggedIn()) {
       this.router.navigateByUrl('/');
     }
-    /* If user has no token, create one */ 
+    /* If user has no token, create one */
     const token = this.userService.checkCSRF();
     if (token == null) {
       this.userService.createToken();
@@ -46,7 +46,6 @@ export class SigninComponent implements OnInit {
         this.userService.getUser(response['id']).then(
           user => {
           this.userService.setLoginUser(user);
-          
           this.talkService.createCurrentSession();
 
           sessionStorage.setItem('user', JSON.stringify(user));
