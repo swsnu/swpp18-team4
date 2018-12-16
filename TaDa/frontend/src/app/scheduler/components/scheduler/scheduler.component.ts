@@ -63,8 +63,6 @@ export class SchedulerComponent implements OnInit {
   makeScale(dist: number): number {
     if(dist < 5) return 15;
     let magic_number: number = 9 - Math.log2(dist / 50000);
-    console.log(magic_number);
-    console.log(dist);
     return Math.ceil(magic_number);
   }
 }
