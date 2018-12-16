@@ -40,7 +40,7 @@ def comment(request, comment_id):
         if request.user.is_authenticated:
             target_comment = Comment.objects.filter(id = comment_id)
             if target_comment.exists():
-                return JsonResponse(json.dumps(target_comment.values(), cls = DjangoJSONEncoder), safe=False)
+                return JsonResponse(json.dumps(target_comment.values()[0], cls = DjangoJSONEncoder), safe=False)
             else:
                 return HttpResponse(status=404)
         else:

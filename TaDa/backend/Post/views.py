@@ -25,6 +25,7 @@ def posts(request):
             try:
                 req_data = json.loads(request.body.decode())
                 author = User.objects.filter(id = request.user.id)[0]
+                #author
                 title = req_data['title']
                 content = req_data['content']
                 region = req_data['region']
