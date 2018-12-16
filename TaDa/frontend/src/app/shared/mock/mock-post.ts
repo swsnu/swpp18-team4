@@ -26,7 +26,9 @@ export const mock_posts: Post[] = [
     home_expect_time: null,
     is_magam_user: false,
     is_magam_timeout: false,
-    is_same_person: false
+    is_same_person: false,
+    latitude: null,
+    longitude: null
   },
 
   {
@@ -48,7 +50,9 @@ export const mock_posts: Post[] = [
     home_expect_time: null,
     is_magam_user: true,
     is_magam_timeout: false,
-    is_same_person: false
+    is_same_person: false,
+    latitude: 35.524879,
+    longitude: 129.344075
   },
   {
     id: 3,
@@ -69,7 +73,9 @@ export const mock_posts: Post[] = [
     home_expect_time: null,
     is_magam_user: false,
     is_magam_timeout: false,
-    is_same_person: false
+    is_same_person: false,
+    latitude: null,
+    longitude: null
   },
   {
     id: 4,
@@ -90,6 +96,8 @@ export const mock_posts: Post[] = [
     home_expect_time: null,
     is_magam_user: false,
     is_magam_timeout: true,
-    is_same_person: false
+    is_same_person: false,
+    latitude: null,
+    longitude: null
   }
 ];
