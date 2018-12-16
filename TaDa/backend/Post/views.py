@@ -59,7 +59,7 @@ def post(request, post_id):
             target_post = Post.objects.filter(id = post_id)
             if target_post.exists():
                 post_dict = json.dumps(target_post.values()[0], cls=DjangoJSONEncoder)
-                return JsonResponse(post_dict, safe=False)           
+                return JsonResponse(post_dict, safe=False)
             else:
                 return HttpResponse(status=404)
         else:
@@ -120,7 +120,7 @@ def post(request, post_id):
 def author(request, author_id):
     if request.method == 'GET':
         if request.user.is_authenticated:
-            post_list = [post for post in Post.objects.filter(author_id = author_id).values()]
+            post_list = [post for post in Post.objects.filter(author = author_id).values()]
             return JsonResponse(post_list, safe=False)
         else:
             return HttpResponse(status=401)
