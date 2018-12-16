@@ -8,7 +8,7 @@ import { HowToPayEnum } from 'src/app/core/models/enums/how-to-pay-enum.enum';
 
 export const mock_posts: Post[] = [
   {
-    post_id: 1,
+    id: 1,
     author_id: 1,
     title: 'title1',
     content: 'content1',
@@ -22,13 +22,14 @@ export const mock_posts: Post[] = [
     register_date: null,
     last_modify_date: null,
     deadline: null,
-    home_expected_time: null,
+    home_expect_time: null,
     is_magam_user: false,
     is_magam_timeout: false,
     is_same_person: false
   },
+
   {
-    post_id: 2,
+    id: 2,
     author_id: 1,
     title: 'title2',
     content: 'content2',
@@ -43,8 +44,48 @@ export const mock_posts: Post[] = [
     last_modify_date: null,
     deadline: null,
     home_expected_time: null,
+    is_magam_user: true,
+    is_magam_timeout: false,
+    is_same_person: false
+  },
+  {
+    post_id: 3,
+    author_id: 2,
+    title: 'title3',
+    content: 'content3',
+    region: RegionEnum.home,
+    region_specific: '너네 집',
+    arbeit_type: ArbeitTypeEnum.outsourcing,
+    timezone: [],
+    how_to_pay: HowToPayEnum.goods,
+    pay_per_hour: null,
+    goods: '스타벅스',
+    register_date: null,
+    last_modify_date: null,
+    deadline: null,
+    home_expected_time: null,
     is_magam_user: false,
     is_magam_timeout: false,
+    is_same_person: false
+  },
+  {
+    post_id: 4,
+    author_id: 2,
+    title: 'title4',
+    content: 'content3',
+    region: RegionEnum.home,
+    region_specific: '너네 집',
+    arbeit_type: ArbeitTypeEnum.outsourcing,
+    timezone: [],
+    how_to_pay: HowToPayEnum.goods,
+    pay_per_hour: null,
+    goods: '스타벅스',
+    register_date: null,
+    last_modify_date: null,
+    deadline: null,
+    home_expected_time: null,
+    is_magam_user: false,
+    is_magam_timeout: true,
     is_same_person: false
   }
 ];
