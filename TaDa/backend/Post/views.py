@@ -129,12 +129,16 @@ def post(request, post_id):
 def author(request, author_id):
     if request.method == 'GET':
         if request.user.is_authenticated:
-            post_list = [post for post in Post.objects.filter(author = author_id).values()]
-            return JsonResponse(post_list, safe=False)
+            target_author = User.objects.filter(id = author_id)
+            if target_author.exists():
+                post_list = [post for post in Post.objects.filter(author = target_author).values()]
+                return JsonResponse(post_list, safe=False)
+            else:
+                return HttpResponse(status=404)
         else:
             return HttpResponse(status=401)
     else: 
-        return HttpResponseBadRequest(['GET'])
+        return HttpResponseNotAllowed(['GET'])
 
 @csrf_exempt
 def alarm(request):
@@ -148,7 +152,7 @@ def alarm(request):
         else:
             return HttpResponse(status=401)
     else: 
-        return HttpResponseBadRequest(['GET'])
+        return HttpResponseNotAllowed(['GET'])
 
 @ensure_csrf_cookie
 def token(request):
