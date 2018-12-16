@@ -16,20 +16,23 @@
     </div>
   </div>
 
-
   <!-- Selecting Tags -->
-  <div class="row" style="border-width: 1.5px;">  
-    <button type="button"  (click)= "filter_button=1" class="btn tag-button tag-time">시간</button>
-    <button type="button" (click)= "filter_button=2" class="btn tag-button tag-type">유형</button>  
-    <button type="button" (click)= "filter_button=3" class="btn tag-button tag-region">장소</button>
-    <button type="button" (click)= "filter_button=4" class="btn tag-button tag-pay">급여</button>
+  <div class="row" style="border-width: 1.5px;">
+    <button type="button" (click)="filter_button =1; removeTag(1,0);" class="btn tag-button tag-time">시간</button>
+    <button type="button" (click)="filter_button=2" class="btn tag-button tag-type">유형</button>  
+    <button type="button" (click)="filter_button=3" class="btn tag-button tag-region">장소</button>
+    <button type="button" (click)="filter_button=4" class="btn tag-button tag-pay">급여</button>
     <button type="button" style="float: right; margin-left: auto;" (click)= "getMyTagInfo()" class="btn btn-primary">
       내 태그 불러오기
     </button>
   </div>
 
   <div [ngSwitch]="filter_button">
-      <b *ngSwitchCase="1">NOT YET</b>
+      <ng-container *ngSwitchCase="1">
+          <app-timeblock [isSelectable]="true" [givenDate]="timeblocks">
+          </app-timeblock>
+          <button type="button" class="btn btn-sm" (click)="addTag(1,0);filter_button=0;">확인</button>
+      </ng-container>
       <ng-container *ngSwitchCase="2">
         <b *ngFor="let enums of arbeit_type_enum_list; let idx = index;">
           <app-tag (addTag)="addTag(2, idx)" (removeTag)="removeTag(2, idx)" 
@@ -105,6 +108,9 @@
         <td>{{post.pay_per_hour}}</td>
         <td>아직 개발중</td>
         <td>{{post.register_date | date: 'yyyy.MM.d'}}</td>
+      </tr>
+      <tr *ngIf="posts_filtered.length == 0">
+        <td colspan="9" style="text-align: center">검색결과가 없습니다!</td>
       </tr>
     </tbody>
   </table>

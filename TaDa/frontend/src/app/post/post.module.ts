@@ -10,6 +10,8 @@ import { CommentViewComponent } from './components/comment-view/comment-view.com
 import { FormsModule } from '@angular/forms';
 import { NgbModule, NgbDatepicker } from '@ng-bootstrap/ng-bootstrap';
 import { TagComponent } from '../shared/tag/tag.component';
+import { TimeblockComponent } from '../shared/timeblock/timeblock.component';
+import { DragToSelectModule } from 'ngx-drag-to-select';
 import { AgmCoreModule } from '@agm/core';
 
 @NgModule({
@@ -18,10 +20,19 @@ import { AgmCoreModule } from '@agm/core';
     PostRoutingModule,
     FormsModule,
     NgbModule.forRoot(),
+    DragToSelectModule.forRoot()
     AgmCoreModule.forRoot({
       apiKey: 'AIzaSyCYOybP6ZEj4V4tWM8367t_EKIXVHD4ado'
     }),
   ],
-  declarations: [PostListComponent, PostViewComponent, PostCreateComponent, PostEditComponent, CommentViewComponent, TagComponent]
+  declarations: [
+    PostListComponent, 
+    PostViewComponent, 
+    PostCreateComponent, 
+    PostEditComponent, 
+    CommentViewComponent, 
+    TagComponent,
+    TimeblockComponent
+  ]
 })
 export class PostModule { }

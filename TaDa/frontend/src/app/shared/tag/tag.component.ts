@@ -25,6 +25,9 @@ export class TagComponent implements OnInit {
   /* initiate color and body content of each tag */
   ngOnInit() {
     switch (this.type) {
+      case 1: this.tag_color = '#ff9900';
+              this.tag_string = '시간';
+              break;
       //Type-Enum
       case 2: this.tag_color = '#ff5050';
               this.tag_string = arbeit_type_enum_list[this.body];
