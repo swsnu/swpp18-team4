@@ -52,8 +52,8 @@ export class PostService {
       .toPromise().then(() => post).catch(this.handleError);
   }
 
-  getClosingTimePosts(): Promise<Post[]> {
-  return this.http.get<Post[]>(`${this.postsUrl}closing_time/`, httpOptions)
+  getAlarmPosts(): Promise<Post[]> {
+  return this.http.get<Post[]>(`${this.postsUrl}alarm/`, httpOptions)
     .toPromise()
     .catch(this.handleError);
 }

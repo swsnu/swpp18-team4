@@ -1,8 +1,8 @@
 import { BrowserModule } from '@angular/platform-browser';
 import { HttpClientModule, HttpClient } from '@angular/common/http';
 import { NgModule } from '@angular/core';
-import { FormsModule } from '@angular/forms';
-import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { NgbActiveModal, NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { AgmCoreModule, GoogleMapsAPIWrapper } from '@agm/core';
 
 import { AppComponent } from './app.component';
@@ -20,6 +20,7 @@ import { CommentService } from './core/services/comment.service';
 import { TalkService } from './core/services/talk.service';
 import { DragToSelectModule } from 'ngx-drag-to-select';
 import { TimeblockService } from './core/services/timeblock.service';
+import { NgbdModalComponent, NgbdModalContentComponent } from './shared/modal/modal.component';
 
 @NgModule({
   declarations: [
@@ -29,17 +30,21 @@ import { TimeblockService } from './core/services/timeblock.service';
     NavComponent,
     SigninComponent,
     SignupComponent,
+    NgbdModalComponent,
+    NgbdModalContentComponent,
   ],
   imports: [
     BrowserModule,
     AppRoutingModule,
     HttpClientModule,
     FormsModule,
+    ReactiveFormsModule,
     AgmCoreModule.forRoot({
-      apiKey: 'AIzaSyCGdFwTXy8_d6emqQWwS5ww3AaSL9wRw9Q'
+      apiKey: 'AIzaSyCYOybP6ZEj4V4tWM8367t_EKIXVHD4ado'
     }),
     NgbModule.forRoot(),
   ],
+  entryComponents: [NgbdModalContentComponent],
   providers: [
     AuthGuard,
     UserService,
@@ -47,6 +52,7 @@ import { TimeblockService } from './core/services/timeblock.service';
     CommentService,
     TalkService,
     TimeblockService
+    NgbActiveModal,
   ],
   bootstrap: [AppComponent]
 })

@@ -1,5 +1,5 @@
 export class Comment {
-    comment_id: number;
+    id: number;
     post_id: number;
     refer_comment_id: number;
     author_id: number;

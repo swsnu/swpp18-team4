@@ -63,10 +63,10 @@ class User(AbstractBaseUser):
     business_content = models.TextField(null=True)
     representative_name = models.CharField(max_length=50, null=True)
     employer_license_number = models.CharField(max_length=20, null=True)
-    #profile_image = models.ImageField(upload_to='uploads/') #modify
     is_admin = models.BooleanField(default=False)
     is_active = models.BooleanField(default=True)
-    
+
+
     objects = UserManager()
     
     USERNAME_FIELD = 'email'

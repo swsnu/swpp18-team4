@@ -10,10 +10,11 @@ export const mock_posts: Post[] = [
   {
     id: 1,
     author_id: 1,
+    author_name: 'aaa',
     title: 'title1',
     content: 'content1',
-    region: RegionEnum.home,
-    region_specific: '포항',
+    region: RegionEnum.seoulip,
+    region_specific: '서울대입구역 9번출구',
     arbeit_type: ArbeitTypeEnum.academy,
     timezone: [],
     how_to_pay: HowToPayEnum.pay_hourly,
@@ -25,12 +26,15 @@ export const mock_posts: Post[] = [
     home_expect_time: null,
     is_magam_user: false,
     is_magam_timeout: false,
-    is_same_person: false
+    is_same_person: false,
+    latitude: 37.480955,
+    longitude: 126.952208
   },
 
   {
     id: 2,
     author_id: 1,
+    author_name: 'aaa',
     title: 'title2',
     content: 'content2',
     region: RegionEnum.extra,
@@ -46,11 +50,14 @@ export const mock_posts: Post[] = [
     home_expect_time: null,
     is_magam_user: true,
     is_magam_timeout: false,
-    is_same_person: false
+    is_same_person: false,
+    latitude: 35.524879,
+    longitude: 129.344075
   },
   {
     id: 3,
     author_id: 2,
+    author_name: 'bbb',
     title: 'title3',
     content: 'content3',
     region: RegionEnum.home,
@@ -66,11 +73,14 @@ export const mock_posts: Post[] = [
     home_expect_time: null,
     is_magam_user: false,
     is_magam_timeout: false,
-    is_same_person: false
+    is_same_person: false,
+    latitude: null,
+    longitude: null
   },
   {
     id: 4,
     author_id: 2,
+    author_name: 'bbb',
     title: 'title4',
     content: 'content3',
     region: RegionEnum.home,
@@ -86,6 +96,54 @@ export const mock_posts: Post[] = [
     home_expect_time: null,
     is_magam_user: false,
     is_magam_timeout: true,
-    is_same_person: false
+    is_same_person: false,
+    latitude: null,
+    longitude: null
+  },
+  {
+    id: 5,
+    author_id: 2,
+    author_name: 'bbb',
+    title: 'title5',
+    content: 'content5',
+    region: RegionEnum.nakdae,
+    region_specific: '낙성대역 2번출구앞',
+    arbeit_type: ArbeitTypeEnum.mentoring,
+    timezone: [],
+    how_to_pay: HowToPayEnum.pay_hourly,
+    pay_per_hour: 12000,
+    goods: null,
+    register_date: null,
+    last_modify_date: null,
+    deadline: null,
+    home_expect_time: null,
+    is_magam_user: false,
+    is_magam_timeout: true,
+    is_same_person: false,
+    latitude: 37.476709,
+    longitude: 126.963610
+  },
+  {
+    id: 6,
+    author_id: 2,
+    author_name: 'bbb',
+    title: 'title6',
+    content: 'content6',
+    region: RegionEnum.nokdu,
+    region_specific: 'CU 관악고시촌점',
+    arbeit_type: ArbeitTypeEnum.extra,
+    timezone: [],
+    how_to_pay: HowToPayEnum.pay_hourly,
+    pay_per_hour: 10000,
+    goods: null,
+    register_date: null,
+    last_modify_date: null,
+    deadline: null,
+    home_expect_time: null,
+    is_magam_user: false,
+    is_magam_timeout: true,
+    is_same_person: false,
+    latitude: 37.466255,
+    longitude: 126.936667
   }
 ];

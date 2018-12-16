@@ -12,6 +12,7 @@ import { NgbModule, NgbDatepicker } from '@ng-bootstrap/ng-bootstrap';
 import { TagComponent } from '../shared/tag/tag.component';
 import { TimeblockComponent } from '../shared/timeblock/timeblock.component';
 import { DragToSelectModule } from 'ngx-drag-to-select';
+import { AgmCoreModule } from '@agm/core';
 
 @NgModule({
   imports: [
@@ -20,7 +21,9 @@ import { DragToSelectModule } from 'ngx-drag-to-select';
     FormsModule,
     NgbModule.forRoot(),
     DragToSelectModule.forRoot()
-
+    AgmCoreModule.forRoot({
+      apiKey: 'AIzaSyCYOybP6ZEj4V4tWM8367t_EKIXVHD4ado'
+    }),
   ],
   declarations: [
     PostListComponent, 

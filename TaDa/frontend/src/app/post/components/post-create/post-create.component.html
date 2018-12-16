@@ -13,7 +13,7 @@
           <div class="input-group-prepend">
             <span class="input-group-text" style="display: inline-block; height: 38px;">장소</span>
           </div>
-          <select  class="custom-select" id="region" [(ngModel)]="new_post.region">
+          <select  class="custom-select" id="region" [(ngModel)]="new_post.region" (ngModelChange)="regionChange($event)">
             <option *ngFor="let symbol of region_enum_list" [ngValue]="symbol">{{symbol}}</option>
           </select>
         </div>
@@ -23,6 +23,15 @@
         <ng-template #notHomeBlock>
           <span class="input-group-text">(상세주소)</span>
           <input type="text" [(ngModel)]="new_post.region_specific" placeholder="상세주소를 입력하세요">
+          <span class="input-group-text" style="margin-top: 10px;">(지도 - 대략적인 위치를 클릭해 주세요)</span>
+          <div class="map-container">
+            <agm-map class="custom-map" [latitude]="init_googlemap_latitude" [longitude]="init_googlemap_longitude"
+            [zoom]="init_googlemap_zoom" (mapClick)="onClickMapEvent($event)">
+              <agm-marker [latitude]="new_post.latitude" [longitude]="new_post.longitude">
+                
+              </agm-marker>
+            </agm-map>
+          </div>
         </ng-template>
         <ng-template #HomeBlock>
           <span class="input-group-text">(예상 총 업무 시간)</span>
