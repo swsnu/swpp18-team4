@@ -19,6 +19,7 @@ import { PostService } from './core/services/post.service';
 import { CommentService } from './core/services/comment.service';
 import { TalkService } from './core/services/talk.service';
 import { DragToSelectModule } from 'ngx-drag-to-select';
+import { TimeblockService } from './core/services/timeblock.service';
 import { NgbdModalComponent, NgbdModalContentComponent } from './shared/modal/modal.component';
 
 @NgModule({
@@ -27,7 +28,6 @@ import { NgbdModalComponent, NgbdModalContentComponent } from './shared/modal/mo
     HomeComponent,
     FooterComponent,
     NavComponent,
-    TimeblockComponent,
     SigninComponent,
     SignupComponent,
     NgbdModalComponent,
@@ -43,8 +43,6 @@ import { NgbdModalComponent, NgbdModalContentComponent } from './shared/modal/mo
       apiKey: 'AIzaSyCYOybP6ZEj4V4tWM8367t_EKIXVHD4ado'
     }),
     NgbModule.forRoot(),
-    DragToSelectModule.forRoot()
-
   ],
   entryComponents: [NgbdModalContentComponent],
   providers: [
@@ -53,6 +51,7 @@ import { NgbdModalComponent, NgbdModalContentComponent } from './shared/modal/mo
     PostService,
     CommentService,
     TalkService,
+    TimeblockService
     NgbActiveModal,
   ],
   bootstrap: [AppComponent]
