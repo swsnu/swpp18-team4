@@ -83,7 +83,7 @@ import {ToastrService} from 'ngx-toastr';
     } else if (this.new_post.region === RegionEnum.nakdae) {
       return 126.963758;
     } else if (this.new_post.region === RegionEnum.seoulip) {
-      return 126.952755
+      return 126.952755;
     } else if (this.new_post.region === RegionEnum.nokdu) {
       return 126.937568;
     } else {
@@ -105,9 +105,9 @@ import {ToastrService} from 'ngx-toastr';
     const converted_date = new Date(json_to_date.year, json_to_date.month - 1, json_to_date.day, 23, 59);
     return converted_date;
   }
-  addToTimezone(time_zone_start, time_zone_end): void {
+  addToTimezone(time_zone_start): void {
     const converted_time_zone_start = this.convertJsonToDate(time_zone_start);
-    const converted_time_zone_end = this.convertJsonToDate(time_zone_end);
+    const converted_time_zone_end = this.convertJsonToDate(time_zone_start);
     converted_time_zone_start.setHours(this.time_zone_hm[0]); converted_time_zone_start.setMinutes(this.time_zone_hm[1]);
     converted_time_zone_end.setHours(this.time_zone_hm[2]); converted_time_zone_end.setMinutes(this.time_zone_hm[3]);
 

@@ -6,7 +6,9 @@
 
       <!-- if user is logged in -->
       <ng-template #loginBlock>
-        <button (click)="alarm(content)">종</button>
+        <button (click)="alarm(content)">
+          <i class="fas fa-bell"></i>
+        </button>
         <button routerLink="/message">채팅</button>
         <button (click)="logOut()">로그아웃</button>
         <button (click)="toUserPage()">마이페이지</button>
