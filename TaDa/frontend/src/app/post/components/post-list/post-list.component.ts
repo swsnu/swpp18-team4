@@ -56,6 +56,8 @@ export class PostListComponent implements OnInit {
       posts => {
         this.posts_all = posts;
         this.posts_filtered = posts;
+        this.posts_all = mock_posts;
+        this.posts_filtered = mock_posts;
       });
   }
   onClickSearch(keyword: string, criteria: number): void {
@@ -169,6 +171,7 @@ export class PostListComponent implements OnInit {
         bool_one = false;
         for (let i = 0; i < post.timezone.length; i = i+2) { //loop2
           day = new Date(post.timezone[i]).getDay();
+          bool_one = false;
           for (const obj of converted_timeblocks[day]) { // loop1
             if (new Date(post.timezone[i]).getHours() >= obj.start 
                 && new Date(post.timezone[i+1]).getHours() < obj.end) {
@@ -191,7 +194,7 @@ export class PostListComponent implements OnInit {
           day = new Date(post.timezone[i]).getDay();
           for (const obj of converted_timeblocks[day]) {
             if (new Date(post.timezone[i]).getHours() >= obj.start 
-                && new Date(post.timezone[i+1]).getHours() <= obj.end) {
+                && new Date(post.timezone[i+1]).getHours() < obj.end) {
               new_arr.push(post);
               should_break = true;
               break;
@@ -273,5 +276,23 @@ export class PostListComponent implements OnInit {
       }
     }
     return false;
+  }
+
+  private getStringFromDate(date: Date): string {
+    return date.getMonth() + '/' + date.getDate();
+  }
+
+  getGiganString(post: Post): string {
+    var start_time = new Date(2100,0,1,0,0);
+    var end_time = new Date(1900,0,1,0,0);
+    for (let i = 0; i < post.timezone.length; i = i + 2) {
+      if (start_time > post.timezone[i]) start_time = post.timezone[i];
+      if (end_time < post.timezone[i + 1]) end_time = post.timezone[i + 1];
+    }
+    if (start_time > end_time) return '-';
+    let start_string = this.getStringFromDate(start_time);
+    let end_string = this.getStringFromDate(end_time);
+    if (start_string === end_string) return start_string;
+    else return start_string + '-' + end_string;
   }
 }
