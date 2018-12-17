@@ -150,6 +150,9 @@
           <ng-container *ngIf="comment.star%1 == 0.5">
             <i class="fas fa-star-half-alt"></i>
           </ng-container>
+          <ng-container *ngFor="let i of comment_service.iter_vacant(comment.star)">
+            <i class="far fa-star"></i>
+          </ng-container>
           {{comment.content}}
         <div class="button-group" *ngIf="current_user && current_user.id == comment.author_id">
           <button (click)="editComment(comment)">수정</button>

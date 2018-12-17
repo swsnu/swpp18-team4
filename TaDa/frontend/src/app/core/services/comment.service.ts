@@ -73,6 +73,16 @@ export class CommentService {
     }
     return arr;
   }
+  iter_vacant (n: number) {
+    const arr = [];
+    if (n % 1 === 0.5) {
+      n += 0.5;
+    }
+    for (let i = 0; i < 5 - n; i++) {
+      arr.push(i);
+    }
+    return arr;
+  }
   private handleError(error: any): Promise<any> {
     console.log('An error occurred in CommentService', error);
     return Promise.reject(error.message || 'Internal server error');
