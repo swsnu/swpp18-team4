@@ -66,4 +66,39 @@ class PostTestCase(TestCase):
 
     def test_comment_else(self):
         pass 
-
+    
+    def test_commentByPost_get_success(self):
+        pass
+    
+    def test_commentByPost_get_not_authenticated(self):
+        pass
+    
+    def test_commentByPost_get_not_exist(self):
+        pass
+    
+    def test_commentByPost_else(self):
+        pass
+    
+    def test_commentByAuthor_get_success(self):
+        pass
+    
+    def test_commentByAuthor_get_not_authenticated(self):
+        pass
+    
+    def test_commentByAuthor_get_not_exist(self):
+        pass
+    
+    def test_commentByAuthor_else(self):
+        pass
+    
+    def test_commentReceive_get_success(self):
+        pass
+    
+    def test_commentReceive_get_not_authenticated(self):
+        pass
+    
+    def test_commentReceive_get_not_exist(self):
+        pass
+    
+    def test_commentReceive_else(self):
+        pass

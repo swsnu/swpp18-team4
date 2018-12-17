@@ -94,7 +94,7 @@ def commentByPost(request, post_id):
             else:
                 return HttpResponse(status=404)
         else:
-            return HttpResponse(status=404)
+            return HttpResponse(status=401)
     else: 
         return HttpResponseBadRequest(['GET'])
 
@@ -110,11 +110,10 @@ def commentByAuthor(request, author_id):
             else:
                 return HttpResponse(status=404)
         else:
-            return HttpResponse(status=404)
+            return HttpResponse(status=401)
     else: 
         return HttpResponseBadRequest(['GET'])
 
-#버그
 @csrf_exempt
 def commentReceive(request, author_id):
     if request.method == 'GET':
@@ -129,12 +128,11 @@ def commentReceive(request, author_id):
                     comment_list += comment_list_pid
                 return JsonResponse(comment_list, safe=False)
             else:
-                return HttpResponse(status=403)
+                return HttpResponse(status=404)
         else:
-            return HttpResponse(status=404)
+            return HttpResponse(status=401)
     else:
         return HttpResponseBadRequest(['GET'])
-#
 
 @ensure_csrf_cookie
 def token(request):

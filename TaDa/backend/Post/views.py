@@ -16,11 +16,8 @@ from .models import Post
 @csrf_exempt
 def posts(request):
     if request.method == 'GET':
-        if request.user.is_authenticated:
-            post_all_list = [post for post in Post.objects.all().values()]
-            return JsonResponse(post_all_list, safe = False)
-        else:
-            return HttpResponse(status=401)
+        post_all_list = [post for post in Post.objects.all().values()]
+        return JsonResponse(post_all_list, safe = False)
     elif request.method == 'POST':
         if request.user.is_authenticated:
             try:
