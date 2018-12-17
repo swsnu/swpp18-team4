@@ -5,7 +5,7 @@ import { HttpClientModule } from '@angular/common/http';
 import { Comment } from '../models/comment';
 
 const mock_comment: Comment = {
-  comment_id: 1,
+  id: 1,
   post_id: 1,
   refer_comment_id: 1,
   author_id: 1,
