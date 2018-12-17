@@ -47,7 +47,7 @@
             <input type="number" min="0" disabled [value]="current_post.pay_per_hour" placeholder="미입력">
           </div>
           <div *ngIf="current_post.how_to_pay === '건급'" class="input-group-prepend">
-            <span class="input-group-text">예상 시급</span>
+            <span class="input-group-text">건급</span>
             <input disabled [value]="current_post.pay_per_hour" placeholder="미입력">
           </div>
           <div *ngIf="current_post.how_to_pay === '상품' || current_post.how_to_pay === '랜덤'" class="input-group-prepend">
