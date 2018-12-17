@@ -131,7 +131,7 @@ def author(request, author_id):
         if request.user.is_authenticated:
             target_author = User.objects.filter(id = author_id)
             if target_author.exists():
-                post_list = [post for post in Post.objects.filter(author = target_author).values()]
+                post_list = [post for post in Post.objects.filter(author__in = target_author).values()]
                 return JsonResponse(post_list, safe=False)
             else:
                 return HttpResponse(status=404)
