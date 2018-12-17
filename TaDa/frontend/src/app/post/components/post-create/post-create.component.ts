@@ -164,6 +164,7 @@ import {ToastrService} from 'ngx-toastr';
       this.new_post.timezone = this.time_zone_list;
       this.post_service.createPost(this.new_post)
         .then( () => this.router.navigateByUrl('/post/list'))
+        .then( () => this.toastrService.info('등록되었습니다'))
         .catch( () => alert('글 작성 실패'));
     } else {
       this.toastrService.warning('기본 정보란을 모두 작성해주세요');

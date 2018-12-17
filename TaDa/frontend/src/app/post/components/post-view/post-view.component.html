@@ -22,11 +22,11 @@
         <div class="input-group mb-3">
           <div *ngIf="current_post.region === '재택'; then HomeBlock; else notHomeBlock" class="input-group-prepend"></div>
           <ng-template #notHomeBlock>
-            <span class="input-group-text">(상세주소)</span>
+            <span class="input-group-text">상세주소</span>
             <input type="text" disabled [value]="current_post.region_specific" placeholder="미입력">
           </ng-template>
           <ng-template #HomeBlock>
-            <span class="input-group-text">(예상 총 업무 시간)</span>
+            <span class="input-group-text">예상 총 업무 시간</span>
             <input type="number" disabled [value]="current_post.home_expect_time" placeholder="미입력">
           </ng-template>
         </div>
@@ -34,15 +34,15 @@
 
         <div *ngIf = "current_post.how_to_pay" class="input-group mb-3">
           <div *ngIf="current_post.how_to_pay === '시급'" class="input-group-prepend">
-            <span class="input-group-text">(시급)</span>
+            <span class="input-group-text">시급</span>
             <input type="number" min="0" disabled [value]="current_post.pay_per_hour" placeholder="미입력">
           </div>
           <div *ngIf="current_post.how_to_pay === '건급'" class="input-group-prepend">
-            <span class="input-group-text">(예상 시급)</span>
+            <span class="input-group-text">예상 시급</span>
             <input disabled [value]="current_post.pay_per_hour" placeholder="미입력">
           </div>
           <div *ngIf="current_post.how_to_pay === '상품' || current_post.how_to_pay === '랜덤'" class="input-group-prepend">
-            <span class="input-group-text">(상품)</span>
+            <span class="input-group-text">상품</span>
             <input type="text" disabled [value]="current_post.goods" placeholder="미입력">
           </div>
         </div>
@@ -87,14 +87,13 @@
     <!-- 위치정보 -->
     <div *ngIf="current_post && current_post.region !== '재택'" class="card border-info mb-3" style="margin-right:2%;">
       <div class="card-header border-info" style="color: lightseagreen;">위치 정보</div>
-      <span class="col-sm-6 map-container">
-        <agm-map class="map-view" [latitude]="current_post.latitude" [longitude]="current_post.longitude" [zoom] = "15">
-            <agm-polyline-point
-              [latitude]="current_post.latitude" [longitude]="current_post.longitude">
-            </agm-polyline-point>
-        </agm-map>
-        <agm-marker [latitude]="current_post.latitude" [longitude]="current_post.longitude" label="여기"></agm-marker>
-    </span>
+      <div class="card-body text-primary">
+        <span class="map-container">
+          <agm-map class="map-view" [latitude]="current_post.latitude" [longitude]="current_post.longitude" [zoom] = "15">
+            <agm-marker [latitude]="current_post.latitude" [longitude]="current_post.longitude"></agm-marker>
+          </agm-map>
+        </span>
+      </div>
     </div>
 
     <div *ngIf="post_author && post_author.company_name" class="card border-dark mb-3" style="margin-right:2%;">
@@ -104,28 +103,28 @@
         <div class="input-group mb-3 company">
           <div class="input-group-prepend company">
             <span class="input-group-text company">회사명</span>
-            <input type="text" disabled [value]="post_author.company_name">
+            <input type="text" disabled [value]="post_author.company_name" placeholder="미입력">
           </div>
         </div>
 
         <div class="input-group mb-3 company">
           <div class="input-group-prepend company">
             <span class="input-group-text company">회사 주소</span>
-            <input type="text" disabled [value]="post_author.company_address">
+            <input type="text" disabled [value]="post_author.company_address" placeholder="미입력">
           </div>
         </div>
 
         <div class="input-group mb-3 company">
           <div class="input-group-prepend company">
             <span class="input-group-text company">대표자 이름</span>
-            <input type="text" disabled [value]="post_author.representative_name">
+            <input type="text" disabled [value]="post_author.representative_name" placeholder="미입력">
           </div>
         </div>
 
         <div class="input-group mb-3 company">
           <div class="input-group-prepend company">
             <span class="input-group-text company">사업 내용</span>
-            <input type="text" disabled [value]="post_author.business_content">
+            <input type="text" disabled [value]="post_author.business_content" placeholder="미입력">
           </div>
         </div>
       </div>
@@ -155,9 +154,10 @@
   </div>
 </div>
 
-
-  <div>
+<div *ngIf="current_user && post_author">
+  <button routerLink="/post/list" class="btn btn-outline-secondary btn-lg">취소</button>
+  <div *ngIf="current_user.id == post_author.id" style="display: inline">
     <button (click)="edit()" class="btn btn-outline-primary btn-lg">수정</button>
-    <button routerLink="/post/list" class="btn btn-outline-secondary btn-lg">취소</button>
+    <button (click)="delete()" class="btn btn-outline-danger btn-lg">삭제</button>
   </div>
-
+</div>

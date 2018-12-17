@@ -9,7 +9,8 @@ import { User } from '../../../core/models/user';
 import {CommentService} from '../../../core/services/comment.service';
 import {Comment} from '../../../core/models/comment';
 
-
+import {MarkerManager} from '@agm/core';
+import {GoogleMapsAPIWrapper} from '@agm/core';
 
 @Component({
   selector: 'app-post-view',
@@ -49,10 +50,7 @@ export class PostViewComponent implements OnInit {
   back(): void {
     this.router.navigateByUrl(`/post/list/`);
   }
-  edit() {
-    const id = +this.route.snapshot.paramMap.get('id');
-    this.router.navigateByUrl(`/post/edit/${id}`);
-  }
+
   ConfirmComment(content, star, refer) {
     const new_comment: Comment = {
       id: -1,
@@ -67,20 +65,32 @@ export class PostViewComponent implements OnInit {
     this.comment_service.createComment(new_comment)
       .then( () => this.comment_service.getWriteCommentsByPostId(this.id)
         .then(comments => this.post_comments = comments))
-      .then( () => this.comment_value = '' )
+      .then( () => this.toastrService.info('등록되었습니다'))
+      .catch( () => alert('에러!') );
+    this.comment_value = '';
+  }
+  edit() {
+    const id = +this.route.snapshot.paramMap.get('id');
+    this.router.navigateByUrl(`/post/edit/${id}`);
+  }
+  delete() {
+    this.post_service.deletePost(this.current_post)
+      .then( () => this.toastrService.warning('삭제되었습니다'))
+      .then(() => this.router.navigateByUrl(`/post/list`))
       .catch( () => alert('에러!') );
   }
 
   editComment(comment) {
-    this.toastrService.success('good');
     this.comment_service.getWriteCommentsByPostId(this.id)
       .then(comments => this.post_comments = comments)
+      .then( () => this.toastrService.info('수정되었습니다'))
       .catch( () => alert('에러!') );
   }
   deleteComment(comment) {
     this.comment_service.deleteComment(comment)
       .then( () => this.comment_service.getWriteCommentsByPostId(this.id)
         .then(comments => this.post_comments = comments))
+      .then( () => this.toastrService.warning('삭제되었습니다'))
       .catch( () => alert('에러!') );
   }
 
