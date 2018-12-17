@@ -2,7 +2,11 @@
 <div class="row">          
   <div class="col-sm-1"></div>
   <div class="col-sm-10">
+
     <!-- Profile Card -->
+    <div *ngIf = "is_employee">
+      
+    </div>
     <div *ngIf="user" class="card" style="border-style: double">
       <div class="card-body">
         <div class="row">          
@@ -31,7 +35,7 @@
     <!-- the posts-->
     <div *ngIf="post_list" class="card" style = "margin-top:20px;margin-bottom: 20px">
       <div class="card-header">
-        {{user_name}}이/가 쓴 글
+        <b>{{user_name}}</b>이/가 쓴 글
       </div>
       <ul class="list-group list-group-flush" *ngFor="let post of post_list;">
         <li [routerLink]="'/post/view/'+post.id" style="padding: 3px" class="list-group-item">
@@ -45,17 +49,26 @@
     </div>
 
     <!-- the comments-->
-    <div *ngIf="comment_list" class="card" style="margin-top:20px;margin-bottom: 20px">
-        <div class="card-header">
-          <b>{{user_name}}</b>이/가 쓴 글
+    <div *ngIf="comment_list" class="card" style="margin-top:20px;margin-bottom: 20px" 
+    data-toggle="tooltip" data-placement="top" title="댓글을 클릭하면 해당 게시글로 이동합니다.">
+        <div *ngIf="is_employee" class="card-header">
+          <b>{{user_name}}</b>이/가 쓴 댓글
         </div>
-        <ul class="list-group list-group-flush" *ngFor="let comment of comment_list;">
-          <li [routerLink]="'/post/view/'+post.id" style="padding: 3px" class="list-group-item">
-            <small>&nbsp;{{post.register_date | date: 'yyyy.MM.d'}}&nbsp;&nbsp;</small>{{post.title}}
-            <ng-container class="col-md-4" *ngFor="let tag of this.postService.makePostTags(post);">
-              <app-tag [justShowing]="true" [hasCloseButton]="false" [isSelectable]="false" [enumType]="tag.type" [enumBody]="tag.index">
-              </app-tag>
-            </ng-container>      
+        <div *ngIf="!is_employee" class="card-header">
+            <b>{{user_name}}</b>에게 달린 댓글
+        </div>
+        <ul class="list-group list-group-flush" *ngFor="let comment of comment_list">
+          <li [routerLink]="'/post/view/'+comment.post_id" style="padding:3px" class="list-group-item">
+            <small>&nbsp;{{comment.register_date | date: 'yyyy.MM.d'}}&nbsp;&nbsp;</small>
+            {{getPostTitle(comment.post_id)}}
+            <br>
+            <ng-container *ngFor="let i of commentService.iter(comment.star)">
+              <i class="fas fa-star"></i>
+            </ng-container>
+            <ng-container *ngIf="comment.star%1 == 0.5">
+              <i class="fas fa-star-half-alt"></i>
+            </ng-container>
+            {{comment.content}}  
           </li>
         </ul>
       </div>

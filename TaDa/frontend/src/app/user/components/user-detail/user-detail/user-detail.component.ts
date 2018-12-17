@@ -10,7 +10,10 @@ import { HowToPayEnum } from 'src/app/core/models/enums/how-to-pay-enum.enum';
 import { PostService } from 'src/app/core/services/post.service';
 import { CommentService } from 'src/app/core/services/comment.service';
 import { mock_posts } from 'src/app/shared/mock/mock-post';
+import { mock_comments } from 'src/app/shared/mock/mock-comment';
 import { Post } from '../../../../core/models/post';
+import { Comment } from '../../../../core/models/comment';
+
 
 @Component({
   selector: 'app-user-detail',
@@ -23,7 +26,7 @@ export class UserDetailComponent implements OnInit {
   is_employee: boolean;
   tag_list = null; // user preference tag list
   post_list: Post[] = null; // post list to show
-  comment_list = null; // comment list to show
+  comment_list: Comment[] = null; // comment list to show
 
 
   constructor(
@@ -62,6 +65,7 @@ export class UserDetailComponent implements OnInit {
       }*/
     });
     this.post_list = mock_posts;
+    this.comment_list = mock_comments;
     //console.log(this.postService.makePostTags(this.post_list[1]));
   }
 
@@ -97,5 +101,20 @@ export class UserDetailComponent implements OnInit {
     console.log('send Message!');
   }
 
+  getPostTitle(postId: number): string {
+    let tmp = "";
+    /* first examine this component */
+    for (const post of this.post_list) {
+      if (postId === post.id ) {
+        return post.title;
+      }
+    }
+    
+    /* if fail, http call inevitably */
+    this.postService.getPostByPostId(postId).then(
+      res => tmp = res.title
+    )
+    return tmp;
+  }
   
 }
