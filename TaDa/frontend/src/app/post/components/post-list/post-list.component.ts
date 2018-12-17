@@ -262,4 +262,8 @@ export class PostListComponent implements OnInit {
   existInArray(enumtype: number, enumindex: number) {
     return this.tagService.existInArray(this.filtering_tags, enumtype, enumindex);
   }
+
+  clearTag(): void {
+    this.filtering_tags = [];
+  }
 }

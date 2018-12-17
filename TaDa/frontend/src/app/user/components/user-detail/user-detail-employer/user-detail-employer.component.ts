@@ -20,7 +20,6 @@ export class UserDetailEmployerComponent implements OnInit {
     console.log(this.user);
   }
 
-
   gotoEdit() {
     this.router.navigateByUrl('/user/edit');
   }
