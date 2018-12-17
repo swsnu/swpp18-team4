@@ -70,6 +70,7 @@ def comment(request, comment_id):
         if request.user.is_authenticated:
             target_comment = Comment.objects.filter(id = comment_id)
             if target_comment.exists():
+                target_comment = target_comment[0]
                 if target_comment.author == request.user:
                     target_comment.delete()
                     return HttpResponse(status=200)
@@ -94,7 +95,7 @@ def commentByPost(request, post_id):
             else:
                 return HttpResponse(status=404)
         else:
-            return HttpResponse(status=404)
+            return HttpResponse(status=401)
     else: 
         return HttpResponseBadRequest(['GET'])
 
@@ -110,7 +111,7 @@ def commentByAuthor(request, author_id):
             else:
                 return HttpResponse(status=404)
         else:
-            return HttpResponse(status=404)
+            return HttpResponse(status=401)
     else: 
         return HttpResponseBadRequest(['GET'])
 
@@ -129,9 +130,9 @@ def commentReceive(request, author_id):
                     comment_list += comment_list_pid
                 return JsonResponse(comment_list, safe=False)
             else:
-                return HttpResponse(status=403)
+                return HttpResponse(status=404)
         else:
-            return HttpResponse(status=404)
+            return HttpResponse(status=401)
     else:
         return HttpResponseBadRequest(['GET'])
 #
