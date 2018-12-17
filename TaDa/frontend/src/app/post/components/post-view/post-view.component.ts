@@ -25,6 +25,7 @@ export class PostViewComponent implements OnInit {
   current_user: User;
   id: number;
   comment_value: string;
+  refer_comments: Comment[];
 
   constructor(
     private post_service: PostService,
@@ -36,6 +37,7 @@ export class PostViewComponent implements OnInit {
   ) { }
 
   ngOnInit() {
+    this.refer_comments = [];
     this.id = +this.route.snapshot.paramMap.get('id');
     this.post_service.getPostByPostId(this.id)
       .then( post => this.current_post = post)
@@ -43,8 +45,26 @@ export class PostViewComponent implements OnInit {
         .then( user => this.post_author = user))
       .catch( () => this.router.navigateByUrl('/post/list'));
     this.comment_service.getWriteCommentsByPostId(this.id)
-      .then(comments => this.post_comments = comments);
+      .then(comments => this.post_comments = comments)
+      .then( () => this.getReferComments() );
     this.current_user = this.user_service.getCurrentUser();
+  }
+
+  getReferComments() {
+    for (const comment of this.post_comments) {
+      const id = comment.id;
+      this.comment_service.getReferComments(id)
+        .then( comments => this.refer_comments = this.refer_comments.concat(comments));
+    }
+  }
+  referOfComment(comment) {
+    const refer_comment_list = [];
+    for (const refer_comment of this.refer_comments) {
+      if (refer_comment.refer_comment_id === comment.id) {
+        refer_comment_list.push(refer_comment);
+      }
+    }
+    return refer_comment_list;
   }
 
   back(): void {
@@ -52,6 +72,10 @@ export class PostViewComponent implements OnInit {
   }
 
   ConfirmComment(content, star, refer) {
+    if (content === '') {
+      this.toastrService.info('내용을 입력해주세요');
+      return;
+    }
     const new_comment: Comment = {
       id: -1,
       post_id: this.id,

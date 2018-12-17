@@ -146,6 +146,17 @@
           <button (click)="deleteComment(comment)">삭제</button>
         </div>
       </div>
+        <ul class="list-group list-group-flush" *ngFor="let refer_comment of referOfComment(comment)">
+          <li style="padding:10px" class="list-group-item">
+            <div style="display: inline-block;">
+              {{refer_comment.content}}
+              <div class="button-group">
+                <button (click)="editComment(refer_comment)">수정</button>
+                <button (click)="deleteComment(refer_comment)">삭제</button>
+              </div>
+            </div>
+          </li>
+        </ul>
     </li>
   </ul>
   <div class="write-comment">

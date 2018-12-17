@@ -41,6 +41,12 @@ export class CommentService {
       .toPromise().catch(this.handleError);
   }
 
+  getReferComments(comment_id: number): Promise<Comment[]> {
+    const url = `${this.commentsUrl}refer/${comment_id}/`;
+    return this.http.get<Comment>(url, httpOptions)
+      .toPromise().catch(this.handleError);
+  }
+
   createComment(comment: Comment): Promise<Comment> {
     return this.http.post<Comment>(this.commentsUrl, comment, httpOptions)
       .toPromise().then(() => comment).catch(this.handleError);
