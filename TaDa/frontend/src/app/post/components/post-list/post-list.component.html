@@ -26,7 +26,8 @@
     <button type="button" (click)= "getMyTagInfo()" class="btn btn-primary">
       내 태그 불러오기
     </button>
-    <button type="button" (click)= "clearTag()" class="btn btn-primary">
+    &nbsp;
+    <button type="button" style="margin-right:12px" (click)= "clearTag()" class="btn btn-primary">
         태그 비우기
     </button>
     </div>
@@ -36,7 +37,7 @@
       <ng-container *ngSwitchCase="1">
           <app-timeblock [isSelectable]="true" [givenDate]="timeblocks">
           </app-timeblock>
-          <button type="button" class="btn btn-sm" (click)="addTag(1,0);filter_button=0;">확인</button>
+          <button type="button" class="btn btn-primary" (click)="addTag(1,0); filter_button=0;">확인</button>
       </ng-container>
       <ng-container *ngSwitchCase="2">
         <b *ngFor="let enums of arbeit_type_enum_list; let idx = index;">
@@ -64,7 +65,7 @@
 
     <!-- seach bar -->
     <div class="row" style="margin-top: 20px;">    
-      <div class="col-sm-6 col-md-6 float-left">
+      <div class="col-sm-6 col-md-6">
 		    <div class="input-group">
           <select #search_criteria name="search_criteria">
             <option value="0" selected="selected">제목</option>
@@ -75,12 +76,12 @@
           <button class="btn btn-primary" type="button" (click)="onClickSearch(search_keyword.value, search_criteria.value)">검색</button>        
         </div>
       </div>
-      <div class="col-sm-2 col-md-2">
+      <div class="col-sm-3 col-md-3">
       </div>
 
         <!--sorting buttons-->
-      <div class="col-sm-4 col-md-4" style="float: right; margin-left: auto;">
-      <div class="btn-group btn-group-toggle">
+      <div class="col-sm-3 col-md-3" >
+      <div class="btn-group btn-group-toggle" style="float: right; margin-right: auto;">
           <button (click)= "sort(0)" class="btn btn-dark">최신순</button>
           <button (click)= "sort(1)" class="btn btn-dark">시급순</button>
           <button (click)= "sort(2)" class="btn btn-dark">마감일순</button>
@@ -105,9 +106,9 @@
       </tr>
     </thead>
     <tbody>
-      <tr class="clickable" [routerLink]="'/post/view/'+post.id" *ngFor="let post of posts_filtered; let idx = index;"
+      <tr class="clickable" [routerLink]="'/post/view/'+post.id" *ngFor="let post of posts_filtered;"
           [ngStyle]= "post.is_magam_timeout || post.is_magam_user ? {'opacity':0.5}: {}">
-        <td>{{idx+1}}</td>
+        <td>{{post.id}}</td>
         <td>{{post.title}}</td>
         <td>{{post.author_name}}</td>
         <td>{{post.region}}</td>
