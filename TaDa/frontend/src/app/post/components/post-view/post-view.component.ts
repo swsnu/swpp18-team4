@@ -5,8 +5,11 @@ import { ActivatedRoute, Router } from '@angular/router';
 import { ToastrService } from 'ngx-toastr';
 import { Post } from '../../../core/models/post';
 import { User } from '../../../core/models/user';
+
 import {CommentService} from '../../../core/services/comment.service';
 import {Comment} from '../../../core/models/comment';
+
+
 
 @Component({
   selector: 'app-post-view',
@@ -17,6 +20,7 @@ import {Comment} from '../../../core/models/comment';
 export class PostViewComponent implements OnInit {
   current_post: Post;
   post_author: User;
+
   constructor(
     private post_service: PostService,
     private user_service: UserService,
@@ -33,6 +37,15 @@ export class PostViewComponent implements OnInit {
       .then( () => this.user_service.getUser(this.current_post.author_id)
         .then( user => this.post_author = user))
       .catch( () => this.router.navigateByUrl('/post/list'));
+    this.current_user = this.user_service.getCurrentUser();
+  }
+
+  back(): void {
+    this.router.navigateByUrl(`/post/list/`);
+  }
+  edit(): void {
+    const id = +this.route.snapshot.paramMap.get('id');
+    this.router.navigateByUrl(`/post/edit/${id}`);
   }
   edit() {
     const id = +this.route.snapshot.paramMap.get('id');

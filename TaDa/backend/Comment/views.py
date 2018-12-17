@@ -35,14 +35,11 @@ def comments(request):
 @csrf_exempt
 def comment(request, comment_id):
     if request.method == 'GET':
-        if request.user.is_authenticated:
-            target_comment = Comment.objects.filter(id = comment_id)
-            if target_comment.exists():
-                return JsonResponse(target_comment.values()[0], safe=False)
-            else:
-                return HttpResponse(status=404)
+        target_comment = Comment.objects.filter(id = comment_id)
+        if target_comment.exists():
+            return JsonResponse(target_comment.values()[0], safe=False)
         else:
-            return HttpResponse(status=401)
+            return HttpResponse(status=404)
     elif request.method == 'PUT':
         if request.user.is_authenticated:
             target_comment = Comment.objects.filter(id = comment_id)
@@ -97,7 +94,7 @@ def commentByPost(request, post_id):
             else:
                 return HttpResponse(status=404)
         else:
-            return HttpResponse(status=401)
+            return HttpResponse(status=404)
     else: 
         return HttpResponseBadRequest(['GET'])
 
@@ -113,7 +110,7 @@ def commentByAuthor(request, author_id):
             else:
                 return HttpResponse(status=404)
         else:
-            return HttpResponse(status=401)
+            return HttpResponse(status=404)
     else: 
         return HttpResponseBadRequest(['GET'])
 
@@ -135,9 +132,9 @@ def commentReceive(request, author_id):
                 else:
                     return HttpResponse(status=403)
             else:
-                return HttpResponse(status=404)
+                return HttpResponse(status=403)
         else:
-            return HttpResponse(status=401)
+            return HttpResponse(status=404)
     else:
         return HttpResponseBadRequest(['GET'])
 #
