@@ -1,5 +1,6 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
+import { FormsModule } from '@angular/forms';
 
 import { UserRoutingModule } from './user-routing.module';
 import { UserEditComponent } from './components/user-edit/user-edit/user-edit.component';
@@ -8,12 +9,23 @@ import { UserEditEmployerComponent } from './components/user-edit/user-edit-empl
 import { UserDetailComponent } from './components/user-detail/user-detail/user-detail.component';
 import { UserDetailEmployeeComponent } from './components/user-detail/user-detail-employee/user-detail-employee.component';
 import { UserDetailEmployerComponent } from './components/user-detail/user-detail-employer/user-detail-employer.component';
+import { SharedModule } from '../shared/shared.module';
+
 
 @NgModule({
   imports: [
     CommonModule,
-    UserRoutingModule
+    UserRoutingModule,
+    FormsModule,
+    SharedModule
   ],
-  declarations: [UserEditComponent, UserEditEmployeeComponent, UserEditEmployerComponent, UserDetailComponent, UserDetailEmployeeComponent, UserDetailEmployerComponent]
+  declarations: [
+    UserEditComponent, 
+    UserEditEmployeeComponent, 
+    UserEditEmployerComponent, 
+    UserDetailComponent, 
+    UserDetailEmployeeComponent, 
+    UserDetailEmployerComponent,
+  ]
 })
 export class UserModule { }

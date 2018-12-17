@@ -1,6 +1,8 @@
 import { Injectable } from '@angular/core';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Post } from '../models/post';
+import { region_enum_list, arbeit_type_enum_list, how_to_pay_enum_list } from '../models/enums/enum-list';
+
 
 const httpOptions = {
   headers: new HttpHeaders({'Content-Type': 'application/json'})
@@ -55,7 +57,32 @@ export class PostService {
   return this.http.get<Post[]>(`${this.postsUrl}alarm/`, httpOptions)
     .toPromise()
     .catch(this.handleError);
-}
+  }
+
+  makePostTags(post: Post) {
+    let tag_arr = [];
+    if (post.arbeit_type != null) {
+      tag_arr.push({
+        type: 2,
+        index: arbeit_type_enum_list.indexOf(post.arbeit_type)
+      });
+      
+    }
+    if (post.region != null) {
+      tag_arr.push({
+        type: 3,
+        index: region_enum_list.indexOf(post.region)
+      });
+    }
+    if (post.how_to_pay != null) {
+      tag_arr.push({
+        type: 4,
+        index: how_to_pay_enum_list.indexOf(post.how_to_pay)
+      });
+    }
+    return tag_arr;
+  }
+
 
   private handleError(error: any): Promise<any> {
     console.log('An error occurred in PostService', error);

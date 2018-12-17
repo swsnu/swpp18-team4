@@ -10,7 +10,6 @@ import { HomeComponent } from './core/home/home.component';
 import { AppRoutingModule } from './app-routing.module';
 import { FooterComponent } from './shared/footer/footer.component';
 import { NavComponent } from './shared/nav/nav.component';
-import { TimeblockComponent } from './shared/timeblock/timeblock.component';
 import { SigninComponent } from './auth/components/signin/signin.component';
 import { SignupComponent } from './auth/components/signup/signup.component';
 import { AuthGuard } from './core/guard/auth.guard';
@@ -18,9 +17,10 @@ import { UserService } from './core/services/user.service';
 import { PostService } from './core/services/post.service';
 import { CommentService } from './core/services/comment.service';
 import { TalkService } from './core/services/talk.service';
-import { DragToSelectModule } from 'ngx-drag-to-select';
 import { TimeblockService } from './core/services/timeblock.service';
 import { NgbdModalComponent, NgbdModalContentComponent } from './shared/modal/modal.component';
+import { SharedModule } from './shared/shared.module';
+
 
 @NgModule({
   declarations: [
@@ -30,7 +30,6 @@ import { NgbdModalComponent, NgbdModalContentComponent } from './shared/modal/mo
     NavComponent,
     SigninComponent,
     SignupComponent,
-    NgbdModalComponent,
     NgbdModalContentComponent,
   ],
   imports: [
@@ -39,6 +38,7 @@ import { NgbdModalComponent, NgbdModalContentComponent } from './shared/modal/mo
     HttpClientModule,
     FormsModule,
     ReactiveFormsModule,
+    SharedModule,
     AgmCoreModule.forRoot({
       apiKey: 'AIzaSyCYOybP6ZEj4V4tWM8367t_EKIXVHD4ado'
     }),

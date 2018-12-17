@@ -64,19 +64,6 @@ export class UserService {
       return false;
     }
   }
-/*
-  getUserTags(): [] {
-    let arr = [];
-    if (this.currentUser.employee_type != null) {
-      this.currentUser.employee_type.forEach(enum => {
-        arr.push({
-          type: 
-        })
-      })
-      region_enum_list
-    }
-    return [];
-  } */
 
   isActivate(): boolean {
     if (this.currentUser != null && this.currentUser.is_active == true) {
@@ -93,6 +80,45 @@ export class UserService {
 
   setLoginUser(user: User): void {
     this.currentUser = user;
+  }
+
+
+  getUserTagInfo(user: User) {
+    let arr = [], user_enums = [];
+    
+    if (user.employee_type != null) {
+      user_enums = Object.values(user.employee_type);
+      arbeit_type_enum_list.forEach(ele=> {
+        if(user_enums.includes(ele)) {
+          arr.push({
+            type: 2,
+            index: arbeit_type_enum_list.indexOf(ele)
+          });
+        }
+    })};
+
+    if (user.employee_region != null) {
+      user_enums = Object.values(user.employee_region);
+      region_enum_list.forEach(ele=> {
+        if(user_enums.includes(ele)) {
+          arr.push({
+            type: 3,
+            index: region_enum_list.indexOf(ele)
+          });
+        }
+    })};
+
+    if (user.employee_how_to_pay != null) {
+      user_enums = Object.values(user.employee_how_to_pay);
+      how_to_pay_enum_list.forEach(ele=> {
+        if(user_enums.includes(ele)) {
+          arr.push({
+            type: 4,
+            index: how_to_pay_enum_list.indexOf(ele)
+          });
+        }
+    })};
+    return arr;
   }
 
   /* http for UserService */
