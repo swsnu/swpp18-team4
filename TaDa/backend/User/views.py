@@ -55,7 +55,7 @@ def signup(request):
 
         if user_type and email and password:
             User.objects.create_user(user_type = user_type, email = email, nickname = nickname, 
-            password = password, company_name = company_name, company_address=company_address)
+            password = password, company_name = company_name)
             return HttpResponse(status=201)
         else:
             return HttpResponse(status=409)

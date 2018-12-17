@@ -146,5 +146,15 @@ export class PostViewComponent implements OnInit {
     }
   }
 
-
+  magam() {
+    if (this.current_post.is_magam_user || this.current_post.is_magam_timeout) {
+      this.toastrService.warning('이미 마감되었습니다');
+    } else {
+      this.current_post.is_magam_user = true;
+      this.post_service.updatePost(this.current_post)
+        .then(() => this.post_service.getPostByPostId(this.id)
+          .then(post => this.current_post = post))
+      .then( () => this.toastrService.warning('마감되었습니다'));
+    }
+  }
 }
