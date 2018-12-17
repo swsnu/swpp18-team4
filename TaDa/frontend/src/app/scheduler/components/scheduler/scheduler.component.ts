@@ -216,7 +216,7 @@ export class SchedulerComponent implements OnInit {
 
     this.postService.getPosts().then(
       posts => {
-        save = mock_posts_for_scheduler.filter(x => this.isIntersectWithSuccess(x, start_time, end_time).length > 0);
+        save = posts.filter(x => this.isIntersectWithSuccess(x, start_time, end_time).length > 0);
         while (save.length > 0) {
           let x = save[0];
           for (let i = 1; i < save.length; i = i + 1) {
