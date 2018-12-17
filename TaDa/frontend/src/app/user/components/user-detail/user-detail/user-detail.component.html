@@ -1,19 +1,58 @@
-<div *ngIf="user">
-  <div *ngIf="isMyPage()">
-    <button type="button" routerLink="/user/edit" class="btn btn-primary">내정보 수정</button>
-    {{user.email}}
-  </div>
+<!-- make margin to both side -->
+<div class="row">          
+  <div class="col-sm-1"></div>
+  <div class="col-sm-10">
 
-  
-
-  <hr class="divider">
-
-  <div *ngIf="user && !isMyPage()" id="chat-container">
-    <div class="row">
-      <div class="col-sm-4"></div>
-      <div class="col-sm-4 container-title">채팅</div>
-      <div class="col-sm-4"></div>
+    <!-- Profile Card -->
+    <div *ngIf = "user">
+      <div *ngIf = "is_employee">
+        <app-user-detail-employee [isMyPage]="isMyPage()" [user]="user"></app-user-detail-employee>
+      </div>
+      <div *ngIf = "!is_employee">
+        <app-user-detail-employer [isMyPage]="isMyPage()" [user]="user"></app-user-detail-employer>
+      </div>
     </div>
-    <div id="talkjs-container">{{getCurrentUserName()}}와 채팅하기...</div>
+
+    <!-- the posts-->
+    <div *ngIf="post_list" class="card" style = "margin-top:20px;margin-bottom: 20px">
+      <div class="card-header">
+        <b>{{user_name}}</b>이/가 쓴 글
+      </div>
+      <ul class="list-group list-group-flush" *ngFor="let post of post_list;">
+        <li [routerLink]="'/post/view/'+post.id" style="padding: 3px" class="list-group-item">
+          <small>&nbsp;{{post.register_date | date: 'yyyy.MM.d'}}&nbsp;&nbsp;</small>{{post.title}}
+          <ng-container class="col-md-4" *ngFor="let tag of this.postService.makePostTags(post);">
+            <app-tag [justShowing]="true" [hasCloseButton]="false" [isSelectable]="false" [enumType]="tag.type" [enumBody]="tag.index">
+            </app-tag>
+          </ng-container>      
+        </li>
+      </ul>
+    </div>
+
+    <!-- the comments-->
+    <div *ngIf="comment_list" class="card" style="margin-top:20px;margin-bottom: 20px" 
+    data-toggle="tooltip" data-placement="top" title="댓글을 클릭하면 해당 게시글로 이동합니다.">
+        <div *ngIf="is_employee" class="card-header">
+          <b>{{user_name}}</b>이/가 쓴 댓글
+        </div>
+        <div *ngIf="!is_employee" class="card-header">
+            <b>{{user_name}}</b>에게 달린 댓글
+        </div>
+        <ul class="list-group list-group-flush" *ngFor="let comment of comment_list; let i=index">
+          <li [routerLink]="'/post/view/'+comment.post_id" style="padding:3px" class="list-group-item">
+            <small>&nbsp;{{comment.register_date | date: 'yyyy.MM.d'}}&nbsp;&nbsp;</small>
+            {{comment_title_list[i]}}
+            <br>
+            <ng-container *ngFor="let i of commentService.iter(comment.star)">
+              <i class="fas fa-star"></i>
+            </ng-container>
+            <ng-container *ngIf="comment.star%1 == 0.5">
+              <i class="fas fa-star-half-alt"></i>
+            </ng-container>
+            {{comment.content}}  
+          </li>
+        </ul>
+      </div>
   </div>
+  <div class="col-sm-1"></div>
 </div>

@@ -16,3 +16,8 @@
 .btn-cannotselect {
     color: black;
 }
+
+.btn [disabled] {
+    opacity: 0 !important;
+    color: black !important;
+}

@@ -12,9 +12,10 @@
 
 
 <ng-template #withoutCloseButton>
-    <button type="button"  style="margin-right: 5px; margin-top:10px" (click)="onClickSelect()"
+    <button type="button"  style="margin-right: 5px;" (click)="onClickSelect()"
         [ngStyle]="isSelectable ? {'border-color':tag_color} : {'background-color': tag_color }" 
-        [ngClass]="isSelectable ? 'btn btn-sm btn-canselect': 'btn btn-sm btn-cannotselect'">
+        [ngClass]="isSelectable ? 'btn btn-sm btn-canselect': 'btn btn-sm btn-cannotselect'"
+        [disabled]= "justShowing">
         {{tag_string}}&nbsp;
     </button>
 </ng-template>

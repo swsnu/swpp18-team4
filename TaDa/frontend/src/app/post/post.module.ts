@@ -9,11 +9,12 @@ import { PostEditComponent } from './components/post-edit/post-edit.component';
 import { CommentViewComponent } from './components/comment-view/comment-view.component';
 import { FormsModule } from '@angular/forms';
 import { NgbModule, NgbDatepicker } from '@ng-bootstrap/ng-bootstrap';
-import { TagComponent } from '../shared/tag/tag.component';
 import { AgmCoreModule } from '@agm/core';
+import { SharedModule } from '../shared/shared.module';
 
 @NgModule({
   imports: [
+    SharedModule,
     CommonModule,
     PostRoutingModule,
     FormsModule,
@@ -22,6 +23,12 @@ import { AgmCoreModule } from '@agm/core';
       apiKey: 'AIzaSyCYOybP6ZEj4V4tWM8367t_EKIXVHD4ado'
     }),
   ],
-  declarations: [PostListComponent, PostViewComponent, PostCreateComponent, PostEditComponent, CommentViewComponent, TagComponent]
+  declarations: [
+    PostListComponent,
+    PostViewComponent,
+    PostCreateComponent,
+    PostEditComponent,
+    CommentViewComponent,
+  ]
 })
 export class PostModule { }

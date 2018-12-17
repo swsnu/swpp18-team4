@@ -11,6 +11,7 @@ import { region_enum_list, arbeit_type_enum_list, how_to_pay_enum_list } from '.
 export class TagComponent implements OnInit {
   @Input('hasCloseButton') public hasCloseButton: boolean;
   @Input('isSelectable') public isSelectable: boolean;
+  @Input('justShowing') public justShowing: boolean;
   @Input('enumType') public type: number;
   @Input('enumBody') public body: number;
 
@@ -25,6 +26,9 @@ export class TagComponent implements OnInit {
   /* initiate color and body content of each tag */
   ngOnInit() {
     switch (this.type) {
+      case 1: this.tag_color = '#ff9900';
+              this.tag_string = '시간';
+              break;
       //Type-Enum
       case 2: this.tag_color = '#ff5050';
               this.tag_string = arbeit_type_enum_list[this.body];
