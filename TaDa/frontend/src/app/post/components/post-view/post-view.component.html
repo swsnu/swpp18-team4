@@ -127,6 +127,9 @@
             <input type="text" disabled [value]="post_author.business_content" placeholder="미입력">
           </div>
         </div>
+
+        <button type="button" routerLink="/user/{{post_author.id}}" class="btn btn-primary btn-lg btn-block company-button">회사페이지로 이동</button>
+
       </div>
     </div>
   </div>
@@ -140,8 +143,15 @@
   <ul class="list-group list-group-flush" *ngFor="let comment of post_comments">
     <li style="padding:3px" class="list-group-item">
       <div style="display: inline-block;">
-        {{comment.star}} {{comment.content}}
-        <div class="button-group" *ngIf="current_user.id == comment.author_id">
+          {{getAuthorname(comment)}} <br>
+          <ng-container *ngFor="let i of comment_service.iter(comment.star)">
+            <i class="fas fa-star"></i>
+          </ng-container>
+          <ng-container *ngIf="comment.star%1 == 0.5">
+            <i class="fas fa-star-half-alt"></i>
+          </ng-container>
+          {{comment.content}}
+        <div class="button-group" *ngIf="current_user && current_user.id == comment.author_id">
           <button (click)="editComment(comment)">수정</button>
           <button (click)="deleteComment(comment)">삭제</button>
         </div>
@@ -160,8 +170,14 @@
     </li>
   </ul>
   <div class="write-comment">
-    <input type="text" [(ngModel)]="comment_value" name="content">
-    <button (click)="ConfirmComment(comment_value, 3.5, 100)">확인</button>
+    <div class="input-group-prepend star_div">
+      <span class="input-group-text">별점</span>
+      <input type="range" [(ngModel)]="star_value" class="custom-range" min="0" max="5" step="0.5"><p class="star_value">{{star_value}}</p>
+    </div>
+    <div>
+      <input type="text" [(ngModel)]="comment_value" name="content">
+      <button (click)="ConfirmComment(comment_value, star_value, -1)">확인</button>
+    </div>
   </div>
 </div>
 

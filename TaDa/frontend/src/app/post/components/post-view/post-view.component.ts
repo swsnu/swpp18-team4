@@ -5,12 +5,10 @@ import { ActivatedRoute, Router } from '@angular/router';
 import { ToastrService } from 'ngx-toastr';
 import { Post } from '../../../core/models/post';
 import { User } from '../../../core/models/user';
+import { isIterable } from 'rxjs/internal-compatibility';
 
 import {CommentService} from '../../../core/services/comment.service';
 import {Comment} from '../../../core/models/comment';
-
-import {MarkerManager} from '@agm/core';
-import {GoogleMapsAPIWrapper} from '@agm/core';
 
 @Component({
   selector: 'app-post-view',
@@ -26,17 +24,22 @@ export class PostViewComponent implements OnInit {
   id: number;
   comment_value: string;
   refer_comments: Comment[];
+  all_users: User[];
+  star_value: number;
 
   constructor(
     private post_service: PostService,
     private user_service: UserService,
-    private comment_service: CommentService,
+    public comment_service: CommentService,
     private router: Router,
     private route: ActivatedRoute,
-    private toastrService: ToastrService
+    private toastrService: ToastrService,
   ) { }
 
   ngOnInit() {
+    this.comment_value = '';
+    this.star_value = 0;
+    this.all_users = [];
     this.refer_comments = [];
     this.id = +this.route.snapshot.paramMap.get('id');
     this.post_service.getPostByPostId(this.id)
@@ -46,15 +49,15 @@ export class PostViewComponent implements OnInit {
       .catch( () => this.router.navigateByUrl('/post/list'));
     this.comment_service.getWriteCommentsByPostId(this.id)
       .then(comments => this.post_comments = comments)
-      .then( () => this.getReferComments() );
+      .then( () => this.getAllUser() );
     this.current_user = this.user_service.getCurrentUser();
   }
-
-  getReferComments() {
-    for (const comment of this.post_comments) {
-      const id = comment.id;
-      this.comment_service.getReferComments(id)
-        .then( comments => this.refer_comments = this.refer_comments.concat(comments));
+  getAllUser() {
+    if (isIterable(this.post_comments)) {
+      for (const comment of this.post_comments) {
+        this.user_service.getUser(comment.author_id)
+          .then(user => this.all_users.push(user));
+      }
     }
   }
   referOfComment(comment) {
@@ -92,6 +95,7 @@ export class PostViewComponent implements OnInit {
       .then( () => this.toastrService.info('등록되었습니다'))
       .catch( () => alert('에러!') );
     this.comment_value = '';
+    this.star_value = 0;
   }
   edit() {
     const id = +this.route.snapshot.paramMap.get('id');
@@ -105,10 +109,21 @@ export class PostViewComponent implements OnInit {
   }
 
   editComment(comment) {
-    this.comment_service.getWriteCommentsByPostId(this.id)
-      .then(comments => this.post_comments = comments)
-      .then( () => this.toastrService.info('수정되었습니다'))
-      .catch( () => alert('에러!') );
+    let updated_comment: string = prompt('댓글 수정', comment.content);
+    if (updated_comment != null) {
+      updated_comment = updated_comment.trim();
+      if (updated_comment === '' || updated_comment === comment.content) {
+        this.toastrService.warning('내용을 입력해주세요');
+      } else {
+        comment.content = updated_comment;
+        this.comment_service.updateComment(comment)
+          .then( () => this.toastrService.info('수정되었습니다'))
+          .then( () =>
+            this.comment_service.getWriteCommentsByPostId(this.current_post.id)
+            .then(comments => this.post_comments = comments ))
+          .catch( () => alert('에러!') );
+      }
+    }
   }
   deleteComment(comment) {
     this.comment_service.deleteComment(comment)
@@ -116,6 +131,19 @@ export class PostViewComponent implements OnInit {
         .then(comments => this.post_comments = comments))
       .then( () => this.toastrService.warning('삭제되었습니다'))
       .catch( () => alert('에러!') );
+  }
+  getAuthorname(comment) {
+    if (isIterable(this.all_users)) {
+      for (const user of this.all_users) {
+        if (comment.author_id === user.id) {
+          if (user.user_type === 'EE') {
+            return user.nickname;
+          } else {
+            return user.company_name;
+          }
+        }
+      }
+    }
   }
 
 

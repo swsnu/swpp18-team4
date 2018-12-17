@@ -2,8 +2,12 @@
 @import url(//fonts.googleapis.com/earlyaccess/kopubbatang.css);
 @import url(//fonts.googleapis.com/earlyaccess/hanna.css);
 
-* {
+
+*:not i {
   font-family: 'Hanna', sans-serif;
+}
+.fas {
+  font-size: 1em;
 }
 *:focus {
   outline: none;
@@ -73,7 +77,6 @@ select {
 
 
 
-
 .custom-checkbox {
   margin-top: 10px;
   margin-left: 10px;
@@ -137,6 +140,26 @@ select {
 }
 .write-comment button {
   margin-left: 10px;
+}
+
+.star_div span{
+  border: none;
+  background: powderblue;
+  color: black;
+}
+.star_div input {
+  margin-top: 4px;
+  width: 500px;
+  height: 30px;
+  border: none;
+}
+.star_div {
+  margin-bottom: 4px;
+}
+.star_value {
+  margin-left: 4px;
+  size: 10px;
+  color: gold;
 }
 
 
