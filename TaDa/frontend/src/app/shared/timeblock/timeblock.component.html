@@ -1,29 +1,47 @@
-<!--<dts-select-container [(selectedItems)]="selectedItems" [selectWithShortcut]="false">
-<table class="table table-responsive table-bordered">
-    <thead>
-      <tr>
-        <th scope="col" class='th' width="16%"></th>
-        <ng-container *ngFor="let row_idx of row_index">
-            <th class='th' scope="col" width="12%">{{row_idx}}</th>
-        </ng-container>
-      </tr>
-    </thead>
-    <tbody>                  
-      <tr *ngFor="let col_idx of col_index; let y=index">
-        <th class='th' scope="row">{{col_idx}}</th>
-        <ng-container *ngFor="let row_idx of row_index; let x=index">
-            <td #item name="item" [dtsSelectItem]="rawItems[x][y]">{{x}}:{{y}}</td>
-        </ng-container>
-      </tr>
-    </tbody>
-</table>
-</dts-select-container>
+<div *ngIf="isSelectable; then selectable; unselectable"></div>
 
-<div class="col-6">
-		<div class="card">
-			<div class="card-header">
-				Selected
-			</div>
-			<pre>{{selectedItems | json}}</pre>
-		</div>
-</div>-->
+<ng-template #selectable>
+<dts-select-container [(selectedItems)]="selectedItems" [selectWithShortcut]="true"
+  (itemSelected)="$event.selected = true" (itemDeselected)="$event.selected = false">
+  <table width="40%" class="table table-sm table-responsive table-bordered">
+      <thead>
+        <tr height="20px">
+          <th scope="col" class='th'></th>
+          <ng-container *ngFor="let row_idx of this.timeblockService.row_index">
+              <th class='th' scope="col">{{row_idx}}</th>
+          </ng-container>
+        </tr>
+      </thead>
+      <tbody>                  
+        <tr height="20px" *ngFor="let col_idx of this.timeblockService.col_index; let y=index">
+          <th class='th' scope="row">{{col_idx}}</th>
+          <ng-container *ngFor="let row_idx of this.timeblockService.row_index; let x=index">
+            <td [dtsSelectItem]="inputItems[x][y]"></td>
+          </ng-container>
+        </tr>
+      </tbody>
+  </table>
+</dts-select-container>
+</ng-template>
+
+
+<ng-template #unselectable>
+ <!--   <table width="40%" class="table table-sm table-responsive table-bordered">
+        <thead>
+          <tr height="20px">
+            <th scope="col" class='th'></th>
+            <ng-container *ngFor="let row_idx of this.timeblockService.row_index">
+                <th class='th' scope="col">{{row_idx}}</th>
+            </ng-container>
+          </tr>
+        </thead>
+        <tbody>                  
+          <tr height="20px" *ngFor="let col_idx of this.timeblockService.col_index; let y=index">
+            <th class='th' scope="row">{{col_idx}}</th>
+            <ng-container *ngFor="let row_idx of this.timeblockService.row_index; let x=index">
+              <td [dtsSelectItem]="rawItems[x][y]"></td>
+            </ng-container>
+          </tr>
+        </tbody>
+    </table>-->
+</ng-template>

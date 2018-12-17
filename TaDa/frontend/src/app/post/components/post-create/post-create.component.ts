@@ -157,6 +157,7 @@ import {ToastrService} from 'ngx-toastr';
       }
     }
     // 마지막 확인
+
     if ( error_state === 0 ) {
       // 토스트로 바꾸기
       this.new_post.author_id = this.user_service.getCurrentUser().id;

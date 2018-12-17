@@ -1,3 +1,49 @@
 <p>
   scheduler works!
 </p>
+
+<div class="result-container">
+<div class="row">
+  <span class="col-sm-6 map-container">
+    <agm-map class="map-view" [latitude]="center_latitude" [longitude]="center_longitude" [zoom] = "map_zoom">
+      <agm-polyline *ngFor="let value of post_list;let i = index;" [strokeOpacity]="0.8" [strokeWeight]="5" [zIndex]="" [strokeColor]="'blue'">
+        <agm-polyline-point [latitude]="value.latitude" [longitude]="value.longitude"> </agm-polyline-point>
+        <ng-container *ngIf="post_list[i+1]">
+          <agm-polyline-point [latitude]="post_list[i+1].latitude" [longitude]="post_list[i+1].longitude"> </agm-polyline-point>
+        </ng-container>
+      </agm-polyline>
+      <agm-marker *ngFor="let value of post_list; let i = index;" [latitude]="value.latitude" [longitude]="value.longitude" label="{{i+1}}"></agm-marker>
+    </agm-map>
+  </span>
+
+  <span class="col-sm-6">
+    <table class="table table-striped">
+      <thead>
+        <tr>
+          <th>번호</th>
+          <th>제목</th>
+          <th>작성자</th>
+          <th>장소</th>
+          <th>유형</th>
+          <th>급여</th>
+          <th>기간</th>
+          <th>등록일자</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr [routerLink]="'/post/view/'+post.id" *ngFor="let post of post_list; let idx = index;"
+            [ngStyle]= "post.is_magam_timeout || post.is_magam_user ? {'opacity':0.5}: {}">
+          <td>{{idx+1}}</td>
+          <td>{{post.title}}</td>
+          <td>{{post.author_name}}</td>
+          <td>{{post.region}}</td>
+          <td>{{post.arbeit_type}}</td>
+          <td>{{post.pay_per_hour}}</td>
+          <td>아직 개발중</td>
+          <td>{{post.register_date | date: 'yyyy.MM.d'}}</td>
+        </tr>
+      </tbody>
+    </table>
+  </span>
+</div>
+</div>

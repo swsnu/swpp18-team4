@@ -1,19 +1,64 @@
-<div *ngIf="user">
-  <div *ngIf="isMyPage()">
-    <button type="button" routerLink="/user/edit" class="btn btn-primary">내정보 수정</button>
-    {{user.email}}
-  </div>
-
-  
-
-  <hr class="divider">
-
-  <div *ngIf="user && !isMyPage()" id="chat-container">
-    <div class="row">
-      <div class="col-sm-4"></div>
-      <div class="col-sm-4 container-title">채팅</div>
-      <div class="col-sm-4"></div>
+<!-- make margin to both side -->
+<div class="row">          
+  <div class="col-sm-1"></div>
+  <div class="col-sm-10">
+    <!-- Profile Card -->
+    <div *ngIf="user" class="card" style="border-style: double">
+      <div class="card-body">
+        <div class="row">          
+          <div class="col-sm-3">
+            <i class="fas fa-id-card" style="font-size: 8em; margin: 10px"></i>
+          </div>
+          <div class = "col-sm-9">
+            <h3 class="card-title">{{getCurrentUserName()}}</h3>
+            <hr>
+            <b class="card-text">이메일 주소&nbsp;&nbsp;&nbsp;</b>{{user.email}}
+            <br>
+            <b class="card-text">선호 태그&nbsp;&nbsp;&nbsp;</b>
+            <br>
+            <ng-container *ngFor="let tag of tag_list">
+              <app-tag [justShowing]="true" [hasCloseButton]="false" [isSelectable]="false" [enumType]="tag.type" [enumBody]="tag.index" >
+              </app-tag> 
+            </ng-container>
+            <br>
+            <button [hidden]="isMyPage()" style="float: right; margin-left: auto;" (click)="sendMessage()" class="btn btn-primary">메세지 보내기</button>
+            <button [hidden]="!isMyPage()" style="float: right; margin-left: auto;" (click)="gotoEdit()" class="btn btn-primary">내 정보 수정</button>
+          </div>
+        </div>
+      </div>
     </div>
-    <div id="talkjs-container">{{getCurrentUserName()}}와 채팅하기...</div>
+
+    <!-- the posts-->
+    <div *ngIf="post_list" class="card" style = "margin-top:20px;margin-bottom: 20px">
+      <div class="card-header">
+        {{getCurrentUserName()}}이/가 쓴 글
+      </div>
+      <ul class="list-group list-group-flush" *ngFor="let post of post_list;">
+        <li [routerLink]="'/post/view/'+post.id" style="padding: 3px" class="list-group-item">
+          <small>&nbsp;{{post.register_date | date: 'yyyy.MM.d'}}&nbsp;&nbsp;</small>{{post.title}}
+          <ng-container class="col-md-4" *ngFor="let tag of this.postService.makePostTags(post);">
+            <app-tag [justShowing]="true" [hasCloseButton]="false" [isSelectable]="false" [enumType]="tag.type" [enumBody]="tag.index">
+            </app-tag>
+          </ng-container>      
+        </li>
+      </ul>
+    </div>
+
+    <!-- the comments-->
+    <div *ngIf="post_list" class="card" style="margin-top:20px;margin-bottom: 20px">
+        <div class="card-header">
+          <b>{{getCurrentUserName()}}</b>이/가 쓴 글
+        </div>
+        <ul class="list-group list-group-flush" *ngFor="let post of post_list;">
+          <li [routerLink]="'/post/view/'+post.id" style="padding: 3px" class="list-group-item">
+            <small>&nbsp;{{post.register_date | date: 'yyyy.MM.d'}}&nbsp;&nbsp;</small>{{post.title}}
+            <ng-container class="col-md-4" *ngFor="let tag of this.postService.makePostTags(post);">
+              <app-tag [justShowing]="true" [hasCloseButton]="false" [isSelectable]="false" [enumType]="tag.type" [enumBody]="tag.index">
+              </app-tag>
+            </ng-container>      
+          </li>
+        </ul>
+      </div>
   </div>
+  <div class="col-sm-1"></div>
 </div>
