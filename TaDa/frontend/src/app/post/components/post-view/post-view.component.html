@@ -5,6 +5,15 @@
       <div class="card-header">알바 정보</div>
       <div class="card-body text-primary">
 
+        <div class="custom-control" *ngIf="current_post.is_magam_user || current_post.is_magam_timeout">
+          <label style="display: inline;" class="caution" style="margin-top: 10px;">
+            <img src="caution.ico" alt="" style="height: 30px;">
+            <p style="font-size: 30px; display: inline;">마감되었습니다</p>
+            <img src="caution.ico" alt="" style="height: 30px;">
+          </label>
+        </div>
+
+
         <div class="input-group mb-3">
           <div class="input-group-prepend">
             <span class="input-group-text">제목</span>
@@ -81,7 +90,7 @@
         </div>
 
         <div *ngIf="current_post.author_id === current_user.id">
-          <button type="button" class="btn btn-danger btn-lg btn-block">마감</button>
+          <button type="button" (click)="magam()" style="margin-top: 10px;" class="btn btn-danger btn-lg btn-block">마감</button>
         </div>
       </div>
     </div>
