@@ -4,6 +4,9 @@ import { User } from '../models/user';
 import { Response } from '@angular/http';
 import { TypeEnum } from '../models/enums/type-enum.enum';
 import { region_enum_list, arbeit_type_enum_list, how_to_pay_enum_list } from '../models/enums/enum-list';
+import { ArbeitTypeEnum } from '../models/enums/arbeit-type-enum.enum';
+import { RegionEnum } from '../models/enums/region-enum.enum';
+import { HowToPayEnum } from '../models/enums/how-to-pay-enum.enum';
 
 const httpOptions = {
   headers: new HttpHeaders({ 'Content-Type': 'application/json'})
@@ -121,6 +124,21 @@ export class UserService {
     return arr;
   }
 
+  saveTaginUser(user: User, tag_list) {
+    user.employee_type = [];
+    user.employee_region = [];
+    user.employee_how_to_pay = [];
+    for (const tag of tag_list) {
+      if (tag.type == 2) {
+        user.employee_type.push(<ArbeitTypeEnum>arbeit_type_enum_list[tag.index]);
+      } else if (tag.type == 3) {
+        user.employee_region.push(<RegionEnum>region_enum_list[tag.index]);
+      } else {
+        user.employee_how_to_pay.push(<HowToPayEnum>how_to_pay_enum_list[tag.index]);
+      }
+    }
+  }
+
   /* http for UserService */
   signup(user: Partial<User>): Promise<Response> {
     return this.http.post<User>(this.signupUrl, user, httpOptions)
@@ -173,6 +191,17 @@ export class UserService {
     const url = `${this.userUrl}${id}/`;
     return this.http.get<User>(url).toPromise().catch(this.handleError);
   }
+
+  validatePassword(password: string): boolean {
+    if (password == null) {
+      return false;
+    }
+    const lowercase: boolean = (/[a-z]/).test(password);
+    const uppercase: boolean = (/[A-Z]/).test(password);
+    const decimalcase: boolean = (/[0-9]/).test(password);
+    return (password.length >= 8) && (lowercase || uppercase) && decimalcase;
+  }
+
 
   private handleError(error: any): Promise<any> {
     console.log('An error occurred in UserService', error);

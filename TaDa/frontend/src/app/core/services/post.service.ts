@@ -83,7 +83,6 @@ export class PostService {
     return tag_arr;
   }
 
-
   private handleError(error: any): Promise<any> {
     console.log('An error occurred in PostService', error);
     return Promise.reject(error.message || 'Internal server error');

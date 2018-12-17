@@ -70,6 +70,7 @@ def comment(request, comment_id):
         if request.user.is_authenticated:
             target_comment = Comment.objects.filter(id = comment_id)
             if target_comment.exists():
+                target_comment = target_comment[0]
                 if target_comment.author == request.user:
                     target_comment.delete()
                     return HttpResponse(status=200)
@@ -95,8 +96,13 @@ def commentByPost(request, post_id):
                 return HttpResponse(status=404)
         else:
             return HttpResponse(status=401)
+<<<<<<< HEAD
     else:
         return HttpResponseBadRequest(['GET'])
+=======
+    else: 
+        return HttpResponseNotAllowed(['GET'])
+>>>>>>> b08310b38ebc7ec92c45e6e5d8988ae14efd1fd1
 
 @csrf_exempt
 def commentByAuthor(request, author_id):
@@ -112,7 +118,7 @@ def commentByAuthor(request, author_id):
         else:
             return HttpResponse(status=401)
     else: 
-        return HttpResponseBadRequest(['GET'])
+        return HttpResponseNotAllowed(['GET'])
 
 @csrf_exempt
 def commentReceive(request, author_id):
@@ -132,7 +138,22 @@ def commentReceive(request, author_id):
         else:
             return HttpResponse(status=401)
     else:
-        return HttpResponseBadRequest(['GET'])
+        return HttpResponseNotAllowed(['GET'])
+
+@csrf_exempt
+def commentRefer(request, comment_id):
+    if request.method == 'GET':
+        if request.user.is_authenticated:
+            target_comment = Comment.objects.filter(id = comment_id)
+            if target_comment.exists():
+                comment_list = [comment for comment in Comment.objects.filter(refer_comment_id = comment_id).values()] 
+                return JsonResponse(comment_list, safe=False)
+            else:
+                return HttpResponse(status=404)
+        else:
+            return HttpResponse(status=401)
+    else:
+        return HttpResponseNotAllowed(['GET'])
 
 @ensure_csrf_cookie
 def token(request):

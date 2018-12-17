@@ -1,0 +1,26 @@
+
+.tag-button {
+    margin-left: 10px;
+    font-weight: bold;
+
+}
+.tag-time {
+    background: #ff9900;
+    border-color: #ff9900;
+}
+
+.tag-type {
+    background: #ff5050;
+    border-color: #ff5050;
+}
+
+.tag-region {
+    background: #6666ff;
+    border-color: #6666ff;
+}
+
+
+.tag-pay {
+    background: #cc6699;
+    border-color: #cc6699;
+}

@@ -37,15 +37,10 @@ export class PostViewComponent implements OnInit {
       .then( () => this.user_service.getUser(this.current_post.author_id)
         .then( user => this.post_author = user))
       .catch( () => this.router.navigateByUrl('/post/list'));
-    this.current_user = this.user_service.getCurrentUser();
   }
 
   back(): void {
     this.router.navigateByUrl(`/post/list/`);
-  }
-  edit(): void {
-    const id = +this.route.snapshot.paramMap.get('id');
-    this.router.navigateByUrl(`/post/edit/${id}`);
   }
   edit() {
     const id = +this.route.snapshot.paramMap.get('id');
