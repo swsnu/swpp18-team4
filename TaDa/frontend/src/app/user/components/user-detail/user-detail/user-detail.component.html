@@ -33,8 +33,7 @@
       <div class="card-header">
         {{getCurrentUserName()}}이/가 쓴 글
       </div>
-      <ul class="list-group list-group-flush" 
-      *ngFor="let post of post_list;">
+      <ul class="list-group list-group-flush" *ngFor="let post of post_list;">
         <li [routerLink]="'/post/view/'+post.id" style="padding: 3px" class="list-group-item">
           <small>&nbsp;{{post.register_date | date: 'yyyy.MM.d'}}&nbsp;&nbsp;</small>{{post.title}}
           <ng-container class="col-md-4" *ngFor="let tag of this.postService.makePostTags(post);">
@@ -44,13 +43,13 @@
         </li>
       </ul>
     </div>
+
     <!-- the comments-->
-    <div *ngIf="post_list" class="card" style = "margin-top:20px;margin-bottom: 20px">
+    <div *ngIf="post_list" class="card" style="margin-top:20px;margin-bottom: 20px">
         <div class="card-header">
-          {{getCurrentUserName()}}이/가 쓴 글
+          <b>{{getCurrentUserName()}}</b>이/가 쓴 글
         </div>
-        <ul class="list-group list-group-flush" 
-        *ngFor="let post of post_list;">
+        <ul class="list-group list-group-flush" *ngFor="let post of post_list;">
           <li [routerLink]="'/post/view/'+post.id" style="padding: 3px" class="list-group-item">
             <small>&nbsp;{{post.register_date | date: 'yyyy.MM.d'}}&nbsp;&nbsp;</small>{{post.title}}
             <ng-container class="col-md-4" *ngFor="let tag of this.postService.makePostTags(post);">
