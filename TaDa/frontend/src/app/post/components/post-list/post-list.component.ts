@@ -2,7 +2,6 @@ import { Component, OnInit } from '@angular/core';
 import { UserService } from 'src/app/core/services/user.service';
 import { PostService } from 'src/app/core/services/post.service';
 import { TagService} from 'src/app/core/services/tag.service';
-import { User } from '../../../core/models/user';
 import { Post } from '../../../core/models/post';
 import { HowToPayEnum } from '../../../core/models/enums/how-to-pay-enum.enum';
 import { region_enum_list, arbeit_type_enum_list, how_to_pay_enum_list } from '../../../core/models/enums/enum-list';
@@ -71,12 +70,13 @@ export class PostListComponent implements OnInit {
   }
 
   search(keyword: string, criteria: number, arr: Post[]): Post[] {
+    console.log(keyword+" "+criteria);
     if (keyword == undefined || (keyword = keyword.trim()) == null) {
       return arr;
     }
     /* search by title */
      let new_arr = [];
-    if (criteria === 0) {
+    if (criteria == 0) {
       for (const post of arr) {
         if (post.title.includes(keyword)) {
           new_arr.push(post);
