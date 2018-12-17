@@ -65,6 +65,52 @@
               </small>   
             </div>
           </div>
+
+          <!-- Handling my ㅆags-->
+          <div class="input-group mb-3">
+              <div class="input-group-prepend">
+                <span class="input-group-text" id="basic-addon3">내 태그</span>
+              </div>
+              <div class="form-control" id="basic-url" style="padding: 3px" aria-describedby="basic-addon3">
+                <ng-container class="col-md-4"  *ngFor="let tag of filtering_tags">
+                    <app-tag [justShowing]="false" (removeTag)="removeTag(tag.type, tag.index)" 
+                      [hasCloseButton]="true" [isSelectable]="true" [enumType]="tag.type" [enumBody]="tag.index" >
+                    </app-tag>
+                </ng-container>
+              </div>
+            </div>
+          
+            <!-- Selecting Tags -->
+            <div class="row"  style="border-width: 1.5px;">
+              <button type="button" (click)="filter_button=2" class="btn tag-button tag-type">유형</button>  
+              <button type="button" (click)="filter_button=3" class="btn tag-button tag-region">장소</button>
+              <button type="button" (click)="filter_button=4" class="btn tag-button tag-pay">급여</button>
+            </div>
+          
+            <div style="margin-top:10px" [ngSwitch]="filter_button">
+                <ng-container *ngSwitchCase="2">
+                  <b *ngFor="let enums of arbeit_type_enum_list; let idx = index;">
+                    <app-tag (addTag)="addTag(2, idx)" (removeTag)="removeTag(2, idx)" 
+                    [justShowing]="false" [hasCloseButton]="false" [isSelectable]="!existInArray(2, idx)" [enumType]="2" [enumBody]="idx" >
+                    </app-tag> 
+                  </b>
+                </ng-container>
+                <ng-container *ngSwitchCase="3">
+                  <b *ngFor="let enums of region_enum_list; let idx = index;">
+                      <app-tag (addTag)="addTag(3, idx)" (removeTag)="removeTag(3, idx)" 
+                      [justShowing]="false" [hasCloseButton]="false" [isSelectable]="!existInArray(3, idx)" [enumType]="3" [enumBody]="idx" >
+                      </app-tag> 
+                  </b>
+                </ng-container>
+                <ng-container *ngSwitchCase="4">
+                  <b *ngFor="let enums of how_to_pay_enum_list; let idx = index;">
+                    <app-tag (addTag)="addTag(4, idx)" (removeTag)="removeTag(4, idx)" 
+                    [justShowing]="false" [hasCloseButton]="false" [isSelectable]="!existInArray(4, idx)" [enumType]="4" [enumBody]="idx" >
+                    </app-tag> 
+                  </b>
+                </ng-container>
+                <b *ngSwitchDefault></b>
+            </div>           
       </form>
   </div>
   <div class="modal-footer modals">

@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { UserService } from 'src/app/core/services/user.service';
 import { PostService } from 'src/app/core/services/post.service';
+import { TagService} from 'src/app/core/services/tag.service';
 import { mock_posts } from '../../../shared/mock/mock-post';
 import { mock_users } from '../../../shared/mock/mock-user';
 import { User } from '../../../core/models/user';
@@ -39,7 +40,8 @@ export class PostListComponent implements OnInit {
     private userService: UserService,
     private postService: PostService,
     private timeblockService: TimeblockService,
-    private toastrService: ToastrService
+    private toastrService: ToastrService,
+    private tagService: TagService
 
   ) { }
 
@@ -250,28 +252,14 @@ export class PostListComponent implements OnInit {
       this.toastrService.warning('필터링 태그는 10개까지 입력 가능합니다!');
       return;
     }
-    let ele = {
-      type: enumtype,
-      index: enumindex
-    }
-    this.filtering_tags.push(ele);
+    this.tagService.addTag(this.filtering_tags, enumtype, enumindex);
   }
 
-  removeTag(type: number, index: number): void {
-    for (let i = 0; i < this.filtering_tags.length; i++) {
-      if (this.filtering_tags[i].type === type && this.filtering_tags[i].index === index) {
-          this.filtering_tags.splice(i, 1);
-          break;
-      }
-    }
+  removeTag(enumtype: number, enumindex: number) {
+    this.tagService.removeTag(this.filtering_tags, enumtype, enumindex);
   }
 
-  existInArray(type: number, index: number): boolean {
-    for (let i = 0; i < this.filtering_tags.length; i++) {
-      if (this.filtering_tags[i].type === type && this.filtering_tags[i].index === index) {
-          return true;
-      }
-    }
-    return false;
+  existInArray(enumtype: number, enumindex: number) {
+    return this.tagService.existInArray(this.filtering_tags, enumtype, enumindex);
   }
 }
