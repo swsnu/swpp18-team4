@@ -16,8 +16,6 @@ from django.shortcuts import get_object_or_404
 from django.db import models
 from .models import User, UserManager
 
-# There are 'profile_image' attribute in test, not in views.
-
 class UserTestCase(TestCase):
 
 #email
