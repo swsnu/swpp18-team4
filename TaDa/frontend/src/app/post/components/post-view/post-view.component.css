@@ -2,10 +2,6 @@
 @import url(//fonts.googleapis.com/earlyaccess/kopubbatang.css);
 @import url(//fonts.googleapis.com/earlyaccess/hanna.css);
 
-
-*:not i {
-  font-family: 'Hanna', sans-serif;
-}
 .fas {
   font-size: 1em;
 }

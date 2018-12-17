@@ -75,11 +75,14 @@
         </div>
 
         <div class="custom-control" *ngIf="current_post.is_same_person">
-          <label class="caution">
+          <label class="caution" style="margin-top: 10px;">
             <img src="caution.ico" alt="" style="height: 20px;"> 매 알바마다 같은 사람이 와야만 합니다
           </label>
         </div>
 
+        <div *ngIf="current_post.author_id === current_user.id">
+          <button type="button" class="btn btn-danger btn-lg btn-block">마감</button>
+        </div>
       </div>
     </div>
 
