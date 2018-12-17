@@ -122,7 +122,7 @@ export class SchedulerComponent implements OnInit {
       for (let i = 0; i < post.timezone.length; i = i + 2) {
         let st = post.timezone[i];
         let en = post.timezone[i + 1];
-        if (start_time.getTime() <= st.getTime() && en.getTime() <= end_time.getTime()) {
+        if ((new Date(start_time)).getTime() <= (new Date(st)).getTime() && (new Date(en)).getTime() <= (new Date(end_time)).getTime()) {
           // time fit
         } else {
           return false;
@@ -134,7 +134,7 @@ export class SchedulerComponent implements OnInit {
       for (let i = 0; i < post.timezone.length; i = i + 2) {
         let st = post.timezone[i];
         let en = post.timezone[i + 1];
-        if (start_time.getTime() <= st.getTime() && en.getTime() <= end_time.getTime()) {
+        if ((new Date(start_time)).getTime() <= (new Date(st)).getTime() && (new Date(en)).getTime() <= (new Date(end_time)).getTime()) {
           return true;
         }
       }
@@ -161,7 +161,7 @@ export class SchedulerComponent implements OnInit {
         let st = post.timezone[i];
         let en = post.timezone[i + 1];
         let ok = 1;
-        if (start_time.getTime() <= st.getTime() && en.getTime() <= end_time.getTime()) {
+        if ((new Date(start_time)).getTime() <= (new Date(st)).getTime() && (new Date(en)).getTime() <= (new Date(end_time)).getTime()) {
           ok = 1;
           for (let j = 0; j < this.view_result.length; j = j + 1) {
             let st2 = this.view_result[j].start_time;
@@ -185,7 +185,7 @@ export class SchedulerComponent implements OnInit {
         let st = post.timezone[i];
         let en = post.timezone[i + 1];
         let ok = 1;
-        if (start_time.getTime() <= st.getTime() && en.getTime() <= end_time.getTime()) {
+        if ((new Date(start_time)).getTime() <= (new Date(st)).getTime() && (new Date(en)).getTime() <= (new Date(end_time)).getTime()) {
           ok = 1;
           for (let j = 0; j < this.view_result.length; j = j + 1) {
             let st2 = this.view_result[j].start_time;
@@ -228,16 +228,16 @@ export class SchedulerComponent implements OnInit {
           result.push(x);
           let temp = this.isIntersectWithSuccess(x, start_time, end_time);
           for(let i = 0; i < temp.length; i = i + 2) {
-            this.expected_gain = this.expected_gain + (temp[i+1].getTime() - temp[i].getTime()) / 3600000 * x.pay_per_hour;
+            this.expected_gain = this.expected_gain + ((new Date(temp[i+1])).getTime() - (new Date(temp[i])).getTime()) / 3600000 * x.pay_per_hour;
             this.view_result.push(new schResult(temp[i], temp[i+1], x));
           }
           save = save.filter(x => this.isIntersectWithSuccess(x, start_time, end_time).length > 0);
         }
         result.sort((a, b) => {
-          return a.timezone[0].getTime() - b.timezone[0].getTime();
+          return (new Date(a.timezone[0])).getTime() - (new Date(b.timezone[0])).getTime();
         });
         this.view_result.sort((a, b) => {
-          return a.start_time.getTime() - b.start_time.getTime();
+          return (new Date(a.start_time)).getTime() - (new Date(b.start_time)).getTime();
         });
         this.post_list = result;
         this.updateCenterCoord();
@@ -249,7 +249,7 @@ export class SchedulerComponent implements OnInit {
   }
 
   getStringFromTime(date: Date) {
-    return date.getHours() + ":" + (date.getMinutes() < 10 ? "0" + date.getMinutes() : date.getMinutes());
+    return (new Date(date)).getHours() + ":" + ((new Date(date)).getMinutes() < 10 ? "0" + (new Date(date)).getMinutes() : (new Date(date)).getMinutes());
   }
 
   getTimeString(idx: number): string {

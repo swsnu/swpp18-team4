@@ -10,6 +10,9 @@ import { isIterable } from 'rxjs/internal-compatibility';
 import {CommentService} from '../../../core/services/comment.service';
 import {Comment} from '../../../core/models/comment';
 
+import * as Talk from 'talkjs';
+import { TalkService } from 'src/app/core/services/talk.service';
+
 @Component({
   selector: 'app-post-view',
   templateUrl: './post-view.component.html',
@@ -26,6 +29,7 @@ export class PostViewComponent implements OnInit {
   refer_comments: Comment[];
   all_users: User[];
   star_value: number;
+  private chatPopup: Talk.Popup;
 
   constructor(
     private post_service: PostService,
@@ -34,6 +38,7 @@ export class PostViewComponent implements OnInit {
     private router: Router,
     private route: ActivatedRoute,
     private toastrService: ToastrService,
+    private talkService: TalkService
   ) { }
 
   ngOnInit() {
@@ -45,7 +50,11 @@ export class PostViewComponent implements OnInit {
     this.post_service.getPostByPostId(this.id)
       .then( post => this.current_post = post)
       .then( () => this.user_service.getUser(this.current_post.author_id)
-        .then( user => this.post_author = user))
+        .then( user => {
+          this.post_author = user;
+          this.preloadChatPopup(user);
+          return user;
+        }))
       .catch( () => this.router.navigateByUrl('/post/list'));
     this.comment_service.getWriteCommentsByPostId(this.id)
       .then(comments => this.post_comments = comments)
@@ -146,5 +155,14 @@ export class PostViewComponent implements OnInit {
     }
   }
 
+  
+  private async preloadChatPopup(vendor: User) {
+    this.chatPopup = await this.talkService.createPopup(vendor, false);
+    this.chatPopup.mount({ show: false });
+  }
+
+  sendMessage() {
+    this.chatPopup.show();
+  }
 
 }

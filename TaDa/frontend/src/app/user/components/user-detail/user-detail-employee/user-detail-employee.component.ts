@@ -9,6 +9,8 @@ import { RegionEnum } from 'src/app/core/models/enums/region-enum.enum';
 import { HowToPayEnum } from 'src/app/core/models/enums/how-to-pay-enum.enum';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { ToastrService } from 'ngx-toastr';
+import { TalkService } from 'src/app/core/services/talk.service';
+import * as Talk from 'talkjs';
 
 @Component({
   selector: 'app-user-detail-employee',
@@ -27,13 +29,15 @@ export class UserDetailEmployeeComponent implements OnInit {
   region_enum_list: string[];
   arbeit_type_enum_list: string[];
   how_to_pay_enum_list: string[];
+  private chatPopup: Talk.Popup;
 
   constructor(
     private router: Router,
     private userService: UserService,
     private tagService: TagService,
     private modalService: NgbModal,
-    private toastrService: ToastrService
+    private toastrService: ToastrService,
+    private talkService: TalkService
   ) { }
 
   ngOnInit() {
@@ -41,6 +45,7 @@ export class UserDetailEmployeeComponent implements OnInit {
     this.arbeit_type_enum_list = arbeit_type_enum_list;
     this.how_to_pay_enum_list = how_to_pay_enum_list;
     this. tag_list = this.userService.getUserTagInfo(this.user);
+    this.preloadChatPopup(this.user);
   }
   
 
@@ -82,8 +87,6 @@ export class UserDetailEmployeeComponent implements OnInit {
     this.user.employee_type = employee_type;
     this.user.employee_region = employee_region;
     this.user.employee_how_to_pay = employee_how_to_pay;
-
-    console.log(this.user.employee_how_to_pay);
     
     this.userService.updateUser(this.user).then(
       user => this.user = user,
@@ -94,7 +97,7 @@ export class UserDetailEmployeeComponent implements OnInit {
   }
 
   sendMessage() {
-    console.log('send Message!');
+    this.chatPopup.show();
   }
 
 
@@ -118,6 +121,9 @@ export class UserDetailEmployeeComponent implements OnInit {
     this.tag_list = [];
   }
   
-
+  private async preloadChatPopup(vendor: User) {
+    this.chatPopup = await this.talkService.createPopup(vendor, false);
+    this.chatPopup.mount({ show: false });
+  }
 
 }

@@ -44,7 +44,7 @@ export class TalkService {
     await Talk.ready;
 
     return new Talk.User({
-        id: 'snutada_i_love_talkjs_' + applicationUser.id,
+        id: 'snutada2_I_love_talkjs_' + applicationUser.id,
         name: (applicationUser.user_type === TypeEnum.EE ? applicationUser.nickname : applicationUser.company_name),
         email: applicationUser.email,
         // photoUrl: applicationUser.profile_image,
