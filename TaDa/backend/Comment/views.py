@@ -97,7 +97,7 @@ def commentByPost(request, post_id):
         else:
             return HttpResponse(status=401)
     else: 
-        return HttpResponseBadRequest(['GET'])
+        return HttpResponseNotAllowed(['GET'])
 
 @csrf_exempt
 def commentByAuthor(request, author_id):
@@ -113,7 +113,7 @@ def commentByAuthor(request, author_id):
         else:
             return HttpResponse(status=401)
     else: 
-        return HttpResponseBadRequest(['GET'])
+        return HttpResponseNotAllowed(['GET'])
 
 #버그
 @csrf_exempt
@@ -134,8 +134,23 @@ def commentReceive(request, author_id):
         else:
             return HttpResponse(status=401)
     else:
-        return HttpResponseBadRequest(['GET'])
-      
+        return HttpResponseNotAllowed(['GET'])
+
+@csrf_exempt
+def commentRefer(request, comment_id):
+    if request.method == 'GET':
+        if request.user.is_authenticated:
+            target_comment = Comment.objects.filter(id = comment_id)
+            if target_comment.exists():
+                comment_list = [comment for comment in Comment.objects.filter(refer_comment_id = comment_id).values()] 
+                return JsonResponse(comment_list, safe=False)
+            else:
+                return HttpResponse(status=404)
+        else:
+            return HttpResponse(status=401)
+    else:
+        return HttpResponseNotAllowed(['GET'])
+
 @ensure_csrf_cookie
 def token(request):
     if request.method == 'GET':
