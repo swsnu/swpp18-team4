@@ -134,7 +134,6 @@ def commentReceive(request, author_id):
         else:
             return HttpResponse(status=401)
     else:
-<<<<<<< HEAD
         return HttpResponseNotAllowed(['GET'])
 
 @csrf_exempt
@@ -152,10 +151,6 @@ def commentComment(request, comment_id):
     else:
         return HttpResponseNotAllowed(['GET'])
 
-=======
-        return HttpResponseBadRequest(['GET'])
-      
->>>>>>> b7e6e7d438c1b29c06a339a95330afd30b0ec5c2
 @ensure_csrf_cookie
 def token(request):
     if request.method == 'GET':
