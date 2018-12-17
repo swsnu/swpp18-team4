@@ -137,7 +137,7 @@ def commentReceive(request, author_id):
         return HttpResponseNotAllowed(['GET'])
 
 @csrf_exempt
-def commentComment(request, comment_id):
+def commentRefer(request, comment_id):
     if request.method == 'GET':
         if request.user.is_authenticated:
             target_comment = Comment.objects.filter(id = comment_id)

@@ -590,7 +590,7 @@ class PostTestCase(TestCase):
         response = client.post('/api/comment/receive/1/')
         self.assertEqual(response.status_code, 405)
     
-    def test_commentComment_get_success(self):
+    def test_commentRefer_get_success(self):
         client = Client()
         User.objects.create_user(user_type = 'ER', email = 'abc@snu.ac.kr', password = 'a')
         client.post('/api/user/signin/', data = json.dumps({
@@ -632,29 +632,29 @@ class PostTestCase(TestCase):
             'star': 0,
             'content': 'b',
         }, cls=DjangoJSONEncoder), content_type="application/json")
-        url = '/api/comment/comment/' + str(comment_id) + '/'
+        url = '/api/comment/refer/' + str(comment_id) + '/'
         response = client.get(url)
         self.assertEqual(response.status_code, 200)
         self.assertJSONNotEqual(response.content, [])
     
-    def test_commentComment_get_not_authenticated(self):
+    def test_commentRefer_get_not_authenticated(self):
         client = Client()
-        response = client.get('/api/comment/comment/1/')
+        response = client.get('/api/comment/refer/1/')
         self.assertEqual(response.status_code, 401)
     
-    def test_commentComment_get_not_exist(self):
+    def test_commentRefer_get_not_exist(self):
         client = Client()
         User.objects.create_user(user_type = 'ER', email = 'abc@snu.ac.kr', password = 'a')
         client.post('/api/user/signin/', data = json.dumps({
             'email': 'abc@snu.ac.kr',
             'password': 'a',
         }), content_type="application/json")
-        response = client.get('/api/comment/comment/2/')
+        response = client.get('/api/comment/refer/2/')
         self.assertEqual(response.status_code, 404)
     
-    def test_commentComment_else(self):
+    def test_commentRefer_else(self):
         client = Client()
-        response = client.post('/api/comment/comment/1/')
+        response = client.post('/api/comment/refer/1/')
         self.assertEqual(response.status_code, 405)
 
     def test_token_get(self):
