@@ -92,34 +92,27 @@
     <div *ngIf="post_author && post_author.company_name" class="card border-dark mb-3" style="margin-right:2%;">
       <div class="card-header border-dark" style="color: black;">회사 정보</div>
       <div class="card-body text-primary">
-        <div class="input-group mb-3">
-          <div class="input-group-prepend">
-            <span class="input-group-text">회사명</span>
-          </div>
-          <input type="text" disabled [value]="post_author.company_name" placeholder="제목을 입력하세요">
 
-        </div>
         <div class="input-group mb-3">
           <div *ngIf="post_author.company_name" class="input-group-prepend">
             <span class="input-group-text">회사명</span>
+            <input type="text" disabled [value]="post_author.company_name">
           </div>
-          <input type="text" disabled [value]="post_author.company_name">
 
           <div *ngIf="post_author.company_address" class="input-group-prepend">
             <span class="input-group-text">회사주소</span>
+            <input type="text" disabled [value]="post_author.company_address">
           </div>
-          <input type="text" disabled [value]="post_author.company_address">
 
           <div *ngIf="post_author.business_content" class="input-group-prepend">
             <span class="input-group-text">사업내용</span>
+            <input type="text" disabled [value]="post_author.business_content">
           </div>
-          <input type="text" disabled [value]="post_author.business_content">
 
           <div *ngIf="post_author.representative_name" class="input-group-prepend">
             <span class="input-group-text">대표자이름</span>
+            <input type="text" disabled [value]="post_author.representative_name">
           </div>
-          <input type="text" disabled [value]="post_author.representative_name">
-
         </div>
 
       </div>
@@ -129,6 +122,21 @@
 </div>
 
 <hr>
+<div class="card comment-card" style="margin-top:20px;margin-bottom: 20px"
+     data-toggle="tooltip" data-placement="top">
+  <div class="card-header comment-card-header">
+    <b>댓글</b>
+  </div>
+  <ul class="list-group list-group-flush" *ngFor="let comment of [1,1,1,1,3]">
+    <li style="padding:3px" class="list-group-item">
+      jjj
+    </li>
+  </ul>
+</div>
+
+
+
+
 <button (click)="ConfirmComment()">등록</button>
 <button (click)="getComment()">get</button>
 
@@ -136,4 +144,6 @@
     <button (click)="edit()" class="btn btn-outline-primary btn-lg">수정</button>
     <button routerLink="/post/list" class="btn btn-outline-secondary btn-lg">취소</button>
   </div>
+
+
 

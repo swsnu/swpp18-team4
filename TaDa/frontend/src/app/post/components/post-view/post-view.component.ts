@@ -55,7 +55,7 @@ export class PostViewComponent implements OnInit {
       .catch( () => console.log('에러!') );
   }
   getComment() {
-    this.comment_service.getComment(1)
+    this.comment_service.getReceiveCommentsByUserId(22)
       .then( comment => console.log(comment))
       .catch( () => console.log('에러2!') );
   }

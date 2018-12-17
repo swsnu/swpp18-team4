@@ -49,27 +49,9 @@
   border-width: 1.5px;
   padding-left: 10px;
   width: 80%;
-  height: 3em;
-}
-.input-group textarea:focus {
   height: 10em;
 }
-.not-important span {
-  border: 2px solid cornflowerblue;
-  color: cornflowerblue;
-}
-.not-important input {
-  border-color: cornflowerblue;
-  margin-right: 30px;
-}
-.not-important input::placeholder {
-  color: lightblue;
-}
 
-.not-important-header {
-  color: lightseagreen;
-  border-bottom-color: lightseagreen;
-}
 
 .custom-checkbox {
   margin-top: 10px;
@@ -88,35 +70,37 @@
 .plus {
   margin-right: 5px;
 }
-.input-group2 input {
-  max-width: 150px;
-}
-.input-group2 select {
-  margin-left: 1px;
-  margin-right: 1px;
-  height: 37px;
-}
 
 .btn-lg {
   margin-left: 5px;
 }
 
-.border-info span {
+.comment-card {
+  border: solid;
+  border-color: cornflowerblue;
+  color: #5BC0DE;
+}
+.comment-card-header {
+  border-bottom-color: cornflowerblue;
+  color: #5BC0DE;
+}
+
+.comment-card span {
   border: 2px solid cornflowerblue;
   color: cornflowerblue;
 }
-.border-info select {
+.comment-card select {
   border: solid;
   border-color: cornflowerblue;
 }
-.border-info input {
+.comment-card input {
   border: solid;
   border-color: cornflowerblue;
 }
-.border-info input::placeholder {
+.comment-card input::placeholder {
   color: lightblue;
 }
-.border-info h5 {
+.comment-card h5 {
   color: cornflowerblue;
 }
 
