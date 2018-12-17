@@ -4,6 +4,9 @@ import { User } from '../models/user';
 import { Response } from '@angular/http';
 import { TypeEnum } from '../models/enums/type-enum.enum';
 import { region_enum_list, arbeit_type_enum_list, how_to_pay_enum_list } from '../models/enums/enum-list';
+import { ArbeitTypeEnum } from '../models/enums/arbeit-type-enum.enum';
+import { RegionEnum } from '../models/enums/region-enum.enum';
+import { HowToPayEnum } from '../models/enums/how-to-pay-enum.enum';
 
 const httpOptions = {
   headers: new HttpHeaders({ 'Content-Type': 'application/json'})
@@ -119,6 +122,21 @@ export class UserService {
         }
     })};
     return arr;
+  }
+
+  saveTaginUser(user: User, tag_list) {
+    user.employee_type = [];
+    user.employee_region = [];
+    user.employee_how_to_pay = [];
+    for (const tag of tag_list) {
+      if (tag.type == 2) {
+        user.employee_type.push(<ArbeitTypeEnum>arbeit_type_enum_list[tag.index]);
+      } else if (tag.type == 3) {
+        user.employee_region.push(<RegionEnum>region_enum_list[tag.index]);
+      } else {
+        user.employee_how_to_pay.push(<HowToPayEnum>how_to_pay_enum_list[tag.index]);
+      }
+    }
   }
 
   /* http for UserService */
