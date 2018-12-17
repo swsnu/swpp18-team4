@@ -115,7 +115,6 @@ def commentByAuthor(request, author_id):
     else: 
         return HttpResponseNotAllowed(['GET'])
 
-#버그
 @csrf_exempt
 def commentReceive(request, author_id):
     if request.method == 'GET':

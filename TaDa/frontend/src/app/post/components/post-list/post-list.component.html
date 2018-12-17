@@ -22,9 +22,14 @@
     <button type="button" (click)="filter_button=2" class="btn tag-button tag-type">유형</button>  
     <button type="button" (click)="filter_button=3" class="btn tag-button tag-region">장소</button>
     <button type="button" (click)="filter_button=4" class="btn tag-button tag-pay">급여</button>
-    <button type="button" style="float: right; margin-left: auto;" (click)= "getMyTagInfo()" class="btn btn-primary">
+    <div style="float: right; margin-left: auto;">
+    <button type="button" (click)= "getMyTagInfo()" class="btn btn-primary">
       내 태그 불러오기
     </button>
+    <button type="button" (click)= "clearTag()" class="btn btn-primary">
+        태그 비우기
+    </button>
+    </div>
   </div>
 
   <div style="margin-top:10px" [ngSwitch]="filter_button">

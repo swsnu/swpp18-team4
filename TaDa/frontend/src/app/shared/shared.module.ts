@@ -5,7 +5,7 @@ import { UserModule } from '../user/user.module';
 import { SchedulerModule } from '../scheduler/scheduler.module';
 import { TagComponent } from './tag/tag.component';
 import { TimeblockComponent } from './timeblock/timeblock.component';
-import { NgbdModalComponent } from './modal/modal.component';
+import { NgbdModalComponent, NgbdModalContentComponent } from './modal/modal.component';
 import { DragToSelectModule } from 'ngx-drag-to-select';
 
 @NgModule({
@@ -19,7 +19,7 @@ import { DragToSelectModule } from 'ngx-drag-to-select';
   declarations: [
     TagComponent,
     TimeblockComponent,
-    NgbdModalComponent
+    NgbdModalComponent,
   ],
   exports: [
     TagComponent,

@@ -20,7 +20,7 @@
       </div>
       <ul class="list-group list-group-flush" *ngFor="let post of post_list;">
         <li [routerLink]="'/post/view/'+post.id" style="padding: 3px" class="list-group-item">
-          <small>&nbsp;{{post.register_date | date: 'yyyy.MM.d'}}&nbsp;&nbsp;</small>{{post.title}}
+          <small>&nbsp;{{post.register_date | date: 'yyyy.MM.d'}}&nbsp;&nbsp;</small>{{post.title}}&nbsp;
           <ng-container class="col-md-4" *ngFor="let tag of this.postService.makePostTags(post);">
             <app-tag [justShowing]="true" [hasCloseButton]="false" [isSelectable]="false" [enumType]="tag.type" [enumBody]="tag.index">
             </app-tag>

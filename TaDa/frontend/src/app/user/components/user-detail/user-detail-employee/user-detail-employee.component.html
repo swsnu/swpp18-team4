@@ -17,8 +17,105 @@
         </ng-container>
         <br>
         <button [hidden]="isMyPage" style="float: right; margin-left: auto;" (click)="sendMessage()" class="btn btn-primary">메세지 보내기</button>
-        <button [hidden]="!isMyPage" style="float: right; margin-left: auto;" (click)="gotoEdit()" class="btn btn-primary">내 정보 수정</button>
+        <button [hidden]="!isMyPage" style="float: right; margin-left: auto;" (click)="edit(modalEmployee)" class="btn btn-primary">내 정보 수정</button>
       </div>
     </div>
   </div>
 </div>
+
+
+<!-- Modal window for editing employee information -->
+
+<ng-template #modalEmployee let-modal>
+  <div class="modal-header modals" style="display: inline-block;">
+    <h4 class="modal-title" style="text-align: center;display: inline-block;">내 정보 수정</h4>
+  </div>
+  <div class="modal-body modals">
+      <form>
+          <div class="form-group row">
+              <label for="inputEmail3" class="col-sm-3 col-form-label">닉네임</label>
+              <div class="col-sm-9">
+                <input type="email" class="form-control" name="nickname" [(ngModel)]="user.nickname" disabled>
+              </div>
+          </div>
+          <div class="form-group row">
+            <label for="inputEmail3" class="col-sm-3 col-form-label">이메일</label>
+            <div class="col-sm-9">
+              <input type="email" class="form-control" name="email" [(ngModel)]="user.email" disabled>
+            </div>
+          </div>
+          <!--
+          <div class="form-group row">
+            <label for="inputPassword3" class="col-sm-3 col-form-label">비밀번호</label>
+            <div class="col-sm-9">
+              <input type="password" class="form-control" name="pw"  
+                #password="ngModel" [(ngModel)]="pw" placeholder="00000000">
+              <small class="help-block" *ngIf="password.dirty && !userService.validatePassword(pw)" required maxlength="20">
+                  비밀번호는 8자 이상으로, 영문과 숫자가 섞여있어야 합니다. 
+              </small> touched: {{password.touched}} dirty: {{password.dirty}}
+            </div>
+          </div>
+          <div class="form-group row">
+            <label for="inputPassword3" class="col-sm-3 col-form-label">비밀번호<br>확인</label>
+            <div class="col-sm-9">
+              <input type="password" class="form-control" name="pwconfirm" 
+                [(ngModel)]="pw_confirm" #pwConfirm="ngModel" placeholder="00000000">
+              <small class="help-block" *ngIf="(pwConfirm.touched || pwConfirm.dirty) && pw !== pw_confirm">
+                비밀번호가 일치하지 않습니다. 
+              </small>   
+            </div>
+          </div>-->
+          <!-- Handling my Tags -->
+          <div class="input-group mb-3"  height="60px">
+              <div class="input-group-prepend">
+                <span class="input-group-text" id="basic-addon3">내 태그</span>
+              </div>
+              <div class="form-control" id="basic-url" style="padding: 3px" aria-describedby="basic-addon3">
+                <ng-container class="col-md-4"  *ngFor="let tag of tag_list">
+                    <app-tag [justShowing]="false" (removeTag)="removeTag(tag.type, tag.index)" 
+                      [hasCloseButton]="true" [isSelectable]="true" [enumType]="tag.type" [enumBody]="tag.index" >
+                    </app-tag>
+                </ng-container>
+              </div>
+          </div>
+          <div class="row"  style="border-width: 1.5px;">
+            <button type="button" (click)="filter_button=2" class="btn tag-button tag-type">유형</button>  
+            <button type="button" (click)="filter_button=3" class="btn tag-button tag-region">장소</button>
+            <button type="button" (click)="filter_button=4" class="btn tag-button tag-pay">급여</button>
+            <button type="button" style="float: right; margin-left: auto;" (click)= "clearTag()" class="btn btn-primary">
+                태그 비우기
+            </button>
+          </div>
+          
+          <div style="margin-top:10px" [ngSwitch]="filter_button">
+              <ng-container *ngSwitchCase="2">
+                <b *ngFor="let enums of arbeit_type_enum_list; let idx = index;">
+                  <app-tag (addTag)="addTag(2, idx)" (removeTag)="removeTag(2, idx)" 
+                  [justShowing]="false" [hasCloseButton]="false" [isSelectable]="!existInArray(2, idx)" [enumType]="2" [enumBody]="idx" >
+                  </app-tag>
+                </b>
+              </ng-container>
+              <ng-container *ngSwitchCase="3">
+                <b *ngFor="let enums of region_enum_list; let idx = index;">
+                    <app-tag (addTag)="addTag(3, idx)" (removeTag)="removeTag(3, idx)" 
+                    [justShowing]="false" [hasCloseButton]="false" [isSelectable]="!existInArray(3, idx)" [enumType]="3" [enumBody]="idx" >
+                    </app-tag>
+                </b>
+              </ng-container>
+              <ng-container *ngSwitchCase="4">
+                <b *ngFor="let enums of how_to_pay_enum_list; let idx = index;">
+                  <app-tag (addTag)="addTag(4, idx)" (removeTag)="removeTag(4, idx)" 
+                  [justShowing]="false" [hasCloseButton]="false" [isSelectable]="!existInArray(4, idx)" [enumType]="4" [enumBody]="idx" >
+                  </app-tag>
+                </b>
+              </ng-container>
+              <b *ngSwitchDefault></b>
+          </div> 
+      </form>
+  </div>
+  <div class="modal-footer modals">
+    <button type="button" class="btn btn-outline-dark" (click)="close()">창 닫기</button>
+    <button type="button" class="btn btn-outline-dark" (click)="confirm()">저장</button>
+  </div>
+</ng-template>
+  
