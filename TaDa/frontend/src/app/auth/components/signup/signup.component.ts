@@ -94,7 +94,7 @@ export class SignupComponent implements OnInit {
         this.signup_user.user_type = TypeEnum.ER;
         this.signup_user.nickname = null;
       }
-      console.log(this.signup_user);
+      
       document.getElementById('signup').setAttribute('disabled', 'disabled');
       this.userService.signup(this.signup_user).then(res => {
           if ( this.as_employee === true) {

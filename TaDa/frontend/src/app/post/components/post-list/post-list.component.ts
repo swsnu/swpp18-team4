@@ -261,12 +261,12 @@ export class PostListComponent implements OnInit {
   }
 
   private getStringFromDate(date: Date): string {
-    return date.getMonth() + '/' + date.getDate();
+    return (new Date(date)).getMonth() + '/' + (new Date(date)).getDate();
   }
 
   getGiganString(post: Post): string {
-    var start_time = new Date(2100,0,1,0,0);
-    var end_time = new Date(1900,0,1,0,0);
+    let start_time = new Date(2100,0,1,0,0);
+    let end_time = new Date(1900,0,1,0,0);
     for (let i = 0; i < post.timezone.length; i = i + 2) {
       if (start_time > post.timezone[i]) start_time = post.timezone[i];
       if (end_time < post.timezone[i + 1]) end_time = post.timezone[i + 1];
