@@ -33,51 +33,6 @@ from django.core.serializers.json import DjangoJSONEncoder
 class PostTestCase(TestCase):
 
     def test_comments_post_success(self):
-<<<<<<< HEAD
-        pass
-
-    def test_comments_post_not_authenticated(self):
-        pass
-
-    def test_comments_post_JSONerror(self):
-        pass
-
-    def test_comments_else(self):
-        pass 
-    
-    def test_comment_get_success(self):
-        pass
-    
-    def test_comment_get_not_exist(self):
-        pass
-    
-    def test_comment_put_success(self):
-        pass
-    
-    def test_comment_put_not_authenticated(self):
-        pass
-    
-    def test_comment_put_not_exist(self):
-        pass
-    
-    def test_comment_put_not_authorized(self):
-        pass
-    
-    def test_comment_put_JSONerror(self):
-        pass
-    
-    def test_comment_delete_success(self):
-        pass
-    
-    def test_comment_delete_not_authenticated(self):
-        pass
-    
-    def test_comment_delete_not_exist(self):
-        pass
-    
-    def test_comment_delete_not_authorized(self):
-        pass
-=======
         client = Client()
         User.objects.create_user(user_type = 'ER', email = 'abc@snu.ac.kr', password = 'a')
         client.post('/api/user/signin/', data = json.dumps({
@@ -724,4 +679,3 @@ class PostTestCase(TestCase):
         client = Client()
         response = client.post('/api/post/token/')
         self.assertEqual(response.status_code, 405)
->>>>>>> b08310b38ebc7ec92c45e6e5d8988ae14efd1fd1

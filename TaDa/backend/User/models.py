@@ -7,7 +7,7 @@ import datetime
 
 # Create your models here.
 class UserManager(BaseUserManager):
-    def create_user(self, user_type, email, nickname = None,  password = None, company_name = None, company_address= None):
+    def create_user(self, user_type, email, nickname = None,  password = None, company_name = None):
         if not email:
             raise ValueError("User must have an email")
         if not user_type:
@@ -17,7 +17,6 @@ class UserManager(BaseUserManager):
             email = self.normalize_email(email),
             nickname = nickname, 
             company_name = company_name,
-            company_address = company_address
         )
         user.set_password(password)
         user.save(using=self._db)

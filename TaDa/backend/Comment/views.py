@@ -96,13 +96,8 @@ def commentByPost(request, post_id):
                 return HttpResponse(status=404)
         else:
             return HttpResponse(status=401)
-<<<<<<< HEAD
-    else:
-        return HttpResponseBadRequest(['GET'])
-=======
     else: 
         return HttpResponseNotAllowed(['GET'])
->>>>>>> b08310b38ebc7ec92c45e6e5d8988ae14efd1fd1
 
 @csrf_exempt
 def commentByAuthor(request, author_id):
