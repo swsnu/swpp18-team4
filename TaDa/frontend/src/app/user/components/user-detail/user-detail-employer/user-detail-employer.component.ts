@@ -32,6 +32,7 @@ export class UserDetailEmployerComponent implements OnInit {
   close() {
     this.modalService.dismissAll();
   }
+  
   confirm() {
     this.userService.updateUser(this.user).then(
       user => this.user = user,

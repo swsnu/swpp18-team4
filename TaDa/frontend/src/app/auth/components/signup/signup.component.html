@@ -1,80 +1,85 @@
-<h2>회원가입</h2>
-<br>
-<div class="btn-group" role="group" aria-label="Basic example">
-  <button id="as_employee" (click)="as_employee = true" type="button" class="btn btn-secondary" selected>알바생으로 가입</button>
-  <button id="as_employer"(click)="as_employee = false" type="button" class="btn btn-secondary">고용주로 가입</button>
-</div>
-<br>
-<form>
-
-  <!-- Email field -->
-  <div class="form-group">
-    <label for="InputEmail"> Email 주소 (가능하면 SNU 메일을 입력해주십시오) </label>
-    <input type="email" class="form-control" name="email" aria-describedby="emailHelp" 
-        [(ngModel)]="signup_user.email" #email="ngModel" (ngModelChange)="check_email = false;">        
-    <button type="button" class="btn btn-secondary" name="check_email" (click)="onClickcheckDuplicateEmail()" [disabled]="check_email">
-      {{check_email? "확인 완료": "중복체크"}} 
-    </button>
-  </div>
-
-  <!-- Password and Confirmation field -->
-  <div class="row">
-      <div class="col">
-        <!-- PW field -->
-        <div class="form-group">
-            <label for="InputPassword">비밀번호</label>
-            <input type="password" class="form-control" name="password"
-                [(ngModel)]="signup_user.password" #password="ngModel" required maxlength="20">
-            <small class="help-block" *ngIf="(password.touched || password.dirty) && !validatePassword()">
-                비밀번호는 8자 이상으로, 영문과 숫자가 섞여있어야 합니다. 
-            </small>
-        </div>
-      </div>
-
-      <div class="col">
-        <!-- PW confirmation field -->
-        <div class="form-group">
-            <label for="InputPassword">비밀번호 확인</label>
-            <input type="password" class="form-control" name="password_confirm"
-                [(ngModel)]="password_confirm" #passwordConfirm="ngModel" required>
-            <small class="help-block" *ngIf="(passwordConfirm.touched || passwordConfirm.dirty) && signup_user.password !== password_confirm">
-              비밀번호가 일치하지 않습니다. 
-            </small>
-        </div>
-      </div>
-  </div>
-
-  <!-- Nickname field. Only for Employee -->
-  <div *ngIf="as_employee" class="form-group">
-    <label for="InputNickname"> 닉네임 </label>
-    <input type="text" class="form-control" name="nickname" aria-describedby="nicknameHelp" 
-        [(ngModel)]="signup_user.nickname" #nickname="ngModel" (ngModelChange)="check_nickname = false;">
-    <button type="button" class="btn btn-secondary" (click) = onClickcheckDuplicateNickname() [disabled]="check_nickname">
-        {{check_nickname? "확인 완료": "중복 체크"}} 
-    </button>
-  </div>
-
-  <!-- Business autOnly for Employer -->
-  <div *ngIf="!as_employee" class="form-group">
+<form class="row">
+<div class="col-sm-1"></div>
     
-      <!-- company name-->
-      <label for="company_name"> 회사 이름 </label>
-      <input type="text" class="form-control" name="company_name" aria-describedby="company_name" 
-            [(ngModel)]="signup_user.company_name" #company_name="ngModel" required >
-      <!-- company_address-->
-      <label for="company_address"> 회사 주소 </label>
-      <input type="text" class="form-control" name="company_address" aria-describedby="company_address" 
-            [(ngModel)]="signup_user.company_address" #company_address="ngModel" required >
+<div class="col-sm-10">
+<div class="card text-center">
+    <div class="card-header">
+        <ul class="nav nav-tabs card-header-tabs">
+        <li class="nav-item">
+            <button [ngClass]="as_employee ? 'nav-link active': 'nav-link'" (click)="as_employee = true">알바생 계정</button>
+        </li>
+        <li class="nav-item">
+            <button [ngClass]="!as_employee ? 'nav-link active': 'nav-link'" (click)="as_employee = false">회사 계정</button>
+        </li>
+        </ul>
+    </div>
+    <div class="card-body">
+        <div class = "row">
+        <div class="col-sm-1"></div>
+        <div class="col-sm-10">
+          <!-- Email field -->
+        <div class="form-group row">
+            <label for="InputEmail"> <b>Email 주소</b></label>&nbsp;&nbsp;         
+            <input type="email" class="form-control" name="email" aria-describedby="emailHelp" 
+                [(ngModel)]="signup_user.email" #email="ngModel" (ngModelChange)="check_email = false;">
+            <button style="margin-top:8px"  type="button" class="btn btn-secondary" name="check_email" (click)="onClickcheckDuplicateEmail()" [disabled]="check_email">
+                    {{check_email? "확인 완료": "중복체크"}} 
+            </button>        
 
-      <!--
-    <label for="business_license"> 사업자 등록 번호 </label>
-      <small id="business_license_Help" class="form-text text-muted"> 
-        법적으로 등록된 사업장 혹은 사업자인지 확인하기 위함입니다. 스누메일로 가입인증을 한 회원은 작성하지 않아도 됩니다. 
-      </small>
-      <input type="text" class="form-control" name="business_license" aria-describedby="business_licencse_Help" 
-          [(ngModel)]="signup_user.employer_license_number" #email="ngModel" required >
-      <button type="button" class="btn btn-secondary" (click)=onClickcheckBusinessLicense() [disabled]="check_license">확인</button>-->
-  </div>
-  
-  <button type="submit" (click)=onClickConfirm() class="btn btn-primary">회원 가입</button>
+        </div>
+        <br>
+        <!-- Password and Confirmation field -->
+        <div class="row">
+            <div class="col">
+                <!-- PW field -->
+                <div class="form-group row">
+                    <label for="InputPassword"><b>비밀번호</b></label>
+                    <input type="password" class="form-control" name="password"
+                        [(ngModel)]="signup_user.password" #password="ngModel" required maxlength="20">
+                    <small class="help-block" *ngIf="(password.touched || password.dirty) && !validatePassword()">
+                        비밀번호는 8자 이상으로, 영문과 숫자가 섞여있어야 합니다. 
+                    </small>
+                </div>
+            </div>
+            &nbsp;&nbsp;
+            <div class="col">
+                <!-- PW confirmation field -->
+                <div class="form-group row">
+                    <label for="InputPassword"><b>비밀번호 확인</b></label>
+                    <input type="password" class="form-control" name="password_confirm"
+                        [(ngModel)]="password_confirm" #passwordConfirm="ngModel" required>
+                    <small class="help-block" *ngIf="(passwordConfirm.touched || passwordConfirm.dirty) && signup_user.password !== password_confirm">
+                    비밀번호가 일치하지 않습니다. 
+                    </small>
+                </div>
+            </div>
+        </div>
+        <br>
+        <!-- Nickname field. Only for Employee -->
+        <div *ngIf="as_employee" class="form-group row">
+            <label for="InputNickname"> <b>닉네임</b> </label> &nbsp; &nbsp;
+            <input type="text" class="form-control" name="nickname" aria-describedby="nicknameHelp" 
+                [(ngModel)]="signup_user.nickname" #nickname="ngModel" (ngModelChange)="check_nickname = false;">
+                <button style="margin-top:8px"  type="button" class="btn btn-secondary" (click) = onClickcheckDuplicateNickname() [disabled]="check_nickname">
+                        {{check_nickname? "확인 완료": "중복 체크"}} 
+                </button>
+        </div>
+
+        <!-- company name field. Only for Employer -->
+        <div *ngIf="!as_employee" class="form-group row">
+            <label for="InputNickname">  <b>회사명</b> </label>
+            <input type="text" class="form-control" name="company_name" aria-describedby="nicknameHelp" 
+                [(ngModel)]="signup_user.company_name" #company_name="ngModel">
+        </div>
+        <br>
+        <br>
+        <button (click)=onClickConfirm() style="border-color:#004080; background-color:#004080;"  class="btn btn-primary btn-lg btn-block">회원 가입</button>
+        </div>
+        <div class="col-sm-1"></div>
+
+    </div>
+</div>
+</div>
+</div>
+<div class="col-sm-1"></div>
 </form>

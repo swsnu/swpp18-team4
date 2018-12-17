@@ -138,10 +138,15 @@ def author(request, author_id):
 def alarm(request):
     from django.utils import timezone
     if request.method == 'GET':
-            startdate = datetime.datetime.now(tz=timezone.utc)
-            enddate = startdate + datetime.timedelta(days=2)
+        startdate = datetime.datetime.now(tz=timezone.utc)
+        enddate = startdate + datetime.timedelta(days=2)
+        if request.user.is_authenticated and request.user.user_type == 'EE':
+            post_list = [post for post in Post.objects.filter(deadline__range=[startdate, enddate] 
+            and (region in request.user.employee_region or arbeit_type in request.user.employee_type 
+            or how_to_pay in request.user.employee_how_to_pay)).values()]
+        else:
             post_list = [post for post in Post.objects.filter(deadline__range=[startdate, enddate]).values()]
-            return JsonResponse(post_list, safe=False)
+        return JsonResponse(post_list, safe=False)
     else: 
         return HttpResponseNotAllowed(['GET'])
 
