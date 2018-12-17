@@ -17,8 +17,8 @@ export class UserDetailEmployerComponent implements OnInit {
   ) { }
 
   ngOnInit() {
+    console.log(this.user);
   }
-
 
   gotoEdit() {
     this.router.navigateByUrl('/user/edit');

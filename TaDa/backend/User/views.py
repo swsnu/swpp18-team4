@@ -49,12 +49,13 @@ def signup(request):
             password = req_data['password']
             user_type = req_data['user_type']
             company_name = req_data['company_name']
+            company_address = req_data['company_address']
         except (KeyError, JSONDecodeError) as e:
             return HttpResponseBadRequest()
 
         if user_type and email and password:
             User.objects.create_user(user_type = user_type, email = email, nickname = nickname, 
-            password = password, company_name = company_name)
+            password = password, company_name = company_name, company_address=company_address)
             return HttpResponse(status=201)
         else:
             return HttpResponse(status=409)
@@ -143,7 +144,7 @@ def user(request, uid):
             target_user = User.objects.filter(id=uid)
             if target_user.exists():
                 target_user = target_user[0]
-                if target_user.id == request.user.id:
+                if target_user['id'] == request.user.id:
                     #columns = ["user_type", "email", "password", "nickname", "employee_region", "employee_type", "employee_how_to_pay", "employee_pay_limit", "company_name", "company_address", "business_content", "representative_name", "employer_license_number", "profile_image"]
                     #keylist = list(req_data.keys())
                     try:
@@ -153,6 +154,7 @@ def user(request, uid):
                             target_user.employee_region = req_data["employee_region"]
                             target_user.employee_type = req_data["employee_type"]
                             target_user.employee_how_to_pay = req_data["employee_how_to_pay"]
+                            print(target_user.employee_how_to_pay)
                             target_user.employee_pay_limit = req_data["employee_pay_limit"]
                             target_user.company_name = None
                             target_user.company_address = None
