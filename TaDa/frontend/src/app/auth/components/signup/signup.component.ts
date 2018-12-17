@@ -90,7 +90,6 @@ export class SignupComponent implements OnInit {
       if ( this.as_employee === true) {
         this.signup_user.user_type = TypeEnum.EE;
         this.signup_user.company_name = null;
-        this.signup_user.company_address = null;
       } else {
         this.signup_user.user_type = TypeEnum.ER;
         this.signup_user.nickname = null;
@@ -99,9 +98,9 @@ export class SignupComponent implements OnInit {
       this.userService.signup(this.signup_user).then(
         res => {
           if ( this.as_employee === true) {
-            alert('회원가입 성공! 다시 로그인 해주세요');
+            this.toastrService.success('회원가입 성공! 다시 로그인 해주세요');
           } else {
-            alert('회원가입 성공! 마이페이지에서 정보 등록 후 계정이 활성화됩니다!');
+            this.toastrService.success('회원가입 성공! 마이페이지에서 추가 정보를 등록해주세요');
           }
           this.router.navigate(['signin']);
         }
@@ -151,13 +150,10 @@ export class SignupComponent implements OnInit {
     }
     if (!this.as_employee) {
       this.signup_user.company_name = this.signup_user.company_name.trim();
-      this.signup_user.company_address = this.signup_user.company_address.trim();
       if (this.signup_user.company_name == null) {
         msg.push('회사 이름을 입력해주세요');
       }
-      if (this.signup_user.company_address == null) {
-        msg.push('회사 주소를 입력해주세요');
-      }
+
     }
     return msg;
   }

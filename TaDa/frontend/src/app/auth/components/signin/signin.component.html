@@ -6,19 +6,19 @@
       <div class="form-group row">
         <label for="inputEmail3" class="col-sm-3 col-form-label"><b>이메일</b></label>
         <div class="col-sm-9">
-          <input type="email" [(ngModel)]="emailInput" class="form-control" id="inputEmail3" placeholder="Email">
+          <input type="email" name="email" [(ngModel)]="emailInput" class="form-control" id="inputEmail3" placeholder="Email">
         </div>
       </div>
       <div class="form-group row">
         <label for="inputPassword3" class="col-sm-3 col-form-label"><b>비밀번호</b></label>
         <div class="col-sm-9">
-          <input type="password" [(ngModel)]="passwordInput" class="form-control" id="inputPassword3" placeholder="Password">
+          <input type="password" name="pw" [(ngModel)]="passwordInput" class="form-control" id="inputPassword3" placeholder="Password">
         </div>
       </div>
       <br>
       <br>
-      <button type="button" (click)="onClickSignIn()" style="border-color:#b3b3cc; background-color:#b3b3cc;" class="btn btn-primary btn-lg btn-block">로그인</button>
-      <button type="button" (click)="onClickSignUp()" style="border-color:#b3b3cc; background-color:#b3b3cc;" class="btn btn-primary btn-lg btn-block">회원가입</button>
+      <button type="button" (click)="onClickSignIn()" style="border-color:#004080; background-color:#004080;" class="btn btn-primary btn-lg btn-block">로그인</button>
+      <button type="button" (click)="onClickSignUp()" style="border-color:#004080; background-color:#004080;" class="btn btn-primary btn-lg btn-block">회원가입</button>
     </div>
     </div>
     </div>
