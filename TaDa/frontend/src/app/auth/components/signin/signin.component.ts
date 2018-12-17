@@ -5,6 +5,7 @@ import { HttpErrorResponse } from '@angular/common/http';
 import { Response } from '@angular/http';
 import { User } from 'src/app/core/models/user';
 import { TalkService } from 'src/app/core/services/talk.service';
+import { ToastrService } from 'ngx-toastr';
 
 @Component({
   selector: 'app-signin',
@@ -17,6 +18,7 @@ export class SigninComponent implements OnInit {
     private router: Router,
     private talkService: TalkService,
     private route: ActivatedRoute,
+    private toastrService: ToastrService
   ) { }
 
   emailInput: string = '';
@@ -58,7 +60,7 @@ export class SigninComponent implements OnInit {
       (error: HttpErrorResponse) => {
         this.emailInput = '';
         this.passwordInput = '';
-        alert('로그인 실패!');
+        this.toastrService.warning('로그인 실패!');
       });
     }
     onClickSignUp() {
