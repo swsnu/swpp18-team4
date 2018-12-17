@@ -7,14 +7,13 @@
       <div class = "col-sm-9">
         <h3 class="card-title">{{user.company_name}}</h3>
         <hr>
-        <b class="card-text">이메일 주소&nbsp;&nbsp;&nbsp;</b>{{user.email}}
+        <b class="card-text">회사 주소&nbsp;&nbsp;&nbsp;</b>{{user.company_name}}
         <br>
-        <b class="card-text">선호 태그&nbsp;&nbsp;&nbsp;</b>
+        <b class="card-text">회사 설명&nbsp;&nbsp;&nbsp;</b>{{user.business_content}}
         <br>
-        <ng-container *ngFor="let tag of tag_list">
-          <app-tag [justShowing]="true" [hasCloseButton]="false" [isSelectable]="false" [enumType]="tag.type" [enumBody]="tag.index" >
-          </app-tag> 
-        </ng-container>
+        <b class="card-text">사업자등록번호&nbsp;&nbsp;&nbsp;</b>{{user.employer_license_number}}
+        <br>
+        <b class="card-text">대표 이름&nbsp;&nbsp;&nbsp;</b>{{user.representative_name}}
         <br>
         <button [hidden]="isMyPage" style="float: right; margin-left: auto;" (click)="sendMessage()" class="btn btn-primary">메세지 보내기</button>
         <button [hidden]="!isMyPage" style="float: right; margin-left: auto;" (click)="gotoEdit()" class="btn btn-primary">내 정보 수정</button>

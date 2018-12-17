@@ -12,9 +12,20 @@ export class UserDetailEmployerComponent implements OnInit {
   @Input('isMyPage') public isMyPage: boolean;
   @Input('user') public user: User;
 
-  constructor() { }
+  constructor(
+    private router: Router
+  ) { }
 
   ngOnInit() {
+  }
+
+
+  gotoEdit() {
+    this.router.navigateByUrl('/user/edit');
+  }
+
+  sendMessage() {
+    console.log('send Message!');
   }
 
 }
