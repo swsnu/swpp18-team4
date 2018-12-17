@@ -95,8 +95,8 @@ export class SignupComponent implements OnInit {
         this.signup_user.nickname = null;
       }
       console.log(this.signup_user);
-      this.userService.signup(this.signup_user).then(
-        res => {
+      document.getElementById('signup').setAttribute('disabled', 'disabled');
+      this.userService.signup(this.signup_user).then(res => {
           if ( this.as_employee === true) {
             this.toastrService.success('회원가입 성공! 다시 로그인 해주세요');
           } else {

@@ -162,6 +162,7 @@ import {ToastrService} from 'ngx-toastr';
       // 토스트로 바꾸기
       this.new_post.author_id = this.user_service.getCurrentUser().id;
       this.new_post.timezone = this.time_zone_list;
+      document.getElementById('create').setAttribute('disabled', 'disabled');
       this.post_service.createPost(this.new_post)
         .then( () => this.router.navigateByUrl('/post/list'))
         .then( () => this.toastrService.info('등록되었습니다'))
