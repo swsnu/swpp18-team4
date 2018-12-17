@@ -459,7 +459,7 @@ class PostTestCase(TestCase):
             'longitude': 36.5,
         }, cls=DjangoJSONEncoder), content_type="application/json")
         user_id = Post.objects.filter(title = 'a')[0].author_id
-        url = '/api/post/' + str(user_id) + '/'
+        url = '/api/post/author/' + str(user_id) + '/'
         response = client.get(url)
         self.assertEqual(response.status_code, 200)
     """
@@ -489,8 +489,8 @@ class PostTestCase(TestCase):
             #last_modify_date = models.DateTimeField('last edited date', auto_now = True, blank = True)
             'deadline': datetime.datetime.strptime("2018-01-02 16:30", "%Y-%m-%d %H:%M"),
             'home_expect_time': 10,
-                #is_magam_user = models.BooleanField(default = False)
-                #is_magam_timeout = models.BooleanField(default = False)
+            #is_magam_user = models.BooleanField(default = False)
+            #is_magam_timeout = models.BooleanField(default = False)
             'is_same_person': True,
             'latitude': 36.5,
             'longitude': 36.5,
