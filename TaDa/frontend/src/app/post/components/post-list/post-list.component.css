@@ -32,3 +32,8 @@
     background: #cc6699;
     border-color: #cc6699;
 }
+
+
+.clickable:hover{
+    cursor: pointer;
+}

@@ -1,3 +1,15 @@
+
+* {
+ font-family: 'Hanna', sans-serif;
+}
+*:focus {
+  outline: none;
+}
+.input-group2 select {
+  margin-left: 1px;
+  margin-right: 1px;
+  height: 37px;
+}
 .result-container {
   height: 600px;
 }
@@ -9,4 +21,7 @@
 .map-view {
   width: 100%;
   height: 100%;
+}
+.clickable:hover{
+  cursor: pointer;
 }
