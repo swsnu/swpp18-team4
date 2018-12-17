@@ -26,7 +26,12 @@ class PostTestCase(TestCase):
         response = client.get('/api/post/')
         self.assertEqual(response.status_code, 200)
         self.assertJSONEqual(response.content , [])
-
+    """
+    def test_posts_get_not_authenticated(self):
+        client = Client()
+        response = client.get('/api/post/')
+        self.assertEqual(response.status_code, 401)
+    """
     def test_posts_post_success(self):
         client = Client()
         User.objects.create_user(user_type = 'ER', email = 'abc@snu.ac.kr', password = 'a')
@@ -51,8 +56,8 @@ class PostTestCase(TestCase):
                 #is_magam_user = models.BooleanField(default = False)
                 #is_magam_timeout = models.BooleanField(default = False)
             'is_same_person': True,
-            'latitude': 36.5,
-            'longitude': 36.5,
+            'latitude': None,
+            'longitude': None,
         }, cls=DjangoJSONEncoder), content_type="application/json")
         self.assertEqual(response.status_code, 200)
     

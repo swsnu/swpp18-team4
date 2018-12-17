@@ -50,8 +50,8 @@ import {ToastrService} from 'ngx-toastr';
     this.time_zone_start = new Date();
     this.time_zone_end = new Date();
     this.time_zone_hm = [0, 0, 0, 0];
-    this.new_post.latitude = 0;
     this.new_post.longitude = 0;
+    this.new_post.latitude = 0;
   }
 
   regionChange(event) {

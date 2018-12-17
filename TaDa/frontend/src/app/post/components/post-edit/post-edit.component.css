@@ -45,11 +45,11 @@
   border: solid;
   border-color: mediumvioletred;
   padding-left: 10px;
-  width: 50%;
-  height: 3em;
+  width: 80%;
+  height: 10em;
 }
 .input-group textarea:focus {
-  height: 10em;
+  height: 15em;
 }
 .not-important span {
   border: 2px solid cornflowerblue;

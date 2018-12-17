@@ -58,6 +58,15 @@ export class CommentService {
       .toPromise().then(() => comment).catch(this.handleError);
   }
 
+  /* just generate iterator for ngFor in showing stars*/
+  iter (n: number) {
+    let arr = [];
+    if (n % 1 == 0.5) n -= 0.5;
+    for(let i =0; i < n; i++) {
+      arr.push(i);
+    }
+    return arr;
+  }
   private handleError(error: any): Promise<any> {
     console.log('An error occurred in CommentService', error);
     return Promise.reject(error.message || 'Internal server error');
