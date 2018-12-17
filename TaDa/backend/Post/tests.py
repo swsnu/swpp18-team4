@@ -95,7 +95,7 @@ class PostTestCase(TestCase):
         }, cls=DjangoJSONEncoder), content_type="application/json")
             
         self.assertEqual(response.status_code, 400)
-    
+    """
     def test_posts_post_not_authenticated(self):
         client = Client()
         response = client.post('/api/post/', data = json.dumps({
@@ -119,7 +119,7 @@ class PostTestCase(TestCase):
             'longitude': 36.5,
         }, cls=DjangoJSONEncoder), content_type="application/json")
         self.assertEqual(response.status_code, 401)
-    
+    """
     def test_posts_else(self):
         client = Client()
         response = client.put('/api/post/')
@@ -156,12 +156,12 @@ class PostTestCase(TestCase):
         url = '/api/post/' + str(post_id) + '/'
         response = client.get(url)
         self.assertEqual(response.status_code, 200)
-    
+    """
     def test_post_get_not_authenticated(self):
         client = Client()
         response = client.get('/api/post/1/')
         self.assertEqual(response.status_code, 401)
-
+    """
     def test_post_get_not_exist(self):
         client = Client()
         User.objects.create_user(user_type = 'ER', email = 'abc@snu.ac.kr', password = 'a')
@@ -467,12 +467,12 @@ class PostTestCase(TestCase):
         url = '/api/post/' + str(user_id) + '/'
         response = client.get(url)
         self.assertEqual(response.status_code, 200)
-    
+    """
     def test_author_get_not_authenticated(self):
         client = Client()
         response = client.get('/api/post/author/1/')
         self.assertEqual(response.status_code, 401)
-    
+    """
     def test_author_get_not_exists(self):
         client = Client()
         User.objects.create_user(user_type = 'ER', email = 'abc@snu.ac.kr', password = 'a')
@@ -511,11 +511,6 @@ class PostTestCase(TestCase):
     def test_alarm_success(self):
         pass
     """
-    def test_alarm_not_authorized(self):
-        client = Client()
-        response = client.get('/api/post/alarm/')
-        self.assertEqual(response.status_code, 401)
-    
     def test_alarm_else(self):
         client = Client()
         response = client.post('/api/post/alarm/')

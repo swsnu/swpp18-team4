@@ -70,6 +70,7 @@ def comment(request, comment_id):
         if request.user.is_authenticated:
             target_comment = Comment.objects.filter(id = comment_id)
             if target_comment.exists():
+                target_comment = target_comment[0]
                 if target_comment.author == request.user:
                     target_comment.delete()
                     return HttpResponse(status=200)
@@ -114,6 +115,7 @@ def commentByAuthor(request, author_id):
     else: 
         return HttpResponseBadRequest(['GET'])
 
+#버그
 @csrf_exempt
 def commentReceive(request, author_id):
     if request.method == 'GET':
@@ -133,7 +135,7 @@ def commentReceive(request, author_id):
             return HttpResponse(status=401)
     else:
         return HttpResponseBadRequest(['GET'])
-
+      
 @ensure_csrf_cookie
 def token(request):
     if request.method == 'GET':

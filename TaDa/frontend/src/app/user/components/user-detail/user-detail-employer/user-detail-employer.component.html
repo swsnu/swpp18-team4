@@ -1,3 +1,23 @@
-<p>
-  user-detail-employer works!
-</p>
+<div class="card" style="border-style: double">
+  <div class="card-body">
+    <div class="row">          
+      <div class="col-sm-3">
+        <i class="fas fa-building" style="font-size: 8em; margin: 10px"></i>
+      </div>
+      <div class = "col-sm-9">
+        <h3 class="card-title">{{user.company_name}}</h3>
+        <hr>
+        <b class="card-text">회사 주소&nbsp;&nbsp;&nbsp;</b>{{user.company_name}}
+        <br>
+        <b class="card-text">회사 설명&nbsp;&nbsp;&nbsp;</b>{{user.business_content}}
+        <br>
+        <b class="card-text">사업자등록번호&nbsp;&nbsp;&nbsp;</b>{{user.employer_license_number}}
+        <br>
+        <b class="card-text">대표 이름&nbsp;&nbsp;&nbsp;</b>{{user.representative_name}}
+        <br>
+        <button [hidden]="isMyPage" style="float: right; margin-left: auto;" (click)="sendMessage()" class="btn btn-primary">메세지 보내기</button>
+        <button [hidden]="!isMyPage" style="float: right; margin-left: auto;" (click)="gotoEdit()" class="btn btn-primary">내 정보 수정</button>
+      </div>
+    </div>
+  </div>
+</div>
