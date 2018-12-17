@@ -44,6 +44,7 @@
               <input type="email" class="form-control" name="email" [(ngModel)]="user.email" disabled>
             </div>
           </div>
+          <!--
           <div class="form-group row">
             <label for="inputPassword3" class="col-sm-3 col-form-label">비밀번호</label>
             <div class="col-sm-9">
@@ -63,11 +64,11 @@
                 비밀번호가 일치하지 않습니다. 
               </small>   
             </div>
-          </div>
+          </div>-->
           <!-- Handling my Tags -->
-          <div class="input-group mb-3">
+          <div class="input-group mb-3"  height="60px">
               <div class="input-group-prepend">
-                <span class="input-group-text" id="basic-addon3">필터링 태그</span>
+                <span class="input-group-text" id="basic-addon3">내 태그</span>
               </div>
               <div class="form-control" id="basic-url" style="padding: 3px" aria-describedby="basic-addon3">
                 <ng-container class="col-md-4"  *ngFor="let tag of tag_list">
@@ -114,7 +115,7 @@
   </div>
   <div class="modal-footer modals">
     <button type="button" class="btn btn-outline-dark" (click)="close()">창 닫기</button>
-    <button type="button" class="btn btn-outline-dark" (click)="confirm(password.dirty)">저장</button>
+    <button type="button" class="btn btn-outline-dark" (click)="confirm()">저장</button>
   </div>
 </ng-template>
   

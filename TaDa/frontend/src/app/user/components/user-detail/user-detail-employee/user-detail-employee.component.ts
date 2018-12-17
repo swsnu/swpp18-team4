@@ -54,8 +54,8 @@ export class UserDetailEmployeeComponent implements OnInit {
     this.modalService.dismissAll();
   }
 
-  confirm(ifdirty: boolean) {
-    /* check password first */
+  confirm() {
+    /* check password first 
     let ifvalid = this.userService.validatePassword(this.pw) && this.pw === this.pw_confirm;
     if (ifdirty) {
       if (ifvalid) {
@@ -64,7 +64,7 @@ export class UserDetailEmployeeComponent implements OnInit {
         this.toastrService.warning('비밀번호를 다시 확인해주세요');
         return;
       }
-    }
+    }*/
 
     /* and then process preference tags*/
     let employee_type = [];
@@ -87,10 +87,10 @@ export class UserDetailEmployeeComponent implements OnInit {
     
     this.userService.updateUser(this.user).then(
       user => this.user = user,
-      error => alert('실패했습니다')
+      error => this.toastrService.warning('실패했습니다')
     );
     this.close();
-    alert('성공!');
+    this.toastrService.success('성공!');
   }
 
   sendMessage() {
