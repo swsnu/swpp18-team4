@@ -58,17 +58,12 @@ export class PostListComponent implements OnInit {
         this.posts_filtered = posts;
       });
   }
-
-  getAuthorNameByID(id: number): string {
-    return "정채현";
-  }
-
-
   onClickSearch(keyword: string, criteria: number): void {
     let arr = this.search(keyword, criteria, this.posts_all);
     this.posts_filtered = this.filter(arr);
   }
 
+  // current, using mock user
   getMyTagInfo(): void {
     //const user = this.userService.getCurrentUser();
     if (this.userService.isLoggedIn() == false) {
@@ -78,38 +73,7 @@ export class PostListComponent implements OnInit {
     user.employee_region.push(RegionEnum.seoulip);
     user.employee_region.push(RegionEnum.home);
     user.employee_how_to_pay.push(HowToPayEnum.pay_hourly);
-    let arr = [], user_enums = [];
-
-    user_enums = Object.values(user.employee_type);
-    arbeit_type_enum_list.forEach(ele=> {
-      if(user_enums.includes(ele)) {
-        arr.push({
-          type: 2,
-          index: arbeit_type_enum_list.indexOf(ele)
-        });
-      }
-  });
-
-    user_enums = Object.values(user.employee_region);
-    region_enum_list.forEach(ele=> {
-      if(user_enums.includes(ele)) {
-        arr.push({
-          type: 3,
-          index: region_enum_list.indexOf(ele)
-        });
-      }
-    });
-    user_enums = Object.values(user.employee_how_to_pay);
-    how_to_pay_enum_list.forEach(ele=> {
-
-      if(user_enums.includes(ele)) {
-        arr.push({
-          type: 4,
-          index: how_to_pay_enum_list.indexOf(ele)
-        });
-      }
-    });
-    this.filtering_tags = arr;
+    this.filtering_tags = this.userService.getUserTagInfo(user);
   }
 
   search(keyword: string, criteria: number, arr: Post[]): Post[] {
@@ -282,8 +246,8 @@ export class PostListComponent implements OnInit {
   /* functions for handling tag from filter_list */ 
 
   addTag(enumtype: number, enumindex: number): void {
-    if (this.filtering_tags.length >= 5) {
-      this.toastrService.warning('필터링 태그는 5개까지 입력 가능합니다!');
+    if (this.filtering_tags.length >= 10) {
+      this.toastrService.warning('필터링 태그는 10개까지 입력 가능합니다!');
       return;
     }
     let ele = {
