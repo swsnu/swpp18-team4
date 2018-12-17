@@ -118,6 +118,7 @@ export class PostEditComponent implements OnInit {
       this.current_post.timezone = this.time_zone_list;
       this.post_service.updatePost(this.current_post)
         .then( () => this.router.navigateByUrl('/post/list'))
+        .then( () => this.toastrService.info('수정되었습니다'))
         .catch( () => alert('업데이트 실패'));
     } else {
       this.toastrService.warning('기본 정보란을 모두 작성해주세요');

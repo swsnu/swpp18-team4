@@ -41,6 +41,12 @@ export class CommentService {
       .toPromise().catch(this.handleError);
   }
 
+  getReferComments(comment_id: number): Promise<Comment[]> {
+    const url = `${this.commentsUrl}refer/${comment_id}/`;
+    return this.http.get<Comment>(url, httpOptions)
+      .toPromise().catch(this.handleError);
+  }
+
   createComment(comment: Comment): Promise<Comment> {
     return this.http.post<Comment>(this.commentsUrl, comment, httpOptions)
       .toPromise().then(() => comment).catch(this.handleError);
@@ -63,6 +69,16 @@ export class CommentService {
     let arr = [];
     if (n % 1 == 0.5) n -= 0.5;
     for(let i =0; i < n; i++) {
+      arr.push(i);
+    }
+    return arr;
+  }
+  iter_vacant (n: number) {
+    const arr = [];
+    if (n % 1 === 0.5) {
+      n += 0.5;
+    }
+    for (let i = 0; i < 5 - n; i++) {
       arr.push(i);
     }
     return arr;

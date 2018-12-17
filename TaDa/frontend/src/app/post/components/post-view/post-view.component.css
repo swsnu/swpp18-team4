@@ -2,11 +2,18 @@
 @import url(//fonts.googleapis.com/earlyaccess/kopubbatang.css);
 @import url(//fonts.googleapis.com/earlyaccess/hanna.css);
 
-* {
-  font-family: 'Hanna', sans-serif;
+.fas {
+  font-size: 1em;
 }
 *:focus {
   outline: none;
+}
+
+input {
+  padding-left: 10px;
+}
+select {
+  padding-left: 10px;
 }
 
 .card {
@@ -30,7 +37,6 @@
   border: solid;
   border-color: mediumvioletred;
   border-width: 1.5px;
-  padding-left: 10px;
   max-width: 50%;
   width: 50%;
 }
@@ -40,7 +46,6 @@
 .input-group select {
   border: solid;
   border-color: mediumvioletred;
-  padding-left: 10px;
   max-width: 80%;
 }
 .input-group textarea {
@@ -51,6 +56,21 @@
   width: 80%;
   height: 10em;
 }
+
+.company input{
+  border: solid;
+  border-width: 1.5px;
+  width: 80%;
+}
+.company span{
+  border: 1.5px solid dimgray;
+  border-radius: 0;
+  color: dimgray;
+}
+.company input::placeholder {
+  color: gray;
+}
+
 
 
 .custom-checkbox {
@@ -105,7 +125,64 @@
 }
 
 
+.write-comment {
+  display: inline-block;
+  margin: 20px;
+}
+.write-comment input {
+  border-color: #7f7f7f;
+  width: 90%;
+  height: 3em;
+}
+.write-comment button {
+  margin-left: 10px;
+}
+
+.star_div span{
+  border: none;
+  background: powderblue;
+  color: black;
+}
+.star_div input {
+  margin-top: 4px;
+  width: 500px;
+  height: 30px;
+  border: none;
+}
+.star_div {
+  margin-bottom: 4px;
+}
+.star_value {
+  margin-left: 4px;
+  size: 10px;
+  color: gold;
+}
+
+
+
+.button-group button {
+  border: none;
+  background: none;
+  color: plum;
+}
+.button-group button:hover {
+  color: deeppink;
+}
 
 .caution {
   color: orangered;
+}
+
+
+.map-container {
+  width: 200px;
+  height: 200px;
+}
+.map-view {
+  width: 200px;
+  height: 200px;
+}
+.map-view:hover {
+  width: 400px;
+  height: 400px;
 }
