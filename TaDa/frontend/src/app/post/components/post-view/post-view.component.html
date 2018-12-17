@@ -140,8 +140,8 @@
   <ul class="list-group list-group-flush" *ngFor="let comment of post_comments">
     <li style="padding:3px" class="list-group-item">
       <div style="display: inline-block;">
-        {{comment.content}}
-        <div class="button-group">
+        {{comment.star}} {{comment.content}}
+        <div class="button-group" *ngIf="current_user.id == comment.author_id">
           <button (click)="editComment(comment)">수정</button>
           <button (click)="deleteComment(comment)">삭제</button>
         </div>
