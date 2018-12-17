@@ -135,8 +135,7 @@ def commentReceive(request, author_id):
             return HttpResponse(status=401)
     else:
         return HttpResponseBadRequest(['GET'])
-#
-
+      
 @ensure_csrf_cookie
 def token(request):
     if request.method == 'GET':
