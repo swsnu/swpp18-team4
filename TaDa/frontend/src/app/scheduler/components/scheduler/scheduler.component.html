@@ -1,5 +1,39 @@
 <div class="scheduler-form">
   
+  <div *ngIf="start_time">
+    <form class="form-inline">
+      <div class="form-group">
+        <div class="input-group2">
+          <input class="form-control" placeholder="날짜"
+            name="dp" [(ngModel)]="start_time" ngbDatepicker #d1="ngbDatepicker">
+          <button class="btn btn-outline-secondary" (click)="d1.toggle()" type="button">
+            <img src="calendar.ico" style="width: 1.2rem; height: 1rem; cursor: pointer;"/>
+          </button>
+          <select name="start_h" [(ngModel)]="time_zone_hm[0]">
+            <option *ngFor="let i of iter(24)" [ngValue]="i">{{i}}</option>
+          </select>
+          <select name="start_m" [(ngModel)]="time_zone_hm[1]">
+            <option *ngFor="let i of iter_minute(60)" [ngValue]="i">{{i}}</option>
+          </select>
+        </div>
+        <p class="font-weight-bold" style="font-size: 30px; padding-right: 2px;">~</p>
+        <div class="input-group2">
+          <input class="form-control" placeholder="날짜"
+            name="dp" [(ngModel)]="end_time" ngbDatepicker #d2="ngbDatepicker">
+            <button class="btn btn-outline-secondary" (click)="d2.toggle()" type="button">
+              <img src="calendar.ico" style="width: 1.2rem; height: 1rem; cursor: pointer;"/>
+            </button>
+          <select name="end_h" [(ngModel)]="time_zone_hm[2]">
+            <option *ngFor="let i of iter(24)" [ngValue]="i">{{i}}</option>
+          </select>
+          <select name="end_m" [(ngModel)]="time_zone_hm[3]">
+            <option *ngFor="let i of iter_minute(60)" [ngValue]="i">{{i}}</option>
+          </select>
+        </div>
+      </div>
+    </form>
+  </div>
+  <button class="btn btn-outline-secondary plus" (click)="onClickSearchButton()">찾기!</button>
 </div>
 
 <div class="result-container">
@@ -39,7 +73,7 @@
           <td>{{post.region}}</td>
           <td>{{post.arbeit_type}}</td>
           <td>{{post.pay_per_hour}}</td>
-          <td>아직 개발중</td>
+          <td>{{getGiganString(post)}}</td>
           <td>{{post.register_date | date: 'yyyy.MM.d'}}</td>
         </tr>
       </tbody>

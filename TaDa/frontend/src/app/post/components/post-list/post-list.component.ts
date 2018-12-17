@@ -56,8 +56,6 @@ export class PostListComponent implements OnInit {
       posts => {
         this.posts_all = posts;
         this.posts_filtered = posts;
-        this.posts_all = mock_posts;
-        this.posts_filtered = mock_posts;
       });
   }
   onClickSearch(keyword: string, criteria: number): void {
