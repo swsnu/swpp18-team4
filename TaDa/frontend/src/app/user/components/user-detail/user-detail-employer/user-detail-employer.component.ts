@@ -17,6 +17,7 @@ export class UserDetailEmployerComponent implements OnInit {
   ) { }
 
   ngOnInit() {
+    console.log(this.user);
   }
 
 

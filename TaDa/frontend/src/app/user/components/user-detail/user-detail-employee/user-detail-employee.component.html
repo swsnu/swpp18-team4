@@ -17,8 +17,58 @@
         </ng-container>
         <br>
         <button [hidden]="isMyPage" style="float: right; margin-left: auto;" (click)="sendMessage()" class="btn btn-primary">메세지 보내기</button>
-        <button [hidden]="!isMyPage" style="float: right; margin-left: auto;" (click)="gotoEdit()" class="btn btn-primary">내 정보 수정</button>
+        <button [hidden]="!isMyPage" style="float: right; margin-left: auto;" (click)="edit(modalEmployee)" class="btn btn-primary">내 정보 수정</button>
       </div>
     </div>
   </div>
 </div>
+
+
+<!-- Modal window for editing employee information -->
+
+<ng-template #modalEmployee let-modal>
+  <div class="modal-header modals" style="display: inline-block;">
+    <h4 class="modal-title" style="text-align: center;display: inline-block;">내 정보 수정</h4>
+  </div>
+  <div class="modal-body modals">
+
+      <form>
+          <div class="form-group row">
+              <label for="inputEmail3" class="col-sm-3 col-form-label">닉네임</label>
+              <div class="col-sm-9">
+                <input type="email" class="form-control" name="nickname" [(ngModel)]="user.nickname" disabled>
+              </div>
+          </div>
+          <div class="form-group row">
+            <label for="inputEmail3" class="col-sm-3 col-form-label">이메일</label>
+            <div class="col-sm-9">
+              <input type="email" class="form-control" name="email" [(ngModel)]="user.email" disabled>
+            </div>
+          </div>
+          <div class="form-group row">
+            <label for="inputPassword3" class="col-sm-3 col-form-label">비밀번호</label>
+            <div class="col-sm-9">
+              <input type="password" class="form-control" name="pw"  #password="ngModel" [(ngModel)]="user.email">
+              <small class="help-block" *ngIf="(password.touched || password.dirty) && !userService.validatePassword()" required maxlength="20">
+                  비밀번호는 8자 이상으로, 영문과 숫자가 섞여있어야 합니다. 
+              </small>
+            </div>
+          </div>
+          <div class="form-group row">
+            <label for="inputPassword3" class="col-sm-3 col-form-label">비밀번호<br>확인</label>
+            <div class="col-sm-9">
+              <input type="password" class="form-control" name="pwconfirm" 
+                [(ngModel)]="pw_confirm" #pwConfirm="ngModel">
+              <small class="help-block" *ngIf="(pwConfirm.touched || pwConfirm.dirty) && user.password !== pw_confirm">
+                비밀번호가 일치하지 않습니다. 
+              </small>   
+            </div>
+          </div>
+      </form>
+  </div>
+  <div class="modal-footer modals">
+    <button type="button" class="btn btn-outline-dark" (click)="close()">닫기</button>
+    <button type="button" class="btn btn-outline-dark" (click)="confirm()">확인</button>
+  </div>
+</ng-template>
+  

@@ -21,7 +21,6 @@ export class NavComponent implements OnInit {
     public userService: UserService,
     private talkService: TalkService,
     private router: Router,
-
     private postService: PostService,
     private modalService: NgbModal,
   ) { }

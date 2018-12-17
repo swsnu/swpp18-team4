@@ -174,6 +174,17 @@ export class UserService {
     return this.http.get<User>(url).toPromise().catch(this.handleError);
   }
 
+  validatePassword(user: User): boolean {
+    if (user.password == null) {
+      return false;
+    }
+    const lowercase: boolean = (/[a-z]/).test(user.password);
+    const uppercase: boolean = (/[A-Z]/).test(user.password);
+    const decimalcase: boolean = (/[0-9]/).test(user.password);
+    return (user.password.length >= 8) && (lowercase || uppercase) && decimalcase;
+  }
+
+
   private handleError(error: any): Promise<any> {
     console.log('An error occurred in UserService', error);
     return Promise.reject(error.message || 'Internal server error');
