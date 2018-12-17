@@ -122,15 +122,12 @@ def commentReceive(request, author_id):
             target_author = User.objects.filter(id = author_id)
             if target_author.exists():
                 target_author = target_author[0]
-                if author_id == request.user.id:
-                    post_id_list = [post.id for post in Post.objects.filter(author = target_author).values()]
-                    comment_list = []
-                    for pid in post_id_list:
-                        comment_list_pid = [comment for comment in Comment.objects.filter(post_id = pid).values()] 
-                        comment_list += comment_list_pid
-                    return JsonResponse(comment_list, safe=False)
-                else:
-                    return HttpResponse(status=403)
+                post_id_list = [post['id'] for post in Post.objects.filter(author = target_author).values()]
+                comment_list = []
+                for pid in post_id_list:
+                    comment_list_pid = [comment for comment in Comment.objects.filter(post_id = pid).values()] 
+                    comment_list += comment_list_pid
+                return JsonResponse(comment_list, safe=False)
             else:
                 return HttpResponse(status=403)
         else:
