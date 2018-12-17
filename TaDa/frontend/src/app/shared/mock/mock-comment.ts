@@ -3,7 +3,7 @@ import { Comment } from '../../core/models/comment';
 export const mock_comments: Comment[] = [
     {
         id: 1,
-        post_id: 13, 
+        post_id: 14, 
         refer_comment_id: -1,
         author_id: 3,
         star: 2.5,
@@ -13,7 +13,7 @@ export const mock_comments: Comment[] = [
     },
     {
         id: 2,
-        post_id: 4, 
+        post_id: 4,
         refer_comment_id: -1,
         author_id: 3,
         star: 4.0,

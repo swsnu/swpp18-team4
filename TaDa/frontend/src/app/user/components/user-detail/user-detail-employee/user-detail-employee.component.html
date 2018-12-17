@@ -1,3 +1,24 @@
-<p>
-  user-detail-employee works!
-</p>
+<div class="card" style="border-style: double">
+  <div class="card-body">
+    <div class="row">          
+      <div class="col-sm-3">
+        <i class="fas fa-id-card" style="font-size: 8em; margin: 10px"></i>
+      </div>
+      <div class = "col-sm-9">
+        <h3 class="card-title">{{user.nickname}}</h3>
+        <hr>
+        <b class="card-text">이메일 주소&nbsp;&nbsp;&nbsp;</b>{{user.email}}
+        <br>
+        <b class="card-text">선호 태그&nbsp;&nbsp;&nbsp;</b>
+        <br>
+        <ng-container *ngFor="let tag of tag_list">
+          <app-tag [justShowing]="true" [hasCloseButton]="false" [isSelectable]="false" [enumType]="tag.type" [enumBody]="tag.index" >
+          </app-tag> 
+        </ng-container>
+        <br>
+        <button [hidden]="isMyPage" style="float: right; margin-left: auto;" (click)="sendMessage()" class="btn btn-primary">메세지 보내기</button>
+        <button [hidden]="!isMyPage" style="float: right; margin-left: auto;" (click)="gotoEdit()" class="btn btn-primary">내 정보 수정</button>
+      </div>
+    </div>
+  </div>
+</div>
