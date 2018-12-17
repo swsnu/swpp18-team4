@@ -149,7 +149,7 @@ def user(request, uid):
                     try:
                         req_data = json.loads(request.body.decode())
                         if target_user.user_type == 'EE':
-                            target_user.set_password(req_data["password"])
+                            #target_user.set_password(req_data["password"])
                             target_user.employee_region = req_data["employee_region"]
                             target_user.employee_type = req_data["employee_type"]
                             target_user.employee_how_to_pay = req_data["employee_how_to_pay"]
@@ -162,7 +162,7 @@ def user(request, uid):
                             target_user.save()
                             return HttpResponse(status=200)
                         elif target_user.user_type == 'ER':
-                            target_user.set_password(req_data["password"])
+                            #target_user.set_password(req_data["password"])
                             target_user.employee_region = None
                             target_user.employee_type = None
                             target_user.employee_how_to_pay = None
