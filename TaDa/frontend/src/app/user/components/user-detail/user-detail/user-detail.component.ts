@@ -19,10 +19,12 @@ import { Post } from '../../../../core/models/post';
 })
 export class UserDetailComponent implements OnInit {
   user: User;
-  tag_list = null;
-  post_list: Post[] = null;
-  comment_list = null;
-  tag_per_post = [];
+  user_name: string;
+  is_employee: boolean;
+  tag_list = null; // user preference tag list
+  post_list: Post[] = null; // post list to show
+  comment_list = null; // comment list to show
+
 
   constructor(
     private userService: UserService,
@@ -38,23 +40,27 @@ export class UserDetailComponent implements OnInit {
     this.userService.getUser(id).then(
       user => {
         this.user = user;
+        this.user_name = (user.user_type == TypeEnum.EE ? this.user.nickname : this.user.company_name);
+        this.is_employee = (user.user_type == TypeEnum.EE);
+
         this.getTagList();
         /*this.postService.getPostsByAuthorId(id).then(
           posts => {
             this.post_list = posts;
-            this.commentService.getWriteCommentsByUserId(id).then(
-              comments => this.comment_list = comments
-            )
+            if (this.user.user_type == TypeEnum.EE) {
+              this.commentService.getWriteCommentsByUserId(id).then(
+                comments => this.comment_list = comments
+            )} else {
+              this.commentService.getReceiveCommentsByUserId(id).then(
+                comments => this.comment_list = comments
+              )
+            }
           })
-
-          let 
-          
-          */
       },
       error => {
         this.router.navigateByUrl('');
-      }
-    );
+      }*/
+    });
     this.post_list = mock_posts;
     //console.log(this.postService.makePostTags(this.post_list[1]));
   }
@@ -63,6 +69,7 @@ export class UserDetailComponent implements OnInit {
     return this.user.id === this.userService.getCurrentUser().id;
   }
   
+  /* make user preference tags*/
   getTagList() {
     let tag_list = [];
     /* mock data */
@@ -75,13 +82,6 @@ export class UserDetailComponent implements OnInit {
 
     tag_list = this.userService.getUserTagInfo(this.user); 
     this.tag_list = tag_list;
-  }
-
-  getCurrentUserName(): string {
-    if (!this.user) {
-      return '';
-    }
-    return this.user.user_type === TypeEnum.EE ? this.user.nickname : this.user.company_name;
   }
 
   private async loadChatbox(otherUser: User) {
