@@ -49,7 +49,6 @@ export class TimeblockService {
       }
       new_arr.push(tmp);
     }
-    console.log(new_arr);
     return new_arr;
   }
 
