@@ -44,7 +44,7 @@ export class UserDetailEmployeeComponent implements OnInit {
     this.region_enum_list = region_enum_list;
     this.arbeit_type_enum_list = arbeit_type_enum_list;
     this.how_to_pay_enum_list = how_to_pay_enum_list;
-    this. tag_list = this.userService.getUserTagInfo(this.user);
+    this.tag_list = this.userService.getUserTagInfo(this.user);
     this.preloadChatPopup(this.user);
   }
   
@@ -60,17 +60,6 @@ export class UserDetailEmployeeComponent implements OnInit {
   }
 
   confirm() {
-    /* check password first 
-    let ifvalid = this.userService.validatePassword(this.pw) && this.pw === this.pw_confirm;
-    if (ifdirty) {
-      if (ifvalid) {
-        this.user.password = this.pw;
-      } else {
-        this.toastrService.warning('비밀번호를 다시 확인해주세요');
-        return;
-      }
-    }*/
-
     /* and then process preference tags*/
     let employee_type = [];
     let employee_region = [];
