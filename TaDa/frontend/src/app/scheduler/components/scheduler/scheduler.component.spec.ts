@@ -64,10 +64,6 @@ describe('SchedulerComponent', () => {
     postServiceSpy.getPosts.and.returnValue(of(mock_posts_for_scheduler).toPromise());
     
     component.onClickSearchButton();
-    setTimeout(() => {
-      expect(component.post_list.length).toEqual(5);
-      component.getTimeString(0);
-    }, 500);
 
     expect(toastrServiceSpy.warning.calls.count()).toEqual(0);
   });
