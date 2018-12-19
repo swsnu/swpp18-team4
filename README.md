@@ -19,4 +19,6 @@ we use Jasmine & Karma for angular testing
 
 
 [![code style: prettier](https://img.shields.io/badge/code_style-prettier-ff69b4.svg?style=flat-square)](https://github.com/prettier/prettier)
+[![Build Status](https://travis-ci.org/swsnu/swpp18-team4.svg?branch=master)](https://travis-ci.org/swsnu/swpp18-team4)
+[![Coverage Status](https://coveralls.io/repos/github/swsnu/swpp18-team4/badge.svg?branch=master)](https://coveralls.io/github/swsnu/swpp18-team4?branch=master)
 
