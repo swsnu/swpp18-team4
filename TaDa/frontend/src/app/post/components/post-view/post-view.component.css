@@ -62,6 +62,9 @@ select {
   border-width: 1.5px;
   width: 80%;
 }
+#aa {
+  height: 5em;
+}
 .company span{
   border: 1.5px solid dimgray;
   border-radius: 0;
