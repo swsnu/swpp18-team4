@@ -51,14 +51,22 @@ export class UserDetailComponent implements OnInit {
                 comments => { 
                   this.comment_list = comments;
                   this.getCommentTitle();
+                },
+                error => {
+                  this.router.navigateByUrl('');
                 })} else {
               this.commentService.getReceiveCommentsByUserId(id).then(
                 comments => {
                   this.comment_list = comments;
                   this.getCommentTitle();
-                }
-              )
+                },
+                error => {
+                  this.router.navigateByUrl('');
+                })
             }
+          },
+          error => {
+            this.router.navigateByUrl('');
           })
       },
       error => {

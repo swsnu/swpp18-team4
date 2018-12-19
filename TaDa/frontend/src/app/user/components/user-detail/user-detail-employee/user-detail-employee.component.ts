@@ -1,6 +1,5 @@
 import { Component, OnInit, Input } from '@angular/core';
 import { User } from 'src/app/core/models/user';
-import { Router } from '@angular/router';
 import { UserService } from 'src/app/core/services/user.service';
 import { TagService } from 'src/app/core/services/tag.service';
 import { region_enum_list, arbeit_type_enum_list, how_to_pay_enum_list } from 'src/app/core/models/enums/enum-list';
@@ -30,7 +29,6 @@ export class UserDetailEmployeeComponent implements OnInit {
   private chatPopup: Talk.Popup;
 
   constructor(
-    private router: Router,
     private userService: UserService,
     private tagService: TagService,
     private modalService: NgbModal,

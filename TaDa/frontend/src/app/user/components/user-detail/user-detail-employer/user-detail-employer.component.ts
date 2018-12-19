@@ -16,7 +16,7 @@ import { TalkService } from 'src/app/core/services/talk.service';
 export class UserDetailEmployerComponent implements OnInit {
   @Input('isMyPage') public isMyPage: boolean;
   @Input('user') public user: User;
-  private chatPopup: Talk.Popup;
+  public chatPopup: Talk.Popup;
 
   constructor(
     private router: Router,
@@ -51,7 +51,7 @@ export class UserDetailEmployerComponent implements OnInit {
     this.chatPopup.show();
   }
 
-  private async preloadChatPopup(vendor: User) {
+  public async preloadChatPopup(vendor: User) {
     this.chatPopup = await this.talkService.createPopup(vendor, false);
     this.chatPopup.mount({ show: false });
   }
