@@ -27,9 +27,9 @@ export class NavComponent implements OnInit {
 
   ngOnInit() {
     this.postService.getAlarmPosts()
-      .then( posts => this.alarm_posts = posts);
+      .then( posts => this.alarm_posts = posts, err => console.log(err));
     this.postService.getPosts()
-      .then( posts => this.all_posts = posts);
+      .then( posts => this.all_posts = posts, err => console.log(err));
   }
 
   logOut() {
