@@ -1,7 +1,6 @@
 import { TestBed, async } from '@angular/core/testing';
 import { AppComponent } from './app.component';
 import { NavComponent } from './shared/nav/nav.component';
-import { FooterComponent } from './shared/footer/footer.component';
 import { RouterTestingModule } from '@angular/router/testing';
 import { HttpClientModule } from '@angular/common/http';
 import { FormsModule } from '@angular/forms';
@@ -11,8 +10,7 @@ describe('AppComponent', () => {
     TestBed.configureTestingModule({
       declarations: [
         AppComponent,
-        NavComponent,
-        FooterComponent
+        NavComponent
       ],
       imports: [
         RouterTestingModule,

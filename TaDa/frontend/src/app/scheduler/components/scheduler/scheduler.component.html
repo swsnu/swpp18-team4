@@ -5,7 +5,7 @@
       <div class="form-group">
         <div class="input-group2">
           <input class="form-control" placeholder="날짜"
-            name="dp" [(ngModel)]="start_time" ngbDatepicker #d1="ngbDatepicker">
+            name="dp" [(ngModel)]="start_time_input" ngbDatepicker #d1="ngbDatepicker">
           <button class="btn btn-outline-secondary" (click)="d1.toggle()" type="button">
             <img src="calendar.ico" style="width: 1.2rem; height: 1rem; cursor: pointer;"/>
           </button>
@@ -19,7 +19,7 @@
         <p class="font-weight-bold" style="font-size: 30px; padding-right: 2px;">~</p>
         <div class="input-group2">
           <input class="form-control" placeholder="날짜"
-            name="dp" [(ngModel)]="end_time" ngbDatepicker #d2="ngbDatepicker">
+            name="dp" [(ngModel)]="end_time_input" ngbDatepicker #d2="ngbDatepicker">
             <button class="btn btn-outline-secondary" (click)="d2.toggle()" type="button">
               <img src="calendar.ico" style="width: 1.2rem; height: 1rem; cursor: pointer;"/>
             </button>

@@ -168,7 +168,7 @@ export const mock_posts_for_scheduler: Post[] = [
     home_expect_time: null,
     is_magam_user: false,
     is_magam_timeout: false,
-    is_same_person: false,
+    is_same_person: true,
     latitude: 37.481596,
     longitude: 126.957554
   },
@@ -191,7 +191,7 @@ export const mock_posts_for_scheduler: Post[] = [
     home_expect_time: null,
     is_magam_user: false,
     is_magam_timeout: false,
-    is_same_person: false,
+    is_same_person: true,
     latitude: 37.483198,
     longitude: 126.940913
   },
@@ -260,7 +260,7 @@ export const mock_posts_for_scheduler: Post[] = [
     home_expect_time: null,
     is_magam_user: false,
     is_magam_timeout: false,
-    is_same_person: false,
+    is_same_person: true,
     latitude: 37.484277,
     longitude: 126.952538
   },
@@ -283,7 +283,7 @@ export const mock_posts_for_scheduler: Post[] = [
     home_expect_time: null,
     is_magam_user: false,
     is_magam_timeout: false,
-    is_same_person: false,
+    is_same_person: true,
     latitude: 37.485660,
     longitude: 126.952392
   },
@@ -306,7 +306,7 @@ export const mock_posts_for_scheduler: Post[] = [
     home_expect_time: null,
     is_magam_user: false,
     is_magam_timeout: false,
-    is_same_person: false,
+    is_same_person: true,
     latitude: 37.471902,
     longitude: 126.928669
   },
@@ -398,7 +398,7 @@ export const mock_posts_for_scheduler: Post[] = [
     home_expect_time: null,
     is_magam_user: false,
     is_magam_timeout: false,
-    is_same_person: false,
+    is_same_person: true,
     latitude: 37.474422,
     longitude: 126.944768
   },
@@ -421,7 +421,7 @@ export const mock_posts_for_scheduler: Post[] = [
     home_expect_time: null,
     is_magam_user: false,
     is_magam_timeout: false,
-    is_same_person: false,
+    is_same_person: true,
     latitude: 37.482544,
     longitude: 126.941787
   },
@@ -536,7 +536,7 @@ export const mock_posts_for_scheduler: Post[] = [
     home_expect_time: null,
     is_magam_user: false,
     is_magam_timeout: false,
-    is_same_person: false,
+    is_same_person: true,
     latitude: 37.479935,
     longitude: 126.947255
   },
@@ -559,7 +559,7 @@ export const mock_posts_for_scheduler: Post[] = [
     home_expect_time: null,
     is_magam_user: false,
     is_magam_timeout: false,
-    is_same_person: false,
+    is_same_person: true,
     latitude: 37.479582,
     longitude: 126.927677
   },
@@ -582,7 +582,7 @@ export const mock_posts_for_scheduler: Post[] = [
     home_expect_time: null,
     is_magam_user: false,
     is_magam_timeout: false,
-    is_same_person: false,
+    is_same_person: true,
     latitude: 37.470733,
     longitude: 126.933036
   },
