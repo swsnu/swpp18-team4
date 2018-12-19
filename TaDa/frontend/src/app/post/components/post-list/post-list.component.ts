@@ -70,7 +70,6 @@ export class PostListComponent implements OnInit {
   }
 
   search(keyword: string, criteria: number, arr: Post[]): Post[] {
-    console.log(keyword+" "+criteria);
     if (keyword == undefined || (keyword = keyword.trim()) == null) {
       return arr;
     }

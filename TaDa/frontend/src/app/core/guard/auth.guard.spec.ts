@@ -21,7 +21,7 @@ describe('AuthGuard', () => {
   let toastrServiceSpy: jasmine.SpyObj<ToastrService>;
   let guard: AuthGuard;
   beforeEach(() => {    
-    const userSpy = jasmine.createSpyObj('UserService', ['isActivate']);
+    const userSpy = jasmine.createSpyObj('UserService', ['isLoggedIn']);
     const toastrSpy = jasmine.createSpyObj('ToastrService', ['warning']);
 
     TestBed.configureTestingModule({
@@ -46,13 +46,13 @@ describe('AuthGuard', () => {
   }));
 
   it('test canActivate when logged-in', inject([AuthGuard], (guard: AuthGuard) => {
-    userServiceSpy.isActivate.and.returnValue(true);
+    userServiceSpy.isLoggedIn.and.returnValue(true);
     expect(guard.canActivate(null, null)).toBe(true);
   }));
 
 
   it('test canActivate when not logged-in', inject([AuthGuard], (guard: AuthGuard) => {
-    userServiceSpy.isActivate.and.returnValue(false);
+    userServiceSpy.isLoggedIn.and.returnValue(false);
     const arg = new mockState();
     arg.url = '/post/detail/3';
     guard.canActivate(null, arg);

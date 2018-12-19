@@ -23,7 +23,7 @@ describe('SignupComponent', () => {
     routerSpy = jasmine.createSpyObj('Router', ['navigateByUrl']);
     const userSpy = jasmine.createSpyObj('UserService', ['createToken','checkCSRF', 'isLoggedIn', 
       'signup', 'checkDuplicateEmail', 'checkDuplicateNickname','sendEmail']);
-    const toastrSpy = jasmine.createSpyObj('ToastrService', ['warning']);
+    const toastrSpy = jasmine.createSpyObj('ToastrService', ['warning', 'success']);
 
     TestBed.configureTestingModule({
       declarations: [ SignupComponent ],
@@ -118,17 +118,19 @@ describe('SignupComponent', () => {
   it('test sign up fail with invalid input', async() => {
     component.as_employee = false;
     component.signup_user.password = '123ABCabc';
+    component.signup_user.company_name = 'mycompany';
     component.password_confirm = '123ABCabc';
     component.check_email = false;
     component.check_nickname = false;
 
     await component.onClickConfirm();
-    expect(toastrServiceSpy.warning.calls.count()).toEqual(2);
+    expect(toastrServiceSpy.warning.calls.count()).toEqual(1);
   });
 
   it('test sign up success', async() => {
     component.as_employee = false;
     component.signup_user.password = '123ABCabc';
+    component.signup_user.company_name = 'mycompany';
     component.password_confirm = '123ABCabc';
     component.check_email = true;
     component.check_nickname = true;
@@ -137,13 +139,13 @@ describe('SignupComponent', () => {
       Promise.resolve({'isUnique': false}
     ));
     await component.onClickConfirm();
-    spyOn(window, 'alert');
     expect(userServiceSpy.signup.calls.count()).toEqual(1);
-    expect(userServiceSpy.sendEmail.calls.count()).toEqual(1);
-    fixture.detectChanges();
-    fixture.whenStable().then(() => {
-      expect(window.alert).toHaveBeenCalled();
-    });
+    expect(userServiceSpy.sendEmail.calls.count()).toEqual(0);
+    expect(toastrServiceSpy.success.calls.count()).toEqual(1);
+  //  fixture.detectChanges();
+  //  fixture.whenStable().then(() => {
+  //    expect(window.alert).toHaveBeenCalled();
+  //  });
   });  
 
   it('test validateEmail', () => {
@@ -171,10 +173,11 @@ describe('SignupComponent', () => {
 
   it('test buildErrMsg', () => {
     component.as_employee = false;
+    component.signup_user.company_name = '';
     component.check_email = false;
     component.check_nickname = false;
     component.check_password = true;
-    expect(component.build_errmsg().length).toBe(2);
+    expect(component.build_errmsg().length).toBe(1);
     component.check_nickname = true;
     expect(component.build_errmsg().length).toBe(1);
   }); 

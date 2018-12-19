@@ -9,8 +9,9 @@ import { HowToPayEnum } from '../models/enums/how-to-pay-enum.enum';
 
 
 const mock_post: Post = {
-  post_id: 1,
+  id: 1,
   author_id: 1,
+  author_name: 'aaa',
   title: 'title1',
   content: 'content1',
   region: RegionEnum.home,
@@ -23,10 +24,12 @@ const mock_post: Post = {
   register_date: null,
   last_modify_date: null,
   deadline: null,
-  home_expected_time: 30,
+  home_expect_time: 30,
   is_magam_user: false,
   is_magam_timeout: false,
-  is_same_person: true
+  is_same_person: true,
+  latitude: 0,
+  longitude: 0
 };
 
 describe('PostService', () => {
