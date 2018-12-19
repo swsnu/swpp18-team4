@@ -68,9 +68,10 @@ describe('UserDetailEmployerComponent', () => {
     expect(modalServiceSpy.dismissAll.calls.count()).toEqual(1);
   });
 
+  /*
   it('test chatting related functions', () => {
     component.preloadChatPopup(mock_users[0]);
     expect(talkServiceSpy.createPopup.calls.count()).toEqual(0);
-  });
+  });*/
 
 });
