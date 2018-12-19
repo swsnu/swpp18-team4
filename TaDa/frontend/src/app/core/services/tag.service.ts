@@ -7,9 +7,7 @@ export class TagService {
 
   constructor() { }
 
-
     /* functions for handling tag from filter_list */ 
-
     addTag(arr, enumtype: number, enumindex: number): void {
       let ele = {
         type: enumtype,

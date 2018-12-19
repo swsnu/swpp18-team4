@@ -88,7 +88,6 @@ export class UserService {
 
   getUserTagInfo(user: User) {
     let arr = [], user_enums = [];
-    
     if (user.employee_type != null) {
       user_enums = Object.values(user.employee_type);
       arbeit_type_enum_list.forEach(ele=> {

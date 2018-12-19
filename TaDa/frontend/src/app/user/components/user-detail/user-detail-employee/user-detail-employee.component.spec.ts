@@ -24,7 +24,7 @@ describe('UserDetailEmployeeComponent', () => {
 
   beforeEach(async(() => {
     toastrServiceSpy = jasmine.createSpyObj('ToastrService', ['warning', 'success']);
-    const userSpy = jasmine.createSpyObj('UserService', ['getUserTagInfo', 'setLoginUser', 'updateUser']);
+    const userSpy = jasmine.createSpyObj('UserService', ['getUserTagInfo', 'setLoginUser', 'updateUser', 'getCurrentUser']);
     const talkSpy = jasmine.createSpyObj('TalkService', ['createPopup']);
     const tagSpy = jasmine.createSpyObj('TagService', ['addTag', 'removeTag', 'existInArray']);
     const modalSpy = jasmine.createSpyObj('NgbModal', ['open', 'dismissAll']);

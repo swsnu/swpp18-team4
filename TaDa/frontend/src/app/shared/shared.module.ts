@@ -12,9 +12,6 @@ import { DragToSelectModule } from 'ngx-drag-to-select';
   imports: [
     CommonModule,
     DragToSelectModule.forRoot(),
-    /*PostModule,
-    UserModule,
-    SchedulerModule*/
   ],
   declarations: [
     TagComponent,
