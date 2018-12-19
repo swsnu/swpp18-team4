@@ -5,6 +5,7 @@ import { ToastrService } from 'ngx-toastr';
 import { HowToPayEnum } from 'src/app/core/models/enums/how-to-pay-enum.enum';
 import { PostService } from 'src/app/core/services/post.service';
 import { schResult } from '../../../core/models/schclass';
+import { NgbDate } from '@ng-bootstrap/ng-bootstrap';
 
 @Component({
   selector: 'app-scheduler',
@@ -21,6 +22,8 @@ export class SchedulerComponent implements OnInit {
   end_time: Date;
   time_zone_hm: number[];
   view_result: schResult[];
+  start_time_input: NgbDate;
+  end_time_input: NgbDate;
 
   expected_gain: number;
 
@@ -270,8 +273,8 @@ export class SchedulerComponent implements OnInit {
   
   onClickSearchButton(): void {
     // date time re-bind
-    const converted_time_zone_start = this.convertJsonToDate(this.start_time);
-    const converted_time_zone_end = this.convertJsonToDate(this.end_time);
+    const converted_time_zone_start = this.convertJsonToDate(this.start_time_input);
+    const converted_time_zone_end = this.convertJsonToDate(this.end_time_input);
     converted_time_zone_start.setHours(this.time_zone_hm[0]); converted_time_zone_start.setMinutes(this.time_zone_hm[1]);
     converted_time_zone_end.setHours(this.time_zone_hm[2]); converted_time_zone_end.setMinutes(this.time_zone_hm[3]);
 

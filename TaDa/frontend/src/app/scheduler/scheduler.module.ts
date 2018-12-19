@@ -6,7 +6,6 @@ import { SchedulerComponent } from './components/scheduler/scheduler.component';
 import { AgmCoreModule } from '@agm/core';
 import { NgbModule, NgbDatepicker } from '@ng-bootstrap/ng-bootstrap';
 import { FormsModule } from '@angular/forms';
-import { SharedModule } from '../shared/shared.module';
 
 @NgModule({
   imports: [
