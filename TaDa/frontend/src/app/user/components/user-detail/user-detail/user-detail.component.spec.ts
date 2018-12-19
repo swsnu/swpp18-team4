@@ -30,7 +30,6 @@ describe('UserDetailComponent', () => {
     const userSpy = jasmine.createSpyObj('UserService', ['getUser', 'getCurrentUser']);
     const postSpy = jasmine.createSpyObj('PostService', ['getPostsByAuthorId', 'getPostByPostId']);
     const commentSpy = jasmine.createSpyObj('CommentService', ['getWriteCommentsByUserId', 'getReceiveCommentsByUserId']);
-    const routeSpy = jasmine.createSpyObj('ActivatedRoute', ['snapshot']);
 
     TestBed.configureTestingModule({
       declarations: [UserDetailComponent, UserDetailEmployeeComponent, UserDetailEmployerComponent, TagComponent],

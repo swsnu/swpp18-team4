@@ -20,8 +20,6 @@ import * as Talk from 'talkjs';
 export class UserDetailEmployeeComponent implements OnInit {
   @Input('isMyPage') public isMyPage: boolean;
   @Input('user') public user: User;
-  pw="";
-  pw_confirm="";
   tag_list = []; // user preference tag list
   
   /* for tag selecting */
@@ -54,8 +52,6 @@ export class UserDetailEmployeeComponent implements OnInit {
   }
 
   close() {
-    this.pw = "";
-    this.pw_confirm = "";
     this.modalService.dismissAll();
   }
 
