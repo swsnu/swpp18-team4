@@ -49,7 +49,6 @@ def signup(request):
             password = req_data['password']
             user_type = req_data['user_type']
             company_name = req_data['company_name']
-            company_address = req_data['company_address']
         except (KeyError, JSONDecodeError) as e:
             return HttpResponseBadRequest()
 
@@ -98,7 +97,7 @@ def validate(request, email):
         target_user = User.objects.get(email=email)
 
         html_content = render_to_string('authentication_email.html', {
-            'user': target_user,
+            'user': target_user,, company_address=company_address
             'domain': 'localhost:4200/email_verification_success',
             'uid': urlsafe_base64_encode(force_bytes(target_user.pk)).decode(),
             'activate_token': PasswordResetTokenGenerator().make_token(target_user),
@@ -153,7 +152,6 @@ def user(request, uid):
                             target_user.employee_region = req_data["employee_region"]
                             target_user.employee_type = req_data["employee_type"]
                             target_user.employee_how_to_pay = req_data["employee_how_to_pay"]
-                            print(target_user.employee_how_to_pay)
                             target_user.employee_pay_limit = req_data["employee_pay_limit"]
                             target_user.company_name = None
                             target_user.company_address = None
