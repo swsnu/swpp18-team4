@@ -1,4 +1,61 @@
-language: python
-script:
-  - echo "build start!"
-  - python ./main.py
+sudo: required
+notifications:
+  webhooks: https://coveralls.io/webhook
+
+matrix:
+  include:
+  - language: python
+    cache:
+      pip: true
+    python: 3.6
+    services:
+      - mysql
+    env:
+      - COVERALLS_PARALLEL=true
+      - TEST=backend
+    before_install:
+      - mysql -e "CREATE USER 'TaDa'@'localhost' identified by '1234';"
+      - mysql -e "GRANT ALL PRIVILEGES ON *.* to 'TaDa'@'localhost';"
+      - mysql -e 'CREATE DATABASE TaDa_DB CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci;'
+      - cd TaDa/backend
+    install:
+      - pip install django
+      - pip install coverage
+      - pip install python-coveralls
+      - pip install mysqlclient
+      - pip install django-mysql
+    script:
+      - coverage run --source='./' --omit='*wsgi*,manage.py' manage.py test
+    after_success:
+      - coveralls
+  - language: node_js
+    node_js: 11.0
+    addons:
+      apt:
+        sources:
+          - google-chrome
+        packages:
+          - google-chrome-stable
+    cache:
+      npm: true
+      directories:
+        - TaDa/frontend/node_modules
+    env:
+      - COVERALLS_PARALLEL=true
+      - TEST=frontend
+    before_install:
+      - export CHROME_BIN=/usr/bin/google-chrome
+      - export DISPLAY=:99.0
+      - sh -e /etc/init.d/xvfb start
+      - cd TaDa/frontend
+    install:
+      - npm install
+      - npm install coveralls
+      - npm install -g @angular/cli
+    script:
+      - ng test --code-coverage --watch false
+    after_success:
+      - cat ./coverage/lcov.info | ./node_modules/coveralls/bin/coveralls.js
+    after_script:
+      - cd ..
+
