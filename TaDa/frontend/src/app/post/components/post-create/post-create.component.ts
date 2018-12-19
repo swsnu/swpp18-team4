@@ -7,7 +7,7 @@ import { HowToPayEnum } from '../../../core/models/enums/how-to-pay-enum.enum';
 import { Router } from '@angular/router';
 import { PostService } from '../../../core/services/post.service';
 import { UserService } from '../../../core/services/user.service';
-import {ToastrService} from 'ngx-toastr';
+import { ToastrService } from 'ngx-toastr';
 
 
 @Component({
