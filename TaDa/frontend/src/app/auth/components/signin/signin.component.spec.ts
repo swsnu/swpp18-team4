@@ -6,7 +6,7 @@ import { RouterTestingModule } from '@angular/router/testing';
 import { HttpClientModule } from '@angular/common/http';
 import { UserService } from '../../../core/services/user.service';
 import { HttpErrorResponse } from '@angular/common/http';
-import { of, Observable } from 'rxjs';
+import { of } from 'rxjs';
 import { FormsModule } from '@angular/forms';
 import { TalkService } from 'src/app/core/services/talk.service';
 
@@ -53,7 +53,7 @@ describe('SigninComponent', () => {
         { provide: Router, useValue: routerSpy },
         { provide: TalkService, useValue: talkServiceSpy },
         { provide: ActivatedRoute, useValue: {
-          queryParams: of({redirectTo: ''})
+          queryParams: of({redirectTo: '/post/list'})
         } },
         { provide: ToastrService, useValue: toastrServiceSpy },
         { provide: UserService, useValue: userSpy }

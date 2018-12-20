@@ -1,6 +1,5 @@
 import { Component, OnInit, Input } from '@angular/core';
 import { User } from 'src/app/core/models/user';
-import { Router } from '@angular/router';
 import { UserService } from 'src/app/core/services/user.service';
 import { TagService } from 'src/app/core/services/tag.service';
 import { region_enum_list, arbeit_type_enum_list, how_to_pay_enum_list } from 'src/app/core/models/enums/enum-list';
@@ -20,8 +19,6 @@ import * as Talk from 'talkjs';
 export class UserDetailEmployeeComponent implements OnInit {
   @Input('isMyPage') public isMyPage: boolean;
   @Input('user') public user: User;
-  pw="";
-  pw_confirm="";
   tag_list = []; // user preference tag list
   
   /* for tag selecting */
@@ -32,7 +29,6 @@ export class UserDetailEmployeeComponent implements OnInit {
   private chatPopup: Talk.Popup;
 
   constructor(
-    private router: Router,
     private userService: UserService,
     private tagService: TagService,
     private modalService: NgbModal,
@@ -44,7 +40,7 @@ export class UserDetailEmployeeComponent implements OnInit {
     this.region_enum_list = region_enum_list;
     this.arbeit_type_enum_list = arbeit_type_enum_list;
     this.how_to_pay_enum_list = how_to_pay_enum_list;
-    this. tag_list = this.userService.getUserTagInfo(this.user);
+    this.tag_list = this.userService.getUserTagInfo(this.user);
     this.preloadChatPopup(this.user);
   }
   
@@ -54,23 +50,10 @@ export class UserDetailEmployeeComponent implements OnInit {
   }
 
   close() {
-    this.pw = "";
-    this.pw_confirm = "";
     this.modalService.dismissAll();
   }
 
   confirm() {
-    /* check password first 
-    let ifvalid = this.userService.validatePassword(this.pw) && this.pw === this.pw_confirm;
-    if (ifdirty) {
-      if (ifvalid) {
-        this.user.password = this.pw;
-      } else {
-        this.toastrService.warning('비밀번호를 다시 확인해주세요');
-        return;
-      }
-    }*/
-
     /* and then process preference tags*/
     let employee_type = [];
     let employee_region = [];

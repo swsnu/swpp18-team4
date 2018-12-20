@@ -1,18 +1,15 @@
 import { Component, OnInit } from '@angular/core';
 import { User } from 'src/app/core/models/user';
 import { UserService } from 'src/app/core/services/user.service';
-import { TalkService } from 'src/app/core/services/talk.service';
 import { TypeEnum } from 'src/app/core/models/enums/type-enum.enum';
 import { Router } from '@angular/router';
+
 
 import { ActivatedRoute } from '@angular/router';
 import { PostService } from 'src/app/core/services/post.service';
 import { CommentService } from 'src/app/core/services/comment.service';
-import { mock_posts } from 'src/app/shared/mock/mock-post';
-import { mock_comments } from 'src/app/shared/mock/mock-comment';
 import { Post } from '../../../../core/models/post';
 import { Comment } from '../../../../core/models/comment';
-
 
 @Component({
   selector: 'app-user-detail',
@@ -32,7 +29,6 @@ export class UserDetailComponent implements OnInit {
     private userService: UserService,
     private postService: PostService,
     private commentService: CommentService,
-    private talkService: TalkService,
     private router: Router, 
     private route: ActivatedRoute,
   ) { }
@@ -55,36 +51,34 @@ export class UserDetailComponent implements OnInit {
                 comments => { 
                   this.comment_list = comments;
                   this.getCommentTitle();
+                },
+                error => {
+                  this.router.navigateByUrl('');
                 })} else {
               this.commentService.getReceiveCommentsByUserId(id).then(
                 comments => {
                   this.comment_list = comments;
                   this.getCommentTitle();
-                }
-              )
+                },
+                error => {
+                  this.router.navigateByUrl('');
+                })
             }
+          },
+          error => {
+            this.router.navigateByUrl('');
           })
       },
       error => {
         this.router.navigateByUrl('');
       }
     );
-    //this.post_list = mock_posts;
-    //this.comment_list = mock_comments;
-    //console.log(this.postService.makePostTags(this.post_list[1]));
   }
 
   isMyPage(): boolean {
     return this.user.id === this.userService.getCurrentUser().id;
   }
   
-
-  private async loadChatbox(otherUser: User) {
-    const chatbox = await this.talkService.createChatbox(otherUser);
-    chatbox.mount(document.getElementById('talkjs-container'));
-  }
-
-
   getCommentTitle(): void {
     /* first examine this component */
     for (const comment of this.comment_list) {
@@ -104,7 +98,5 @@ export class UserDetailComponent implements OnInit {
       error => str = ""
     )
     return str;
-    
-    //return 'titleee'
   }
 }
