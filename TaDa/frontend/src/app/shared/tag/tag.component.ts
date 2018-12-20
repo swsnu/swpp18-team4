@@ -18,8 +18,8 @@ export class TagComponent implements OnInit {
   @Output() public addTag = new EventEmitter<boolean>();
   @Output() public removeTag = new EventEmitter<boolean>();
 
-  private tag_string: string;
-  private tag_color: string;
+  public tag_string: string;
+  public tag_color: string;
 
   constructor() { }
 

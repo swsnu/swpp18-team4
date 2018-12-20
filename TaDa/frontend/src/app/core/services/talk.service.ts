@@ -1,5 +1,4 @@
 import { Injectable } from '@angular/core';
-
 import * as Talk from 'talkjs';
 import { Deferred } from 'src/app/core/models/deffered.util';
 import { UserService } from './user.service';

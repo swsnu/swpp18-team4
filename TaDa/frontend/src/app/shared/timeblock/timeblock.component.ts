@@ -1,6 +1,6 @@
 import { Component, OnInit, Input, Output, EventEmitter, ViewChild, AfterViewInit } from '@angular/core';
 import { SelectContainerComponent } from 'ngx-drag-to-select';
-import { TimeblockService, DraggableCell } from '../../core/services/timeblock.service';
+import { DraggableCell } from '../../core/services/timeblock.service';
 
 @Component({
   selector: 'app-timeblock',
@@ -19,17 +19,12 @@ export class TimeblockComponent implements OnInit, AfterViewInit {
   selectedItems = [];  
 
   constructor(
-    private timeblockService: TimeblockService
   ) { }
 
   ngOnInit() {
-    //this.rawItems = this.timeblockService.createCells();
   }
 
   ngAfterViewInit(): void {
-    /*if (this.inputItems == null || this.inputItems.length == 0) {
-      return;
-    }*/
     this.selectContainer.selectItems((item: DraggableCell) => item.selected === true);
   }
 

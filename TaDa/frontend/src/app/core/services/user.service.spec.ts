@@ -7,6 +7,8 @@ import {TypeEnum} from '../models/enums/type-enum.enum';
 import {Router} from '@angular/router';
 import {Response, ResponseOptions} from '@angular/http';
 import {HttpClientTestingModule} from '@angular/common/http/testing';
+import { mock_users } from 'src/app/shared/mock/mock-user';
+
 
 const mock_user: User = {
   id: 1,
@@ -90,6 +92,17 @@ describe('UserService', () => {
       .then(res => expect(res).toBeTruthy());
   });
 
+  /*
+  it('test updateUser func', async() => {
+    await userService.updateUser(mock_user[0])
+      .then(res => expect(res).toBeTruthy());
+  });*/
+
+  it('test getUser func', () => {
+    userService.getUser(1)
+      .then(res => expect(res).toBeTruthy());
+  });  
+
   it('test checkDuplicateEmail func', () => {
     userService.checkDuplicateEmail('chjeong9727@naver.com')
       .then(res => expect(res).toBeTruthy());
@@ -112,4 +125,23 @@ describe('UserService', () => {
     userService.verificate('1234', 'PtZtnTdserLc03QqqLzkr9Ulf2xq96aQ')
       .then(res => expect(res).toBeTruthy());
   });
+
+
+  it('test validatePassword', () => {
+    expect(userService.validatePassword('chjeong@snu.ac.kr')).toBe(false);
+    expect(userService.validatePassword('123  22')).toBe(false);
+    expect(userService.validatePassword('123chJeong')).toBe(true);
+  });
+
+  
+  it('test getUserTagInfo', () => {
+    expect(userService.getUserTagInfo(mock_users[0]).length).toBe(3);
+  });
+
+  it('test saveTaginUser', async () => {
+    let arr = [{type:2, index:2}, {type:3, index:1}, {type:4, index:2}];
+    userService.saveTaginUser(mock_users[0], arr);
+    await expect(mock_users[0].employee_region.length).toBe(1);
+  });
+
 });
