@@ -46,8 +46,7 @@ describe('PostListComponent', () => {
         { provide: TagService, useValue: tagServiceSpy},
         { provide: PostService, useValue: postServiceSpy},
         { provide: TimeblockService, useValue: timeblockServiceSpy},
-      ]
-      
+      ],
     })
     .compileComponents();
   }));

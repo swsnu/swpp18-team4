@@ -18,7 +18,7 @@ describe('PostCreateComponent', () => {
   let toastrServiceSpy: jasmine.SpyObj<ToastrService>;
   let talkServiceSpy: jasmine.SpyObj<TalkService>;
   let modalServiceSpy: jasmine.SpyObj<NgbModal>;
-  let userServiceSpy: jasmine.SpyObj<UserService>
+  let userServiceSpy: jasmine.SpyObj<UserService>;
 
   beforeEach(async(() => {
     toastrServiceSpy = jasmine.createSpyObj('ToastrService', ['warning', 'success']);
@@ -85,8 +85,11 @@ describe('PostCreateComponent', () => {
     expect(date_value).toEqual(new Date(2019, 1, 1, 23, 59));
   });
   it('test addToTimeZone func', () => {
-    component.time_zone_hm = [0, 0, 0, 0];
+    component.time_zone_hm = [0, 0, 10, 0];
     const date_value = new Date(2019, 1, 1, 23, 59);
+    expect(component.addToTimezone(date_value)).toBeUndefined();
+  });
+  it('test create func', () => {
     expect(component.create()).toBeUndefined();
   });
 });
