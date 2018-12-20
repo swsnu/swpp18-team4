@@ -57,7 +57,7 @@ export class PostListComponent implements OnInit {
   }
   onClickSearch(keyword: string, criteria: number): void {
     let arr = this.search(keyword, criteria, this.posts_all);
-    this.posts_filtered = this.filter(arr);
+    this.posts_filtered = this.filtering(arr);
   }
 
   // current, using mock user
@@ -99,8 +99,9 @@ export class PostListComponent implements OnInit {
     return new_arr;
   }
 
-  filter(arr: Post[]): Post[] {
 
+  filtering(arr: Post[]): Post[] {
+    console.log('inside filter!');
     let tag_arr2 = [], tag_arr3 = [], tag_arr4 =[];
     let new_arr = [];
     let shouldTimeSort: boolean = false;
@@ -133,6 +134,12 @@ export class PostListComponent implements OnInit {
     if (tag_arr4.length === 0) {
       tag_arr4 = this.how_to_pay_enum_list;
     }
+    console.log('******************');
+    console.log(tag_arr2);
+    console.log(tag_arr3);
+    console.log(tag_arr4);
+
+
 
     for (const post of arr) {
       if ((tag_arr2.includes(post.arbeit_type)) &&
@@ -259,7 +266,7 @@ export class PostListComponent implements OnInit {
     this.filtering_tags = [];
   }
 
-  private getStringFromDate(date: Date): string {
+  getStringFromDate(date: Date): string {
     return (new Date(date)).getMonth() + '/' + (new Date(date)).getDate();
   }
 

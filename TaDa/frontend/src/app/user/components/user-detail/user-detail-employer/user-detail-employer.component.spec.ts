@@ -31,7 +31,7 @@ describe('UserDetailEmployerComponent', () => {
       providers:[
         { provide: ToastrService, useValue: toastrServiceSpy },
         { provide: UserService, useValue: userServiceSpy },
-       // { provide: TalkService, useValue: talkServiceSpy },
+        //{ provide: TalkService, useValue: talkServiceSpy },
         { provide: NgbModal, useValue: modalServiceSpy },
       ]
     })
@@ -49,6 +49,7 @@ describe('UserDetailEmployerComponent', () => {
   });
 
   it('should create', () => {
+    talkServiceSpy.createPopup.and.returnValue(of());
     expect(component).toBeTruthy();
   });
 
@@ -67,11 +68,5 @@ describe('UserDetailEmployerComponent', () => {
     component.close();
     expect(modalServiceSpy.dismissAll.calls.count()).toEqual(1);
   });
-
-  /*
-  it('test chatting related functions', () => {
-    component.preloadChatPopup(mock_users[0]);
-    expect(talkServiceSpy.createPopup.calls.count()).toEqual(0);
-  });*/
 
 });
