@@ -130,7 +130,6 @@ describe('UserDetailEmployeeComponent', () => {
 
     /* tag clear */
     component.clearTag();
-    console.log(component.tag_list);
     expect(component.tag_list.length).toEqual(0);
   });
   

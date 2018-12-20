@@ -133,7 +133,6 @@ describe('PostListComponent', () => {
 
     /* tag clear */
     component.clearTag();
-    console.log(component.filtering_tags);
     expect(component.filtering_tags).toEqual([]);
   });
 
@@ -144,16 +143,13 @@ describe('PostListComponent', () => {
   });
 
   it('filtering test', async() => {
-    console.log('fitlering test');
     component.filtering_tags = [
       {type: 1, index: 0}, {type: 2, index: 0}, 
       {type: 2, index: 3}, {type: 3, index: 2}, 
       {type: 3, index: 4}
     ];
-    
     let arr = component.filtering(mock_posts);
     await expect(arr.length).toEqual(0);
-
 
   });
 

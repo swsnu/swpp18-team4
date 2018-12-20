@@ -101,7 +101,6 @@ export class PostListComponent implements OnInit {
 
 
   filtering(arr: Post[]): Post[] {
-    console.log('inside filter!');
     let tag_arr2 = [], tag_arr3 = [], tag_arr4 =[];
     let new_arr = [];
     let shouldTimeSort: boolean = false;
@@ -134,12 +133,6 @@ export class PostListComponent implements OnInit {
     if (tag_arr4.length === 0) {
       tag_arr4 = this.how_to_pay_enum_list;
     }
-    console.log('******************');
-    console.log(tag_arr2);
-    console.log(tag_arr3);
-    console.log(tag_arr4);
-
-
 
     for (const post of arr) {
       if ((tag_arr2.includes(post.arbeit_type)) &&
