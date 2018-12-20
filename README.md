@@ -1,8 +1,8 @@
 # swpp18-team4
 
 [![code style: prettier](https://img.shields.io/badge/code_style-prettier-ff69b4.svg?style=flat-square)](https://github.com/prettier/prettier)
-[![Build Status](https://travis-ci.org/swsnu/swpp18-team4.svg?branch=master&service=github)](https://travis-ci.org/swsnu/swpp18-team4)
-[![Coverage Status](https://coveralls.io/repos/github/swsnu/swpp18-team4/badge.svg?branch=master&service=github)](https://coveralls.io/github/swsnu/swpp18-team4?branch=master)
+[![Build Status](https://travis-ci.org/swsnu/swpp18-team4.svg?branch=master&kill_cache=1)](https://travis-ci.org/swsnu/swpp18-team4)
+[![Coverage Status](https://coveralls.io/repos/github/swsnu/swpp18-team4/badge.svg?branch=master&kill_cache=1)](https://coveralls.io/github/swsnu/swpp18-team4?branch=master)
 
 # How to run
 ## Frontend
