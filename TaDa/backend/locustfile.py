@@ -1,5 +1,6 @@
 from locust import HttpLocust, TaskSet, task
 import json
+import random
 
 class WebsiteTasks(TaskSet):
     domain_user = 'api/user/'
@@ -16,8 +17,10 @@ class WebsiteTasks(TaskSet):
 
     def signin(self):
         #self.token()
+        random_number = random.randint(0,4)
+        random_user = ['aaa@naver1.com', 'bbb@naver1.com', 'ccc@naver1.com', 'ddd@naver1.com', 'eee@naver1.com']
         self.client.post(self.domain_user+'signin/', json.dumps({
-          'email':'aaa@naver.com', 'password':'123456aa'
+          'email': random_user[random_number], 'password':'123456aa'
         }), headers={"X-CSRFToken": self.csrftoken}, cookies={"csrftoken": self.csrftoken})
     
     def signout(self):
